@@ -25,42 +25,24 @@
 }
 
 .metricCard {
-}
-
-.metricCard h1 {
-	left: 24px;
-	top: 24px;
-
-	/* 14 Semibold */
-
 	font-family: "Inter";
 	font-style: normal;
 	font-weight: 600;
+}
+
+.metricCard h1 {
 	font-size: 14px;
 	line-height: 20px;
-	/* identical to box height, or 143% */
-
-	font-feature-settings: "ss01" on, "cv01" on, "cv11" on;
-
-	/* Black/100% */
 
 	color: #1c1c1c;
 }
 
 .metricCard h2 {
-	/* 24 Semibold */
-
-	font-family: "Inter";
-	font-style: normal;
-	font-weight: 600;
 	font-size: 24px;
 	line-height: 36px;
 }
 
 .metricCard h3 {
-	font-family: "Inter";
-	font-style: normal;
-	font-weight: 700;
 	font-size: 12px;
 	line-height: 18px;
 }

@@ -37,13 +37,13 @@ const Widgets = memo(() => {
 			title: "This Month's Balance",
 			value: 0.0,
 			unit: "USD",
-			percentChange: 0.0,
+			percentChange: 10.0,
 		},
 		{
 			title: "Total Memory Used",
 			value: 0,
 			unit: "utilized",
-			percentChange: 0.0,
+			percentChange: 10.0,
 		},
 	]);
 
@@ -73,8 +73,9 @@ const MetricCard = ({ title, value, unit, percentChange }) => {
 		<div className={styles.metricCard}>
 			<h1>{title}</h1>
 			<h2>
-				${value.toFixed(2)} {unit}
+				{value} {unit}
 			</h2>
+			{/*Displays $0.00 */}
 			<h3>{value ? (value * 100).toFixed(percentChange) : "0.00"}%</h3>
 		</div>
 	);
