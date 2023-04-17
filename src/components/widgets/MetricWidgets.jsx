@@ -1,52 +1,57 @@
 /**
  * @file MetricWidgets.jsx
  *
- * @description
- * This file is responsible for creating each of the four metric widgets
+ * @description This file exports a set of components that render four metric
+ * widgets that will be used in the Dashboard
  *
- * @requires metric-widgets.css
+ * @exports
+ * @requires metric-widgets.module.css
  */
 
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
+import styles from "./metric-widgets.module.css";
 
 /**
- * Defines the metric widgets for the Dashboard
+ * Defines four memoized metric widget components for the Dashboard
+ *
+ * The component is memoized using 'memo' since its behavior is independent of
+ * its props which ensures better performance by preventing unnecessary re-renders
  *
  * @returns Four JSX metric widgets
  */
-const Widgets = () => {
-	const [minutes, setMinutes] = useState(0);
-	const [recordings, setRecordings] = useState(0);
-	const [balance, setBalance] = useState(0);
-	const [memoryUsed, setMemoryUsed] = useState(0);
+const Widgets = memo(() => {
+	const [totalMinutesUsed, setTotalMinutesUsed] = useState(0);
+	const [numberOfRecordings, setNumberOfRecordings] = useState(0);
+	const [currentMonthBalance, setCurrentMonthBalance] = useState(0);
+	const [totalMemoryUsed, setTotalMemoryUsed] = useState(0);
 
 	return (
 		<>
-			<div className="metricCard">
+			<div className={styles.metricCard}>
 				<p>Total Minutes Used</p>
-				<p>{minutes} minutes</p>
+				<p>{totalMinutesUsed} minutes</p>
 				<p>0.00%</p>
 			</div>
 
-			<div className="metricCard">
+			<div className={styles.metricCard}>
 				<p>Number of Recordings</p>
-				<p>{recordings} recordings</p>
+				<p>{numberOfRecordings} recordings</p>
 				<p>0.00%</p>
 			</div>
 
-			<div className="metricCard">
-				<p>This Months Balance</p>
-				<p>{balance} USD</p>
+			<div className={styles.metricCard}>
+				<p>This Month's Balance</p>
+				<p>{currentMonthBalance} USD</p>
 				<p>0.00%</p>
 			</div>
 
-			<div className="metricCard">
+			<div className={styles.metricCard}>
 				<p>Total Memory Used</p>
-				<p>{memoryUsed} utilized</p>
+				<p>{totalMemoryUsed} utilized</p>
 				<p>0.00%</p>
 			</div>
 		</>
 	);
-};
+});
 
 export default Widgets;
