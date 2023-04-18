@@ -1,9 +1,27 @@
+/**
+ * @file Header.jsx
+ *
+ * @description Defines the header component of the dashboard
+ *
+ * @requires react
+ * @requires header.module.css
+ * @requires notes.svg
+ * @requires recording.svg
+ * @requires import-file.svg
+ *
+ * @exports Header
+ */
+
 import React from "react";
 import styles from "./header.module.css";
-import importFile from "/src/assets/import-file.svg";
 import notes from "/src/assets/notes.svg";
 import recording from "/src/assets/recording.svg";
+import importFile from "/src/assets/import-file.svg";
 
+/**
+ *
+ * @returns {jsx Element}
+ */
 const Header = () => {
 	return (
 		<header className={styles.headerContainer}>

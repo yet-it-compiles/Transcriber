@@ -1,18 +1,20 @@
 /**
  * @file MetricWidgets.jsx
  *
- * @description This file exports a set of components that render four metric
+ * @description This file exports a set of 4 components that render four metric
  * widgets that will be used in the Dashboard
  *
- * @exports
+ * @requires react
  * @requires metric-widgets.module.css
+ *
+ * @exports Widgets
  */
 
 import React, { useState, memo } from "react";
 import styles from "./metric-widgets.module.css";
 
 /**
- * Defines a memoized metric widget component for the Dashboard.jsx
+ * Defines a memoized metric widget for the Dashboard.jsx
  *
  * The component is memoized using 'memo' since its behavior is independent of
  * its props which ensures better performance by preventing unnecessary re-renders
@@ -20,7 +22,7 @@ import styles from "./metric-widgets.module.css";
  * @returns {JSX.Element} - a metric widget
  */
 const Widgets = memo(() => {
-	const [metrics, setMetrics] = useState([
+	const [metricWidget, setMetricWidget] = useState([
 		{
 			title: "Total Minutes Used",
 			value: 0,
@@ -37,21 +39,21 @@ const Widgets = memo(() => {
 			title: "This Month's Balance",
 			value: 0.0,
 			unit: "USD",
-			percentChange: 10.0,
+			percentChange: 0.0,
 		},
 		{
 			title: "Total Memory Used",
 			value: 0,
 			unit: "utilized",
-			percentChange: 10.0,
+			percentChange: 0.0,
 		},
 	]);
 
 	return (
 		<>
-			{metrics.map((metric, index) => (
-				<div className={styles.metricCardContainer} key={index}>
-					<MetricCard {...metric} />
+			{metricWidget.map((eachMetric, eachIndex) => (
+				<div className={styles.metricCardContainer} key={eachIndex}>
+					<MetricCard {...eachMetric} />
 				</div>
 			))}
 		</>
@@ -64,7 +66,7 @@ const Widgets = memo(() => {
  * @param {string} title - The title of the metric card.
  * @param {number} value - The value of the metric card.
  * @param {string} unit - The unit of the metric card.
- * @param {number} sign - The number of decimal places to show for the sign (percentage).
+ * @param {number} percentChange - The percentChange of the metric card
  *
  * @returns {JSX.Element} - A metric card with the specified props
  */
@@ -76,7 +78,7 @@ const MetricCard = ({ title, value, unit, percentChange }) => {
 				{value} {unit}
 			</h2>
 			{/*Displays $0.00 */}
-			<h3>{value ? (value * 100).toFixed(percentChange) : "0.00"}%</h3>
+			<h3>{percentChange}%</h3>
 		</div>
 	);
 };
