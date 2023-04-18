@@ -3,8 +3,8 @@
  *
  * @description
  * Handles the responsibility of initializing various tools to
- * effectively manage
- * audio data along with providing recording, and
+ * effectively manage audio data along with providing recording, and playback
+ * features.
  *
  * @requires DisplayTranscription
  * @requires react
@@ -16,9 +16,8 @@ import DisplayTranscription from "./DisplayTranscription";
 import React, { useState, useRef, useCallback } from "react";
 
 /**
- * Provides the applications ability to allow users to control
- * audio playback in various ways along with establishing
- * mechanisms to deal with audio data
+ * Provides the applications ability to allow users to control audio playback in
+ * various ways along with establishing mechanisms to deal with audio data
  *
  * @returns A simple JSX layout of buttons to allow a user to
  * control limited audio settings.
@@ -31,14 +30,11 @@ function AudioRecorder() {
 	const audioRef = useRef();
 
 	/**
-	 * Defines the ability to start recording audio from the
-	 * users browser, and initializes various values to manage
-	 * audio data.
+	 * Defines the ability to start recording audio from the users browser, and
+	 * initializes various values to manage audio data.
 	 *
 	 * Accomplished by prompting the user for permission, and
-	 * initializing
-	 * chunking mechanisms that help with breaking down large
-	 * data.
+	 * initializing chunking mechanisms that help with breaking down large data
 	 */
 	const handleStartRecording = useCallback(async () => {
 		try {
@@ -117,7 +113,7 @@ function AudioRecorder() {
 				Play Recording
 			</button>
 
-			{/*<DisplayTranscription theAudioBlob={audioBlob} /> */}
+			{/* <DisplayTranscription theAudioBlob={audioBlob} /> */}
 
 			{/* Displays audio controls */}
 			<audio src={audioBlobURL} ref={audioRef} />

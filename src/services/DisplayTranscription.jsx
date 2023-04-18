@@ -23,8 +23,7 @@ import axios from "axios";
 
 /**
  * Provides the ability to submit the most recently recorded
- * audio clip, and
- * request it to be transcribed in real time.
+ * audio clip, and request it to be transcribed in real time.
  *
  * @param {theAudioBlob} param0 Audio object that represents
  * binary audio data

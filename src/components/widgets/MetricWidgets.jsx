@@ -16,8 +16,11 @@ import styles from "./metric-widgets.module.css";
 /**
  * Defines a memoized metric widget for the Dashboard.jsx
  *
- * The component is memoized using 'memo' since its behavior is independent of
- * its props which ensures better performance by preventing unnecessary re-renders
+ * @TODO - I think I should have used callback() not memo
+ *
+ * Memoized since its behavior is independent of its props ensuring better
+ * performance by preventing unnecessary re-renders. It will only re-render if
+ * the props passed to it change.
  *
  * @returns {JSX.Element} - a metric widget
  */
@@ -77,7 +80,6 @@ const MetricCard = ({ title, value, unit, percentChange }) => {
 			<h2>
 				{value} {unit}
 			</h2>
-			{/*Displays $0.00 */}
 			<h3>{percentChange}%</h3>
 		</div>
 	);

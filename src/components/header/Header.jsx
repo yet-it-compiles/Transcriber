@@ -18,6 +18,7 @@ import notes from "/src/assets/notes.svg";
 import recording from "/src/assets/recording.svg";
 import importFile from "/src/assets/import-file.svg";
 
+// @TODO Extra buttons to their own components
 /**
  *
  * @returns {jsx Element}

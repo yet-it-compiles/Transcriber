@@ -1,9 +1,8 @@
 /**
  * @file main.jsx
  *
- * @description
- * Serves as the primary entry point component for the application tasked with
- * the responsibility to render the initial component along with hooking
+ * @description Serves as the primary entry point component for the application
+ * tasked with the responsibility to render the initial component along with hooking
  * itself into the index HTML document which allows it to asynchronously render
  * each update
  *
@@ -12,9 +11,9 @@
  * @requires ./App
  */
 
+import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import Header from "./components/header/Header";
 import MetricWidgets from "./components/widgets/MetricWidgets";
 import NavigationLeft from "./components/navigation/NavigationLeft";
