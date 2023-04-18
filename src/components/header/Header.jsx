@@ -14,9 +14,9 @@
 
 import React from "react";
 import styles from "./header.module.css";
-import notes from "/src/assets/notes.svg";
-import recording from "/src/assets/recording.svg";
-import importFile from "/src/assets/import-file.svg";
+import notes from "/src/assets/button-icons/notes-icon.svg";
+import recording from "/src/assets/button-icons/recording-icon.svg";
+import importFile from "/src/assets/button-icons/import-icon.svg";
 
 // @TODO Extra buttons to their own components
 /**
@@ -28,18 +28,22 @@ const Header = () => {
 		<header className={styles.headerContainer}>
 			<p>Dashboard Overview</p>
 
-			<button type="button" name="import" className={styles.redButton}>
-				<img src={importFile} alt="import" className={styles.icons} />
+			<button
+				type="button"
+				name="import file icon"
+				className={styles.redButton}
+			>
+				<img src={importFile} alt="Import File Icon" className={styles.icons} />
 				<span>Import File</span>
 			</button>
 
 			<button type="button" name="notes">
-				<img src={notes} alt="import" className={styles.icons} />
+				<img src={notes} alt="Quick Notes Icon" className={styles.icons} />
 				<span>Quick Notes</span>
 			</button>
 
 			<button type="button" name="import">
-				<img src={recording} alt="import" className={styles.icons} />
+				<img src={recording} alt="Quick Record Icon" className={styles.icons} />
 				<span>Quick Record</span>
 			</button>
 
