@@ -13,7 +13,7 @@
 
 import React from "react";
 import { BrowserRouter, Link, NavLink } from "react-router-dom";
-import styles from "./navigation-left.css?inline";
+import styles from "./navigation-left.module.css?inline";
 
 /**
  *
