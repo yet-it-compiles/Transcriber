@@ -1,9 +1,4 @@
 .metricCardContainer {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-
 	width: 201px;
 	height: 112px;
 	margin: 17px;
@@ -31,6 +26,12 @@
 }
 
 .metricCard h1 {
+	position: relative;
+	width: 198px;
+	height: 20px;
+	left: 24px;
+	top: 24px;
+
 	font-size: 14px;
 	line-height: 20px;
 
@@ -38,11 +39,24 @@
 }
 
 .metricCard h2 {
-	font-size: 24px;
-	line-height: 36px;
+	position: relative;
+	width: 170px;
+	height: 27px;
+	left: 24px;
+
+	font-size: 18px;
+	line-height: 42px;
 }
 
 .metricCard h3 {
+	position: relative;
+	width: 47px;
+	height: 18px;
+	left: 120px;
+	top: -35px;
+
 	font-size: 12px;
 	line-height: 18px;
+
+	color: #299941;
 }
