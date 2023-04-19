@@ -1,8 +1,8 @@
 /**
  * @file NavigationLeft.jsx
  *
- * @description This module defines the left navigation component that stays
- * persistent through the application on the left side.
+ * @description This module defines the left navigation component that
+ * stays persistent through the applications left pane.
  *
  * @requires react
  * @requires navigation-left.module.css
@@ -23,6 +23,7 @@ const NavigationLeft = () => {
 			<ApplicationSection />
 			<TranscriptSearch />
 			<Links />
+
 			<ToggleSwitch />
 			<UserProfile />
 		</aside>
@@ -56,13 +57,36 @@ const Links = () => {
 	return (
 		<nav className={styles.links}>
 			<ul>
-				<li>Dashboard</li>
-				<li>Conversations</li>
-				<li>Text-Editor</li>
-				<li>Recordings</li>
-				<li>Calendar</li>
-				<li>Analytics</li>
-				<li>Settings</li>
+				<li>
+					<img src="/src/assets/navigation-icons/dashboard-icon.svg" />
+					Dashboard
+				</li>
+
+				<li>
+					<img src="/src/assets/navigation-icons/conversation-icon.svg" />
+					Conversations
+				</li>
+
+				<li>
+					<img src="/src/assets/navigation-icons/text-editor-icon.svg" />
+					Text-Editor
+				</li>
+				<li>
+					<img src="/src/assets/navigation-icons/record-icon.svg" />
+					Recordings
+				</li>
+				<li>
+					<img src="/src/assets/navigation-icons/calendar-icon.svg" />
+					Calendar
+				</li>
+				<li>
+					<img src="/src/assets/navigation-icons/analytics-icon.svg" />
+					Analytics
+				</li>
+				<li>
+					<img src="/src/assets/navigation-icons/settings-icon.svg" />
+					Settings
+				</li>
 			</ul>
 		</nav>
 	);
@@ -72,6 +96,7 @@ const ToggleSwitch = () => {
 	return (
 		<section className={styles.toggle}>
 			<img src="/src/assets/navigation-icons/light-mode-icon.svg" alt="" />
+			<br />
 			<p>Light Mode</p>
 		</section>
 	);
@@ -81,7 +106,7 @@ const UserProfile = () => {
 	return (
 		<section className={styles.profile}>
 			<p>Jane Doe</p>
-			<br />
+
 			<p>jane.doe@gmail.com</p>
 			<button type="submit">Logout</button>
 		</section>

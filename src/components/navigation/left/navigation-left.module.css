@@ -2,7 +2,6 @@
 	position: absolute;
 	width: 240px;
 	height: 1165px;
-
 	border: 1px solid rgba(9, 36, 75, 0.2);
 	border-radius: 8px;
 }
@@ -10,17 +9,19 @@
 .projectSection {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 
 	width: 240px;
 	height: 80px;
 
+	border-radius: 5px;
 	background: #838485;
 }
 
 .projectSection img,
 p {
 	position: relative;
-	align-items: center;
+	top: 10px;
 }
 
 .projectSection p {
@@ -42,34 +43,34 @@ p {
 }
 
 .search {
-	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .search img {
-	position: absolute;
-	top: 50%;
-	left: 10px;
-	transform: translateY(-50%);
-	width: 20px;
-	height: 20px;
+	position: relative;
+	right: 20px;
 }
 
 .search input {
-	width: 195px;
+	position: relative;
+	width: 170px;
 	height: 40px;
 
 	margin-top: 24px;
 
-	background: #f2f4f6;
 	box-shadow: 0px -1px 0px rgba(255, 255, 255, 0.2);
 	border-radius: 8px;
 
 	font-size: 14px;
-	background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
+
+	background-image: url(/src/assets/navigation-icons/eyeglass-bar-icon.svg);
+
 	background-repeat: no-repeat;
-	background-position: left center;
-	padding-left: 40px;
-	background-color: #fff;
+	background-position: 10px center;
+	padding-left: 55px;
+	background-color: #f2f4f6;
 }
 
 .links {
@@ -79,11 +80,14 @@ p {
 }
 
 .links ul {
-	margin: 0;
-	padding: 0;
+	position: absolute;
+	display: flexbox;
+	padding: 10px;
 }
 
 .links li {
+	display: flex;
+	align-items: center;
 	width: 208px;
 	height: 40px;
 
@@ -92,9 +96,20 @@ p {
 	cursor: pointer;
 }
 
+.links li:first-child {
+	color: white;
+	background-color: #007aff;
+}
+
+.links li img {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .toggle {
 	position: absolute;
 	display: flex;
+	align-items: center;
 
 	width: 211px;
 	height: 30px;
@@ -102,24 +117,36 @@ p {
 	top: 1041px;
 }
 
-.toggle img,
-p {
-	position: relative;
-	align-items: center;
-	bottom: 0px;
+.toggle p {
+	left: 20px;
 }
 
 .profile {
 	position: absolute;
 	display: flex;
+
 	width: 240px;
-	height: 75px;
 	bottom: 0;
 
 	background-color: #c1d7f5;
 }
 
-.profile p,
-button {
-	left: 20px;
+.profile p {
+	width: auto;
+}
+
+.profile p:nth-child(1) {
+	position: relative;
+	width: 51px;
+	height: 13px;
+	left: -7px;
+	top: 2px;
+}
+
+.profile:nth-child(2) {
+	position: relative;
+	width: 124px;
+	height: 36px;
+	left: 70px;
+	top: 20px;
 }
