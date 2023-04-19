@@ -90,6 +90,7 @@ p {
 	align-items: center;
 	width: 208px;
 	height: 40px;
+	transition: all 0.2s ease-in-out;
 
 	list-style: none;
 	border-radius: 8px;
@@ -104,6 +105,10 @@ p {
 .links li img {
 	margin-left: 10px;
 	margin-right: 10px;
+}
+
+.links li:hover {
+	transform: scale(1.05);
 }
 
 .toggle {
