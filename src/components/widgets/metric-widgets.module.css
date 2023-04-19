@@ -1,4 +1,6 @@
 .metricCardContainer {
+	display: inline-block;
+
 	width: 201px;
 	height: 112px;
 	margin: 17px;
