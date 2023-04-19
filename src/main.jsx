@@ -16,7 +16,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/header/Header";
 import MetricWidgets from "./components/widgets/MetricWidgets";
-import NavigationLeft from "./components/navigation/NavigationLeft";
+import NavigationLeft from "./components/navigation/left/NavigationLeft";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
