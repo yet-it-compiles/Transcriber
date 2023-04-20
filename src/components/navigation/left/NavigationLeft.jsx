@@ -32,7 +32,7 @@ const NavigationLeft = () => {
 
 const ApplicationSection = () => {
 	return (
-		<section className={styles.projectSection}>
+		<section>
 			<img src="/project-logo.svg" alt="Project Logo" />
 			<p>SLP</p>
 			<p>Scribe</p>
@@ -96,7 +96,6 @@ const ToggleSwitch = () => {
 	return (
 		<section className={styles.toggle}>
 			<img src="/src/assets/navigation-icons/light-mode-icon.svg" alt="" />
-			<br />
 			<p>Light Mode</p>
 		</section>
 	);
@@ -106,8 +105,8 @@ const UserProfile = () => {
 	return (
 		<section className={styles.profile}>
 			<p>Jane Doe</p>
-
 			<p>jane.doe@gmail.com</p>
+			<br />
 			<button type="submit">Logout</button>
 		</section>
 	);

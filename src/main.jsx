@@ -14,15 +14,12 @@
 import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/header/Header";
+import DashboardHeader from "./components/DashboardHeader/DashboardHeader";
 import MetricWidgets from "./components/widgets/MetricWidgets";
 import NavigationLeft from "./components/navigation/left/NavigationLeft";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<App />
-		<MetricWidgets />
-		<Header />
 		<NavigationLeft />
 	</React.StrictMode>
 );

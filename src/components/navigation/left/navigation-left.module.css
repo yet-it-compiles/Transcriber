@@ -1,59 +1,54 @@
 .navigationLeft {
-	position: absolute;
+	position: relative;
 	width: 240px;
 	height: 1165px;
 	border: 1px solid rgba(9, 36, 75, 0.2);
-	border-radius: 8px;
+	border-radius: 5px;
 }
 
-.projectSection {
+.navigationLeft section:nth-child(1) {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
 	width: 240px;
 	height: 80px;
-
-	border-radius: 5px;
+	border-radius: 5px 5px 0px 0px;
 	background: #838485;
 }
 
-.projectSection img,
-p {
+.navigationLeft section:nth-child(1) img,
+section:nth-child(1) p {
 	position: relative;
 	top: 10px;
-}
 
-.projectSection p {
 	font-family: "Inter";
 	font-style: normal;
 	font-weight: 400;
 	font-size: 20px;
 	line-height: 20px;
-
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.projectSection p:nth-child(2) {
+.navigationLeft section:first-of-type p:first-of-type {
 	color: #4bc0c8;
 }
 
-.projectSection p:nth-child(3) {
+.navigationLeft section:first-of-type p:nth-child(3) {
 	color: #c1d7f5;
 }
 
-.search {
+.navigationLeft form:nth-child(1) {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.search img {
+.navigationLeft form:first-of-type img:first-of-type {
 	position: relative;
 	right: 20px;
 }
 
-.search input {
+.navigationLeft form:first-of-type input {
 	position: relative;
 	width: 170px;
 	height: 40px;
@@ -74,7 +69,7 @@ p {
 }
 
 .links {
-	margin-top: 41px;
+	margin-top: 3px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 8px;
 }
@@ -88,13 +83,13 @@ p {
 .links li {
 	display: flex;
 	align-items: center;
-	width: 208px;
+	width: 230px;
 	height: 40px;
-	transition: all 0.2s ease-in-out;
 
 	list-style: none;
 	border-radius: 8px;
 	cursor: pointer;
+	transition: all 0.2s ease-in-out;
 }
 
 .links li:first-child {
@@ -115,6 +110,7 @@ p {
 	position: absolute;
 	display: flex;
 	align-items: center;
+	justify-content: space-evenly;
 
 	width: 211px;
 	height: 30px;
@@ -122,13 +118,11 @@ p {
 	top: 1041px;
 }
 
-.toggle p {
-	left: 20px;
-}
-
 .profile {
 	position: absolute;
 	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	width: 240px;
 	bottom: 0;
@@ -136,22 +130,11 @@ p {
 	background-color: #c1d7f5;
 }
 
-.profile p {
-	width: auto;
+.profile p:first-of-type {
 }
 
-.profile p:nth-child(1) {
-	position: relative;
-	width: 51px;
-	height: 13px;
-	left: -7px;
-	top: 2px;
+.profile p:nth-child(2) {
 }
 
-.profile:nth-child(2) {
-	position: relative;
-	width: 124px;
-	height: 36px;
-	left: 70px;
-	top: 20px;
+.profile p:nth-child(3) {
 }
