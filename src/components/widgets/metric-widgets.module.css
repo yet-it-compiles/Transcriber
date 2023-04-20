@@ -1,65 +1,64 @@
-.metricCardContainer {
-	display: inline-block;
+.widget {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
+.widget aside {
 	width: 201px;
-	height: 112px;
-	margin: 17px;
-	transition: all 0.2s ease-in-out;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	height: 90px;
+	margin: 10px;
+	padding-top: 10px;
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 20px;
 	border-radius: 16px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	transition: all 0.2s ease-in-out;
 }
 
-.metricCardContainer:nth-child(even) {
-	background-color: #b5e4ff;
-}
-
-.metricCardContainer:nth-child(odd) {
+.widget aside:nth-child(even) {
 	background-color: #c1d7f5;
 }
 
-.metricCardContainer:hover {
+.widget aside:nth-child(odd) {
+	background-color: #b5e4ff;
+}
+
+.widget aside:hover {
+	color: #1c1c1c;
 	cursor: pointer;
 	transform: scale(1.05);
 }
 
-.metricCard {
-	font-family: "Inter";
-	font-style: normal;
-	font-weight: 600;
+.widget aside p {
+	left: 20px;
+	line-height: 22px;
+	margin: 0px;
 }
 
-.metricCard h1 {
-	position: relative;
-	width: 198px;
-	height: 20px;
-	left: 24px;
-	top: 24px;
-
+.widget aside p:nth-of-type(1) {
 	font-size: 14px;
-	line-height: 20px;
-
-	color: #1c1c1c;
 }
 
-.metricCard h2 {
-	position: relative;
-	width: 170px;
-	height: 27px;
-	left: 24px;
+.widget aside p:nth-of-type(2) {
+	justify-content: space-between;
+	display: inline-block;
 
-	font-size: 18px;
-	line-height: 42px;
+	font-size: 24px;
+	line-height: 46px;
 }
 
-.metricCard h3 {
-	position: relative;
-	width: 47px;
-	height: 18px;
-	left: 120px;
-	top: -35px;
+.widget aside p:nth-of-type(3) {
+	display: inline-block;
+	left: 28px;
+}
 
-	font-size: 12px;
-	line-height: 18px;
-
+.widget aside p:nth-of-type(4) {
+	display: inline-block;
+	left: 40px;
+	top: 0px;
 	color: #299941;
 }

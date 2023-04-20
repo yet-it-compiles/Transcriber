@@ -13,58 +13,58 @@
 import React, { useState, memo } from "react";
 import styles from "./metric-widgets.module.css";
 
+const initialWidgetMetrics = [
+	{
+		title: "Total Minutes Used",
+		value: 119,
+		unit: "minutes",
+		percentChange: 11.01,
+	},
+	{
+		title: "Number of Recordings",
+		value: 4,
+		unit: "recordings",
+		percentChange: 9.15,
+	},
+	{
+		title: "This Month's Balance",
+		value: 1.79,
+		unit: "USD",
+		percentChange: -0.56,
+	},
+	{
+		title: "Total Memory Used",
+		value: 29,
+		unit: "utilized",
+		percentChange: 9.12,
+	},
+];
+
 /**
- * Defines a memoized metric widget for the Dashboard.jsx
+ * Responsible for displaying four memoized widgets on the Dashboard.jsx.
  *
- * @TODO - I think I should have used callback() not memo
- *
- * Memoized since its behavior is independent of its props ensuring better
- * performance by preventing unnecessary re-renders. It will only re-render if
- * the props passed to it change.
+ * Accomplished by mapping over each widget with the
+ * Generates four memoized metric widgets that will be displayed in the header
+ * section of the dashboard.
  *
  * @returns {JSX.Element} - a metric widget
  */
-const Widgets = memo(() => {
-	const [metricWidget, setMetricWidget] = useState([
-		{
-			title: "Total Minutes Used",
-			value: 0,
-			unit: "minutes",
-			percentChange: 0.0,
-		},
-		{
-			title: "Number of Recordings",
-			value: 0,
-			unit: "recordings",
-			percentChange: 0.0,
-		},
-		{
-			title: "This Month's Balance",
-			value: 0.0,
-			unit: "USD",
-			percentChange: 0.0,
-		},
-		{
-			title: "Total Memory Used",
-			value: 0,
-			unit: "utilized",
-			percentChange: 0.0,
-		},
-	]);
+const DisplayWidgets = () => {
+	const [widgetMetrics, setWidgetMetrics] = useState(initialWidgetMetrics);
 
 	return (
-		<>
-			{metricWidget.map((eachMetric, eachIndex) => (
-				<div className={styles.metricCardContainer} key={eachIndex}>
-					<MetricCard {...eachMetric} />
-				</div>
+		<aside className={styles.widget}>
+			{widgetMetrics.map((eachMetric, eachIndex) => (
+				<aside key={eachIndex}>
+					<UpdateWidget {...eachMetric} />
+				</aside>
 			))}
-		</>
+		</aside>
 	);
-});
+};
 
 /**
- * Renders a metric card with a title, value, unit, and sign.
+ * Responsible for updating the memorized widget with its new state
  *
  * @param {string} title - The title of the metric card.
  * @param {number} value - The value of the metric card.
@@ -73,16 +73,26 @@ const Widgets = memo(() => {
  *
  * @returns {JSX.Element} - A metric card with the specified props
  */
-const MetricCard = ({ title, value, unit, percentChange }) => {
+const UpdateWidget = memo(({ title, value, unit, percentChange }) => {
 	return (
-		<div className={styles.metricCard}>
-			<h1>{title}</h1>
-			<h2>
-				{value} {unit}
-			</h2>
-			<h3>{percentChange}%</h3>
-		</div>
+		<>
+			<p>{title}</p>
+			<p>
+				{unit === "USD"
+					? "$" + value
+					: unit === "utilized"
+					? value + "%"
+					: value}
+			</p>
+			<p>{unit}</p>
+			<p>
+				{percentChange >= 0.0
+					? "+" + percentChange.toFixed(2)
+					: percentChange.toFixed(2)}
+				%
+			</p>
+		</>
 	);
-};
+});
 
-export default Widgets;
+export default DisplayWidgets;
