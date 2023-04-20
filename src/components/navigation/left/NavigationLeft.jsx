@@ -43,12 +43,15 @@ const ApplicationSection = () => {
 const TranscriptSearch = () => {
 	return (
 		<form className={styles.search}>
-			<label htmlFor="search-input"></label>
-			<input
-				type="text"
-				id="search-input"
-				placeholder="Search for transcript..."
-			/>
+			<>
+				<label htmlFor="search-input"></label>
+				<input
+					type="text"
+					id="search-input"
+					placeholder="Search for transcript..."
+				/>
+				<button></button>
+			</>
 		</form>
 	);
 };
@@ -94,7 +97,7 @@ const Links = () => {
 
 const ToggleSwitch = () => {
 	return (
-		<section className={styles.toggle}>
+		<section>
 			<img src="/src/assets/navigation-icons/light-mode-icon.svg" alt="" />
 			<p>Light Mode</p>
 		</section>
@@ -103,11 +106,11 @@ const ToggleSwitch = () => {
 
 const UserProfile = () => {
 	return (
-		<section className={styles.profile}>
+		<section>
 			<p>Jane Doe</p>
 			<p>jane.doe@gmail.com</p>
 			<br />
-			<button type="submit">Logout</button>
+			<button type="submit"></button>
 		</section>
 	);
 };
