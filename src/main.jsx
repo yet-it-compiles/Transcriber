@@ -17,9 +17,10 @@ import ReactDOM from "react-dom/client";
 import DashboardHeader from "./components/DashboardHeader/DashboardHeader";
 import MetricWidgets from "./components/widgets/MetricWidgets";
 import NavigationLeft from "./components/navigation/left/NavigationLeft";
+import TextEditor from "./components/text-editor/TextEditor";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<NavigationLeft />
+		<TextEditor />
 	</React.StrictMode>
 );
