@@ -11,41 +11,90 @@
  * @exports TextEditor
  */
 
-import React, { useState } from "react";
-import styles from "./text-editor.module.css";
+import { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-/**
- * Displays a WYSIWYG text editor and allows users to save the content of
- * the editor along with a title
- *
- * @returns {JSX.Element} The `TextEditor` component
- */
-function TextEditor() {
-	const [title, setTitle] = useState("");
+const TextEditor = () => {
+	const [title, setTitle] = useState("Transcript Editor");
 	const [content, setContent] = useState("");
+	const [isEditingTitle, setIsEditingTitle] = useState(false);
+	const [newTitle, setNewTitle] = useState(title);
 
-	const handleTitleChange = (event) => {
-		setTitle(event.target.value);
+	/**
+	 * Event listener that listens to allow the user to edit the title
+	 */
+	const handleTitleClick = () => {
+		setIsEditingTitle(true);
 	};
 
-	const handleSaveDocument = () => {
-		const documentTitle = `My Document - ${title}`;
+	/**
+	 * Provides the user the ability to dynamically change the name of the document
+	 *
+	 * @param {event} the console output to change the document title
+	 */
+	const handleNewTitleChange = (event) => {
+		setNewTitle((event) => event.target.value);
+	};
 
-		// Prints the documentTitle and the name of the content to the console
+	/**
+	 * Provides the user the ability to save a new document title
+	 */
+	const handleTitleSave = () => {
+		setTitle(() => newTitle);
+		setIsEditingTitle(() => false);
+	};
+
+	/**
+	 * Allows the user to cancel editing the title
+	 */
+	const handleTitleCancel = () => {
+		setIsEditingTitle(() => false);
+		setNewTitle(() => title);
+	};
+
+	/**
+	 *  Provides the user the ability to save and print the document to console
+	 *
+	 * ! Allows the ability to save the document/transcript to the DB
+	 */
+	const handleSaveDocument = () => {
+		const documentTitle = `${title}`;
 		console.log(`Title: ${documentTitle}\nContent: ${content}`);
+	};
+
+	/**
+	 * @TODO - Finish functionality
+	 */
+	const handleDownloadDocument = () => {
+		const filename = `${title}.txt`;
+		const fileContent = `${title}\n\n${content}`;
+		const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
+		const url = URL.createObjectURL(blob);
+		const link = document.createElement("a");
+		link.href = url;
+		link.download = filename;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
 	};
 
 	return (
 		<div>
-			<h2>My Transcript Editor</h2>
-			<label htmlFor="title">Document Title:</label>
-			<input
-				type="text"
-				id="title"
-				value={title}
-				onChange={handleTitleChange}
-			/>
+			<h2>
+				{isEditingTitle ? (
+					<div>
+						<input
+							type="text"
+							value={newTitle}
+							onChange={handleNewTitleChange}
+						/>
+						<button onClick={handleTitleSave}>Save</button>
+						<button onClick={handleTitleCancel}>Cancel</button>
+					</div>
+				) : (
+					<span onClick={handleTitleClick}>{title}</span>
+				)}
+			</h2>
 			<Editor
 				apiKey=""
 				value={content}
@@ -54,22 +103,69 @@ function TextEditor() {
 				}}
 				init={{
 					height: 500,
-					menubar: false,
+					menubar: true,
 					plugins: [
 						"advlist autolink lists link image",
 						"charmap print preview anchor help",
 						"searchreplace visualblocks code",
 						"insertdatetime media table paste wordcount",
+						"hr",
+						"code",
+						"textpattern",
+						"toc",
+						"imagetools",
+						"colorpicker",
+						"fullpage",
+						"media",
+						"table",
+						"codesample",
+						"nonbreaking",
+						"directionality",
+						"emoticons",
+						"template",
+						"preview",
+						"insertdatetime",
+						"contextmenu",
+						"noneditable",
+						"tabfocus",
+						"visualchars",
+						"wordcount",
+						"spellchecker",
+						"advcode",
+						"autosave",
+						"autosave_restore",
+						"casechange",
+						"charmap",
+						"emoticons",
+						"mediaembed",
+						"pagebreak",
+						"print",
+						"searchreplace",
+						"textcolor",
+						"visualblocks",
 					],
 					toolbar:
 						"undo redo | formatselect | bold italic | \
-            alignleft aligncenter alignright | \
-            bullist numlist outdent indent | help",
+				alignleft aligncenter alignright | \
+				bullist numlist outdent indent | help | \
+				code | hr | textpattern | toc | imagetools | \
+				colorpicker | fullpage | media | table | \
+				codesample | nonbreaking | directionality | \
+				emoticons | template | preview | insertdatetime | \
+				contextmenu | noneditable | tabfocus | \
+				visualchars | wordcount | spellchecker | \
+				advcode | autosave | autosave_restore | \
+				casechange | charmap | emoticons | mediaembed | \
+				pagebreak | print | searchreplace | \
+				textcolor | visualblocks",
 				}}
 			/>
-			<button onClick={handleSaveDocument}>Save Transcript</button>
+			<div>
+				<button onClick={handleSaveDocument}>Save Transcript</button>
+				<button onClick={handleDownloadDocument}>Download Transcript</button>
+			</div>
 		</div>
 	);
-}
+};
 
 export default TextEditor;
