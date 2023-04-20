@@ -13,6 +13,7 @@
 
 import { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import styles from "./text-editor.module.css";
 
 const TextEditor = () => {
 	const [title, setTitle] = useState("Transcript Editor");
@@ -79,7 +80,7 @@ const TextEditor = () => {
 	};
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<h2>
 				{isEditingTitle ? (
 					<div>
@@ -87,12 +88,19 @@ const TextEditor = () => {
 							type="text"
 							value={newTitle}
 							onChange={handleNewTitleChange}
+							className={styles.titleInput}
 						/>
-						<button onClick={handleTitleSave}>Save</button>
-						<button onClick={handleTitleCancel}>Cancel</button>
+						<button onClick={handleTitleSave} className={styles.button}>
+							Save
+						</button>
+						<button onClick={handleTitleCancel} className={styles.button}>
+							Cancel
+						</button>
 					</div>
 				) : (
-					<span onClick={handleTitleClick}>{title}</span>
+					<span onClick={handleTitleClick} className={styles.title}>
+						{title}
+					</span>
 				)}
 			</h2>
 			<Editor
@@ -159,10 +167,15 @@ const TextEditor = () => {
 				pagebreak | print | searchreplace | \
 				textcolor | visualblocks",
 				}}
+				className={styles.editor}
 			/>
 			<div>
-				<button onClick={handleSaveDocument}>Save Transcript</button>
-				<button onClick={handleDownloadDocument}>Download Transcript</button>
+				<button onClick={handleSaveDocument} className={styles.button}>
+					Save
+				</button>
+				<button onClick={handleDownloadDocument} className={styles.button}>
+					Download
+				</button>
 			</div>
 		</div>
 	);
