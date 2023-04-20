@@ -11,12 +11,12 @@
  * @requires ./App
  */
 
-import App from "./App";
+/* import App from "./App"; */
 import React from "react";
 import ReactDOM from "react-dom/client";
-import DashboardHeader from "./components/DashboardHeader/DashboardHeader";
+/* import DashboardHeader from "./components/DashboardHeader/DashboardHeader";
 import MetricWidgets from "./components/widgets/MetricWidgets";
-import NavigationLeft from "./components/navigation/left/NavigationLeft";
+import NavigationLeft from "./components/navigation/left/NavigationLeft"; */
 import TextEditor from "./components/text-editor/TextEditor";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

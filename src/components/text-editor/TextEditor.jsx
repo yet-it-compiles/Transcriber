@@ -11,65 +11,110 @@
  * @exports TextEditor
  */
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import styles from "./text-editor.module.css";
 
+const PLUGIN_OPTIONS = [
+	"code",
+	"media",
+	"table",
+	"codesample",
+	"nonbreaking",
+	"directionality",
+	"emoticons",
+	"preview",
+	"insertdatetime",
+	"visualchars",
+	"wordcount",
+	"advcode",
+	"autosave",
+	"casechange",
+	"emoticons",
+	"mediaembed",
+	"pagebreak",
+	"visualblocks",
+];
+
+const TOOLBAR_OPTIONS =
+	"undo redo | formatselect | bold italic | \
+alignleft aligncenter alignright | \
+bullist numlist outdent indent | help | \
+code | hr | textpattern | toc | imagetools | \
+colorpicker | media | table | \
+codesample | nonbreaking | directionality | \
+emoticons | preview | insertdatetime | \
+contextmenu | noneditable | tabfocus | \
+visualchars | wordcount | \
+advcode | autosave | autosave_restore | \
+casechange | charmap | emoticons | mediaembed | \
+pagebreak | print | searchreplace | \
+visualblocks";
+
 const TextEditor = () => {
 	const [title, setTitle] = useState("Transcript Editor");
+	const [date, setDate] = useState(new Date());
 	const [content, setContent] = useState("");
 	const [isEditingTitle, setIsEditingTitle] = useState(false);
 	const [newTitle, setNewTitle] = useState(title);
 
 	/**
-	 * Event listener that listens to allow the user to edit the title
+	 * Callback function that handles the click-to-edit title
 	 */
-	const handleTitleClick = () => {
-		setIsEditingTitle(true);
-	};
+	const handleTitleClick = useCallback(() => {
+		setIsEditingTitle(() => true);
+	}, []);
 
 	/**
-	 * Provides the user the ability to dynamically change the name of the document
+	 * Callback function that handles setting the new document title
 	 *
-	 * @param {event} the console output to change the document title
+	 * @param {event} param0 - The value the user tries to assign as the title
 	 */
-	const handleNewTitleChange = (event) => {
-		setNewTitle((event) => event.target.value);
-	};
+	const handleNewTitleChange = useCallback((event) => {
+		setNewTitle(() => event.target.value);
+	}, []);
 
 	/**
-	 * Provides the user the ability to save a new document title
+	 * Callback function that handles saving the title as the document name on
+	 * download
 	 */
-	const handleTitleSave = () => {
+	const handleTitleSave = useCallback(() => {
 		setTitle(() => newTitle);
 		setIsEditingTitle(() => false);
-	};
+	}, [newTitle]);
 
 	/**
-	 * Allows the user to cancel editing the title
+	 * Callback function that handles when the title editing is cancelled
 	 */
-	const handleTitleCancel = () => {
+	const handleTitleCancel = useCallback(() => {
 		setIsEditingTitle(() => false);
 		setNewTitle(() => title);
-	};
+	}, [title]);
 
 	/**
-	 *  Provides the user the ability to save and print the document to console
+	 * Callback function that handles the save document feature
+	 * When the document is saved, the contents of it is printed to the console
 	 *
-	 * ! Allows the ability to save the document/transcript to the DB
+	 * @TODO
+	 * ! Replace the console.log with the insertion to the DB logic
 	 */
-	const handleSaveDocument = () => {
+	const handleDocumentSave = useCallback(() => {
 		const documentTitle = `${title}`;
 		console.log(`Title: ${documentTitle}\nContent: ${content}`);
-	};
+	}, [content, title]);
 
 	/**
-	 * @TODO - Finish functionality
+	 * Callback function that handles the ability for the document to be downloaded
+	 * to the users computer locally.
+	 *
+	 * type: "text/plain;charset=utf-8" - Represents the .doc and .txt extensions
+	 *
+	 * @TODO - Finish .docx functionality
 	 */
-	const handleDownloadDocument = () => {
-		const filename = `${title}.txt`;
+	const handleDownloadDocument = useCallback(() => {
+		const filename = `${title}.doc`;
 		const fileContent = `${title}\n\n${content}`;
-		const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
+		const blob = new Blob([fileContent], { type: "text/jsx;charset=utf-8" });
 		const url = URL.createObjectURL(blob);
 		const link = document.createElement("a");
 		link.href = url;
@@ -77,7 +122,7 @@ const TextEditor = () => {
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
-	};
+	}, [content, title]);
 
 	return (
 		<div className={styles.container}>
@@ -90,6 +135,7 @@ const TextEditor = () => {
 							onChange={handleNewTitleChange}
 							className={styles.titleInput}
 						/>
+						<br />
 						<button onClick={handleTitleSave} className={styles.button}>
 							Save
 						</button>
@@ -103,6 +149,7 @@ const TextEditor = () => {
 					</span>
 				)}
 			</h2>
+			<p>{date.toLocaleDateString()}</p>
 			<Editor
 				apiKey=""
 				value={content}
@@ -112,65 +159,13 @@ const TextEditor = () => {
 				init={{
 					height: 500,
 					menubar: true,
-					plugins: [
-						"advlist autolink lists link image",
-						"charmap print preview anchor help",
-						"searchreplace visualblocks code",
-						"insertdatetime media table paste wordcount",
-						"hr",
-						"code",
-						"textpattern",
-						"toc",
-						"imagetools",
-						"colorpicker",
-						"fullpage",
-						"media",
-						"table",
-						"codesample",
-						"nonbreaking",
-						"directionality",
-						"emoticons",
-						"template",
-						"preview",
-						"insertdatetime",
-						"contextmenu",
-						"noneditable",
-						"tabfocus",
-						"visualchars",
-						"wordcount",
-						"spellchecker",
-						"advcode",
-						"autosave",
-						"autosave_restore",
-						"casechange",
-						"charmap",
-						"emoticons",
-						"mediaembed",
-						"pagebreak",
-						"print",
-						"searchreplace",
-						"textcolor",
-						"visualblocks",
-					],
-					toolbar:
-						"undo redo | formatselect | bold italic | \
-				alignleft aligncenter alignright | \
-				bullist numlist outdent indent | help | \
-				code | hr | textpattern | toc | imagetools | \
-				colorpicker | fullpage | media | table | \
-				codesample | nonbreaking | directionality | \
-				emoticons | template | preview | insertdatetime | \
-				contextmenu | noneditable | tabfocus | \
-				visualchars | wordcount | spellchecker | \
-				advcode | autosave | autosave_restore | \
-				casechange | charmap | emoticons | mediaembed | \
-				pagebreak | print | searchreplace | \
-				textcolor | visualblocks",
+					plugins: PLUGIN_OPTIONS,
+					toolbar: TOOLBAR_OPTIONS,
 				}}
 				className={styles.editor}
 			/>
 			<div>
-				<button onClick={handleSaveDocument} className={styles.button}>
+				<button onClick={handleDocumentSave} className={styles.button}>
 					Save
 				</button>
 				<button onClick={handleDownloadDocument} className={styles.button}>
@@ -178,6 +173,27 @@ const TextEditor = () => {
 				</button>
 			</div>
 		</div>
+	);
+};
+
+const CurrentDate = () => {
+	const [currentDateTime, setCurrentDateTime] = useState(new Date());
+
+	// Updates the date every 60 seconds
+	useEffect(() => {
+		const timedUpdate = setInterval(() => {
+			setCurrentDateTime(() => new Date());
+		}, 60000);
+
+		// clears the date during every unmount
+		return () => clearInterval(() => timedUpdate);
+	}, []);
+
+	return (
+		<>
+			<p>{currentDateTime.toLocaleDateString()}</p>
+			<p>{currentDateTime.toLocaleTimeString()}</p>
+		</>
 	);
 };
 
