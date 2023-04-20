@@ -6,7 +6,7 @@ SLPScribe, or the Specch Language Pathologist Transcriber, is a specialized free
 The transcripts can be easily exported to Microsoft Word or Google Docs, or downloaded for added flexibility. In addition to its core transcription capabilities, SLPScribe also includes a powerful text editor with advanced formatting and editing tools, allowing for hassle-free corrections and modifications. The application was designed with ease of use in mind, with the goal of simplifying the workflow of language pathologists and other similar professionals.
 
 ## 2. Project Inspiration
-I accepted this freelance project for a speech-language pathologist because I wanted to use my skills to make a positive impact on people's lives. By helping individuals improve their communication skills and assisting dedicated professionals in their work, I felt that I could contribute to the field of speech-language pathology. I was motivated to streamline their processes, so they could continue to make a difference in the lives of their clients.
+This project was a rewarding challenge for me as a freelance software developer. I wanted to use my technical skills to create a high-quality application that supports speech-language pathologists in their work. My goal was to design an efficient and easy to use solution that reduces the administrative burden on SLPs, and allows them to focus more on providing high-quality service to their clients.
 
 ## 3. Version 1 Prototype
 
@@ -31,3 +31,4 @@ I accepted this freelance project for a speech-language pathologist because I wa
 [Coming Soon]
 
 ## 7. License
+[Coming Soon]
