@@ -28,7 +28,7 @@ body {
 .overlay {
 	background-color: rgba(0, 0, 0, 25%);
 	border-radius: 15px;
-	height: fit-content;
+	/* height: fit-content; */
 	width: 700px;
 	padding-bottom: 50px;
 	text-align: center;
@@ -127,7 +127,7 @@ input:valid {
 	display: block;
 	color: var(--link-color);
 	font-size: 12px;
-	width: fit-content;
+	/* width: fit-content; */
 	margin-right: 0px;
 	margin-left: auto;
 }
