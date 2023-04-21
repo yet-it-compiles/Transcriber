@@ -13,18 +13,17 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
+
 import App from "./App";
-import DashboardHeader from "./components/DashboardHeader/DashboardHeader";
-import MetricWidgets from "./components/widgets/MetricWidgets";
+import DashboardHeader from "./components/dashboard-header/DashboardHeader";
 import NavigationLeft from "./components/navigation/left/NavigationLeft";
 import TextEditor from "./components/text-editor/TextEditor";
-import LoginScreen from "./components/LoginPage/LoginScreen";
+import LoginScreen from "./components/login-page/LoginScreen";
 import AuthContextProvider from "./contexts/AuthContext";
+import DisplayWidgets from "./components/widgets/MetricWidgets";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<AuthContextProvider>
-			<LoginScreen />
-		</AuthContextProvider>
+		<DisplayWidgets />
 	</React.StrictMode>
 );

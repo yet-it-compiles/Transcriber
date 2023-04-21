@@ -6,23 +6,20 @@
  * the primary UI features.
  *
  * @requires react
- * @requires ./AudioRecorder
  */
 
 import React from "react";
-import AudioRecorder from "./services/AudioRecorder";
-import LoginScreen from "./components/LoginPage/LoginScreen";
-import AuthContextProvider from './contexts/AuthContext'
 
 /**
- * - @TODO
- * @returns Simple JSX button layout to provide recording, and
- * playback features
+ *
+ * @returns
  */
-function App() {
+const App = () => {
 	return (
-		<></>
+		<>
+			<h1>App Component</h1>
+		</>
 	);
-}
+};
 
 export default App;

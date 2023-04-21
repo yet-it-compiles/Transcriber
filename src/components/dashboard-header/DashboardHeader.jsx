@@ -1,8 +1,8 @@
 /**
  * @file DashboardHeader.jsx
  *
- * @description Defines the header section for Dashboard.jsx, providing several
- * buttons, and a drop down menu.
+ * @description Defines the header section for Dashboard.jsx,
+ * providing several  buttons, and a drop down menu.
  *
  * @requires react
  * @requires header.module.css
