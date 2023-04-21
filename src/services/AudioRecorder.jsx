@@ -2,9 +2,9 @@
  * @file AudioRecorder.jsx
  *
  * @description
- * Handles the responsibility of initializing various tools to
- * effectively manage audio data along with providing recording, and playback
- * features.
+ * Handles the responsibility of initializing various
+ * tools to effectively manage audio data along with
+ * providing recording, and playback features.
  *
  * @requires DisplayTranscription
  * @requires react
