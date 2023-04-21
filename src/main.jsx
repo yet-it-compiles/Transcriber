@@ -18,9 +18,13 @@ import ReactDOM from "react-dom/client";
 import MetricWidgets from "./components/widgets/MetricWidgets";
 import NavigationLeft from "./components/navigation/left/NavigationLeft"; */
 import TextEditor from "./components/text-editor/TextEditor";
+import LoginScreen from "./components/LoginPage/LoginScreen";
+import AuthContextProvider from './contexts/AuthContext'
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<TextEditor />
+		<AuthContextProvider>
+			<LoginScreen />
+		</AuthContextProvider>
 	</React.StrictMode>
 );

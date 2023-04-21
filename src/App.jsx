@@ -11,6 +11,8 @@
 
 import React from "react";
 import AudioRecorder from "./services/AudioRecorder";
+import LoginScreen from "./components/LoginPage/LoginScreen";
+import AuthContextProvider from './contexts/AuthContext'
 
 /**
  * - @TODO
@@ -19,9 +21,7 @@ import AudioRecorder from "./services/AudioRecorder";
  */
 function App() {
 	return (
-		<>
-			<AudioRecorder />
-		</>
+		<></>
 	);
 }
 
