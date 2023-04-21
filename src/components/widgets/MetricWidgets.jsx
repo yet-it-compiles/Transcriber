@@ -1,8 +1,8 @@
 /**
  * @file MetricWidgets.jsx
  *
- * @description This file exports a set of 4 components that render four metric
- * widgets that will be used in the Dashboard
+ * @description This file exports a set of 4 component widgets that render
+ * on the dashboard
  *
  * @requires react
  * @requires metric-widgets.module.css
@@ -44,10 +44,10 @@ const initialWidgetMetrics = [
  * Responsible for displaying four memoized widgets on the Dashboard.jsx.
  *
  * Accomplished by mapping over each widget with the
- * Generates four memoized metric widgets that will be displayed in the header
- * section of the dashboard.
+ * Generates four memoized metric widgets that will be displayed in the
+ * header section of the dashboard.
  *
- * @returns {JSX.Element} - a metric widget
+ * @returns {JSX.Element} - a set of four metric widgets
  */
 const DisplayWidgets = () => {
 	const [widgetMetrics, setWidgetMetrics] = useState(initialWidgetMetrics);
