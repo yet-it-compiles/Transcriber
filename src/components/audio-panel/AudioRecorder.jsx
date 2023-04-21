@@ -1,40 +1,43 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import ReactPlayer from "react-player";
 import styles from "./audio-panel.module.css";
+
+const PLAYBACK_RATES = [0.5, 1, 1.5, 2];
+const DEFAULT_PLAYBACK_RATE = PLAYBACK_RATES[1];
 
 const AudioPanel = () => {
 	const [duration, setDuration] = useState(0);
 	const [volume, setVolume] = useState(0.5);
-	const [playbackRate, setPlaybackRate] = useState(1);
+	const [playbackRate, setPlaybackRate] = useState(DEFAULT_PLAYBACK_RATE);
 	const [isPlaying, setIsPlaying] = useState(false);
 
-	const handleDuration = useCallback((duration) => {
+	const durationInSeconds = useMemo(() => Math.floor(duration), [duration]);
+
+	const handleDuration = (duration) => {
 		setDuration(duration);
-	}, []);
+	};
 
-	const handleVolumeChange = useCallback((event) => {
-		setVolume(parseFloat(event.target.value));
-	}, []);
+	const handleVolumeChange = (event) => {
+		setVolume(event.target.value);
+	};
 
-	const handlePlaybackRateChange = useCallback((event) => {
-		setPlaybackRate(parseFloat(event.target.value));
-	}, []);
+	const handlePlaybackRateChange = (event) => {
+		setPlaybackRate(event.target.value);
+	};
 
-	const handlePlay = useCallback(() => {
+	const handlePlay = () => {
 		setIsPlaying(true);
-	}, []);
+	};
 
-	const handlePause = useCallback(() => {
+	const handlePause = () => {
 		setIsPlaying(false);
-	}, []);
+	};
 
-	const durationInSeconds = useMemo(() => {
-		return Math.floor(duration);
-	}, [duration]);
+	const { container, playerWrapper, controls, waveform, playing } = styles;
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.playerWrapper}>
+		<div className={container}>
+			<div className={playerWrapper}>
 				<ReactPlayer
 					url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
 					controls
@@ -44,18 +47,8 @@ const AudioPanel = () => {
 					onPlay={handlePlay}
 					onPause={handlePause}
 				/>
-				<div className={styles.controls}>
+				<div className={controls}>
 					<p>Duration: {durationInSeconds} seconds</p>
-
-					<input
-						type="range"
-						id="volume"
-						name="volume"
-						min="0"
-						max="1"
-						step="0.01"
-						onChange={handleVolumeChange}
-					/>
 					<label htmlFor="playbackRate">Playback Rate:</label>
 					<select
 						id="playbackRate"
@@ -63,16 +56,15 @@ const AudioPanel = () => {
 						value={playbackRate}
 						onChange={handlePlaybackRateChange}
 					>
-						<option value="0.5">0.5x</option>
-						<option value="1">1x</option>
-						<option value="1.5">1.5x</option>
-						<option value="2">2x</option>
+						{PLAYBACK_RATES.map((rate) => (
+							<option key={rate} value={rate}>
+								{rate}x
+							</option>
+						))}
 					</select>
 				</div>
 			</div>
-			<div
-				className={`${styles.waveform} ${isPlaying ? styles.playing : ""}`}
-			/>
+			<div className={`${waveform} ${isPlaying ? playing : ""}`} />
 		</div>
 	);
 };

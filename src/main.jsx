@@ -13,17 +13,20 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-
+/* 
 import App from "./App";
 import DashboardHeader from "./components/dashboard-header/DashboardHeader";
 import NavigationLeft from "./components/navigation/left/NavigationLeft";
 import TextEditor from "./components/text-editor/TextEditor";
 import LoginScreen from "./components/login-page/LoginScreen";
 import AuthContextProvider from "./contexts/AuthContext";
+*/
+import AudioPanel from "./components/audio-panel/AudioRecorder";
 import DisplayWidgets from "./components/widgets/MetricWidgets";
+import AudioVisualizer from "./components/audio-panel/AudioVisualizer";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<DisplayWidgets />
+		<AudioVisualizer />
 	</React.StrictMode>
 );
