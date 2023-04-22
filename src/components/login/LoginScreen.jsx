@@ -13,11 +13,12 @@
 
 import React from "react";
 // @ ! TODO - Conflicts with the rest of the files
-//import "./login-style.css";
+
+//import "./login.css";
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 
-const LoginScreen = () => {
+const Login = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -94,4 +95,4 @@ const LoginScreen = () => {
 	);
 };
 
-export default LoginScreen;
+export default Login;
