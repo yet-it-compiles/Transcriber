@@ -23,10 +23,12 @@ import AuthContextProvider from "./contexts/AuthContext";
 */
 import AudioPanel from "./components/audio-panel/AudioRecorder";
 import DisplayWidgets from "./components/widgets/MetricWidgets";
-import AudioVisualizer from "./components/audio-panel/AudioVisualizer";
+import AudioRecorder from "./services/AudioRecorder";
+import HearThis from "./components/recorder-test/HearThis";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<AudioVisualizer />
+		<HearThis />
+		<AudioRecorder />
 	</React.StrictMode>
 );
