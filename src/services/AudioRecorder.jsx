@@ -1,8 +1,7 @@
 /**
  * @file AudioRecorder.jsx
  *
- * @description
- * Handles the responsibility of initializing various
+ * @description Handles the responsibility of initializing various
  * tools to effectively manage audio data along with
  * providing recording, and playback features.
  *
@@ -60,15 +59,6 @@ function AudioRecorder() {
 				"Error: Attempted to start recoding but process was terminated:",
 				error
 			);
-			console.error(MediaRecorder.isTypeSupported("audio/webm")); // true
-			console.error(MediaRecorder.isTypeSupported("audio/ogg")); // false
-			console.error(MediaRecorder.isTypeSupported("audio/wav")); // false
-			console.error(MediaRecorder.isTypeSupported("audio/aac")); // false
-			console.error(MediaRecorder.isTypeSupported("audio/x-aiff")); // false
-			console.error(MediaRecorder.isTypeSupported("audio/x-mpegurl")); // false
-			console.error(MediaRecorder.isTypeSupported("audio/x-pn-realaudio")); // false
-			console.error(MediaRecorder.isTypeSupported("audio/x-wav")); // false
-			setRecording(false);
 		}
 	}, []);
 

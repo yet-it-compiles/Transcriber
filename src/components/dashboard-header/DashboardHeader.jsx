@@ -1,8 +1,12 @@
 /**
  * @file DashboardHeader.jsx
  *
- * @description Defines the header section for Dashboard.jsx,
- * providing several  buttons, and a drop down menu.
+ * @description Responsible for rendering the header section for Dashboard.jsx
+ * and is a critical component to the overall applications ux design.
+ *
+ * The component renders the 'Dashboard Overview' and defines the 'Import file',
+ * 'Quick notes', and 'Quick record' buttons as well as the drop down metrics
+ * overview for their daily / monthly usage and expenses.
  *
  * @requires react
  * @requires header.module.css
@@ -22,7 +26,8 @@ import importFile from "/src/assets/button-icons/import-icon.svg";
 /**
  * Creates the dashboard heading layout, along with providing various buttons
  *
- * @returns {jsx Element} Used on the Dashboard.jsx as its header
+ * @returns {jsx.Element} Used on the Dashboard.
+ * jsx as its header
  */
 const DashboardHeader = () => {
 	return (
