@@ -7,7 +7,6 @@
  * @requires firebase/app
  * @requires getAuth
  *
-
  * @export getAuth
  */
 
@@ -18,20 +17,13 @@ import { getAuth } from "firebase/auth";
  * Instantiates the configurations for firebase
  */
 const firebaseConfig = {
-	//   apiKey: process.env.REACT_APP_API_KEY,
-	//   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-	//   projectId: process.env.REACT_APP_PROJECT_ID,
-	//   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-	//   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-	//   appId: process.env.REACT_APP_APP_ID,
-	//   measurementId: "G-1WGDZNNZWV"
-	apiKey: "AIzaSyCWfffZeoOFBLlXxBp-b1uwU6wMuQw9YRE",
-	authDomain: "slpscribe.firebaseapp.com",
-	projectId: "slpscribe",
-	storageBucket: "slpscribe.appspot.com",
-	messagingSenderId: "438356590245",
-	appId: "1:438356590245:web:d8247f21799add29b3174c",
-	measurementId: "G-1WGDZNNZWV",
+	apiKey: import.meta.env.VITE_API_KEY,
+	authDomain: VITE_AUTHDOMAIN,
+	projectId: VITE_PROJECT_ID,
+	storageBucket: VITE_STORAGE_BUCKET,
+	messagingSenderId: VITE_MESSAGING_SENDER_ID,
+	appId: VITE_APP_ID,
+	measurementId: VITE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
