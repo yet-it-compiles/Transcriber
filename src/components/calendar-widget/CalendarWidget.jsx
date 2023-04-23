@@ -7,7 +7,7 @@
  * @requires react-calendar
  * @requires calendar.module.css
  *
- * @exports Calendar
+ * @exports CalendarWidget
  */
 
 import React, { useState, useCallback, useMemo } from "react";
@@ -111,6 +111,7 @@ const CalendarWidget = ({ onDateSelect }) => {
           <button onClick={handleAppointmentSave}>Save</button>
           <button onClick={handleAppointmentCancel}>Cancel</button>
         </div>
+
       </div>
     );
   }, [appointment, handleAppointmentChange, handleAppointmentCancel, handleAppointmentSave]);
