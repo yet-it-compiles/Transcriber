@@ -13,21 +13,6 @@
   padding: 10px;
 }
 
-@media screen and (max-width: 1440px) {
-  .navRight {
-    height: 80vh;
-    padding: 5px;
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  .navRight {
-    width: 25vw;
-    height: 98vh;
-    padding: 3px;
-  }
-}
-
 .notifications {
   position: relative;
   display: flex;
@@ -40,55 +25,9 @@
   font-style: normal;
 }
 
-@media only screen and (min-width: 1920px) {
-  .notifications {
-    height: 24rem;
-    margin: 20rem 0 0 0.2rem;
-  }
-}
-
-@media only screen and (max-width: 1920px) and (min-width: 1440px) {
-  .notifications {
-    height: 20rem;
-    margin: 16rem 0 0 0.2rem;
-  }
-}
-
-@media only screen and (max-width: 1440px) and (min-width: 1280px) {
-  .notifications {
-    height: 16rem;
-    margin: 12rem 0 0 0.2rem;
-  }
-}
-
-@media only screen and (max-width: 1280px) {
-  .notifications {
-    height: 12rem;
-    margin: 20rem 0 0 0.2rem;
-  }
-}
-
 .notifications > p:first-child {
   color: #1c1c1c;
   font-size: 1.25rem;
-}
-
-@media (min-width: 1280px) {
-  .notifications > p:first-child {
-    font-size: 1rem;
-  }
-}
-
-@media (min-width: 1440px) {
-  .notifications > p:first-child {
-    font-size: 1.25rem;
-  }
-}
-
-@media (min-width: 1920px) {
-  .notifications > p:first-child {
-    font-size: 1.5rem;
-  }
 }
 
 .notifications > div {

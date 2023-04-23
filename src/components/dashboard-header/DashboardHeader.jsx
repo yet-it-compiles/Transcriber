@@ -19,7 +19,6 @@
 
 import React from "react";
 import styles from "./header.module.css";
-import { FcDownload } from "react-icons/fc"
 import { GiNotebook } from "react-icons/gi"
 import { FaMicrophoneAlt } from "react-icons/fa"
 import { AiOutlineDownload } from "react-icons/ai"
@@ -39,7 +38,6 @@ const DashboardHeader = () => {
 			<button
 				type="button"
 				name="import file icon"
-				className={styles.redButton}
 			>
 			<AiOutlineDownload/>
 				<span>Import File</span>
@@ -55,9 +53,9 @@ const DashboardHeader = () => {
 				<span>Quick Record</span>
 			</button>
 
-			<select>
-				<option value="option1">This Months Statistics</option>
-				<option value="option2">Todays Statistics</option>
+			<select className={styles.dropDown}>
+				<option value="option1">Todays Statistics</option>
+				<option value="option2">This Months Statistics</option>
 			</select>
 		</header>
 	);
