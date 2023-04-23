@@ -1,0 +1,50 @@
+.navRight {
+  position: absolute;
+  right: 735px;
+  top: 8px;
+  height: 1171px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px 5px 0 0;
+  border: 1px solid rgba(9, 36, 75, 0.2);
+  background-color: rgb(255, 255, 255);
+}
+
+.notifications {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 248px;
+  left: 6px;
+  right: 34px;
+  top: 550px;
+  padding: 0px;
+  gap: 12px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.notifications > p:first-child {
+  color: #1c1c1c;
+  font-size: 20px;
+}
+
+.notifications > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rebeccapurple;
+}
+
+.notifications > div > svg {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
