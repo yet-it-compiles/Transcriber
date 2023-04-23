@@ -117,7 +117,7 @@ const CalendarWidget = ({ onDateSelect }) => {
   }, [appointment, handleAppointmentChange, handleAppointmentCancel, handleAppointmentSave]);
 
   return (
-        <div className={styles.calendarWidget}>
+        <div className={styles.widgetContainer}>
             <Calendar
                 value={date}
                 onChange={handleDateSelect}
