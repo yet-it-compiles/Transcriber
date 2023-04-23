@@ -9,11 +9,16 @@
  */
 
 import React from "react";
+import LeftNavigation from "../navigation/left/LeftNavigation";
+import RightNavigation from "../navigation/right/RightNavigation";
+import DashboardHeader from "../dashboard-header/DashboardHeader"
 
 function Dashboard() {
 	return (
 		<>
-			<h1>Dashboard</h1>
+			<LeftNavigation/>
+			<DashboardHeader/>
+			<RightNavigation/>
 		</>
 	);
 }

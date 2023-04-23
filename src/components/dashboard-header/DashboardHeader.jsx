@@ -19,9 +19,11 @@
 
 import React from "react";
 import styles from "./header.module.css";
-import notes from "/src/assets/button-icons/notes-icon.svg";
-import recording from "/src/assets/button-icons/recording-icon.svg";
-import importFile from "/src/assets/button-icons/import-icon.svg";
+import { FcDownload } from "react-icons/fc"
+import { GiNotebook } from "react-icons/gi"
+import { FaMicrophoneAlt } from "react-icons/fa"
+import { AiOutlineDownload } from "react-icons/ai"
+
 
 /**
  * Creates the dashboard heading layout, along with providing various buttons
@@ -39,17 +41,17 @@ const DashboardHeader = () => {
 				name="import file icon"
 				className={styles.redButton}
 			>
-				<img src={importFile} alt="Import File Icon" className={styles.icons} />
+			<AiOutlineDownload/>
 				<span>Import File</span>
 			</button>
 
 			<button type="button" name="notes">
-				<img src={notes} alt="Quick Notes Icon" className={styles.icons} />
+				<GiNotebook/>
 				<span>Quick Notes</span>
 			</button>
 
 			<button type="button" name="record">
-				<img src={recording} alt="Quick Record Icon" className={styles.icons} />
+				<FaMicrophoneAlt/>
 				<span>Quick Record</span>
 			</button>
 
