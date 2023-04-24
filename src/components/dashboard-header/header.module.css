@@ -3,21 +3,20 @@
   display: flex;
   flex-wrap: wrap;
   top: 0.65vh;
-  width: 87%;
+  width: 90.7%;
   height: 18vh;
-  left: 9.9%;
+  left: 8.9%;
   background: #b4c2da;
 }
 
 .headerContainer p {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  text-align: center;
+  margin-left: 3.8vh;
   width: 9vw;
-  height: 2.53rem;
-  margin: 1.5%;
+  height: 2.5rem;
   background: #838485;
   color: #b5e4ff;
   box-shadow: 0px 4px 8px rgba(41, 54, 84, 0.5);
@@ -26,17 +25,19 @@
   transition: all 0.2s ease-in-out;
 }
 
-.headerContainer > button > svg {
-  margin-top: 0.05vw;
+.headerContainer > button > svg:first-of-type {
+  padding-right: 4px;
+  padding-top: 2px;
 }
 
 .headerContainer > button {
   position: relative;
   top: 10%;
   height: 33px;
-  width: 150px;
-  left: 60%;
+  width: 165px;
+  left: 58%;
   margin-left: 15px;
+
   border: 0.05rem solid #c1d7f5;
   border-radius: 5px;
   color: #fff;
@@ -55,14 +56,14 @@
 
 .dropDown {
   position: absolute;
-  bottom: 5vh;
-  display: flex;
-  width: 7vw;
+  width: 8vw;
+  padding-left: 50px;
+  bottom: 7.8vh;
+  font-size: 0.8rem;
+  font-weight: 600;
   border: none;
   background-color: transparent;
   cursor: pointer;
-  font-size: 1rem;
-  left: 1.5%;
 }
 
 .dropDown:focus {

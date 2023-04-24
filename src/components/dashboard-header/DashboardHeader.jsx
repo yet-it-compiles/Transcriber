@@ -33,7 +33,7 @@ import { AiOutlineDownload } from "react-icons/ai"
 const DashboardHeader = () => {
 	return (
 		<header className={styles.headerContainer}>
-			<p>Dashboard Overview</p>
+			<p className={styles.fucked}>Dashboard Overview</p>
 
 			<button	type="button"
 			><AiOutlineDownload/>
