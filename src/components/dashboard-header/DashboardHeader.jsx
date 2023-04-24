@@ -35,22 +35,19 @@ const DashboardHeader = () => {
 		<header className={styles.headerContainer}>
 			<p>Dashboard Overview</p>
 
-			<button
-				type="button"
-				name="import file icon"
-			>
-			<AiOutlineDownload/>
-				<span>Import File</span>
+			<button	type="button"
+			><AiOutlineDownload/>
+				Import File
 			</button>
 
 			<button type="button" name="notes">
 				<GiNotebook/>
-				<span>Quick Notes</span>
+				Quick Notes
 			</button>
 
 			<button type="button" name="record">
 				<FaMicrophoneAlt/>
-				<span>Quick Record</span>
+				Quick Record
 			</button>
 
 			<select className={styles.dropDown}>

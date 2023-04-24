@@ -2,10 +2,10 @@
   position: absolute;
   display: flex;
   flex-wrap: wrap;
-  top: 8px;
-  width: 1200px;
-  height: 180px;
-  left: 249px;
+  top: 0.65vh;
+  width: 87%;
+  height: 18vh;
+  left: 9.9%;
   background: #b4c2da;
 }
 
@@ -13,30 +13,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 187px;
-  height: 38px;
-  margin: 20px;
+  position: relative;
+  text-align: center;
+  width: 9vw;
+  height: 2.53rem;
+  margin: 1.5%;
   background: #838485;
   color: #b5e4ff;
   box-shadow: 0px 4px 8px rgba(41, 54, 84, 0.5);
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .headerContainer > button > svg {
-  margin-right: 0.3vw;
+  margin-top: 0.05vw;
 }
 
-.headerContainer button {
+.headerContainer > button {
   position: relative;
-  display: inline-block;
-  width: 148px;
-  height: 30px;
-  margin: 15px;
-  left: 35%;
-  border: 1px solid #c1d7f5;
+  top: 10%;
+  height: 33px;
+  width: 150px;
+  left: 60%;
+  margin-left: 15px;
+  border: 0.05rem solid #c1d7f5;
   border-radius: 5px;
   color: #fff;
+  font-size: 0.8rem;
   background: rgba(0, 0, 0, 0.51);
-  cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
@@ -49,74 +54,17 @@
 }
 
 .dropDown {
-  position: relative;
-  width: 155px;
-  height: 20px;
-  top: 100px;
-  right: 57.5%;
-  appearance: none;
+  position: absolute;
+  bottom: 5vh;
+  display: flex;
+  width: 7vw;
   border: none;
   background-color: transparent;
   cursor: pointer;
+  font-size: 1rem;
+  left: 1.5%;
 }
 
-@media screen and (max-width: 1920px) {
-  .headerContainer {
-    width: 1200px;
-    left: 249px;
-  }
-}
-
-@media screen and (max-width: 1440px) {
-  .headerContainer {
-    width: 1000px;
-    left: 200px;
-    height: 224px;
-    top: 5px;
-  }
-
-  .headerContainer p {
-    width: 185px;
-    height: 30px;
-    margin: 10px;
-  }
-
-  .headerContainer button {
-    width: 140px;
-    height: 25px;
-    margin: 10px;
-    left: 30%;
-  }
-
-  .dropDown {
-    width: 130px;
-    height: 20px;
-    top: 80px;
-    right: 50%;
-  }
-}
-
-@media only screen and (max-width: 1280px) and (max-height: 800px) {
-  .headerContainer {
-    height: auto;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .headerContainer p {
-    width: 100%;
-  }
-
-  .headerContainer button {
-    width: 100%;
-    left: unset;
-  }
-
-  .dropDown {
-    width: 100%;
-    top: unset;
-    right: unset;
-  }
+.dropDown:focus {
+  outline: none;
 }

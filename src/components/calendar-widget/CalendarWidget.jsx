@@ -168,7 +168,7 @@ const CalendarWidget = ({ onDateSelect }) => {
             ) : (
                 <div className={styles.selectedDate}>
                     <div>Selected date: {date.toLocaleDateString()}</div>
-                    <button onClick={handleAppointmentCreate}>Create Appointment</button>
+                    <button onClick={handleAppointmentCreate} disabled>Create Appointment</button>
                 </div>
             )}
         </div>

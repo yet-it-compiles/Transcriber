@@ -21,11 +21,13 @@ import Dashboard from "./components/dashboard/Dashboard";
 import DashboardHeader from "./components/dashboard-header/DashboardHeader";
 import LeftNavigation from "./components/navigation/left/LeftNavigation";
 import RightNavigation from "./components/navigation/right/RightNavigation";
+import TextEditor from "./components/text-editor/TextEditor"
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <LeftNavigation />
-    <DashboardHeader/>
     <RightNavigation/>
+    <DashboardHeader/>
+    <LeftNavigation />
   </React.StrictMode>
 );

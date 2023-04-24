@@ -121,7 +121,6 @@ const ToggleSwitch = () => {
 			{isDarkMode ? <BsMoonStars/> : <BsSunrise/>}
 			{isDarkMode ? <p>Dark Mode</p> : <p>Light Mode</p>}
 			<input type="checkbox" onClick={handleToggle}/>
-
 		</div>
 	);
 };
