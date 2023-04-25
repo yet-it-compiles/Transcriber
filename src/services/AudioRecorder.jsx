@@ -5,13 +5,12 @@
  * tools to effectively manage audio data along with
  * providing recording, and playback features.
  *
- * @requires DisplayTranscription
  * @requires react
+ * @requires DisplayTranscription
  *
  * @exports AudioRecorder
  */
 
-import DisplayTranscription from "./DisplayTranscription";
 import React, { useState, useRef, useCallback } from "react";
 
 /**
@@ -103,8 +102,11 @@ function AudioRecorder() {
 				Play Recording
 			</button>
 
-			{/* <DisplayTranscription theAudioBlob={audioBlob} /> */}
+			{console.log("This is the audioBlob: ", {audioBlob})}
 
+
+
+{console.log("This is the audioBlob2: ", {audioBlob})}
 			{/* Displays audio controls */}
 			<audio src={audioBlobURL} ref={audioRef} />
 		</>

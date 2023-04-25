@@ -11,7 +11,7 @@
  * @exports TextEditor
  */
 
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import styles from "./text-editor.module.css";
 
@@ -104,7 +104,8 @@ const TextEditor = () => {
 	}, [content, title]);
 
 	/**
-	 * Callback function that handles the ability for the document to be downloaded
+	 * Callback function that handles the ability for the document to be
+	 * downloaded
 	 * to the users computer locally.
 	 *
 	 * type: "text/plain;charset=utf-8" - Represents the .doc and .txt extensions
@@ -151,7 +152,7 @@ const TextEditor = () => {
 			</h2>
 			<p>{date.toLocaleDateString()}</p>
 			<Editor
-				apiKey=""
+				apiKey={import.meta.env.VITE_EDITOR_AUTHORIZATION_1}
 				value={content}
 				onEditorChange={(newContent) => {
 					setContent(newContent);
