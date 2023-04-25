@@ -102,11 +102,6 @@ function AudioRecorder() {
 				Play Recording
 			</button>
 
-			{console.log("This is the audioBlob: ", {audioBlob})}
-
-
-
-{console.log("This is the audioBlob2: ", {audioBlob})}
 			{/* Displays audio controls */}
 			<audio src={audioBlobURL} ref={audioRef} />
 		</>

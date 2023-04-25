@@ -85,12 +85,11 @@ const Links = () => {
 
 				<li>
 					<FcEditImage/>
-					Text-Editor
+					Text Editor
 				</li>
 				<li>
 					<FcAudioFile/>
-					Recordings
-				</li>
+					Record </li>
 				<li>
 					<FcCalendar/>
 					Calendar

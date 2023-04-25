@@ -95,7 +95,6 @@ const TextEditor = () => {
 	 * Callback function that handles the save document feature
 	 * When the document is saved, the contents of it is printed to the console
 	 *
-	 * @TODO
 	 * ! Replace the console.log with the insertion to the DB logic
 	 */
 	const handleDocumentSave = useCallback(() => {
@@ -105,8 +104,7 @@ const TextEditor = () => {
 
 	/**
 	 * Callback function that handles the ability for the document to be
-	 * downloaded
-	 * to the users computer locally.
+	 * downloaded to the users computer locally.
 	 *
 	 * type: "text/plain;charset=utf-8" - Represents the .doc and .txt extensions
 	 *
