@@ -23,12 +23,10 @@ import { GiNotebook } from "react-icons/gi"
 import { FaMicrophoneAlt } from "react-icons/fa"
 import { AiOutlineDownload } from "react-icons/ai"
 
-
 /**
  * Creates the dashboard heading layout, along with providing various buttons
  *
- * @returns {jsx.Element} Used on the Dashboard.
- * jsx as its header
+ * @returns {JSX.Element} Used on the Dashboard.jsx as its header
  */
 const DashboardHeader = () => {
 	return (

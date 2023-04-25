@@ -13,21 +13,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 /* Need to responsive design this */
-/* import LeftNavigation from "./components/navigation/left/LeftNavigation";
+import LeftNavigation from "./components/navigation/left/LeftNavigation";
 import CalendarWidget from "./components/calendar-widget/CalendarWidget"
 import RightNavigation from "./components/navigation/right/RightNavigation";
- */
-import Dashboard from "./components/dashboard/Dashboard";
 import DashboardHeader from "./components/dashboard-header/DashboardHeader";
-import LeftNavigation from "./components/navigation/left/LeftNavigation";
-import RightNavigation from "./components/navigation/right/RightNavigation";
 import TextEditor from "./components/text-editor/TextEditor"
-
+import MetricWidgets from "./components/widgets/MetricWidgets"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RightNavigation/>
+    {/* <RightNavigation/>
     <DashboardHeader/>
-    <LeftNavigation />
+    <LeftNavigation/> */}
+    {/* <MetricWidgets/> */}
+    {/* <TextEditor/> */}
+    {/* <CalendarWidget/> */}
+
   </React.StrictMode>
 );

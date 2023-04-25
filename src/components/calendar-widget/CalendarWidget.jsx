@@ -47,26 +47,20 @@ const CalendarWidget = ({ onDateSelect }) => {
     setAppointment(null);
   }, []);
 
-  const handleAppointmentChange = useCallback(
-    (field, value) => {
-      setAppointment((prevAppointment) => ({
-        ...prevAppointment,
-        [field]: value,
-      }));
-    },
-    []
-  );
+  const handleAppointmentChange = useCallback((field, value) => {
+    setAppointment((prevAppointment) => ({
+      ...prevAppointment,
+      [field]: value,
+    }));
+  }, []);
 
-  const isDisabled = useCallback(
-    ({ date, view }) => {
-      if (view === "month") {
-        return date < new Date();
-      } else {
-        return false;
-      }
-    },
-    []
-  );
+  const isDisabled = useCallback(({ date, view }) => {
+    if (view === "month") {
+      return date < new Date();
+    } else {
+      return false;
+    }
+  }, []);
 
   const appointmentForm = useMemo(() => {
     if (!appointment) {
@@ -82,7 +76,7 @@ const CalendarWidget = ({ onDateSelect }) => {
         <div className={styles.formRow}>
           <label>Time:</label>
           <input
-            type="time"
+            type='time'
             value={appointment.time}
             onChange={(e) => handleAppointmentChange("time", e.target.value)}
           />
@@ -90,7 +84,7 @@ const CalendarWidget = ({ onDateSelect }) => {
         <div className={styles.formRow}>
           <label>Location:</label>
           <input
-            type="text"
+            type='text'
             value={appointment.location}
             onChange={(e) =>
               handleAppointmentChange("location", e.target.value)
@@ -100,7 +94,7 @@ const CalendarWidget = ({ onDateSelect }) => {
         <div className={styles.formRow}>
           <label>Reminder:</label>
           <input
-            type="text"
+            type='text'
             value={appointment.reminder}
             onChange={(e) =>
               handleAppointmentChange("reminder", e.target.value)
@@ -111,68 +105,74 @@ const CalendarWidget = ({ onDateSelect }) => {
           <button onClick={handleAppointmentSave}>Save</button>
           <button onClick={handleAppointmentCancel}>Cancel</button>
         </div>
-
       </div>
     );
-  }, [appointment, handleAppointmentChange, handleAppointmentCancel, handleAppointmentSave]);
+  }, [
+    appointment,
+    handleAppointmentChange,
+    handleAppointmentCancel,
+    handleAppointmentSave,
+  ]);
 
   return (
-        <div className={styles.widgetContainer}>
-            <Calendar
-                value={date}
-                onChange={handleDateSelect}
-                calendarType="US"
-                className={styles.calendar}
-                tileDisabled={isDisabled}
-                tileClassName={styles.calendarTile}
+    <div className={styles.widgetContainer}>
+      <Calendar
+        value={date}
+        onChange={handleDateSelect}
+        calendarType='US'
+        className={styles.calendar}
+        tileDisabled={isDisabled}
+        tileClassName={styles.calendarTile}
+      />
+      {appointment ? (
+        <div className={styles.appointmentForm}>
+          <div className={styles.formRow}>
+            <label>Date:</label>
+            <span>{appointment.date.toLocaleDateString()}</span>
+          </div>
+          <div className={styles.formRow}>
+            <label>Time:</label>
+            <input
+              type='time'
+              value={appointment.time}
+              onChange={(e) => handleAppointmentChange("time", e.target.value)}
             />
-            {appointment ? (
-                <div className={styles.appointmentForm}>
-                    <div className={styles.formRow}>
-                        <label>Date:</label>
-                        <span>{appointment.date.toLocaleDateString()}</span>
-                    </div>
-                    <div className={styles.formRow}>
-                        <label>Time:</label>
-                        <input
-                            type="time"
-                            value={appointment.time}
-                            onChange={(e) => handleAppointmentChange("time", e.target.value)}
-                        />
-                    </div>
-                    <div className={styles.formRow}>
-                        <label>Location:</label>
-                        <input
-                            type="text"
-                            value={appointment.location}
-                            onChange={(e) =>
-                                handleAppointmentChange("location", e.target.value)
-                            }
-                        />
-                    </div>
-                    <div className={styles.formRow}>
-                        <label>Reminder:</label>
-                        <input
-                            type="text"
-                            value={appointment.reminder}
-                            onChange={(e) =>
-                                handleAppointmentChange("reminder", e.target.value)
-                            }
-                        />
-                    </div>
-                    <div className={styles.formRow}>
-                        <button onClick={handleAppointmentSave}>Save</button>
-                        <button onClick={handleAppointmentCancel}>Cancel</button>
-                    </div>
-                </div>
-            ) : (
-                <div className={styles.selectedDate}>
-                    <div>Selected date: {date.toLocaleDateString()}</div>
-                    <button onClick={handleAppointmentCreate} disabled>Create Appointment</button>
-                </div>
-            )}
+          </div>
+          <div className={styles.formRow}>
+            <label>Location:</label>
+            <input
+              type='text'
+              value={appointment.location}
+              onChange={(e) =>
+                handleAppointmentChange("location", e.target.value)
+              }
+            />
+          </div>
+          <div className={styles.formRow}>
+            <label>Reminder:</label>
+            <input
+              type='text'
+              value={appointment.reminder}
+              onChange={(e) =>
+                handleAppointmentChange("reminder", e.target.value)
+              }
+            />
+          </div>
+          <div className={styles.formRow}>
+            <button onClick={handleAppointmentSave}>Save</button>
+            <button onClick={handleAppointmentCancel}>Cancel</button>
+          </div>
         </div>
-    );
+      ) : (
+        <div className={styles.selectedDate}>
+          <div>Selected date: {date.toLocaleDateString()}</div>
+          <button onClick={handleAppointmentCreate} disabled>
+            Create Appointment
+          </button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default CalendarWidget;
