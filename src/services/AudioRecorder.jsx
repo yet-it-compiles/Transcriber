@@ -1,9 +1,9 @@
 /**
  * @file AudioRecorder.jsx
  *
- * @description Handles the responsibility of initializing various
- * tools to effectively manage audio data along with
- * providing recording, and playback features.
+ * @description Handles the responsibility of initializing various audio tools
+ * to effectively manage audio data along with providing recording, and
+ * playback features.
  *
  * @requires react
  * @requires DisplayTranscription
@@ -13,8 +13,6 @@
 
 import React, { useState, useRef, useCallback } from "react";
 import DisplayTranscription from "./DisplayTranscription";
-
-
 
 /**
  * Defines the ability to start recording audio from the users browser, and
@@ -123,7 +121,6 @@ const AudioRecorder = () => {
 
       <audio src={audioBlobURL} ref={audioRef} />
 
-			{console.log("This is the audio blob", audioBlob)}
       <DisplayTranscription audioLink={fileURL} />
     </>
 	);
