@@ -56,9 +56,9 @@ const DisplayWidgets = () => {
   return (
     <aside className={styles.widget}>
       {widgetMetrics.map((eachMetric, eachIndex) => (
-        <aside key={eachIndex}>
+        <div className={styles.widgetContent} key={eachIndex}>
           <UpdatesWidget {...eachMetric} />
-        </aside>
+        </div>
       ))}
     </aside>
   );
