@@ -55,9 +55,8 @@ const initialWidgetMetrics = [
  *
  * @returns {JSX.Element} - An <aside> widget with its current state
  */
-
 const DisplayWidgets = ({ title, value, unit, percentChange }) => {
-    const [widgetMetrics, setWidgetMetrics] = useState(initialWidgetMetrics);
+    const [widgetMetrics] = useState(initialWidgetMetrics);
 
     return (
         <div className={styles.widget}>
