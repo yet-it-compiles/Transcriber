@@ -9,37 +9,37 @@
  * @requires react
  * @requires metric-widgets.module.css
  *
- * @exports Widgets
+ * @exports DisplayWidgets
  */
 
-import React, { useState, memo } from 'react';
-import styles from './metric-widgets.module.css';
+import React, { useState, memo } from "react";
+import styles from "./metric-widgets.module.css";
 
 const initialWidgetMetrics = [
-  {
-    title: 'Total Minutes Used',
-    value: 119,
-    unit: 'minutes',
-    percentChange: 11.01,
-  },
-  {
-    title: 'Number of Recordings',
-    value: 4,
-    unit: 'recordings',
-    percentChange: 9.15,
-  },
-  {
-    title: "This Month's Balance",
-    value: 1.79,
-    unit: 'USD',
-    percentChange: -0.56,
-  },
-  {
-    title: 'Total Memory Used',
-    value: 29,
-    unit: 'utilized',
-    percentChange: 9.12,
-  },
+    {
+        title: "Total Minutes Used",
+        value: 119,
+        unit: "minutes",
+        percentChange: 11.01,
+    },
+    {
+        title: "Number of Recordings",
+        value: 4,
+        unit: "recordings",
+        percentChange: 9.15,
+    },
+    {
+        title: "This Month's Balance",
+        value: 1.79,
+        unit: "USD",
+        percentChange: -0.56,
+    },
+    {
+        title: "Total Memory Used",
+        value: 29,
+        unit: "utilized",
+        percentChange: 9.12,
+    },
 ];
 
 /**
@@ -48,41 +48,40 @@ const initialWidgetMetrics = [
  * Accomplished by mapping over each widget in the array creating the widget as
  * an <aside> with a unique key representing its array index.
  *
- * @returns {JSX.Element} - An <aside> widget with its current state
- */
-const DisplayWidgets = () => {
-  const [widgetMetrics, setWidgetMetrics] = useState(initialWidgetMetrics);
-
-  return (
-    <aside className={styles.widget}>
-      {widgetMetrics.map((eachMetric, eachIndex) => (
-        <aside key={eachIndex}>
-          <UpdatesWidget {...eachMetric} />
-        </aside>
-      ))}
-    </aside>
-  );
-};
-
-/**
- * Responsible for updating the memorized widget with its new state
- *
  * @param {string} title - The title of the metric card.
  * @param {number} value - The value of the metric card.
  * @param {string} unit - The unit of the metric card.
  * @param {number} percentChange - The percentChange of the metric card
  *
- * @returns {JSX.Element} - An updated memoized widget
+ * @returns {JSX.Element} - An <aside> widget with its current state
  */
-const UpdatesWidget = memo(({ title, value, unit, percentChange }) => {
-  return (
-    <>
-      <p>{title}</p>
-      <p>{unit === 'USD' ? '$' + value : unit === 'utilized' ? value + '%' : value}</p>
-      <p>{unit}</p>
-      <p>{percentChange >= 0.0 ? '+' + percentChange.toFixed(2) : percentChange.toFixed(2)}%</p>
-    </>
-  );
-});
+
+const DisplayWidgets = ({ title, value, unit, percentChange }) => {
+    const [widgetMetrics, setWidgetMetrics] = useState(initialWidgetMetrics);
+
+    return (
+        <div className={styles.widget}>
+            {widgetMetrics.map((eachMetric, eachIndex) => (
+                <aside key={eachIndex}>
+                    <p>{eachMetric.title}</p>
+                    <p>
+                        {eachMetric.unit === "USD"
+                            ? `$${eachMetric.value}`
+                            : eachMetric.unit === "utilized"
+                            ? `${eachMetric.value}%`
+                            : eachMetric.value}
+                    </p>
+                    <p>{eachMetric.unit}</p>
+                    <p>
+                        {eachMetric.percentChange >= 0.0
+                            ? `+${eachMetric.percentChange.toFixed(2)}`
+                            : eachMetric.percentChange.toFixed(2)}
+                        %
+                    </p>
+                </aside>
+            ))}
+        </div>
+    );
+};
 
 export default DisplayWidgets;
