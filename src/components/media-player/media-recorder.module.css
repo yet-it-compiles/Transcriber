@@ -1,0 +1,100 @@
+.componentContainer {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 99%;
+    height: 7%;
+    bottom: 1%;
+    border-top: 5px solid #ccc;
+    box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+    background-color: #333232;
+}
+
+.componentContainer button {
+    background-color: transparent;
+    border: none;
+}
+
+.componentContainer SVG {
+    height: 45px;
+    width: 45px;
+    color: white;
+    cursor: pointer;
+}
+
+.componentContainer SVG:hover {
+    color: #7ccf60;
+}
+
+.MetaData {
+    display: flex;
+    align-items: center;
+    width: 250px;
+    line-height: 9px;
+}
+
+.MetaData > SVG {
+    height: 70px;
+    width: 70px;
+    margin-right: 10px;
+}
+
+.AudioControl {
+    text-align: center;
+    width: 650px;
+}
+
+.AudioControl :nth-child(1) {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flip {
+    transform: scaleX(-1);
+}
+
+.progress {
+    margin-top: 5px;
+}
+
+.progressBar {
+    position: relative;
+    height: 8px;
+    width: 650px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    background-color: white;
+    /* background: rgba(0, 0, 0, 0.25); */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
+        0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progressAnimation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 15px;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.05)
+    );
+    animation: progress audio linear forwards;
+    background-color: #39951b;
+}
+
+.timer {
+    position: relative;
+    left: 17%;
+    top: 15%;
+    color: #fff;
+    font-size: 22px;
+}
+
+/* .audioPlayer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+} */
