@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import styles from "./media-recorder.module.css";
 import { AiOutlineFastForward } from "react-icons/ai";
 import {
@@ -150,10 +150,11 @@ const MediaPlayerUI = () => {
         <div className={styles.componentContainer}>
             <div className={styles.MetaData}>
                 <FcVideoFile className={styles.icons} />
-                <span>
+                <div>
+                    {/* Change into span when variables are ready */}
                     <p>Media Title</p>
                     <p>Date Recorded</p>
-                </span>
+                </div>
             </div>
 
             <div className={styles.timer}>
@@ -163,7 +164,7 @@ const MediaPlayerUI = () => {
                     disabled={isRecording}>
                     {isRecording ? <CiMicrophoneOff /> : <CiMicrophoneOn />}
                 </button>
-                {recordingTime}s
+                <span>{recordingTime}s</span>
             </div>
 
             <div className={styles.AudioControl}>

@@ -17,14 +17,14 @@
     border: none;
 }
 
-.componentContainer SVG {
+.componentContainer svg {
     height: 45px;
     width: 45px;
     color: white;
     cursor: pointer;
 }
 
-.componentContainer SVG:hover {
+.componentContainer svg:hover {
     color: #7ccf60;
 }
 
@@ -35,15 +35,15 @@
     line-height: 9px;
 }
 
-.MetaData > SVG {
-    height: 70px;
-    width: 70px;
+.MetaData > svg {
+    height: 22%;
+    width: 22%;
     margin-right: 10px;
 }
 
 .AudioControl {
     text-align: center;
-    width: 650px;
+    width: 25%;
 }
 
 .AudioControl :nth-child(1) {
@@ -61,8 +61,8 @@
 
 .progressBar {
     position: relative;
-    height: 8px;
-    width: 650px;
+    height: 0.65vh;
+    width: 24.7vw;
     margin-bottom: 20px;
     border-radius: 15px;
     background-color: white;
@@ -83,15 +83,20 @@
         rgba(255, 255, 255, 0.05)
     );
     animation: progress audio linear forwards;
-    background-color: #39951b;
+    background-color: #3b3c3a;
+}
+
+.progressAnimation:hover {
+    background-color:#39951b;
+    cursor: pointer;
 }
 
 .timer {
-    position: relative;
-    left: 17%;
-    top: 15%;
+    position: absolute;
+    left: 35%;
+    top: 25%;
     color: #fff;
-    font-size: 22px;
+    font-size: 1.2rem;
 }
 
 /* .audioPlayer:hover {
