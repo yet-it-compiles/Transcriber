@@ -21,10 +21,10 @@ import DashboardHeader from "./components/dashboard-header/DashboardHeader";
 import RightNavigation from "./components/navigation/right/RightNavigation";
 import CalendarWidget from "./components/calendar-widget/CalendarWidget";
 import MetricWidgets from "./components/widgets/MetricWidgets";
+
 /* Responsive Design Completed For Everything Above This Comment */
-import AudioRecorder from "./components/audio-panel/AudioRecorder";
-import Recording from "./components/recording/Recording";
 import TextEditor from "./components/text-editor/TextEditor";
+import MediaRecorder from "./components/media-player/MediaRecorder";
 
 /**
  * Entry level component that renders the application
@@ -34,16 +34,21 @@ import TextEditor from "./components/text-editor/TextEditor";
 const App = () => {
     return (
         <>
-            {/* Dashboard View */}
-            <RightNavigation />
+            {/* 1. Dashboard View - Active */}
+
+            {/* <RightNavigation />
             <DashboardHeader />
             <LeftNavigation />
-            <MetricWidgets />
+            <MetricWidgets /> */}
 
-            {/* Specific Pages />*/}
+            {/* 2. Completed / Nearly Completed Pages />*/}
+
             {/* <Recording />
             <CalendarWidget />
             <TextEditor /> */}
+
+            {/* 3. Functionality Testing / Building */}
+            <MediaRecorder />
         </>
     );
 };
