@@ -1,62 +1,45 @@
-/* !Testing Value */
-body {
-    margin: 0;
-}
-
-.componentContainer {
+.mediaPlayer {
     position: fixed;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 7%;
-    bottom: 0%;
-    box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.1);
+    height: 8vh;
+    width: 100vw;
+    bottom: 0px;
+
+    color: whitesmoke;
+    background-color: #171717;
+}
+
+.mediaPlayer button {
     color: white;
-    background-color: #333232;
-}
-
-.componentContainer button {
-    background-color: transparent;
     border: none;
+    background-color: transparent;
 }
 
-.componentContainer svg {
+.mediaPlayer svg {
     height: 2.34vw;
     width: 45px;
     color: white;
     cursor: pointer;
 }
 
-.componentContainer svg:hover {
+.mediaPlayer svg:hover {
     color: #7ccf60;
 }
 
 .MetaData {
     display: flex;
-    align-items: center;
-    width: 250px;
-    line-height: 9px;    
 }
 
-.MetaData > svg {
-    height: 28%;
-    width: 28%;
-    margin-right: 10px;
+.MetaData svg {
+    height: 70px;
+    width: 70px;
 }
 
-.AudioControl {
-    text-align: center;
-    width: 25%;
-}
-
-.AudioControl :nth-child(1) {
-    position: relative;
-    right: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+.audioControls {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .flip {
@@ -64,7 +47,8 @@ body {
 }
 
 .progress {
-    margin-top: 5px;
+    position: absolute;
+    bottom: 0vw;
 }
 
 .progressBar {
@@ -77,6 +61,13 @@ body {
     /* background: rgba(0, 0, 0, 0.25); */
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
         0 1px rgba(255, 255, 255, 0.08);
+}
+
+.timer {
+    position: relative;
+    right: 50px;
+    top: 10px;
+    color: #39951b;
 }
 
 .progressAnimation {
@@ -99,23 +90,15 @@ body {
     cursor: pointer;
 }
 
+.volumeControl {
+    position: relative;
+    right: 6%;    
+}
+
 .sliderContainer {
-    position: relative;
-    bottom: 50px;
-}
-
-.slider {
     position: absolute;
-    left: 1.9vw;
-    top: 0.5vh;
 }
 
-.volumeSlider {
-    position: relative;
-    right: 9.91vw;
+.download {
+    margin: 20px;
 }
-
-/* .audioPlayer:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-} */
