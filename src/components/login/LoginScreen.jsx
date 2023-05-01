@@ -37,7 +37,7 @@ const Login = () => {
 		login(username, password)
 			.then((response) => {
 				console.log(response)
-				navigate("/dashboard")})
+				navigate("/")})
 			.catch((error) => {
 				console.log(error.message);
 			});
