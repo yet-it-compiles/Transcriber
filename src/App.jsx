@@ -16,8 +16,8 @@
  */
 
 import React from "react";
-//import AuthContextProvider from "./contexts/AuthContext";
-//import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AuthContextProvider from "./contexts/AuthContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LeftNavigation from "./components/navigation/left/LeftNavigation";
 import DashboardHeader from "./components/dashboard-header/DashboardHeader";
 import RightNavigation from "./components/navigation/right/RightNavigation";
@@ -27,9 +27,9 @@ import MetricWidgets from "./components/widgets/MetricWidgets";
 /* Responsive Design Completed For Everything Above This Comment */
 import TextEditor from "./components/text-editor/TextEditor";
 import MediaRecorder from "./components/media-player/MediaRecorder";
-//import LoginScreen from "./components/login/LoginScreen";
-//import Dashboard from "./components/dashboard/Dashboard";
-//import ForgotPassword from "./components/login/ForgotPassword";
+import LoginScreen from "./components/login/LoginScreen";
+import Dashboard from "./components/dashboard/Dashboard";
+import ForgotPassword from "./components/login/ForgotPassword";
 
 /**
  * Entry level component that renders the application
@@ -39,12 +39,12 @@ import MediaRecorder from "./components/media-player/MediaRecorder";
 const App = () => {
     return (
         <>
-            {/* 1. Dashboard View - Active */}
+            {/* 1. Dashboard View - Active 
 
             <RightNavigation />
             <DashboardHeader />
             <LeftNavigation />
-            <MetricWidgets />
+            <MetricWidgets /> */}
 
             {/* 2. Completed / Nearly Completed Pages />*/}
 
@@ -54,11 +54,11 @@ const App = () => {
 
             {/* 3. Functionality Testing / Building */}
 
-            {/*  <BrowserRouter>
+              <BrowserRouter>
                 <Routes>
                     <Route
                         path="/"
-                        element={<MediaRecorder />}
+                        element={<Dashboard />}
                     />
                     <Route
                         path="/login"
@@ -69,8 +69,8 @@ const App = () => {
                         }
                     />
                     <Route
-                        path="/dashboard"
-                        element={<Dashboard />}
+                        path="/media"
+                        element={<MediaRecorder />}
                     />
 
                     <Route
@@ -78,7 +78,7 @@ const App = () => {
                         element={<ForgotPassword />}
                     />
                 </Routes>
-            </BrowserRouter> */}
+            </BrowserRouter> 
         </>
     );
 };

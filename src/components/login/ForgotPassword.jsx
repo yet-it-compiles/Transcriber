@@ -1,5 +1,5 @@
 import React from 'react'
-import "./login.css";
+import "./login.css"
 import {useRef} from "react";
 import emailjs from '@emailjs/browser';
 import { useState } from "react";
@@ -16,7 +16,7 @@ const ForgotPassword = () => {
 
     emailjs.sendForm('service_agw179e', 'template_3n339qq', form.current, 'NDXZ96LTvQ5VbtPcX')
       .then((result) => {
-          console.log(result.text);
+          console.log(`${result.text} Email sent succesfully`);
       }, (error) => {
           console.log(error.text);
       });
@@ -32,13 +32,14 @@ const ForgotPassword = () => {
         <form ref = {form} onSubmit={sendEmail}>
           <div className="field-holder">
             <input
+              className='login-field'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="text"
               id='email'
               name="user_email"
               required />
-            <label htmlFor="email">Email</label>
+            <label className="login-label" htmlFor="email">Email</label>
           </div>
           <button type="submit" id="login-btn">
             Send Email

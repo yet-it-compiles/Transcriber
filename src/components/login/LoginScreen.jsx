@@ -64,17 +64,19 @@ const Login = () => {
 				<form onSubmit={handleSubmit}>
 					<div className="field-holder">
 						<input
+							className="login-field"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
 							type="text"
 							id="username"
 							required
 						></input>
-						<label htmlFor="username">Username</label>
+						<label className="login-label" htmlFor="username">Username</label>
 					</div>
 
 					<div className="field-holder">
 						<input
+							className="login-field"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 							type="password"
@@ -82,7 +84,7 @@ const Login = () => {
 							required
 						></input>
 
-						<label htmlFor="password">Password</label>
+						<label className="login-label"  htmlFor="password">Password</label>
 
 						<Link to="/forgot" id="forgot">Forgot Password?</Link>
 					</div>
