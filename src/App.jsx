@@ -15,14 +15,9 @@
  * @requires TextEditor
  */
 
-import {
-    BrowserRouter,
-    Routes,
-    Route,
-  } from "react-router-dom";
-import AuthContextProvider from './contexts/AuthContext'
-
 import React from "react";
+//import AuthContextProvider from "./contexts/AuthContext";
+//import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LeftNavigation from "./components/navigation/left/LeftNavigation";
 import DashboardHeader from "./components/dashboard-header/DashboardHeader";
 import RightNavigation from "./components/navigation/right/RightNavigation";
@@ -32,11 +27,9 @@ import MetricWidgets from "./components/widgets/MetricWidgets";
 /* Responsive Design Completed For Everything Above This Comment */
 import TextEditor from "./components/text-editor/TextEditor";
 import MediaRecorder from "./components/media-player/MediaRecorder";
-import LoginScreen from "./components/login/LoginScreen";
-import Dashboard from "./components/dashboard/Dashboard";
-import ForgotPassword from "./components/login/ForgotPassword";
-
-
+//import LoginScreen from "./components/login/LoginScreen";
+//import Dashboard from "./components/dashboard/Dashboard";
+//import ForgotPassword from "./components/login/ForgotPassword";
 
 /**
  * Entry level component that renders the application
@@ -48,10 +41,10 @@ const App = () => {
         <>
             {/* 1. Dashboard View - Active */}
 
-            {/* <RightNavigation />
+            <RightNavigation />
             <DashboardHeader />
             <LeftNavigation />
-            <MetricWidgets /> */}
+            <MetricWidgets />
 
             {/* 2. Completed / Nearly Completed Pages />*/}
 
@@ -60,15 +53,32 @@ const App = () => {
             <TextEditor /> */}
 
             {/* 3. Functionality Testing / Building */}
-            
-            <BrowserRouter>
+
+            {/*  <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<MediaRecorder/>}/>
-                    <Route path="/login" element={<AuthContextProvider><LoginScreen/></AuthContextProvider>}/>
-                    <Route path="/dashboard" element={<Dashboard/>}/>
-                    <Route path="/forgot" element={<ForgotPassword/>}/> 
+                    <Route
+                        path="/"
+                        element={<MediaRecorder />}
+                    />
+                    <Route
+                        path="/login"
+                        element={
+                            <AuthContextProvider>
+                                <LoginScreen />
+                            </AuthContextProvider>
+                        }
+                    />
+                    <Route
+                        path="/dashboard"
+                        element={<Dashboard />}
+                    />
+
+                    <Route
+                        path="/forgot"
+                        element={<ForgotPassword />}
+                    />
                 </Routes>
-                </BrowserRouter>
+            </BrowserRouter> */}
         </>
     );
 };
