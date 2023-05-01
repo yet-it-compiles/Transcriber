@@ -17,6 +17,9 @@
 
 import React from "react";
 /* import LeftNavigation from "./components/navigation/left/LeftNavigation";
+import AuthContextProvider from "./contexts/AuthContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LeftNavigation from "./components/navigation/left/LeftNavigation";
 import DashboardHeader from "./components/dashboard-header/DashboardHeader";
 import RightNavigation from "./components/navigation/right/RightNavigation";
 import CalendarWidget from "./components/calendar-widget/CalendarWidget";
@@ -34,19 +37,56 @@ import MediaPlayerUI from "./components/media-player/MediaPlayer";
 const App = () => {
     return (
         <>
-            {/* 1. Dashboard View - Active */}
-            {/* <RightNavigation />
+            <ActvielyWorkingOn />
+        </>
+    );
+};
+
+const ActvielyWorkingOn = () => {
+    return <MediaPlayerUI />;
+};
+
+const Dashboard = () => {
+    return (
+        <>
+            <RightNavigation />
             <DashboardHeader />
             <LeftNavigation />
-            <MetricWidgets /> */}
+            <MetricWidgets />
+        </>
+    );
+};
 
-            {/* 2. Completed / Nearly Completed Pages />*/}
-            {/* <Recording />
+const NearlyCompleted = () => {
+    return (
+        <>
+            <Recording />
             <CalendarWidget />
-            <TextEditor /> */}
+            <TextEditor />
+        </>
+    );
+};
 
-            {/* 3. Functionality Testing / Building */}
-            <MediaPlayerUI />
+const Routing = () => {
+    return (
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<MediaRecorder />} />
+                    <Route
+                        path="/login"
+                        element={
+                            <AuthContextProvider>
+                                <LoginScreen />
+                            </AuthContextProvider>
+                        }
+                    />
+                    <Route path="/dashboard" element={<Dashboard />} />
+
+                    <Route path="/forgot" element={<ForgotPassword />} />
+                </Routes>
+            </BrowserRouter>{" "}
+            */
         </>
     );
 };
