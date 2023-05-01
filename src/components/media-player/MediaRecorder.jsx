@@ -16,6 +16,8 @@ const MediaPlayerUI = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [recordedAudio, setRecordedAudio] = useState(false);
     const [recordingTime, setRecordingTime] = useState(0.0);
+    const [volume, setVolume] = useState(75);
+    const [sliderVisible, setSliderVisible] = useState(false);
 
     const audioRecorderRef = useRef(null);
     const audioRef = useRef(null);
@@ -90,6 +92,26 @@ const MediaPlayerUI = () => {
         stopTimer();
     };
 
+    const handleChange = (event) => {
+        setVolume(event.target.value);
+    };
+
+    const handleMuteClick = () => {
+        setVolume(0);
+    };
+
+    const handlePlusClick = () => {
+        setVolume((prevVolume) => Math.min(prevVolume + 10, 100));
+    };
+
+    const handleMinusClick = () => {
+        setVolume((prevVolume) => Math.max(prevVolume - 10, 0));
+    };
+
+    const handleIconClick = () => {
+        setSliderVisible(true);
+    };
+
     /**
      * Callback responsible for capturing the audio data creating a blob object
      * as a audio/mp3 then gives the audio blob a URL to be used as an SRC
@@ -152,16 +174,21 @@ const MediaPlayerUI = () => {
                 <FcVideoFile className={styles.icons} />
                 <div>
                     {/* Change into span when variables are ready */}
-                    <p>Media Title</p>
-                    <p>Date Recorded</p>
+                    <p>Title</p>
+                    <p>04/30/2023</p>
                 </div>
             </div>
 
-            <div className={styles.timer}>
+            <div className={styles.MicNTimer}>
                 <button
                     type="submit"
                     onClick={startRecording}
-                    disabled={isRecording}>
+                    disabled={isRecording}
+                    className={
+                        isRecording
+                            ? `${styles.isRecording} ${styles.midOff}`
+                            : styles.isRecording
+                    }>
                     {isRecording ? <CiMicrophoneOff /> : <CiMicrophoneOn />}
                 </button>
                 <span>{recordingTime}s</span>
@@ -193,7 +220,8 @@ const MediaPlayerUI = () => {
                             className={styles.progressAnimation}
                             style={{
                                 width: getProgressBarWidth(),
-                            }}></div>
+                            }}
+                        />
                     </div>
                 </div>
 
@@ -203,13 +231,26 @@ const MediaPlayerUI = () => {
                 />
             </div>
 
-            <div>
-                <BsFillVolumeOffFill />
-                <button
-                    onClick={downloadAudio}
-                    disabled={!recordedAudio}>
-                    <FcDownload />
+            <div className={styles.volumeSlider}>
+                <button onClick={handleIconClick}>
+                    <BsFillVolumeOffFill />
                 </button>
+                {sliderVisible && (
+                    <div className={styles.sliderContainer}>
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value={volume}
+                            onChange={handleChange}
+                            className={styles.slider}
+                        />
+                        <div
+                            className={styles.volumeLevel}
+                            style={{ height: `${volume}%` }}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );
