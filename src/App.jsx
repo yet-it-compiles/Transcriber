@@ -38,12 +38,17 @@ const App = () => {
     return (
         <>
             <ActvielyWorkingOn />
+            {/* <MediaPlayerUI /> */}
         </>
     );
 };
 
 const ActvielyWorkingOn = () => {
-    return <MediaPlayerUI />;
+    return (
+        <>
+            <MediaPlayerUI />
+        </>
+    );
 };
 
 const Dashboard = () => {
