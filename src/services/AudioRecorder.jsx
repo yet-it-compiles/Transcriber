@@ -1,129 +1,170 @@
 /**
  * @file AudioRecorder.jsx
  *
- * @description Handles the responsibility of initializing various audio tools
- * to effectively manage audio data along with providing recording, and
- * playback features.
+ * @description This module is responsible for allowing the application to connect
+ * to the users microphone, and provide them the ability to play, pause, skip,
+ * and adjust the volume of the applications audio playback.
  *
  * @requires react
- * @requires DisplayTranscription
+ * @requires MediaRecorder
  *
  * @exports AudioRecorder
  */
 
-import React, { useState, useRef, useCallback } from "react";
-import DisplayTranscription from "./DisplayTranscription";
+import React, {
+    useState,
+    useRef,
+    useCallback,
+    useEffect,
+    useMemo,
+} from "react";
 
 /**
- * Defines the ability to start recording audio from the users browser, and
- * initializes various values to manage audio data.
+ * Handles the functionality to allow the user to record audio from their mic,
+ * and playback the recording, and download it as a .wav file.
  *
- * Accomplished by prompting the user for permission, and
- * initializing chunking mechanisms that help with breaking down large data
+ * This is accomplished by initializing the dynamic values of the recording
+ * features, and then request audio recording permissions from the browser. The
+ * function has many performance improvements, that help with both memory
+ * consumption and rerendering.
+ *
+ * @returns {JSX.Element} representing an audio recorder
  */
 const AudioRecorder = () => {
-  const [recording, setRecording] = useState(false);
-  const [audioBlob, setAudioBlob] = useState(null);
-  const [audioBlobURL, setAudioURL] = useState(null);
-  const [fileURL, setFileURL] = useState(null);
+    const [isRecording, setIsRecording] = useState(false);
+    const [audioBlob, setAudioBlob] = useState(null);
+    const [audioBlobURL, setAudioBlobURL] = useState(null);
+    const mediaStreamRef = useRef();
+    const mediaRecorderRef = useRef();
+    const audioRef = useRef();
 
-  const mediaRecorderRef = useRef();
-  const audioRef = useRef();
+    /**
+     * Requests access to the browsers microphone, and sets the primary mic as
+     * the requested target. Once the data is retrieved, we efficiently chunk
+     * it and assign it an object URL
+     */
+    const startRecording = useCallback(async () => {
+        try {
+            // Ensures the audio is captured directly from the microphone
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: { capture: true },
+            });
+            mediaStreamRef.current = stream;
 
-  const handleStartRecording = useCallback(async () => {
-    try {
-      // Prompts the user for media permission
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
+            const mediaRecorder = new MediaRecorder(stream);
+            mediaRecorderRef.current = mediaRecorder;
 
-      // Allows the ability to record media data
-      mediaRecorderRef.current = mediaRecorder;
+            const chunks = [];
+            mediaRecorder.ondataavailable = ({ data }) => chunks.push(data);
 
-      const chunks = [];
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks);
+                setAudioBlob(blob);
+                setAudioBlobURL(URL.createObjectURL(blob));
+            };
 
-      mediaRecorder.ondataavailable = (event) => chunks.push(event.data);
+            mediaRecorder.start();
+            setIsRecording(true);
+        } catch (error) {
+            console.error("Failed to start recording:", error);
+            setIsRecording(false);
+        }
+    }, []);
 
-      mediaRecorder.onstop = async () => {
-        setAudioBlob(new Blob(chunks));
-        setAudioURL(URL.createObjectURL(new Blob(chunks)));
-        const formData = new FormData();
-        formData.append("file", new Blob(chunks), "audioRecording.wav");
-        const response = await fetch("https://file.io", {
-          method: "POST",
-          body: formData,
-        });
-        const data = await response.json();
-        setFileURL(data.link);
-        console.log("File URL:", data.link);
-      };
+    /**
+     * Callback that handles the ability to let a user stop the recording by
+     * accessing the mediaRecorderRef switching its value to false.
+     */
+    const stopRecording = useCallback(() => {
+        mediaRecorderRef.current?.stop();
+        setIsRecording(false);
+    }, []);
 
-      mediaRecorder.start();
+    /**
+     * Callback that handles the ability for the user to play the recording by
+     * using the audioBlobURL to create an audio element.
+     */
+    const playRecording = useCallback(() => {
+        if (!audioBlobURL) return;
+        const audio = audioRef.current || new Audio();
+        audio.src = audioBlobURL;
+        audio.onerror = (event) => console.error("Error playing audio:", event);
+        audio.play();
+        audioRef.current = audio;
+    }, [audioBlobURL]);
 
-      setRecording(true);
-    } catch (error) {
-      console.error("Attempting to start the recording.", error);
-      setRecording(false);
-    }
-  }, []);
+    /**
+     * Callback that handles the ability for the user to download the URL by
+     * creating a new URL object from the audioBlob and returns it.
+     */
+    const downloadURL = useCallback(() => {
+        if (!audioBlob) return null;
+        return URL.createObjectURL(audioBlob);
+    }, [audioBlob]);
 
-	const handleStopRecording = useCallback(() => {
-		setRecording(false);
-		mediaRecorderRef.current?.stop();
-	}, []);
+    /**
+     * memorized callback that handles the ability to download the recording
+     * by creating an anchor with the audio URL.
+     */
+    const downloadRecording = useMemo(() => {
+        if (!audioBlob) return null;
+        return () => {
+            const link = document.createElement("a");
+            link.href = downloadURL();
+            link.download = "audioRecording.wav";
+            link.click();
+        };
+    }, [audioBlob, downloadURL]);
 
-	const handlePlayRecording = useCallback(() => {
-		if (audioBlobURL) {
-			audioRef.current.onerror = (event) => {
-				console.error("Error playing audio:", event);
-			};
-			audioRef.current.onloadedmetadata = (event) => {
-				audioRef.current.play();
-			};
-			audioRef.current.src = audioBlobURL;
-		}
-	}, [audioBlobURL]);
+    useEffect(() => {
+        return () => {
+            if (
+                mediaRecorderRef.current &&
+                mediaRecorderRef.current.state !== "inactive"
+            ) {
+                mediaRecorderRef.current.stop();
+            }
+            if (mediaStreamRef.current) {
+                mediaStreamRef.current
+                    .getTracks()
+                    .forEach((track) => track.stop());
+            }
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current.src = "";
+            }
+        };
+    }, []);
 
-  const handleDownload = useCallback(() => {
-    if (audioBlob) {
-      const url = URL.createObjectURL(audioBlob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "audioRecording.wav";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-  }, [audioBlob]);
+    return (
+        <>
+            <button onClick={startRecording} disabled={isRecording}>
+                {isRecording ? "Recording..." : "Start Recording"}
+            </button>
 
-  return (
-    <>
-      <button onClick={handleStartRecording} disabled={recording}>
-        {recording ? "Recording..." : "Start Recording"}
-      </button>
+            <button onClick={stopRecording} disabled={!isRecording}>
+                Stop Recording
+            </button>
 
-      <button onClick={handleStopRecording}>Stop Recording</button>
+            <button onClick={playRecording} disabled={!audioBlobURL}>
+                Play Recording
+            </button>
 
-      <button onClick={handlePlayRecording}>Play Recording</button>
+            <button onClick={downloadRecording} disabled={!audioBlob}>
+                Download
+            </button>
 
-      <button onClick={handleDownload} disabled={!audioBlob}>
-        Download
-      </button>
-
-      {fileURL && (
-        <div>
-          <p>File URL: {fileURL}</p>
-          <a href={fileURL} target="_blank" rel="noopener noreferrer">
-            Open file
-          </a>
-        </div>
-      )}
-
-      <audio src={audioBlobURL} ref={audioRef} />
-
-      <DisplayTranscription audioLink={fileURL} />
-    </>
-	);
-}
+            {audioBlobURL && (
+                <audio
+                    ref={audioRef}
+                    src={audioBlobURL}
+                    onError={(event) =>
+                        console.error("Error playing audio:", event)
+                    }
+                />
+            )}
+        </>
+    );
+};
 
 export default AudioRecorder;
