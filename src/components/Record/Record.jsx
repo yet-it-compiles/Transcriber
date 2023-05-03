@@ -23,7 +23,7 @@ import { CiMicrophoneOn, CiMicrophoneOff } from "react-icons/ci";
 const Record = () => {
     return (
         <>
-            <ComponentName />
+            <RecordingPage />
         </>
     );
 };
@@ -38,7 +38,7 @@ const Record = () => {
  *
  * @returns {JSX.Element} - Representing text, and a single button
  */
-const ComponentName = () => {
+const RecordingPage = () => {
     const [isRecording, setIsRecording] = useState(false);
     const [showWaveAnimation, setShowWaveAnimation] = useState(false);
 
@@ -49,7 +49,7 @@ const ComponentName = () => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.trackingInContract}>
+            <h1 className={styles.directive}>
                 Please tap the record icon when you're ready
             </h1>
             <button
@@ -59,7 +59,7 @@ const ComponentName = () => {
                 <span
                     className={isRecording ? styles.recordButtonActive : null}>
                     {isRecording ? (
-                        <CiMicrophoneOff className={styles.icons} />
+                        <CiMicrophoneOn className={styles.recording} />
                     ) : (
                         <CiMicrophoneOn className={styles.icons} />
                     )}
@@ -67,8 +67,6 @@ const ComponentName = () => {
             </button>
 
             {showWaveAnimation && <AudioWaveAnimation />}
-
-            <div className={styles.conseal}></div>
         </div>
     );
 };
