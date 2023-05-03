@@ -8,7 +8,7 @@
   --motto-color: rgba(190, 237, 227, 255);
 }
 
-body {
+.login-body {
   margin: 0;
 }
 
@@ -64,6 +64,7 @@ sup {
   color: var(--motto-color);
   letter-spacing: 0.25rem;
   margin-top: 0;
+  margin-bottom: 150px;
   padding-right: 0;
   display: inline-block;
 }
