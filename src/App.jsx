@@ -18,8 +18,17 @@ import MediaPlayer from "./components/media-player/MediaPlayer";
 import TextEditor from "./pages/editor/TextEditor";
 
 // Still needs fixes applied
-/* import LoginScreen from "./components/login/LoginScreen";
-import ForgotPassword from "./components/login/ForgotPassword"; */
+import Login from "./pages/login/Login";
+import ForgotPassword from "./pages/forgot-password/ForgotPassword";
+
+//Import react router and auth context
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import AuthContextProvider from './context/AuthContext'
+
 
 /**
  * Entry level component that renders the application
@@ -77,7 +86,7 @@ const NearlyCompleted = () => {
 const LoginAndForgotPassword = () => {
   return (
     <>
-      <LoginScreen />
+      <Login />
       <ForgotPassword />
     </>
   );
@@ -88,12 +97,12 @@ const Routing = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MediaRecorder />} />
+          <Route path="/" element={<MediaPlayer />} />
           <Route
             path="/login"
             element={
               <AuthContextProvider>
-                <LoginScreen />
+                <Login />
               </AuthContextProvider>
             }
           />
@@ -101,8 +110,7 @@ const Routing = () => {
 
           <Route path="/forgot" element={<ForgotPassword />} />
         </Routes>
-      </BrowserRouter>{" "}
-      */
+      </BrowserRouter>
     </>
   );
 };

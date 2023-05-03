@@ -1,7 +1,8 @@
 /**
  * @file Login.jsx
  *
- * @description
+ * @description Login screen where the user logs into the site
+ *              using username and password
  *
  * @requires react
  * @requires login.css
@@ -11,12 +12,17 @@
  * @exports Login
  */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./login.css";
 
 const Login = () => {
+
+  useEffect(()=> {
+    document.body.classList.add('login-body')
+  }, []);
+
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

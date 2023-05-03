@@ -1,7 +1,8 @@
 /**
  * @file ForgotPassword.jsx
  *
- * @description
+ * @description Forgot password screen which allows the user to send an email to
+ *              themselves with instructions to reset their password
  *
  * @requires React
  * @requires react-router-dom
@@ -11,12 +12,17 @@
  * @exports ForgotPassword
  */
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
-import "./login.css";
+import "../login/login.css";
 
 const ForgotPassword = () => {
+
+  useEffect(()=> {
+    document.body.classList.add('login-body')
+  }, []);
+
   const form = useRef();
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
