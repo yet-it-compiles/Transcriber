@@ -124,21 +124,11 @@ const MediaPlayerUI = () => {
                     <AiOutlineFastForward className={styles.flip} />
                 </button>
 
-                <button
-                    type="submit"
-                    onClick={handlePlayPause}
-                    className={`${styles.playButton} ${
-                        isPlaying ? styles.isPlaying : ""
-                    }`}
-                >
+                <button type="submit" onClick={handlePlayPause}>
                     {isPlaying ? (
-                        <FaPauseCircle
-                            className={`${styles.pauseIcon} fa-pause-circle`}
-                        />
+                        <FaPauseCircle className={styles.transitional} />
                     ) : (
-                        <FaPlayCircle
-                            className={`${styles.playIcon} fa-play-circle`}
-                        />
+                        <FaPlayCircle />
                     )}
                 </button>
 
@@ -151,8 +141,7 @@ const MediaPlayerUI = () => {
                         {formatTime(currentTime)}
                     </div>
                     <div
-                        className={`${styles.progressBar} ${styles.progressMoved}`}
-                    >
+                        className={`${styles.progressBar} ${styles.progressMoved}`}>
                         <div
                             className={`${styles.progressAnimation} ${styles.isActive}`}
                             style={{
