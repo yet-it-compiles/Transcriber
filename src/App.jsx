@@ -6,28 +6,20 @@
  * initialize the primary UI features.
  *
  * @requires react
- * @requires LeftNavigation
- * @requires RightNavigation
- * @requires CalendarWidget
- * @requires MetricWidgets
- * @requires AudioRecorder
- * @requires Recording
- * @requires TextEditor
  */
 
 import React from "react";
-/* import LeftNavigation from "./components/navigation/left/LeftNavigation";
-import AuthContextProvider from "./contexts/AuthContext";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/dashboard/Dashboard";
 import LeftNavigation from "./components/navigation/left/LeftNavigation";
-import DashboardHeader from "./components/dashboard-header/DashboardHeader";
 import RightNavigation from "./components/navigation/right/RightNavigation";
-import CalendarWidget from "./components/calendar-widget/CalendarWidget";
-import MetricWidgets from "./components/widgets/MetricWidgets"; */
+import Header from "./components/header/Header";
+import CalendarWidget from "./components/calendar/CalendarWidget";
+import MediaPlayer from "./components/media-player/MediaPlayer";
+import TextEditor from "./pages/editor/TextEditor";
 
-/* Responsive Design Completed For Everything Above This Comment */
-/* import TextEditor from "./components/text-editor/TextEditor"; */
-import MediaPlayerUI from "./components/media-player/MediaPlayer";
+// Still needs fixes applied
+/* import LoginScreen from "./components/login/LoginScreen";
+import ForgotPassword from "./components/login/ForgotPassword"; */
 
 /**
  * Entry level component that renders the application
@@ -35,65 +27,84 @@ import MediaPlayerUI from "./components/media-player/MediaPlayer";
  * @returns {JSX.Element} Representing the application
  */
 const App = () => {
-    return (
-        <>
-            <ActvielyWorkingOn />
-            {/* <MediaPlayerUI /> */}
-        </>
-    );
+  return (
+    <>
+      <ActvielyWorkingOn />
+    </>
+  );
 };
 
+/**
+ * Renders the files that are actively being developed on
+ *
+ * @returns
+ */
 const ActvielyWorkingOn = () => {
-    return (
-        <>
-            <MediaPlayerUI />
-        </>
-    );
+  return (
+    <>
+      <MediaPlayer />
+      <TextEditor />
+    </>
+  );
 };
 
-const Dashboard = () => {
-    return (
-        <>
-            <RightNavigation />
-            <DashboardHeader />
-            <LeftNavigation />
-            <MetricWidgets />
-        </>
-    );
+/**
+ * Displays the current dashboard layout
+ *
+ * @returns
+ */
+const DashboardLayout = () => {
+  return (
+    <>
+      <RightNavigation />
+      <DashboardHeader />
+      <LeftNavigation />
+      <MetricWidgets />
+    </>
+  );
 };
 
 const NearlyCompleted = () => {
-    return (
-        <>
-            <Recording />
-            <CalendarWidget />
-            <TextEditor />
-        </>
-    );
+  return (
+    <>
+      <Recording />
+      <CalendarWidget />
+      <TextEditor />
+    </>
+  );
+};
+
+const LoginAndForgotPassword = () => {
+  return (
+    <>
+      <LoginScreen />
+      <ForgotPassword />
+    </>
+  );
 };
 
 const Routing = () => {
-    return (
-        <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<MediaRecorder />} />
-                    <Route
-                        path="/login"
-                        element={
-                            <AuthContextProvider>
-                                <LoginScreen />
-                            </AuthContextProvider>
-                        }
-                    />
-                    <Route path="/dashboard" element={<Dashboard />} />
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MediaRecorder />} />
+          <Route
+            path="/login"
+            element={
+              <AuthContextProvider>
+                <LoginScreen />
+              </AuthContextProvider>
+            }
+          />
+          <Route path="/dashboard" element={<Dashboard />} />
 
-                    <Route path="/forgot" element={<ForgotPassword />} />
-                </Routes>
-            </BrowserRouter>{" "}
-            */
-        </>
-    );
+          <Route path="/forgot" element={<ForgotPassword />} />
+        </Routes>
+      </BrowserRouter>{" "}
+      */
+    </>
+  );
 };
 
 export default App;

@@ -1,0 +1,46 @@
+.widgetContainer {
+    position: relative;
+    width: 96%;
+    max-width: 97%;
+    height: 74%;
+    top: 260px;
+    margin: 5px;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.calendarTile {
+    border-radius: 5px;
+}
+
+.calendarTile:disabled {
+    background-color: #e8e8e8;
+    color: #a0a0a0;
+    cursor: default;
+}
+
+.selectedDate {
+    margin-top: 0.625em;
+    font: bold 1rem/1.5 sans-serif;
+    color: #555;
+}
+
+@media screen and (max-width: 1920px) {
+    .widgetContainer {
+        top: 242px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .widgetContainer {
+        top: 142px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .widgetContainer {
+        top: 142px;
+        max-width: 100%;
+    }
+}

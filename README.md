@@ -15,18 +15,18 @@ This project was a rewarding challenge for me as a freelance software developer.
 
 ## 4. Application Features
 
--   [x] Record, playback, and save conversations
-        <br>_Capture, review, and store conversations with ease using SLPScribe's recording and playback functions_
--   [x] Easy Audio-to-Text Transcription
-        <br> _Enjoy an easy transcription process with advanced audio-to-text technology that effortlessly converts recorded conversations into editable text_
--   [x] Editable Transcript linked with original audio
-        <br> _Access a complete and accurate record of your conversations with linked audio and text transcripts_
--   [x] Transcript with labeled Speaker Diarisation - up to 5
-        <br> _Keep track of multiple speakers with precision using speaker diarisation that accurately labels up to five different speakers in the transcript_
--   [x] Export audio and text to Microsoft Word or Google Docs
-        <br> _Take your transcripts with you by exporting both audio and text to your favorite apps_
--   [x] Automatic Punctuation and Casing
-        <br> _Save time and effort by letting SLPScribe handle punctuation, casing and syllable counts for you_
+- [x] Record, playback, and save conversations
+      <br>_Capture, review, and store conversations with ease using SLPScribe's recording and playback functions_
+- [x] Easy Audio-to-Text Transcription
+      <br> _Enjoy an easy transcription process with advanced audio-to-text technology that effortlessly converts recorded conversations into editable text_
+- [x] Editable Transcript linked with original audio
+      <br> _Access a complete and accurate record of your conversations with linked audio and text transcripts_
+- [x] Transcript with labeled Speaker Diarisation - up to 5
+      <br> _Keep track of multiple speakers with precision using speaker diarisation that accurately labels up to five different speakers in the transcript_
+- [x] Export audio and text to Microsoft Word or Google Docs
+      <br> _Take your transcripts with you by exporting both audio and text to your favorite apps_
+- [x] Automatic Punctuation and Casing
+      <br> _Save time and effort by letting SLPScribe handle punctuation, casing and syllable counts for you_
 
 ## 5. Application Feature Showcase
 

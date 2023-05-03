@@ -9,11 +9,11 @@
  * @exports RightNavigation
  */
 
-import React, { useState } from 'react';
-import styles from './right-nav.module.css';
-import { FcGoogle, FcLeave, FcTodoList} from 'react-icons/fc';
-import { MdNotificationsActive } from 'react-icons/md';
-import CalendarWidget from '../../calendar-widget/CalendarWidget';
+import React from "react";
+import styles from "./right-nav.module.css";
+import { FcLeave, FcTodoList } from "react-icons/fc";
+import { MdNotificationsActive } from "react-icons/md";
+import CalendarWidget from "../../calendar/CalendarWidget";
 
 /**
  * Responsible for
@@ -25,8 +25,8 @@ import CalendarWidget from '../../calendar-widget/CalendarWidget';
 const RightNavigation = () => {
   return (
     <nav className={styles.navRight}>
-      <CalendarWidget/>
-       <Notifications/>
+      <CalendarWidget />
+      <Notifications />
     </nav>
   );
 };
@@ -44,21 +44,21 @@ const Notifications = () => {
       <p>Notifications</p>
 
       <div>
-        <MdNotificationsActive/>
+        <MdNotificationsActive />
         <p>You Have 3 Transcripts Left To Finish!</p>
       </div>
       <span>Just Now</span>
 
-
-
       <div>
-        <FcLeave/>
+        <FcLeave />
         <p>Your appointment just started</p>
       </div>
-      <span><p>59 minutes ago</p></span>
+      <span>
+        <p>59 minutes ago</p>
+      </span>
 
       <div>
-        <FcTodoList/>
+        <FcTodoList />
         <p>Don't forget to update your calendar for next week!</p>
       </div>
       <span>12 hours ago</span>
