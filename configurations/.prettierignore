@@ -1,0 +1,11 @@
+# Ignore build folders
+build/
+lib/
+dist/
+public/
+tests/
+coverage/
+demo/
+es/
+.rax/
+node_modules/
