@@ -20,25 +20,27 @@ import styles from "./default.module.css";
  * @returns {JSX.Element} representing a simple text editor
  */
 const DefaultEditor = () => {
-    return (
-        <div className={styles.container}>
-            <h2
-                className={styles.title}
-                contentEditable="true"
-                style={{ position: "relative" }}
-                spellCheck="true">
-                Edit The Following Transcript
-            </h2>
-            <br />
-            <div
-                className={styles.body}
-                contentEditable="true"
-                style={{ position: "relative" }}
-                spellCheck="true">
-                <br />
-            </div>
-        </div>
-    );
+  return (
+    <div className={styles.container}>
+      <h2
+        className={styles.title}
+        contentEditable="true"
+        style={{ position: "relative" }}
+        spellCheck="true"
+      >
+        Edit The Following Transcript
+      </h2>
+      <br />
+      <div
+        className={styles.body}
+        contentEditable="true"
+        style={{ position: "relative" }}
+        spellCheck="true"
+      >
+        <br />
+      </div>
+    </div>
+  );
 };
 
 export default DefaultEditor;

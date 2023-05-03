@@ -1,7 +1,7 @@
 .container {
   height: 30vh;
   width: 60vw;
-  
+
   background-color: antiquewhite;
 }
 
@@ -9,7 +9,7 @@
   font-size: 32px;
 }
 
-.titleInput {  
+.titleInput {
   border: none;
   outline: none;
   font-size: 32px;
@@ -21,20 +21,17 @@
   cursor: pointer;
   color: #fff;
   background-color: #333;
-  }
+}
 
 .button:hover {
   background-color: #444;
 }
 
 .timeStamp {
- 
 }
 
-.timeStamp > span { 
+.timeStamp > span {
   position: relative;
   margin-right: 30px;
   bottom: 10px;
 }
-
-
