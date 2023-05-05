@@ -45,35 +45,36 @@ const MediaPlayerUI = () => {
    * the duration of the file it's playing.
    */
   useEffect(() => {
-    if (isPlaying) {
-      timerRef.current = setInterval(() => {
-        setCurrentTime((currentTime) => {
-          if (currentTime < duration) {
-            return currentTime + 1;
-          } else {
-            setIsPlaying(false);
-            return currentTime;
-          }
-        });
-      }, 1000);
-    } else {
+    if (!isPlaying) {
       clearInterval(timerRef.current);
+      return;
     }
+
+    timerRef.current = setInterval(() => {
+      setCurrentTime((prevTime) => {
+        if (prevTime < duration) {
+          return prevTime + 1;
+        }
+
+        setIsPlaying(false);
+        return prevTime;
+      });
+    }, 1000);
 
     return () => {
       clearInterval(timerRef.current);
     };
   }, [isPlaying, duration]);
-
   /**
    * Handles the ability to play and pause the audio by changing bool value
    */
   const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
+    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
   };
 
   /**
    * Handles the ability to change the volume level by a slider
+   *
    * @param {event} event The current value of the volume slider
    */
   const handleVolumeChange = (event) => {
@@ -86,6 +87,7 @@ const MediaPlayerUI = () => {
 
   /**
    * Handles formatting the play time value
+   *
    * @param {number} time the time that should be rendered
    * @returns a JSX element representing a formatted timer
    */
@@ -102,9 +104,8 @@ const MediaPlayerUI = () => {
    */
   const downloadAudio = () => {
     const link = document.createElement("a");
-    // Point it to what it should download: link.href =
-    link.download = "recorded-audio.mp3";
-    link.style.display = "none"; // hide the link
+    link.download = "recorded-audio.wav";
+    link.style.display = "none";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 .mediaPlayer {
   position: fixed;
   display: flex;
@@ -35,8 +39,8 @@
 }
 
 .transitional {
-  -webkit-animation: transitional 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: transitional 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: transitional 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: transitional 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .audioControls {
@@ -79,9 +83,11 @@
   left: 0;
   height: 100%;
   border-radius: 15px;
-  background-image: linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.3),
-      rgba(255, 255, 255, 0.05));
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.05)
+  );
   animation: progress audio linear forwards;
   background-color: #3b3c3a;
 }
@@ -93,11 +99,13 @@
 
 .volumeControl {
   position: relative;
-  right: 6%;
+  right: 8%;
 }
 
 .sliderContainer {
   position: absolute;
+  bottom: 15px;
+  left: 35px;
 }
 
 .download {

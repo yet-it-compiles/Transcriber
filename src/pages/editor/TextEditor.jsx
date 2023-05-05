@@ -5,6 +5,7 @@
  * users to save the content of the editor along with a title.
  *
  * @requires react
+ * @requires react-icons
  * @requires tinymce/tinymce-react
  * @requires text-editor.module.css
  *
@@ -18,7 +19,6 @@ import { FcCalendar, FcClock } from "react-icons/fc";
 
 const PLUGIN_OPTIONS = [
   "preview",
-  "powerpaste",
   "searchreplace",
   "autolink",
   "directionality",
@@ -38,16 +38,36 @@ const PLUGIN_OPTIONS = [
   "advlist",
   "lists",
   "wordcount",
-  "tinymcespellchecker",
-  "a11ychecker",
-  "mediaembed",
-  "linkchecker",
   "help",
 ];
 
 const TOOLBAR_OPTIONS =
   "fontselect fontsizeselect | formatselect | bold italic strikethrough | forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat";
 
+/**
+ * Provides the ability to render DD|MM|YYYY and time
+ *
+ * @returns two formatted values for current date, and time
+ */
+const setCurrentDate = () => {
+  const currentDate = new Date();
+  const formattedTime = currentDate.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const formattedDate = currentDate.toLocaleDateString([], {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
+  });
+  return { formattedTime, formattedDate };
+};
+
+/**
+ * The file handles the responsibility of designing a new
+ *
+ * @returns {JSX.Element} An element representing a text editor
+ */
 const TextEditor = () => {
   const [content, setContent] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -66,7 +86,7 @@ const TextEditor = () => {
    *
    * @param {event} param0 - The value the user tries to assign as the title
    */
-  const handleNewTitleChange = useCallback((event) => {
+  const handleNewTitle = useCallback((event) => {
     setNewTitle(() => event.target.value);
   }, []);
 
@@ -115,22 +135,7 @@ const TextEditor = () => {
     URL.revokeObjectURL(url);
   };
 
-  const CurrentDate = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(Math.round(date.getMinutes() / 15) * 15).padStart(
-      2,
-      "0"
-    );
-    const formattedTime = `${hours}:${minutes}`;
-    const formattedDate = `${month}/${day}/${year}`;
-    return { formattedTime, formattedDate };
-  };
-
-  const { formattedDate, formattedTime } = CurrentDate();
+  const { formattedDate, formattedTime } = setCurrentDate();
 
   return (
     <div className={styles.editorContainer}>
@@ -141,7 +146,7 @@ const TextEditor = () => {
               <input
                 type="text"
                 value={newTitle}
-                onChange={handleNewTitleChange}
+                onChange={handleNewTitle}
                 className={styles.titleInput}
               />
               <br />
@@ -149,7 +154,7 @@ const TextEditor = () => {
                 Change Title
               </button>
               <button onClick={handleTitleCancel} className={styles.button}>
-                Cancel Title change
+                Cancel change
               </button>
             </div>
           ) : (

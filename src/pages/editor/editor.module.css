@@ -1,7 +1,6 @@
 .container {
   height: 30vh;
   width: 60vw;
-
   background-color: antiquewhite;
 }
 
@@ -18,8 +17,8 @@
 
 .button {
   border-radius: 5px;
-  cursor: pointer;
   color: #fff;
+  cursor: pointer;
   background-color: #333;
 }
 

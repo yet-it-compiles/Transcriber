@@ -27,8 +27,10 @@ import {
 import { BsSunrise, BsMoonStars } from "react-icons/bs";
 
 /**
+ * This component is responsible for rendering the left navigation panel on the
+ * dashboard
  *
- * @returns {jsx Element}
+ * @returns {jsx Element} representing the left navigation panel
  */
 const LeftNavigation = () => {
   return (
@@ -44,6 +46,11 @@ const LeftNavigation = () => {
   );
 };
 
+/**
+ * Renders the projects name, and logo to the top of the left navigation menu
+ *
+ * @returns {JSX.Element} representing the right project branding section
+ */
 const Branding = () => {
   return (
     <div className={styles.branding}>
@@ -54,6 +61,11 @@ const Branding = () => {
   );
 };
 
+/**
+ * This component is responsible for rendering the transcription search input
+ *
+ * @returns {JSX.Element} representing the input search to find a transcription
+ */
 const TranscriptSearch = () => {
   return (
     <div className={styles.search}>
@@ -74,6 +86,12 @@ const TranscriptSearch = () => {
   );
 };
 
+/**
+ *  This function provides the ability for a user to view different pages that
+ * they can navigate to.
+ *
+ * @returns {JSX.Element} navigation bar that will route users to different pages
+ */
 const Links = () => {
   return (
     <nav className={styles.routingLinks}>
@@ -92,18 +110,22 @@ const Links = () => {
           <FcEditImage />
           Text Editor
         </li>
+
         <li>
           <FcAudioFile />
-          Record{" "}
+          Record
         </li>
+
         <li>
           <FcCalendar />
           Calendar
         </li>
+
         <li>
           <FcStatistics />
           Analytics
         </li>
+
         <li>
           <FcSettings />
           Settings
@@ -113,6 +135,12 @@ const Links = () => {
   );
 };
 
+/**
+ * A functional component that provides the user the ability to toggle light
+ * mode and dark mode
+ *
+ * @returns {JSX.Element} representing a toggle switch
+ */
 const ToggleSwitch = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -128,6 +156,11 @@ const ToggleSwitch = () => {
   );
 };
 
+/**
+ * A functional component the handles the rendering of the user profile
+ *
+ * @returns {JSX.Element} representing a user profile
+ */
 const UserProfile = () => {
   return (
     <section className={styles.profile}>
