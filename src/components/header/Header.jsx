@@ -46,7 +46,7 @@ const Header = () => {
         Quick Record
       </button>
 
-      <select className={styles.dropDown}>
+      <select>
         <option value="option1">Todays Statistics</option>
         <option value="option2">This Months Statistics</option>
       </select>
