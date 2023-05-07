@@ -6,13 +6,13 @@
  *
  * @requires react
  * @requires react-icons
- * @requires media-recorder.module.css
+ * @requires media-recorder.module.scss
  *
  * @exports MediaPlayerUI
  */
 
 import React, { useState, useRef, useEffect } from "react";
-import styles from "./player.module.css";
+import styles from "./player.module.scss";
 import { AiOutlineFastForward } from "react-icons/ai";
 import {
   BsFillVolumeMuteFill,

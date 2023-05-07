@@ -18,21 +18,6 @@ import styles from "./record.module.css";
 import { CiMicrophoneOn } from "react-icons/ci";
 
 /**
- * Responsible for
- *
- * Accomplished by
- *
- * @returns {JSX.Element} -
- */
-const Record = () => {
-  return (
-    <>
-      <MakeRecording />
-    </>
-  );
-};
-
-/**
  * Responsible for handling the recording feature by providing the user the
  * ability to press the record icon.
  *
