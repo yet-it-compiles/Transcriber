@@ -40,14 +40,18 @@ const MakeRecording = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.directive}>
-        Please tap the record icon when you're ready
+        {isRecording ? (
+          <h1>Recording ...</h1>
+        ) : (
+          <h1>Please tap the record icon when you're ready</h1>
+        )}
       </h1>
       <button
         className={styles.bounceInTop}
         type="submit"
         onClick={handleIsRecording}
       >
-        <span className={isRecording ? styles.recordButtonActive : null}>
+        <span>
           {isRecording ? (
             <CiMicrophoneOn className={styles.recording} />
           ) : (

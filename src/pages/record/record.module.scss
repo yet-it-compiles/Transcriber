@@ -1,48 +1,40 @@
-@mixin setContainer {
-  height: 100px;
-  width: 100px;
-}
+@import "src\\styles\\_mixins.scss";
+
+$background: #579bea;
+$recordingRed: #ff0000;
 
 body {
-  background: linear-gradient(-45deg, #ebe6e6, #fcfcfc, #ece5e5, #f2eaeadb);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
+  background: linear-gradient(-45deg, #ebe6e6, #fcfcfc, #ece5e5, #f2eaeadb);
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 55vh;
+  @include flexColCenter;
 }
 
 .container button {
-  border: none;
-  cursor: pointer;
-  color: red;
-  background-color: transparent;
+  color: $recordingRed;
+  @include stripButton;
 }
 
 .icons {
-  height: 100px;
-  width: 100px;
   margin-top: 25px;
-  color: #579bea;
-  animation: myAnim 2s ease-out 0s 1 normal both;
+  color: $background;
   transform: scaleX(-1);
+  @include setContainer(100px, 100px);
+  animation: myAnim 2s ease-out 0s 1 normal both;
 }
 
 .recording {
-  height: 100px;
-  width: 100px;
-  color: red;
+  color: $recordingRed;
+  @include setContainer(100px, 100px);
   animation: recording 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .leftSlider svg {
-  height: 70px;
-  width: 70px;
+  @include setContainer(70px, 70px);
 }
 
 .waveContainer {
@@ -54,10 +46,9 @@ body {
 .waveContainer span {
   position: absolute;
   display: block;
-  width: 2px;
-  height: 10px;
   bottom: 0;
-  background: #579bea;
+  @include setContainer(20px, 2px);
+  background: $background;
   animation: audio-wave 2s infinite ease-in-out;
 }
 
@@ -108,14 +99,10 @@ body {
 
 @keyframes recording {
   0% {
-    -webkit-transform: rotateY(-360deg);
-    transform: rotateY(-360deg);
-    opacity: 0;
+    @include recording(-360deg, 0);
   }
   100% {
-    -webkit-transform: rotateY(0deg);
-    transform: rotateY(0deg);
-    opacity: 1;
+    @include recording(0deg, 1);
   }
 }
 
@@ -144,69 +131,30 @@ body {
     opacity: 1;
   }
 }
-@keyframes trackingInContract {
-  0% {
-    letter-spacing: 1em;
-    opacity: 0;
-  }
-  40% {
-    opacity: 0.6;
-  }
-  100% {
-    letter-spacing: normal;
-    opacity: 1;
-  }
-}
 
 @keyframes bounceInTop {
   0% {
-    -webkit-transform: translateY(-500px);
-    transform: translateY(-500px);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
-    opacity: 0;
+    @include bounceInTopAnim(-500px, ease-in, 0);
   }
   38% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
-    opacity: 1;
+    @include bounceInTopAnim(0, ease-out, 1);
   }
   55% {
-    -webkit-transform: translateY(-65px);
-    transform: translateY(-65px);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
+    @include bounceInTopAnim(-65px, ease-in, 1);
   }
   72% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
+    @include bounceInTopAnim(0, ease-out, 1);
   }
   81% {
-    -webkit-transform: translateY(-28px);
-    transform: translateY(-28px);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
+    @include bounceInTopAnim(-28px, ease-in, 1);
   }
   90% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
+    @include bounceInTopAnim(0, ease-out, 1);
   }
   95% {
-    -webkit-transform: translateY(-8px);
-    transform: translateY(-8px);
-    -webkit-animation-timing-function: ease-in;
-    animation-timing-function: ease-in;
+    @include bounceInTopAnim(-8px, ease-in, 1);
   }
   100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    -webkit-animation-timing-function: ease-out;
-    animation-timing-function: ease-out;
+    @include bounceInTopAnim(0, ease-out, 1);
   }
 }
