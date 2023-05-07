@@ -6,14 +6,14 @@
  * @requires react
  * @requires react-spring
  * @requires react-calendar
- * @requires calendar.module.css
+ * @requires calendar.module.scss
  *
  * @exports WeatherCalendar
  */
 
 import React, { useState, useEffect } from "react";
 import { animated, useSpring } from "react-spring";
-import styles from "./calendar-window.module.css";
+import styles from "./calendar-window.module.scss";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

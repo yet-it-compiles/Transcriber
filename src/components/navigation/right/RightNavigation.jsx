@@ -4,13 +4,13 @@
  * @description
  *
  * @requires react
- * @requires RightNavigation.module.css
+ * @requires RightNavigation.module.scss
  *
  * @exports RightNavigation
  */
 
 import React from "react";
-import styles from "./right-nav.module.css";
+import styles from "./right-nav.module.scss";
 import { FcLeave, FcTodoList } from "react-icons/fc";
 import { MdNotificationsActive } from "react-icons/md";
 import CalendarWidget from "../../calendar/CalendarWidget";

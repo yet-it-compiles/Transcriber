@@ -11,13 +11,7 @@
  * @exports AudioRecorder
  */
 
-import React, {
-  useState,
-  useRef,
-  useCallback,
-  useEffect,
-  useMemo,
-} from "react";
+import React, { useState, useRef, useCallback, useMemo } from "react";
 
 /**
  * Handles the functionality to allow the user to record audio from their mic,
@@ -31,12 +25,12 @@ import React, {
  * @returns {JSX.Element} representing an audio recorder
  */
 const AudioRecorder = () => {
-  const [isRecording, setIsRecording] = useState(false);
-  const [audioBlob, setAudioBlob] = useState(null);
-  const [audioBlobURL, setAudioBlobURL] = useState(null);
-  const mediaStreamRef = useRef();
-  const mediaRecorderRef = useRef();
   const audioRef = useRef();
+  const mediaRecorderRef = useRef();
+
+  const [audioBlob, setAudioBlob] = useState(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const [audioBlobURL, setAudioBlobURL] = useState(null);
 
   /**
    * Requests access to the browsers microphone, and sets the primary mic as
@@ -46,28 +40,28 @@ const AudioRecorder = () => {
   const startRecording = useCallback(async () => {
     try {
       // Ensures the audio is captured directly from the microphone
-      const stream = await navigator.mediaDevices.getUserMedia({
+      const audioStream = await navigator.mediaDevices.getUserMedia({
         audio: { capture: true },
       });
-      mediaStreamRef.current = stream;
+      const capturedRecordings = [];
+      const mediaRecorder = new MediaRecorder(audioStream);
 
-      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.ondataavailable = ({ data }) => {
+        capturedRecordings.push(data);
+      };
       mediaRecorderRef.current = mediaRecorder;
 
-      const chunks = [];
-      mediaRecorder.ondataavailable = ({ data }) => chunks.push(data);
-
       mediaRecorder.onstop = () => {
-        const blob = new Blob(chunks);
+        const blob = new Blob(capturedRecordings);
         setAudioBlob(blob);
         setAudioBlobURL(URL.createObjectURL(blob));
       };
 
-      mediaRecorder.start();
       setIsRecording(true);
+      mediaRecorder?.start();
     } catch (error) {
-      console.error("Failed to start recording:", error);
       setIsRecording(false);
+      throw new Error("Failed to start recording:", error);
     }
   }, []);
 
@@ -76,8 +70,8 @@ const AudioRecorder = () => {
    * accessing the mediaRecorderRef switching its value to false.
    */
   const stopRecording = useCallback(() => {
-    mediaRecorderRef.current?.stop();
     setIsRecording(false);
+    mediaRecorderRef.current?.stop();
   }, []);
 
   /**
@@ -86,9 +80,13 @@ const AudioRecorder = () => {
    */
   const playRecording = useCallback(() => {
     if (!audioBlobURL) return;
-    const audio = audioRef.current || new Audio();
-    audio.src = audioBlobURL;
-    audio.onerror = (event) => console.error("Error playing audio:", event);
+
+    const audio = audioRef.current || new Audio(audioBlobURL);
+
+    audio.onerror = (event) => {
+      throw new Error("Error playing audio:", event);
+    };
+
     audio.play();
     audioRef.current = audio;
   }, [audioBlobURL]);
@@ -115,24 +113,6 @@ const AudioRecorder = () => {
       link.click();
     };
   }, [audioBlob, downloadURL]);
-
-  useEffect(() => {
-    return () => {
-      if (
-        mediaRecorderRef.current &&
-        mediaRecorderRef.current.state !== "inactive"
-      ) {
-        mediaRecorderRef.current.stop();
-      }
-      if (mediaStreamRef.current) {
-        mediaStreamRef.current.getTracks().forEach((track) => track.stop());
-      }
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.src = "";
-      }
-    };
-  }, []);
 
   return (
     <>

@@ -6,13 +6,13 @@
  *
  * @requires react
  * @requires react-icons
- * @requires navigation-left.module.css
+ * @requires navigation-left.module.scss
  *
  * @exports LeftNavigation
  */
 
 import React, { useState } from "react";
-import styles from "./left-nav.module.css";
+import styles from "./left-nav.module.scss";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { GiArchiveResearch, GiConversation } from "react-icons/gi";
 import { RxDividerVertical } from "react-icons/rx";

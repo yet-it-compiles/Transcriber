@@ -7,13 +7,13 @@
  * design.
  *
  * @requires react
- * @requires metric-widgets.module.css
+ * @requires metric-widgets.module.scss
  *
  * @exports DisplayWidgets
  */
 
 import React, { useState } from "react";
-import styles from "./widgets.module.css";
+import styles from "./widgets.module.scss";
 
 const initialWidgetMetrics = [
   {

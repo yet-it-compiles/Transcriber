@@ -10,13 +10,13 @@
  *
  * @requires react
  * @requires react-icons
- * @requires header.module.css
+ * @requires header.module.scss
  *
  * @exports DashboardHeader
  */
 
 import React from "react";
-import styles from "./header.module.css";
+import styles from "./header.module.scss";
 import { GiNotebook } from "react-icons/gi";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { AiOutlineDownload } from "react-icons/ai";
