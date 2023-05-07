@@ -65,15 +65,16 @@ const MediaPlayerUI = () => {
       clearInterval(timerRef.current);
     };
   }, [isPlaying, duration]);
+
   /**
-   * Handles the ability to play and pause the audio by changing bool value
+   * Callback function that handles the logic to switch between play and pause
    */
   const handlePlayPause = () => {
     setIsPlaying((prevIsPlaying) => !prevIsPlaying);
   };
 
   /**
-   * Handles the ability to change the volume level by a slider
+   * Responsible for setting the current volume level of the player
    *
    * @param {event} event The current value of the volume slider
    */

@@ -6,7 +6,7 @@
  * @requires react
  * @requires Record.module.css
  *
- * @exports Record
+ * @exports MakeRecording
  *
  * @TODO
  * 1. Editable Title
@@ -27,7 +27,7 @@ import { CiMicrophoneOn } from "react-icons/ci";
 const Record = () => {
   return (
     <>
-      <RecordingPage />
+      <MakeRecording />
     </>
   );
 };
@@ -42,7 +42,7 @@ const Record = () => {
  *
  * @returns {JSX.Element} - Representing text, and a single button
  */
-const RecordingPage = () => {
+const MakeRecording = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [showWaveAnimation, setShowWaveAnimation] = useState(false);
 
@@ -100,4 +100,4 @@ const AudioWaveAnimation = () => {
   );
 };
 
-export default Record;
+export default MakeRecording;
