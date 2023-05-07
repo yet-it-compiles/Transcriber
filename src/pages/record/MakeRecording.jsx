@@ -1,10 +1,11 @@
 /**
  * @file Record.jsx
  *
- * @description
+ * @description This file is responsible for providing an interface for the
+ * user to record, and playback audio.
  *
  * @requires react
- * @requires Record.module.css
+ * @requires Record.module.scss
  *
  * @exports MakeRecording
  *
@@ -14,7 +15,7 @@
  */
 
 import React, { useState } from "react";
-import styles from "./record.module.css";
+import styles from "./record.module.scss";
 import { CiMicrophoneOn } from "react-icons/ci";
 
 /**
@@ -62,6 +63,8 @@ const MakeRecording = () => {
 
 /**
  * Generates a wave animation that will be connected to the playback audio
+ *
+ * This is accomplished by
  *
  * @returns {JSX.Element} Representing an audio wave animation
  */
