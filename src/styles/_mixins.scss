@@ -1,0 +1,42 @@
+@mixin setContainer($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin setContainerFull {
+  height: 100%;
+  width: 100%;
+}
+
+@mixin flexRowCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flexColCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin stripButton {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+@mixin bounceInTopAnim($transY, $anim, $opacity) {
+  opacity: $opacity;
+  transform: translateY(transY);
+  animation-timing-function: $anim;
+  -webkit-transform: translateY(transY);
+  -webkit-animation-timing-function: $anim;
+}
+
+@mixin recording($rotateY, $opacity) {
+  -webkit-transform: rotateY($rotateY);
+  transform: rotateY($rotateY);
+  opacity: $opacity;
+}
