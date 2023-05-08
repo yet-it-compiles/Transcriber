@@ -5,6 +5,7 @@
  * user to record, and playback audio.
  *
  * @requires react
+ * @requires react-icons
  * @requires Record.module.scss
  *
  * @exports MakeRecording
@@ -17,6 +18,7 @@
 import React, { useState } from "react";
 import styles from "./record.module.scss";
 import { CiMicrophoneOn } from "react-icons/ci";
+import { FaMicrophoneAlt } from "react-icons/fa";
 
 /**
  * Responsible for handling the recording feature by providing the user the
@@ -32,6 +34,10 @@ const MakeRecording = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [showWaveAnimation, setShowWaveAnimation] = useState(false);
 
+  /**
+   * Callback which handles checking the conditional rendering if the user is
+   * actively recording or not.
+   */
   const handleIsRecording = () => {
     setIsRecording((prev) => !prev);
     setShowWaveAnimation((prev) => !prev);
@@ -39,27 +45,30 @@ const MakeRecording = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.directive}>
-        {isRecording ? (
-          <h1>Recording ...</h1>
-        ) : (
-          <h1>Please tap the record icon when you're ready</h1>
-        )}
-      </h1>
-      <button
-        className={styles.bounceInTop}
-        type="submit"
-        onClick={handleIsRecording}
-      >
+      {isRecording ? (
+        <h2>
+          Listening
+          <div className={styles.dotsContainer}>
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className={styles.dots}></div>
+            ))}
+          </div>
+        </h2>
+      ) : (
+        <h2>
+          Please click the microphone when you're ready to start a recording
+        </h2>
+      )}
+
+      <button type="submit" onClick={handleIsRecording}>
         <span>
           {isRecording ? (
-            <CiMicrophoneOn className={styles.recording} />
+            <FaMicrophoneAlt className={styles.isRec} />
           ) : (
-            <CiMicrophoneOn className={styles.icons} />
+            <FaMicrophoneAlt className={styles.isNotRec} />
           )}
         </span>
       </button>
-
       {showWaveAnimation && <AudioWaveAnimation />}
     </div>
   );
