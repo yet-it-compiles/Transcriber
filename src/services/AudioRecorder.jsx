@@ -13,6 +13,9 @@
 
 import React, { useState, useRef, useCallback, useMemo } from "react";
 
+import { FaMicrophoneAlt } from "react-icons/fa";
+import styles from "../pages/record/record.module.scss";
+
 /**
  * Handles the functionality to allow the user to record audio from their mic,
  * and playback the recording, and download it as a .wav file.
@@ -49,7 +52,6 @@ const AudioRecorder = () => {
       mediaRecorder.ondataavailable = ({ data }) => {
         capturedRecordings.push(data);
       };
-      mediaRecorderRef.current = mediaRecorder;
 
       mediaRecorder.onstop = () => {
         const blob = new Blob(capturedRecordings);
@@ -59,6 +61,7 @@ const AudioRecorder = () => {
 
       setIsRecording(true);
       mediaRecorder?.start();
+      mediaRecorderRef.current = mediaRecorder;
     } catch (error) {
       setIsRecording(false);
       throw new Error("Failed to start recording:", error);
@@ -115,7 +118,30 @@ const AudioRecorder = () => {
   }, [audioBlob, downloadURL]);
 
   return (
-    <>
+    <div className={styles.container}>
+      {isRecording ? (
+        <div>
+          <h2>Listening</h2>
+          <div className={styles.dotsContainer}>
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className={styles.dots}></div>
+            ))}
+          </div>
+          <button type="submit" onClick={stopRecording}>
+            <FaMicrophoneAlt className={styles.isNotRec} />
+          </button>
+        </div>
+      ) : (
+        <div>
+          <h2>
+            Please click the microphone when you're ready to start a recording
+          </h2>
+          <button type="submit" onClick={startRecording}>
+            <FaMicrophoneAlt className={styles.isNotRec} />
+          </button>
+        </div>
+      )}
+
       <button onClick={startRecording} disabled={isRecording}>
         {isRecording ? "Recording..." : "Start Recording"}
       </button>
@@ -139,7 +165,7 @@ const AudioRecorder = () => {
           onError={(event) => console.error("Error playing audio:", event)}
         />
       )}
-    </>
+    </div>
   );
 };
 
