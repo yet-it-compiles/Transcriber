@@ -1,46 +1,106 @@
+@import "src\\styles\\_mixins.scss";
+
 .widgetContainer {
-    position: relative;
-    width: 96%;
-    max-width: 97%;
-    height: 74%;
-    top: 260px;
-    margin: 5px;
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  position: relative;
+  top: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 217px;
+  width: 263px;
+  padding: 10px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  & button {
+    @include stripButton;
+    transition: transform 0.3s ease;
+  }
+
+  & button:hover {
+    transform: scale(1.05);
+  }
 }
 
-.calendarTile {
-    border-radius: 5px;
+.calendar {
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.calendarTile:disabled {
-    background-color: #e8e8e8;
-    color: #a0a0a0;
-    cursor: default;
+.appointmentForm {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.formRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.formRow label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.formRow input[type="time"],
+.formRow input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
 }
 
 .selectedDate {
-    margin-top: 0.625em;
-    font: bold 1rem/1.5 sans-serif;
-    color: #555;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
 }
 
-@media screen and (max-width: 1920px) {
-    .widgetContainer {
-        top: 242px;
-    }
+.selectedDate button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-@media screen and (max-width: 1440px) {
-    .widgetContainer {
-        top: 142px;
-    }
+.selectedDate button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-@media screen and (max-width: 1280px) {
-    .widgetContainer {
-        top: 142px;
-        max-width: 100%;
-    }
+.selectedDate button:hover {
+  background-color: #45a049;
+}
+
+.appointmentForm button {
+  padding: 8px 16px;
+  margin-top: 10px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.appointmentForm button + button {
+  margin-left: 5px;
+  background-color: #f20a0a;
+}
+
+.appointmentForm button:hover,
+.selectedDate button:hover,
+.appointmentForm button:disabled {
+  opacity: 0.9;
 }

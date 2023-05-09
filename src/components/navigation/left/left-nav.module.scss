@@ -8,6 +8,7 @@
   border-radius: 5px;
   border: 1px solid rgba(9, 36, 75, 0.2);
   background-color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 
 .branding {
@@ -155,10 +156,9 @@
   align-items: center;
   justify-content: center;
   bottom: 7%;
-
+  left: 2%;
   gap: 10px;
-
-  background-color: #007aff;
+  cursor: pointer;
 }
 
 .toggle svg {

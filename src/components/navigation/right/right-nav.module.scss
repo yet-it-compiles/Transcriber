@@ -4,12 +4,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  width: 320px;
-  max-width: 320px;
+  width: 12vw;
+  max-width: 12vw;
   height: 99vh;
-  right: 10px;
-  max-height: auto;
+  right: 0.26vw;
   border: 1px solid rgba(9, 36, 75, 0.2);
   border-radius: 5px;
   background-color: #fff;
@@ -21,7 +19,7 @@
   flex-direction: column;
   align-items: flex-start;
   height: 90rem;
-  margin: 15rem 0 0 0.6rem;
+  margin: 24rem 0 0 0.6rem;
   font: 600 0.8rem/1rem "Inter", sans-serif;
   line-height: 1rem;
   font-style: normal;
@@ -43,3 +41,58 @@
   height: 3vh;
   margin: 0 4%;
 }
+
+/* @media (max-width: 1080px) {
+  .navRight {
+    width: 18vw;
+    max-width: 18vw;
+  }
+}
+
+@media (max-width: 786px) {
+  .navRight {
+    width: 24vw;
+    max-width: 24vw;
+  }
+
+  .notifications {
+    height: 70rem;
+    margin: 16rem 0 0 0.6rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 864px) {
+  .navRight {
+    width: 16vw;
+    max-width: 16vw;
+  }
+}
+
+@media (max-width: 720px) {
+  .navRight {
+    width: 20vw;
+    max-width: 20vw;
+  }
+
+  .notifications {
+    height: 60rem;
+    margin: 12rem 0 0 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .navRight {
+    width: 14vw;
+    max-width: 14vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .navRight {
+    width: 14vw;
+    max-width: 14vw;
+  }
+}
+ */
