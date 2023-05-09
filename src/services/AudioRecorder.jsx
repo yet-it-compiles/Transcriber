@@ -52,7 +52,6 @@ const AudioRecorder = () => {
       const mediaRecorder = new MediaRecorder(audioStream);
       let startTime = Date.now();
 
-      // captures the audio recording
       mediaRecorder.ondataavailable = ({ data }) => {
         capturedRecordings.push(data);
       };

@@ -11,7 +11,7 @@
  * @exports MediaPlayerUI
  */
 
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import styles from "./player.module.scss";
 import { AiOutlineFastForward } from "react-icons/ai";
 import {
@@ -22,49 +22,50 @@ import {
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import { FcVideoFile, FcDownload } from "react-icons/fc";
 
-const MediaPlayerUI = ({
-  audioBlobURL,
-  audioRef,
-  audioBlob,
-  recordingDuration,
-}) => {
+const MediaPlayerUI = ({ audioBlobURL, audioRef, recordingDuration }) => {
   const [volume, setVolume] = useState(25);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentPlace, setCurrentPlace] = useState(0);
+  const [title, setTitle] = useState("Set Audio Name");
 
-  /**
-   * Callback that handles the ability for the user to play the recording by
-   * using the audioBlobURL to create an audio element.
-   */
+  useEffect(() => {
+    const audio = audioRef.current || new Audio(audioBlobURL);
+
+    const handleTimeUpdate = () => {
+      setCurrentPlace(audio.currentTime);
+    };
+    const handleAudioEnded = () => {
+      setIsPlaying((prev) => !prev);
+      setCurrentPlace(0);
+    };
+
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("ended", handleAudioEnded);
+
+    return () => {
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, [audioBlobURL, volume]);
+
   const playRecording = useCallback(() => {
     if (!audioBlobURL) return;
     setIsPlaying((prev) => !prev);
 
     const audio = audioRef.current || new Audio(audioBlobURL);
-    audio.volume = volume / 100; // Set the volume based on the slider value
-
-    audio.addEventListener("timeupdate", () => {
-      setCurrentPlace(audio.currentTime);
-    });
 
     if (audio.paused) {
       audio.play();
     } else {
-      setIsPlaying((prev) => !prev);
       audio.pause();
     }
-
     audioRef.current = audio;
+  }, [audioBlobURL, volume]);
 
-    return () => {
-      audio.removeEventListener("timeupdate", () => {
-        setCurrentPlace(audio.currentTime);
-      });
-    };
-  }, [audioBlobURL]);
-
-  const handleVolumeChange = (event) => {
-    setVolume(event.target.value);
+  const downloadRecording = () => {
+    const link = document.createElement("a");
+    link.href = audioBlobURL;
+    link.download = "NEW_recorded_audio.wav";
+    link.click();
   };
 
   const formatTime = (time) => {
@@ -75,28 +76,18 @@ const MediaPlayerUI = ({
     return `${minutes}:${seconds}`;
   };
 
-  const downloadURL = useCallback(() => {
-    if (!audioBlob) return null;
-    return URL.createObjectURL(audioBlob);
-  }, [audioBlob]);
-
-  const downloadRecording = useMemo(() => {
-    if (!audioBlob) return null;
-    return () => {
-      const link = document.createElement("a");
-      link.href = downloadURL();
-      link.download = "audioRecording.wav";
-      link.click();
-    };
-  }, [audioBlob, downloadURL]);
+  const handleVolumeChange = (event) => {
+    setVolume(parseInt(event.target.value, 10));
+  };
 
   return (
     <div className={styles.mediaPlayer}>
       <div className={styles.MetaData}>
         <FcVideoFile className={styles.icons} />
         <p>
-          Audio File #1 <br />
-          05/01/2023
+          {title}
+          <br />
+          05/09/2023
         </p>
       </div>
 
