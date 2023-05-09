@@ -27,6 +27,12 @@
   background-color: transparent;
 }
 
+@mixin stripInput {
+  border: "none";
+  outline: "none";
+  background: "transparent";
+}
+
 @mixin bounceInTopAnim($transY, $anim, $opacity) {
   opacity: $opacity;
   transform: translateY(transY);

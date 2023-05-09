@@ -1,3 +1,5 @@
+@import "src\\styles\\_mixins.scss";
+
 $background: #272424;
 $textColor: whitesmoke;
 
@@ -62,15 +64,13 @@ body {
 
 .progressBar {
   position: relative;
+  cursor: pointer;
   height: 0.65vh;
   width: 24.7vw;
   margin-bottom: 20px;
   overflow: hidden;
   border-radius: 15px;
   background-color: white;
-  /* background: rgba(0, 0, 0, 0.25); */
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25),
-    0 1px rgba(255, 255, 255, 0.08);
 }
 
 .current {
@@ -108,6 +108,7 @@ body {
 .volumeControl {
   position: relative;
   right: 8%;
+  cursor: pointer;
 }
 
 .sliderContainer {
