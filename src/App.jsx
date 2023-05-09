@@ -10,25 +10,17 @@
 
 import React from "react";
 import Dashboard from "./pages/dashboard/Dashboard";
-import LeftNavigation from "./components/navigation/left/LeftNavigation";
-import RightNavigation from "./components/navigation/right/RightNavigation";
-import Header from "./components/header/Header";
 import CalendarWidget from "./components/calendar/CalendarWidget";
-import MediaPlayer from "./components/media-player/MediaPlayer";
 import TextEditor from "./pages/editor/TextEditor";
+import WeatherCalendar from "./components/calendar/WeatherCalendar";
+import AudioRecorder from "./services/AudioRecorder";
 
-// Still needs fixes applied
-import Login from "./pages/login/Login";
+/* import Login from "./pages/login/Login";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 
-//Import react router and auth context
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import AuthContextProvider from './context/AuthContext'
-
+Import react router and auth context
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AuthContextProvider from "./context/AuthContext"; */
 
 /**
  * Entry level component that renders the application
@@ -38,56 +30,19 @@ import AuthContextProvider from './context/AuthContext'
 const App = () => {
   return (
     <>
-      <ActvielyWorkingOn />
+      <Presentation />
+      {/* <ActvielyWorkingOn /> */}
     </>
   );
 };
 
-/**
- * Renders the files that are actively being developed on
- *
- * @returns
- */
-const ActvielyWorkingOn = () => {
+const Presentation = () => {
   return (
     <>
-      <MediaPlayer />
-      <TextEditor />
-    </>
-  );
-};
-
-/**
- * Displays the current dashboard layout
- *
- * @returns
- */
-const DashboardLayout = () => {
-  return (
-    <>
-      <RightNavigation />
-      <DashboardHeader />
-      <LeftNavigation />
-      <MetricWidgets />
-    </>
-  );
-};
-
-const NearlyCompleted = () => {
-  return (
-    <>
-      <Recording />
-      <CalendarWidget />
-      <TextEditor />
-    </>
-  );
-};
-
-const LoginAndForgotPassword = () => {
-  return (
-    <>
-      <Login />
-      <ForgotPassword />
+      {/* <Dashboard /> */}
+      {/* <WeatherCalendar /> */}
+      {/* <TextEditor /> */}
+      {/* <AudioRecorder /> */}
     </>
   );
 };

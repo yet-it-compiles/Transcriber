@@ -1,7 +1,7 @@
 /**
  * @file Calendar.jsx
  *
- * @description
+ * @description This file is responsible for rendering the calendar widget
  *
  * @requires react
  * @requires react-calendar
@@ -12,7 +12,6 @@
 
 import React, { useState, useCallback } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.scss";
 import styles from "./calendar.module.scss";
 
 const CalendarWidget = ({ onDateSelect }) => {
@@ -56,7 +55,9 @@ const CalendarWidget = ({ onDateSelect }) => {
 
   const isDisabled = useCallback(({ date, view }) => {
     if (view === "month") {
-      return date < new Date();
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return date < today;
     } else {
       return false;
     }
@@ -83,7 +84,9 @@ const CalendarWidget = ({ onDateSelect }) => {
             <input
               type="time"
               value={appointment.time}
-              onChange={(e) => handleAppointmentChange("time", e.target.value)}
+              onChange={(event) =>
+                handleAppointmentChange("time", event.target.value)
+              }
             />
           </div>
           <div className={styles.formRow}>
@@ -91,8 +94,8 @@ const CalendarWidget = ({ onDateSelect }) => {
             <input
               type="text"
               value={appointment.location}
-              onChange={(e) =>
-                handleAppointmentChange("location", e.target.value)
+              onChange={(event) =>
+                handleAppointmentChange("location", event.target.value)
               }
             />
           </div>
@@ -101,8 +104,8 @@ const CalendarWidget = ({ onDateSelect }) => {
             <input
               type="text"
               value={appointment.reminder}
-              onChange={(e) =>
-                handleAppointmentChange("reminder", e.target.value)
+              onChange={(event) =>
+                handleAppointmentChange("reminder", event.target.value)
               }
             />
           </div>
@@ -114,9 +117,7 @@ const CalendarWidget = ({ onDateSelect }) => {
       ) : (
         <div className={styles.selectedDate}>
           <div>Selected date: {date.toLocaleDateString()}</div>
-          <button onClick={handleAppointmentCreate} disabled>
-            Create Appointment
-          </button>
+          <button onClick={handleAppointmentCreate}>Create Appointment</button>
         </div>
       )}
     </div>
