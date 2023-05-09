@@ -1,8 +1,8 @@
 /**
  * @file MediaRecorder.jsx
  *
- * @description This file is responsible for rendering the media UI that enables
- * the user to play, pause, and download any media type.
+ * @description This file is responsible for rendering the media player that
+ * allow the user to fast-forward, rewind, play, pause, and download the audio.
  *
  * @requires react
  * @requires react-icons
@@ -11,87 +11,62 @@
  * @exports MediaPlayerUI
  */
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import styles from "./player.module.scss";
 import { AiOutlineFastForward } from "react-icons/ai";
 import {
-  BsFillVolumeMuteFill,
   BsVolumeDownFill,
   BsFillVolumeUpFill,
+  BsFillVolumeMuteFill,
 } from "react-icons/bs";
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import { FcVideoFile, FcDownload } from "react-icons/fc";
 
-/**
- * Responsible for rendering a media player UI that allows the user to play,
- * pause, skip, and download the media file.
- *
- * Accomplished by declaring a useEffect that will update the timer each second
- * until the duration of the file has been hit. Then establishes the minor player
- * values through the use of callback functions.
- *
- * @returns [JSX.Element] Bottom covering media player
- */
-const MediaPlayerUI = () => {
+const MediaPlayerUI = ({
+  audioBlobURL,
+  audioRef,
+  audioBlob,
+  recordingDuration,
+}) => {
   const [volume, setVolume] = useState(25);
-  const [duration, setDuration] = useState(20);
-  const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const timerRef = useRef(null);
+  const [currentPlace, setCurrentPlace] = useState(0);
 
   /**
-   * Declares a useEffect that will update the timer every second from 0.00 to
-   * the duration of the file it's playing.
+   * Callback that handles the ability for the user to play the recording by
+   * using the audioBlobURL to create an audio element.
    */
-  useEffect(() => {
-    if (!isPlaying) {
-      clearInterval(timerRef.current);
-      return;
+  const playRecording = useCallback(() => {
+    if (!audioBlobURL) return;
+    setIsPlaying((prev) => !prev);
+
+    const audio = audioRef.current || new Audio(audioBlobURL);
+    audio.volume = volume / 100; // Set the volume based on the slider value
+
+    audio.addEventListener("timeupdate", () => {
+      setCurrentPlace(audio.currentTime);
+    });
+
+    if (audio.paused) {
+      audio.play();
+    } else {
+      setIsPlaying((prev) => !prev);
+      audio.pause();
     }
 
-    timerRef.current = setInterval(() => {
-      setCurrentTime((prevTime) => {
-        if (prevTime < duration) {
-          return prevTime + 1;
-        }
-
-        setIsPlaying(false);
-        return prevTime;
-      });
-    }, 1000);
+    audioRef.current = audio;
 
     return () => {
-      clearInterval(timerRef.current);
+      audio.removeEventListener("timeupdate", () => {
+        setCurrentPlace(audio.currentTime);
+      });
     };
-  }, [isPlaying, duration]);
+  }, [audioBlobURL]);
 
-  /**
-   * Callback function that handles the logic to switch between play and pause
-   */
-  const handlePlayPause = () => {
-    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
-  };
-
-  /**
-   * Responsible for setting the current volume level of the player
-   *
-   * @param {event} event The current value of the volume slider
-   */
   const handleVolumeChange = (event) => {
     setVolume(event.target.value);
   };
 
-  const handleTimeUpdate = (event) => {
-    setCurrentTime(event.target.currentTime);
-  };
-
-  /**
-   * Handles formatting the play time value
-   *
-   * @param {number} time the time that should be rendered
-   * @returns a JSX element representing a formatted timer
-   */
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60)
@@ -100,17 +75,20 @@ const MediaPlayerUI = () => {
     return `${minutes}:${seconds}`;
   };
 
-  /**
-   * Callback that handles the ability for the user to download the audio file
-   */
-  const downloadAudio = () => {
-    const link = document.createElement("a");
-    link.download = "recorded-audio.wav";
-    link.style.display = "none";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  const downloadURL = useCallback(() => {
+    if (!audioBlob) return null;
+    return URL.createObjectURL(audioBlob);
+  }, [audioBlob]);
+
+  const downloadRecording = useMemo(() => {
+    if (!audioBlob) return null;
+    return () => {
+      const link = document.createElement("a");
+      link.href = downloadURL();
+      link.download = "audioRecording.wav";
+      link.click();
+    };
+  }, [audioBlob, downloadURL]);
 
   return (
     <div className={styles.mediaPlayer}>
@@ -127,29 +105,32 @@ const MediaPlayerUI = () => {
           <AiOutlineFastForward className={styles.flip} />
         </button>
 
-        <button type="submit" onClick={handlePlayPause}>
-          {isPlaying ? (
+        {isPlaying ? (
+          <button onClick={playRecording}>
             <FaPauseCircle className={styles.transitional} />
-          ) : (
+          </button>
+        ) : (
+          <button onClick={playRecording}>
             <FaPlayCircle />
-          )}
-        </button>
+          </button>
+        )}
 
         <button type="submit">
           <AiOutlineFastForward />
         </button>
 
         <div className={styles.progress}>
-          <div className={styles.timer}>{formatTime(currentTime)}</div>
+          <div className={styles.current}>{formatTime(currentPlace)}</div>
           <div className={`${styles.progressBar} ${styles.progressMoved}`}>
             <div
               className={`${styles.progressAnimation} ${styles.isActive}`}
               style={{
-                width: `${(currentTime / duration) * 100}%`,
+                width: `${(currentPlace / recordingDuration) * 100}%`,
               }}
             />
           </div>
         </div>
+        <div className={styles.total}>{formatTime(recordingDuration)}</div>
       </div>
 
       <div className={styles.volumeControl}>
@@ -174,9 +155,9 @@ const MediaPlayerUI = () => {
         </div>
       </div>
 
-      <div className={styles.download}>
+      <button type="submit" onClick={downloadRecording}>
         <FcDownload />
-      </div>
+      </button>
     </div>
   );
 };

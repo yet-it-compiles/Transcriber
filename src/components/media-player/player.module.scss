@@ -1,3 +1,6 @@
+$background: #272424;
+$textColor: whitesmoke;
+
 body {
   margin: 0;
 }
@@ -9,20 +12,19 @@ body {
   height: 8vh;
   width: 100vw;
   bottom: 0;
-  color: whitesmoke;
-  background-color: #272424;
-}
+  color: $textColor;
+  background-color: $background;
 
-.mediaPlayer button {
-  border: none;
-  background-color: transparent;
-}
-
-.mediaPlayer svg {
-  height: 2.34vw;
-  width: 1.7vw;
-  color: white;
-  cursor: pointer;
+  button {
+    border: none;
+    background-color: transparent;
+  }
+  svg {
+    height: 2.34vw;
+    width: 1.7vw;
+    color: $textColor;
+    cursor: pointer;
+  }
 }
 
 .mediaPlayer svg:hover {
@@ -31,11 +33,10 @@ body {
 
 .MetaData {
   display: flex;
-}
-
-.MetaData svg {
-  height: 70px;
-  width: 70px;
+  svg {
+    height: 70px;
+    width: 70px;
+  }
 }
 
 .transitional {
@@ -64,6 +65,7 @@ body {
   height: 0.65vh;
   width: 24.7vw;
   margin-bottom: 20px;
+  overflow: hidden;
   border-radius: 15px;
   background-color: white;
   /* background: rgba(0, 0, 0, 0.25); */
@@ -71,10 +73,16 @@ body {
     0 1px rgba(255, 255, 255, 0.08);
 }
 
-.timer {
+.current {
   position: relative;
   right: 50px;
   top: 10px;
+}
+
+.total {
+  position: relative;
+  left: 255px;
+  top: 50px;
 }
 
 .progressAnimation {
@@ -104,26 +112,12 @@ body {
 
 .sliderContainer {
   position: absolute;
-  bottom: 15px;
-  left: 35px;
+  bottom: 20px;
+  left: 40px;
 }
 
 .download {
   margin: 20px;
-}
-
-@-webkit-keyframes transitional {
-  0% {
-    -webkit-transform: rotate(-360deg);
-    transform: rotate(-360deg);
-    opacity: 0;
-  }
-
-  100% {
-    -webkit-transform: rotate(0);
-    transform: rotate(0);
-    opacity: 1;
-  }
 }
 
 @keyframes transitional {

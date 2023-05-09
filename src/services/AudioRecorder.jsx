@@ -11,8 +11,8 @@
  * @exports AudioRecorder
  */
 
-import React, { useState, useRef, useCallback, useMemo } from "react";
-
+import React, { useState, useRef } from "react";
+import MediaPlayer from "../components/media-player/MediaPlayer";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import styles from "../pages/record/record.module.scss";
 
@@ -34,29 +34,34 @@ const AudioRecorder = () => {
   const [audioBlob, setAudioBlob] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlobURL, setAudioBlobURL] = useState(null);
+  const [recordingDuration, setRecordingDuration] = useState(0);
 
   /**
    * Requests access to the browsers microphone, and sets the primary mic as
    * the requested target. Once the data is retrieved, we efficiently chunk
    * it and assign it an object URL
    */
-  const startRecording = useCallback(async () => {
+  const startRecording = async () => {
     try {
       // Ensures the audio is captured directly from the microphone
       const audioStream = await navigator.mediaDevices.getUserMedia({
         audio: { capture: true },
       });
+
       const capturedRecordings = [];
       const mediaRecorder = new MediaRecorder(audioStream);
+      let startTime = Date.now();
 
+      // captures the audio recording
       mediaRecorder.ondataavailable = ({ data }) => {
         capturedRecordings.push(data);
       };
 
       mediaRecorder.onstop = () => {
         const blob = new Blob(capturedRecordings);
-        setAudioBlob(blob);
         setAudioBlobURL(URL.createObjectURL(blob));
+        setAudioBlob(blob);
+        setRecordingDuration(Math.floor((Date.now() - startTime) / 1000));
       };
 
       setIsRecording(true);
@@ -66,83 +71,41 @@ const AudioRecorder = () => {
       setIsRecording(false);
       throw new Error("Failed to start recording:", error);
     }
-  }, []);
+  };
 
   /**
    * Callback that handles the ability to let a user stop the recording by
    * accessing the mediaRecorderRef switching its value to false.
    */
-  const stopRecording = useCallback(() => {
+  const stopRecording = () => {
     setIsRecording(false);
     mediaRecorderRef.current?.stop();
-  }, []);
-
-  /**
-   * Callback that handles the ability for the user to play the recording by
-   * using the audioBlobURL to create an audio element.
-   */
-  const playRecording = useCallback(() => {
-    if (!audioBlobURL) return;
-
-    const audio = audioRef.current || new Audio(audioBlobURL);
-
-    audio.onerror = (event) => {
-      throw new Error("Error playing audio:", event);
-    };
-
-    audio.play();
-    audioRef.current = audio;
-  }, [audioBlobURL]);
-
-  /**
-   * Callback that handles the ability for the user to download the URL by
-   * creating a new URL object from the audioBlob and returns it.
-   */
-  const downloadURL = useCallback(() => {
-    if (!audioBlob) return null;
-    return URL.createObjectURL(audioBlob);
-  }, [audioBlob]);
-
-  /**
-   * memorized callback that handles the ability to download the recording
-   * by creating an anchor with the audio URL.
-   */
-  const downloadRecording = useMemo(() => {
-    if (!audioBlob) return null;
-    return () => {
-      const link = document.createElement("a");
-      link.href = downloadURL();
-      link.download = "audioRecording.wav";
-      link.click();
-    };
-  }, [audioBlob, downloadURL]);
+  };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.recordingContainer}>
       {isRecording ? (
-        <div>
-          <h2>Listening</h2>
-          <div className={styles.dotsContainer}>
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className={styles.dots}></div>
-            ))}
-          </div>
-          <button type="submit" onClick={stopRecording}>
-            <FaMicrophoneAlt className={styles.isNotRec} />
-          </button>
-        </div>
+        <RecordingInProgress stopRecording={stopRecording} />
       ) : (
-        <div>
-          <h2>
-            Please click the microphone when you're ready to start a recording
-          </h2>
-          <button type="submit" onClick={startRecording}>
-            <FaMicrophoneAlt className={styles.isNotRec} />
-          </button>
-        </div>
+        <NotListening startRecording={startRecording} />
       )}
 
-      <button onClick={startRecording} disabled={isRecording}>
+      {audioBlobURL && (
+        <audio
+          ref={audioRef}
+          src={audioBlobURL}
+          onError={(event) => console.error("Error playing audio:", event)}
+        />
+      )}
+
+      <MediaPlayer
+        audioBlobURL={audioBlobURL}
+        audioRef={audioRef}
+        audiBlob={audioBlob}
+        recordingDuration={recordingDuration}
+      />
+
+      {/* <button onClick={startRecording} disabled={isRecording}>
         {isRecording ? "Recording..." : "Start Recording"}
       </button>
 
@@ -156,17 +119,34 @@ const AudioRecorder = () => {
 
       <button onClick={downloadRecording} disabled={!audioBlob}>
         Download
-      </button>
-
-      {audioBlobURL && (
-        <audio
-          ref={audioRef}
-          src={audioBlobURL}
-          onError={(event) => console.error("Error playing audio:", event)}
-        />
-      )}
+      </button> */}
     </div>
   );
 };
+
+const RecordingInProgress = ({ stopRecording }) => (
+  <div>
+    <h2>
+      Listening
+      <span className={styles.dotsContainer}>
+        {[...Array(3)].map((_, i) => (
+          <span key={i} className={styles.dots}></span>
+        ))}
+      </span>
+    </h2>
+    <button onClick={stopRecording}>
+      <FaMicrophoneAlt className={styles.isRec} />
+    </button>
+  </div>
+);
+
+const NotListening = ({ startRecording }) => (
+  <div className={styles.isNotListening}>
+    <h2>Please click the microphone when you're ready to start a recording</h2>
+    <button onClick={startRecording}>
+      <FaMicrophoneAlt className={styles.isNotRec} />
+    </button>
+  </div>
+);
 
 export default AudioRecorder;
