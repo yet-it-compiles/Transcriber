@@ -100,25 +100,8 @@ const AudioRecorder = () => {
       <MediaPlayer
         audioBlobURL={audioBlobURL}
         audioRef={audioRef}
-        audiBlob={audioBlob}
         recordingDuration={recordingDuration}
       />
-
-      {/* <button onClick={startRecording} disabled={isRecording}>
-        {isRecording ? "Recording..." : "Start Recording"}
-      </button>
-
-      <button onClick={stopRecording} disabled={!isRecording}>
-        Stop Recording
-      </button>
-
-      <button onClick={playRecording} disabled={!audioBlobURL}>
-        Play Recording
-      </button>
-
-      <button onClick={downloadRecording} disabled={!audioBlob}>
-        Download
-      </button> */}
     </div>
   );
 };
@@ -134,7 +117,7 @@ const RecordingInProgress = ({ stopRecording }) => (
       </span>
     </h2>
     <button onClick={stopRecording}>
-      <FaMicrophoneAlt className={styles.isRec} />
+      <FaMicrophoneAlt className={`${styles.isRec}`} />
     </button>
   </div>
 );
@@ -143,7 +126,7 @@ const NotListening = ({ startRecording }) => (
   <div className={styles.isNotListening}>
     <h2>Please click the microphone when you're ready to start a recording</h2>
     <button onClick={startRecording}>
-      <FaMicrophoneAlt className={styles.isNotRec} />
+      <FaMicrophoneAlt className={`${styles.isNotRec} `} />
     </button>
   </div>
 );

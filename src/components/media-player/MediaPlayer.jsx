@@ -11,7 +11,7 @@
  * @exports MediaPlayerUI
  */
 
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styles from "./player.module.scss";
 import { AiOutlineFastForward } from "react-icons/ai";
 import {
