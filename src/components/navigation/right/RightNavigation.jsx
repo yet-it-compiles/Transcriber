@@ -13,7 +13,7 @@ import React from "react";
 import styles from "./right-nav.module.scss";
 import { FcLeave, FcTodoList } from "react-icons/fc";
 import { MdNotificationsActive } from "react-icons/md";
-import CalendarWidget from "../../calendar/CalendarWidget";
+import CalendarWidget from "../../widgets/default-calendar/CalendarWidget";
 
 /**
  * Responsible for
