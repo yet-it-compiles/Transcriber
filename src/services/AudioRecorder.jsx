@@ -6,9 +6,10 @@
  * and adjust the volume of the applications audio playback.
  *
  * @requires react
+ * @requires react-icons
  * @requires MediaRecorder
  *
- * @exports AudioRecorder
+ * @exports MakeRecording
  */
 
 import React, { useState, useRef } from "react";
@@ -27,7 +28,7 @@ import styles from "../pages/record/record.module.scss";
  *
  * @returns {JSX.Element} representing an audio recorder
  */
-const AudioRecorder = () => {
+const MakeRecording = () => {
   const audioRef = useRef();
   const mediaRecorderRef = useRef();
 
@@ -106,6 +107,13 @@ const AudioRecorder = () => {
   );
 };
 
+/**
+ * This component is responsible for rendering the animated listening ellipsis,
+ * that jump on the screen when the user is recording.
+ *
+ * @param {stopRecording} param0
+ * @returns animated ellipsis that animate when a recording is in progress
+ */
 const RecordingInProgress = ({ stopRecording }) => (
   <div>
     <h2>
@@ -122,6 +130,14 @@ const RecordingInProgress = ({ stopRecording }) => (
   </div>
 );
 
+/**
+ * This component is responsible for prompting the user to click on the
+ * microphone icon to start a recording.
+ *
+ * @param {startRecording} param0 react-icon displaying a microphone
+ * @returns page introduction text and an interactable react-icon to start
+ * recording
+ */
 const NotListening = ({ startRecording }) => (
   <div className={styles.isNotListening}>
     <h2>Please click the microphone when you're ready to start a recording</h2>
@@ -131,4 +147,4 @@ const NotListening = ({ startRecording }) => (
   </div>
 );
 
-export default AudioRecorder;
+export default MakeRecording;

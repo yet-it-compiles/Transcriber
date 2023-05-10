@@ -1,0 +1,55 @@
+html {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.ResponsiveDesign {
+    position: absolute;
+    bottom: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ResponsiveDesign > :nth-child(1) {
+    text-align: center;
+    font-weight: 700;
+    color: blue;
+}
+
+
+.ResponsiveDesign > :nth-child(2) {
+    text-align: center;
+}
+
+.Calculations div {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.Calculations div:not(:first-child) {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.Calculations div dt {
+    color: blue;
+}
+
+.Calculations div dd {
+    line-height: 25px;
+    font-weight: bold;
+}
+
+.title {
+    color: blueviolet;
+    font-weight: 700;
+}
+
+ol {
+    display: flex;
+    font-size: 18px;
+    font-weight: bold;
+    justify-content: space-evenly;
+}

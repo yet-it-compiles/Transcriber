@@ -15,12 +15,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import "./login.css";
+import "./login.scss";
 
 const Login = () => {
-
-  useEffect(()=> {
-    document.body.classList.add('login-body')
+  useEffect(() => {
+    document.body.classList.add("login-body");
   }, []);
 
   const navigate = useNavigate();
