@@ -42,7 +42,6 @@ const Login = () => {
       .catch((error) => {
         console.log(error.message);
       });
-    console.log(`username: ${username}\npassword: ${password}`);
   };
 
   return (
