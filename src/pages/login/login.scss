@@ -20,14 +20,13 @@
   justify-content: center;
   overflow: hidden;
   background: linear-gradient(-45deg, #1e394b, #9e8065);
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
 }
 
 .overlay {
   background-color: rgba(0, 0, 0, 25%);
   border-radius: 15px;
-  height: fit-content;
+  height: auto;
   width: 700px;
   padding-bottom: 50px;
   text-align: center;
@@ -143,12 +142,10 @@ sup {
   display: block;
   color: var(--link-color);
   font-size: 12px;
-  width: fit-content;
+  width: auto;
   margin-right: 0;
   margin-left: auto;
 }
-
-/* END .login-field FIELDS */
 
 .loginBtn {
   padding: 15px 75px;
@@ -167,6 +164,6 @@ sup {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
 }
 
-loginBtn:active {
+.loginBtn:active {
   transform: scale(0.98);
 }
