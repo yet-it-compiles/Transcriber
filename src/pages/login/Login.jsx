@@ -1,13 +1,12 @@
 /**
  * @file Login.jsx
  *
- * @description Login screen where the user logs into the site
- *              using username and password
+ * @description The file is responsible for rending the login screen allowing
+ * the user to login to their account using a registered username and password.
  *
  * @requires react
- * @requires login.css
- * @requires useState
  * @requires useAuth
+ * @requires login.scss
  *
  * @exports Login
  */
@@ -17,6 +16,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./login.scss";
 
+/**
+ * Proviles the ability to allow the user to login to their profile
+ *
+ * @returns a login screen with two input fields for email and password
+ */
 const Login = () => {
   useEffect(() => {
     document.body.classList.add("login-body");
