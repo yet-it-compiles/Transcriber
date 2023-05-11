@@ -18,7 +18,7 @@
  */
 
 import React, { useEffect, useState } from "react";
-import "./login.scss";
+import styles from "./login.scss";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -38,8 +38,8 @@ const Login = () => {
 
   const { login } = useAuth();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     if (!username || !password) {
       console.log("Incorrect values");
@@ -55,58 +55,53 @@ const Login = () => {
   };
 
   return (
-    <div className="wrapper">
-      <div className="overlay">
-        <h1 className="welcome">Welcome to</h1>
-        {/* /// ! Change to span */}
-        <h1 id="transcriber">
+    <div className={styles.wrapper}>
+      <div className={styles.overlay}>
+        <h1 className={styles.welcome}>Welcome to</h1>
+        <h1 className={styles.transcriber}>
           &nbsp;SLPscribe<sup>TM</sup>
         </h1>
 
-        {/* // ! Change to p */}
-        <h2 id="motto">
+        <h2 className={styles.motto}>
           Record Conversations
           <br />
-          {/* // ! Change to p */}
           Analyze Articulation
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="field-holder">
+          <div className={styles.fieldHolder}>
             <input
-              className="login-field"
+              className={`${styles.loginField} ${styles.username}`}
               value={username}
               onChange={(event) => setUsername(event.target.value)}
               type="text"
-              id="username"
               required
             />
-            <label className="login-label" htmlFor="username">
+            <label className={styles.loginLabel} htmlFor="username">
               Username
             </label>
           </div>
 
-          <div className="field-holder">
+          <div className={styles.filedHoder}>
             <input
-              className="login-field"
+              className={`${styles.loginField} ${styles.password}`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
-              id="password"
               required
             />
 
-            <label className="login-label" htmlFor="password">
+            <label className={styles.loginLabel} htmlFor="password">
               Password
             </label>
 
-            <Link to="/forgot" id="forgot">
+            <Link to="/forgot" className={styles.forgot}>
               Forgot Password?
             </Link>
           </div>
 
-          <button type="submit" id="login-btn">
-            Log in
+          <button type="submit" className={styles.loginBtn}>
+            Login
           </button>
         </form>
       </div>
