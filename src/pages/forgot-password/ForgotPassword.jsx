@@ -1,8 +1,8 @@
 /**
  * @file ForgotPassword.jsx
  *
- * @description Forgot password screen which allows the user to send an email to
- *              themselves with instructions to reset their password
+ * @description This module is responsible for rendering the forgot password
+ * UI which allows the user to recover their email or password.
  *
  * @requires React
  * @requires react-router-dom
@@ -13,28 +13,31 @@
  */
 
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import styles from "../login/login.scss";
 import emailjs from "@emailjs/browser";
-import "../login/login.css";
+import { useNavigate } from "react-router-dom";
 
+/**
+ * This component is responsible for rendering a simple form that sends an email
+ * to the user's specified email address with a link to reset their password.
+ */
 const ForgotPassword = () => {
-
-  useEffect(()=> {
-    document.body.classList.add('login-body')
+  useEffect(() => {
+    document.body.classList.add("login-body");
   }, []);
 
-  const form = useRef();
+  const formRef = useRef();
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const sendEmail = (event) => {
+  const handleSendEmail = (event) => {
     event.preventDefault();
 
     emailjs
       .sendForm(
         "service_agw179e",
         "template_3n339qq",
-        form.current,
+        formRef.current,
         "NDXZ96LTvQ5VbtPcX"
       )
       .then(
@@ -42,7 +45,7 @@ const ForgotPassword = () => {
           console.log(`${result.text} Email sent succesfully`);
         },
         (error) => {
-          console.log(error.text);
+          throw new Error(error);
         }
       );
     event.target.reset();
@@ -56,7 +59,7 @@ const ForgotPassword = () => {
     <div className="wrapper">
       <div className="overlay">
         <h1 className="forgotHeader">Forgot Password?</h1>
-        <form ref={form} onSubmit={sendEmail}>
+        <form ref={formRef} onSubmit={handleSendEmail}>
           <div className="field-holder">
             <input
               className="login-field"

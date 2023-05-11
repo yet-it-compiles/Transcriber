@@ -9,12 +9,18 @@
  * @requires login.scss
  *
  * @exports Login
+ *
+ * @TODO
+ * - Refactor component to only use classes instead of IDs
+ * - Refactor component to use proper CSS module import syntax to prompt better
+ * interaction with other components.
+ * - Refactor CSS to get rid of warning messages related fire-fox notifications
  */
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 import "./login.scss";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate, Link } from "react-router-dom";
 
 /**
  * Proviles the ability to allow the user to login to their profile
