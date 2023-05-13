@@ -54,7 +54,7 @@
   margin-bottom: 100px;
 }
 
-sup {
+.tm {
   font-size: 1rem;
 }
 
@@ -83,6 +83,7 @@ sup {
   outline: none;
   margin-bottom: 50px;
   color: white;
+  z-index: 1;
 }
 
 .loginField:-webkit-autofill {
@@ -99,6 +100,7 @@ sup {
   align-items: center;
   cursor: text;
   transition: 0.3s ease-in-out;
+  z-index: -1;
 }
 
 .loginField,
@@ -108,7 +110,7 @@ sup {
   height: 55px;
 }
 
-.loginLield:focus + .loginLabel,
+.loginField:focus + .loginLabel,
 .loginField:valid + .loginLabel {
   color: white;
   font-size: 0.75em;
@@ -120,6 +122,7 @@ sup {
 .loginField:valid {
   border-bottom: 3px solid white;
 }
+
 
 .username {
   font-size: 1.25em;
@@ -142,7 +145,7 @@ sup {
   display: block;
   color: var(--link-color);
   font-size: 12px;
-  width: auto;
+  width: fit-content;
   margin-right: 0;
   margin-left: auto;
 }

@@ -10,17 +10,17 @@
 
 import React from "react";
 import Dashboard from "./pages/dashboard/Dashboard";
-import CalendarWidget from "./components/calendar/CalendarWidget";
+//import CalendarWidget from "./components/calendar/CalendarWidget";
 import TextEditor from "./pages/editor/TextEditor";
-import WeatherCalendar from "./components/calendar/WeatherCalendar";
+import WeatherCalendar from "./components/widgets/weather-calendar/WeatherCalendar";
 import AudioRecorder from "./services/AudioRecorder";
 
-/* import Login from "./pages/login/Login";
+import Login from "./pages/login/Login";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 
-Import react router and auth context
+//Import react router and auth context
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AuthContextProvider from "./context/AuthContext"; */
+import AuthContextProvider from "./context/AuthContext";
 
 /**
  * Entry level component that renders the application
@@ -30,7 +30,7 @@ import AuthContextProvider from "./context/AuthContext"; */
 const App = () => {
   return (
     <>
-      <Presentation />
+      <Routing />
       {/* <ActvielyWorkingOn /> */}
     </>
   );
@@ -39,10 +39,10 @@ const App = () => {
 const Presentation = () => {
   return (
     <>
-      {/* <Dashboard /> */}
+      <Dashboard />
       {/* <WeatherCalendar /> */}
-      {/* <TextEditor /> */}
-      {/* <AudioRecorder /> */}
+      <TextEditor />
+      <AudioRecorder />
     </>
   );
 };
@@ -51,20 +51,25 @@ const Routing = () => {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MediaPlayer />} />
+        <AuthContextProvider>
+        <Routes>  
           <Route
-            path="/login"
+            path="/"
             element={
-              <AuthContextProvider>
                 <Login />
-              </AuthContextProvider>
             }
           />
+          <Route
+            path="/forgot"
+            element={
+                <ForgotPassword />}
+           />
+          <Route path="/recorder" element={<AudioRecorder />} />
           <Route path="/dashboard" element={<Dashboard />} />
-
-          <Route path="/forgot" element={<ForgotPassword />} />
+          <Route path="/editor" element={<TextEditor />} />
+        
         </Routes>
+        </AuthContextProvider>
       </BrowserRouter>
     </>
   );
