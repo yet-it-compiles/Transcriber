@@ -13,68 +13,52 @@
  */
 
 import React, { useState, useRef, useEffect } from "react";
-import styles from "../login/login.scss";
-import emailjs from "@emailjs/browser";
+import styles from "../login/login.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
-/**
- * This component is responsible for rendering a simple form that sends an email
- * to the user's specified email address with a link to reset their password.
- */
 const ForgotPassword = () => {
-  useEffect(() => {
-    document.body.classList.add("login-body");
-  }, []);
 
   const formRef = useRef();
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const { resetPassword } = useAuth();
 
   const handleSendEmail = (event) => {
     event.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_agw179e",
-        "template_3n339qq",
-        formRef.current,
-        "NDXZ96LTvQ5VbtPcX"
-      )
-      .then(
-        (result) => {
-          console.log(`${result.text} Email sent succesfully`);
-        },
-        (error) => {
-          throw new Error(error);
-        }
-      );
-    event.target.reset();
-    alert(
-      `Email sent to ${email} If you don't see it, be sure to check your spam folder`
-    );
-    navigate("/login");
+    resetPassword(email)
+        .then((response) => {
+            console.log(response)
+            event.target.reset();
+            alert(
+              `Email sent to ${email}, If you don't see it, be sure to check your spam folder`
+            );
+            navigate("/");
+        })
+        .catch((error) => {
+        console.log(error.message);
+        });
   };
 
   return (
-    <div className="wrapper">
-      <div className="overlay">
-        <h1 className="forgotHeader">Forgot Password?</h1>
+    <div className={styles.wrapper}>
+      <div className={styles.overlay}>
+        <h1 className={styles.forgotHeader}>Forgot Password?</h1>
         <form ref={formRef} onSubmit={handleSendEmail}>
-          <div className="field-holder">
+          <div className={styles.fieldHolder}>
             <input
-              className="login-field"
+              className={styles.loginField}
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               type="text"
               id="email"
               name="user_email"
               required
+              placeholder="Email"
             />
-            <label className="login-label" htmlFor="email">
-              Email
-            </label>
           </div>
-          <button type="submit" id="login-btn">
+          <button type="submit" className={styles.loginBtn}>
             Send Email
           </button>
         </form>

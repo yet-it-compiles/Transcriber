@@ -18,7 +18,7 @@
  */
 
 import React, { useEffect, useState } from "react";
-import styles from "./login.scss";
+import styles from "./login.module.scss";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -28,9 +28,6 @@ import { useNavigate, Link } from "react-router-dom";
  * @returns a login screen with two input fields for email and password
  */
 const Login = () => {
-  useEffect(() => {
-    document.body.classList.add("login-body");
-  }, []);
 
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -47,7 +44,7 @@ const Login = () => {
     login(username, password)
       .then((response) => {
         console.log(response);
-        navigate("/");
+        navigate("/recorder");
       })
       .catch((error) => {
         console.log(error.message);
@@ -59,7 +56,7 @@ const Login = () => {
       <div className={styles.overlay}>
         <h1 className={styles.welcome}>Welcome to</h1>
         <h1 className={styles.transcriber}>
-          &nbsp;SLPscribe<sup>TM</sup>
+          &nbsp;SLPscribe<sup className={styles.tm}>TM</sup>
         </h1>
 
         <h2 className={styles.motto}>
@@ -76,24 +73,20 @@ const Login = () => {
               onChange={(event) => setUsername(event.target.value)}
               type="text"
               required
+              placeholder="Username"
             />
-            <label className={styles.loginLabel} htmlFor="username">
-              Username
-            </label>
+
           </div>
 
-          <div className={styles.filedHoder}>
+          <div className={styles.fieldHolder}>
             <input
               className={`${styles.loginField} ${styles.password}`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               required
+              placeholder="Password"
             />
-
-            <label className={styles.loginLabel} htmlFor="password">
-              Password
-            </label>
 
             <Link to="/forgot" className={styles.forgot}>
               Forgot Password?
