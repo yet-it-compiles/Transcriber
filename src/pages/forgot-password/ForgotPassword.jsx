@@ -5,20 +5,26 @@
  * UI which allows the user to recover their email or password.
  *
  * @requires React
- * @requires react-router-dom
+ * @requires login.scss
  * @requires emailjs/browser
- * @requires login.css
+ * @requires react-router-dom
  *
  * @exports ForgotPassword
  */
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styles from "../login/login.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
+/**
+ * This component renders the forgot password Ui which allows the user to recover
+ * their email or password for their account by submitting their email and 
+ * folloing the directions in the email that gets sent.
+ * 
+ * @returns a forgot password UI page
+ */
 const ForgotPassword = () => {
-
   const formRef = useRef();
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
