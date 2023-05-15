@@ -8,10 +8,26 @@
   width: 100%;
 }
 
+/**
+- normal represents the font-style.
+- 700 represents the font-weight.
+- 12px represents the font-size.
+- /1 represents the line-height.
+"- Inter" represents the font-family.
+**/
+@mixin fontStyle {
+  font: normal 700 12px/1 "Inter";
+}
+
 @mixin flexRowCenter {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin flexCol {
+  display: flex;
+  flex-direction: column;
 }
 
 @mixin flexColCenter {
