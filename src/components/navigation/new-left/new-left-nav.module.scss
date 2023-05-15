@@ -1,21 +1,162 @@
-$activePageColor: #fff;
-$background-color: #007aff;
+@import "../../../styles/mixins";
+
+$background: linear-gradient(
+  182.09deg,
+  rgba(40, 40, 40, 0.83) 9.6%,
+  rgba(16, 16, 16, 0.65) 96.36%
+);
+$brandingBG: #838485;
+$SLP: #4bc0c8;
+$SCRIBE: #c1d7f5;
+$searchTxtColor: #2a2a2a;
+$searchBGColor: #f1f4f6;
+$activeLinkColor: #e9ebee;
+$activeBG: #007aff;
+$linkColor: #989a9d;
+$borders: rgba(9, 36, 75, 0.2);
 
 @mixin activePage {
-  color: $activePageColor;
-  background-color: $background-color;
+  color: $activeLinkColor;
+  background-color: $activeBG;
 }
 
-.navList {
-  li {
-    cursor: pointer;
+.leftNavBar {
+  position: fixed;
+  backdrop-filter: blur(11px) saturate(180%);
+  -webkit-backdrop-filter: blur(11px) saturate(180%);
+
+  @include flexCol;
+  @include setContainerFull;
+  @include setContainer(85vh, 240px);
+  border-radius: 25px 0px 0px 25px;
+  border: 1px solid rgba(209, 213, 219, 0.18);
+
+  cursor: pointer;
+  background: $background;
+}
+
+.branding {
+  @include flexRowCenter;
+  background-color: $brandingBG;
+  font-size: 1.2rem;
+  text-shadow: 0 2% 2% rgba(0, 0, 0, 0.25);
+  border-radius: 25px 0px 0px 0px;
+
+  img:first-of-type,
+  p {
+    position: relative;
+    top: 0.55em;
+
+    &:nth-of-type(1) {
+      color: $SLP;
+    }
+
+    &:nth-of-type(2) {
+      color: $SCRIBE;
+    }
+  }
+
+  p {
+    top: 0.4em;
   }
 }
 
-.active {
-  color: blue;
+.search {
+  position: relative;
+  @include flexRowCenter;
+  margin-top: 15px;
+
+  div:nth-of-type(1) > svg {
+    position: absolute;
+    width: 30px;
+    top: 63%;
+    color: #474b4f;
+    @include stripInput;
+    z-index: 10;
+
+    &:first-child {
+      left: 20px;
+    }
+
+    &:nth-child(2) {
+      color: #474b4f;
+      left: 38px;
+    }
+  }
+
+  input:nth-of-type(1) {
+    position: relative;
+    @include setContainer(40px, 240px);
+    top: 17px;
+    margin: 5px;
+    padding-left: 55px;
+    border-style: none;
+    border-radius: 5px;
+    @include fontStyle;
+    color: $searchTxtColor;
+    background-color: $searchBGColor;
+
+    &:focus {
+      outline: none;
+      border: none;
+    }
+  }
+
+  button:nth-of-type(1) {
+    position: absolute;
+    width: 30px;
+    right: 10px;
+    top: 64%;
+    color: #595d63;
+    @include stripButton;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
-.dashboard {
-  color: red;
+.activeLink {
+  @include activePage();
+}
+
+.navLinks {
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 5px;
+
+  color: $linkColor;
+  cursor: pointer;
+
+  svg {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  ul {
+    padding: 10px;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    width: 220px;
+    height: 40px;
+    margin-bottom: 8px;
+    list-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.03);
+      color: whitesmoke;
+      background-color: #77b9ff;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      margin-top: 2px;
+      width: 218px;
+      z-index: -1;
+    }
+  }
 }

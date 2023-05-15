@@ -49,7 +49,7 @@ const APPLICATION_PAGES = [
  */
 const LeftNavBar = () => {
   return (
-    <div className="container">
+    <div className={styles.leftNavBar}>
       <Branding />
       <TranscriptSearch />
       <NavigationList />
@@ -112,15 +112,15 @@ const NavigationList = () => {
   };
 
   return (
-    <nav className={styles.navList}>
+    <nav className={styles.navLinks}>
       <ul>
         {APPLICATION_PAGES.map((eachPage) => (
           <li
             key={eachPage.id}
             className={
               activePage.name === eachPage.name
-                ? styles.active
-                : styles.dashboard
+                ? styles.activeLink
+                : styles.navLink
             }
             onClick={() => handleSetActive(eachPage.name)}
           >
