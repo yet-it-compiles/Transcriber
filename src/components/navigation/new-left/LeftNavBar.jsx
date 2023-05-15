@@ -14,13 +14,8 @@ import styles from "./new-left-nav.module.scss";
 import { RxDividerVertical } from "react-icons/rx";
 import { GiArchiveResearch } from "react-icons/gi";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import {
-  FcEditImage,
-  FcHome,
-  FcStatistics,
-  FcSettings,
-  FcAudioFile,
-} from "react-icons/fc";
+import { FcHome, FcStatistics, FcReadingEbook } from "react-icons/fc";
+import { FcVoicePresentation, FcElectricalSensor } from "react-icons/fc";
 
 /**
  * Declares the avaliable pages to navigate to within the application.
@@ -32,13 +27,23 @@ const APPLICATION_PAGES = [
   { id: 1, icon: <FcHome />, name: "Dashboard", path: "/dashboard" },
   {
     id: 2,
-    icon: <FcAudioFile />,
-    name: "Start a Recording",
+    icon: <FcElectricalSensor />,
+    name: "Start Recording",
     path: "/recording",
   },
-  { id: 3, icon: <FcEditImage />, name: "Text-Editor", path: "/editor" },
-  { id: 4, icon: <FcStatistics />, name: "Analytics", path: "/analytics" },
-  { id: 5, icon: <FcSettings />, name: "Support / FAQ", path: "/support" },
+  {
+    id: 3,
+    icon: <FcReadingEbook />,
+    name: "Edit Transcripts",
+    path: "/editor",
+  },
+  { id: 4, icon: <FcStatistics />, name: "View Analytics", path: "/analytics" },
+  {
+    id: 5,
+    icon: <FcVoicePresentation />,
+    name: "Support / FAQ",
+    path: "/support",
+  },
 ];
 
 /**
@@ -66,7 +71,7 @@ const Branding = () => {
   return (
     <div className={styles.branding}>
       <img src="/project-logo.svg" alt="Project Logo" />
-      <p>SLP</p>
+      <p>SLP </p>
       <p>Scribe</p>
     </div>
   );
