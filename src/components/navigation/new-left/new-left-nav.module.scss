@@ -1,0 +1,21 @@
+$activePageColor: #fff;
+$background-color: #007aff;
+
+@mixin activePage {
+  color: $activePageColor;
+  background-color: $background-color;
+}
+
+.navList {
+  li {
+    cursor: pointer;
+  }
+}
+
+.active {
+  color: blue;
+}
+
+.dashboard {
+  color: red;
+}
