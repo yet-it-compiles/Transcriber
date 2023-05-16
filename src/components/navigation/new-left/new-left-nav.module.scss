@@ -1,6 +1,6 @@
 @import "../../../styles/mixins";
 
-$background: linear-gradient(
+$backgroundColor: linear-gradient(
   184.59deg,
   #272626 13.46%,
   rgba(2, 2, 2, 0.865) 86.54%
@@ -27,7 +27,7 @@ $borders: rgba(9, 36, 75, 0.2);
   @include setContainer(73.68vh, 240px);
   border: 1px solid rgba(209, 213, 219, 0.18);
   border-radius: 25px 0px 0px 25px;
-  background: $background;
+  background: $backgroundColor;
 }
 
 .branding {
@@ -147,4 +147,7 @@ $borders: rgba(9, 36, 75, 0.2);
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     }
   }
+}
+
+.mediaControls {
 }
