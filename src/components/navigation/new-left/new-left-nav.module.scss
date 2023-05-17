@@ -1,4 +1,4 @@
-@import "../../../styles/mixins";
+@import "../../../styles/_mixins";
 
 $backgroundColor: linear-gradient(
   184.59deg,
@@ -28,6 +28,7 @@ $borders: rgba(9, 36, 75, 0.2);
   border: 1px solid rgba(209, 213, 219, 0.18);
   border-radius: 25px 0px 0px 25px;
   background: $backgroundColor;
+  box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
 }
 
 .branding {
@@ -60,7 +61,29 @@ $borders: rgba(9, 36, 75, 0.2);
 
   svg {
     @include setContainer(25px, 25px);
+  }
+
+  .collapsed,
+  .isFlipped {
+    position: absolute;
+    @include flexRowCenter;
+    @include setContainer(40px, 40px);
+    @include stripButton;
+    top: 72px;
+    right: 0;
+    cursor: pointer;
+    border-radius: 25px 0px 0px 25px;
+    color: whitesmoke;
+    background: linear-gradient(
+      180deg,
+      #127329 0%,
+      rgba(66, 170, 90, 0.74) 100%
+    );
+  }
+
+  .isFlipped {
     @include flip;
+    border-radius: 0px 25px 25px 0px;
   }
 }
 
@@ -173,16 +196,4 @@ $borders: rgba(9, 36, 75, 0.2);
     @include setContainer(30px, 30px);
     margin-bottom: 10px;
   }
-}
-
-.collapsed {
-  position: absolute;
-  @include flexRowCenter;
-  @include setContainer(40px, 40px);
-  top: 72px;
-  right: 0;
-  cursor: pointer;
-  border-radius: 25px 0px 0px 25px;
-  color: whitesmoke;
-  background: linear-gradient(180deg, #127329 0%, rgba(66, 170, 90, 0.74) 100%);
 }

@@ -13,5 +13,6 @@ $backgroundColor: linear-gradient(
   @include setContainer(73.68vh, 11vw);
   border: $borderColor;
   border-radius: 0px 25px 25px 0px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: $backgroundColor;
 }

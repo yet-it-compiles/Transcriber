@@ -17,7 +17,7 @@
 
 import React, { useState } from "react";
 import styles from "./record.module.scss";
-import { CiMicrophoneOn } from "react-icons/ci";
+
 import { FaMicrophoneAlt } from "react-icons/fa";
 
 /**

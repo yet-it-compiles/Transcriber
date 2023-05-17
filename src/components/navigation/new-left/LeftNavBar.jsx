@@ -74,14 +74,28 @@ const LeftNavBar = () => {
  * @returns {JSX.Element} representing the right project branding section
  */
 const Branding = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  /**
+   * Callback function that when called, negates the current state by its
+   * previous state
+   */
+  const handleCollapse = () => {
+    setIsCollapsed((prev) => !prev);
+  };
+
   return (
     <div className={styles.branding}>
       <img src="/project-logo.svg" alt="Project Logo" />
       <p>SLP </p>
       <p>Scribe</p>
-      <span className={styles.collapsed}>
-        <HiOutlineArrowNarrowRight />
-      </span>
+
+      <button
+        className={isCollapsed ? `${styles.isFlipped}` : `${styles.collapsed}`}
+        onClick={handleCollapse}
+      >
+        {<HiOutlineArrowNarrowRight />}
+      </button>
     </div>
   );
 };
