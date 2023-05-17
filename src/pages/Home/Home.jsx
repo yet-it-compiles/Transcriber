@@ -11,9 +11,9 @@
 
 import React, { useState } from "react";
 import styles from "./home.module.scss";
-import LeftNavBar from "../../components/navigation/new-left/LeftNavBar";
+import LeftNavBar from "../../components/navigation/left/LeftNavBar";
 import Dashboard from "../../components/dashboard/Dashboard";
-import RightNavBar from "../../components/navigation/new-right/RightNavBar";
+import RightNavBar from "../../components/navigation/right/RightNavBar";
 
 /**
  * Responsible for assembling the dashboard, and exporting it to App.jsx
