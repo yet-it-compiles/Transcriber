@@ -13,7 +13,7 @@
 
 import React, { useState } from "react";
 import styles from "./dashboard.module.scss";
-import DisplayModal from "../../components/modal/DisplayModal";
+import DisplayModal from "../modal/DisplayModal";
 
 import { BiEdit } from "react-icons/bi";
 import { HiDownload } from "react-icons/hi";
