@@ -8,7 +8,6 @@ $backgroundColor: linear-gradient(
 );
 
 .rightNavBar {
-  position: fixed;
   @include flexCol;
   @include setContainerFull;
   @include setContainer(73.68vh, 240px);

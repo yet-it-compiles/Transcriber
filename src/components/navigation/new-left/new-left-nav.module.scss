@@ -21,7 +21,6 @@ $borders: rgba(9, 36, 75, 0.2);
 }
 
 .leftNavBar {
-  position: fixed;
   @include flexCol;
   @include setContainerFull;
   @include setContainer(73.68vh, 240px);
