@@ -18,34 +18,42 @@ import DisplayModal from "../../components/modal/DisplayModal";
 import { BiEdit } from "react-icons/bi";
 import { HiDownload } from "react-icons/hi";
 import { GiNotebook } from "react-icons/gi";
-import { BsTrash, BsBodyText, BsPersonVcard } from "react-icons/bs";
-import { FcFolder, FcOpenedFolder, FcDownload } from "react-icons/fc";
 import { IoMdMicrophone } from "react-icons/io";
+import { BsTrash, BsPersonVcard } from "react-icons/bs";
 
+/**
+ * Defines an object of various templates the modal can have dependent on which
+ * button invokes it.
+ */
 const modalTemplate = {
   clients: {
     content: "Client-Title",
     body: "Client-Body",
+    icon: "",
     key: 1,
   },
   transcript: {
     content: "Transcript-Title",
     body: "Client-Body",
+    icon: "",
     key: 2,
   },
   edits: {
     content: "Edits-Title",
     body: "Client-Body",
+    icon: "",
     key: 3,
   },
   downloads: {
     content: "Downloads-Title",
     body: "Client-Body",
+    icon: "",
     key: 4,
   },
   deleted: {
-    content: "deleted-Title",
+    content: "Deleted-Title",
     body: "Client-Body",
+    icon: "",
     key: 5,
   },
 };
@@ -54,10 +62,15 @@ const FolderModals = () => {
   const [template, setTemplate] = useState(modalTemplate[0]);
 
   /**
-   * Callback function that
+   * Callback function that will apply the template to the modal when clicked
    */
-  const handleSetTemplate = () => {
-    setIsModalOpen((prev) => !prev);
+  const handleSetTemplate = (key) => {
+    const selectedTemplate = modalTemplate.find(
+      (template) => template.key === key
+    );
+    if (selectedTemplate) {
+      setTemplate(selectedTemplate);
+    }
   };
 
   return (
@@ -66,7 +79,7 @@ const FolderModals = () => {
         <li
           key={eachTemplate.key}
           className={styles.activeModal}
-          onClick={handleSetTemplate}
+          onClick={() => handleSetTemplate(eachTemplate.key)}
         >
           {eachTemplate.content}
         </li>
@@ -92,37 +105,43 @@ const Dashboard = () => {
       <div className={styles.btnContainers}>
         <button onClick={handleSetModal}>
           <BsPersonVcard />
-          Clients
+          <span>Client Records</span>
         </button>
 
         <button onClick={handleSetModal}>
           <GiNotebook />
-          Transcripts
+          <span>Transcripts</span>
         </button>
 
         <button onClick={handleSetModal}>
           <IoMdMicrophone />
-          Recordings
+          <span>Recordings</span>
         </button>
 
         <button onClick={handleSetModal}>
           <BiEdit />
-          Current Edits
+          <span>Current Edits</span>
         </button>
 
         <button onClick={handleSetModal}>
           <HiDownload />
-          Downloads
+          <span>Downloads</span>
         </button>
 
         <button onClick={handleSetModal}>
-          <BsTrash /> Recently Deleted
+          <BsTrash />
+          <span>Recently Deleted</span>
         </button>
       </div>
 
       <DisplayModal isOpen={isModalOpen} onRequestClose={handleSetModal} />
 
       <h2>Previews</h2>
+
+      <div className={styles.movie}>
+        <p>Conversation with ...</p>
+        <p>May 17th, 2023</p>
+      </div>
 
       <h2>Recent Files</h2>
     </div>

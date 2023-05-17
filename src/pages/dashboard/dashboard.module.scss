@@ -1,46 +1,56 @@
+@import "../../styles/global";
+@import "../../styles/_mixins";
+@import "../../styles/_variables";
+
 .dashboard {
   position: relative;
-  height: 71.4vh;
-  width: 65.8vw;
-  color: whitesmoke;
+  @include setContainer(71.4vh, 65.8vw);
+  color: $whiteColor;
   background-color: rgba(4, 4, 4, 0.8);
+  box-shadow: 0px 4px 200px rgba(0, 0, 0, 0.25);
 }
 
 .btnContainers {
-  display: flex;
-  justify-content: center;
+  height: 150px;
+  @include flexRowCenter;
   gap: 1.8vw;
 
   button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 7.3vh;
-    width: 6vw;
-    font: 700 16px "Lexend";
-    line-height: 2.5vh;
-    color: whitesmoke;
+    @include flexColCenter;
+    @include setContainer(7.5vh, 5vw);
+    @include stripButton;
+    font-weight: 700;
+    font-size: 0.7rem;
+    line-height: 35px;
+    color: $whiteColor;
     border-radius: 15px;
     cursor: pointer;
     transition: 500ms;
     transform: translateY(0);
-    background: linear-gradient(122deg, #438da6, #2f6888, #408ab4);
+    background: linear-gradient(122deg, #52afce, #2f6888, #429ace);
     background-size: 400% 400%;
-    -webkit-animation: AnimationName 30s ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    -o-animation: AnimationName 30s ease infinite;
     animation: AnimationName 30s ease infinite;
 
     &:hover {
       transition: 500ms;
       transform: translateY(-10px);
-      background-color: #fff;
     }
+
     svg {
-      color: whitesmoke;
-      width: 45px;
-      height: 45px;
+      position: relative;
+      color: $whiteColor;
+      @include setContainer(45px, 45px);
     }
   }
+}
+
+.movie {
+  @include flexColCenter;
+  width: 249px;
+  height: 235px;
+  border-radius: 15px;
+  background-image: url("../../assets/pictures/place-holder.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

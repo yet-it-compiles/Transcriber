@@ -27,25 +27,28 @@ Modal.setAppElement(document.body);
  */
 const DisplayModal = ({ isOpen, onRequestClose }) => {
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      contentLabel="sadsa"
-      className={styles.modalContainer}
-      overlayClassName={styles.modalWrapper}
-    >
-      <h2>Your File System</h2>
+    <div className={styles.modalContainer}>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onRequestClose}
+        contentLabel="File System Modal"
+        overlayClassName={styles.modalWrapper}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <h2>Your File System</h2>
 
-      <label htmlFor="addStock">File System</label>
+        <label>File System</label>
 
-      <br />
+        <br />
 
-      <button>Submit</button>
+        <button>Submit</button>
 
-      <br />
+        <br />
 
-      <button onClick={onRequestClose}>Close</button>
-    </Modal>
+        <button onClick={onRequestClose}>Close</button>
+      </Modal>
+    </div>
   );
 };
 
