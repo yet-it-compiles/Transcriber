@@ -6,7 +6,7 @@
  *
  * @requires react
  * @requires react-icons
- * @requires modal.module.scss
+ * @requires dashboard.module.scss
  *
  * @exports Dashboard
  */
@@ -92,7 +92,9 @@ const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   /**
-   * Callback function that
+   * Callback function that controls the current state of the modal
+   *
+   * Accomplished by changing its value back and fourth by interacting with it
    */
   const handleSetModal = () => {
     setIsModalOpen((prev) => !prev);
@@ -100,12 +102,12 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      <h2> Quick Access - {isModalOpen} </h2>
+      <h2> Quick Access {isModalOpen} </h2>
 
       <div className={styles.btnContainers}>
         <button onClick={handleSetModal}>
           <BsPersonVcard />
-          <span>Client Records</span>
+          <span>Folders</span>
         </button>
 
         <button onClick={handleSetModal}>
@@ -120,7 +122,7 @@ const Dashboard = () => {
 
         <button onClick={handleSetModal}>
           <BiEdit />
-          <span>Current Edits</span>
+          <span>In-Progress</span>
         </button>
 
         <button onClick={handleSetModal}>
@@ -130,7 +132,7 @@ const Dashboard = () => {
 
         <button onClick={handleSetModal}>
           <BsTrash />
-          <span>Recently Deleted</span>
+          <span>Trash</span>
         </button>
       </div>
 

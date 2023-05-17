@@ -2,34 +2,41 @@
 @import "../../styles/_mixins";
 @import "../../styles/_variables";
 
+/* !TESTING VALUE */
+body {
+  background-color: #6b93ac;
+}
+
 .dashboard {
   position: relative;
   @include setContainer(71.4vh, 65.8vw);
   color: $whiteColor;
-  background-color: rgba(4, 4, 4, 0.8);
-  box-shadow: 0px 4px 200px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  background-color: rgba(22, 23, 24, 0.852);
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .btnContainers {
-  height: 150px;
+  height: 8vh;
   @include flexRowCenter;
   gap: 1.8vw;
 
   button {
     @include flexColCenter;
-    @include setContainer(7.5vh, 5vw);
+    @include setContainer(7.5vh, 4.5vw);
     @include stripButton;
     font-weight: 700;
-    font-size: 0.7rem;
     line-height: 35px;
+    font-size: 0.8rem;
     color: $whiteColor;
     border-radius: 15px;
     cursor: pointer;
     transition: 500ms;
     transform: translateY(0);
-    background: linear-gradient(122deg, #52afce, #2f6888, #429ace);
-    background-size: 400% 400%;
     animation: AnimationName 30s ease infinite;
+    background-size: 400% 400%;
+    background: linear-gradient(122deg, #52afce, #2f6888, #429ace);
 
     &:hover {
       transition: 500ms;
@@ -46,8 +53,7 @@
 
 .movie {
   @include flexColCenter;
-  width: 249px;
-  height: 235px;
+  @include setContainer(18vh, 10.8vw);
   border-radius: 15px;
   background-image: url("../../assets/pictures/place-holder.png");
   background-size: cover;
