@@ -1,182 +1,200 @@
-.navigationLeft {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  max-height: 100%;
-  height: 99vh;
-  width: 240px;
-  border-radius: 5px;
-  border: 1px solid rgba(9, 36, 75, 0.2);
-  background-color: rgb(255, 255, 255);
-  cursor: pointer;
+@import "../../../styles/_mixins";
+
+$backgroundColor: linear-gradient(
+  184.59deg,
+  #272626 13.46%,
+  rgba(2, 2, 2, 0.865) 86.54%
+);
+$SLP: #4bc0c8;
+$SCRIBE: #c1d7f5;
+$searchBGColor: #2f2f2f;
+$searchPicColor: #474b4f;
+$findTranscriptBtn: #595d63;
+$defaultText: whitesmoke;
+$activeBG: #007aff;
+$linkColor: #989a9d;
+$borders: rgba(9, 36, 75, 0.2);
+
+@mixin activePage {
+  color: $defaultText;
+  background-color: $activeBG;
+}
+
+.leftNavBar {
+  position: relative;
+  @include flexCol;
+  min-height: 85.5vh;
+  min-width: 11vw;
+  padding: 0px;
+  border: 1px solid rgba(209, 213, 219, 0.18);
+  border-radius: 25px 0px 0px 25px;
+  background: $backgroundColor;
+  box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
 }
 
 .branding {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 5% 0 0;
-  background-color: #838485;
-  font-size: 1.2rem;
+  @include flexRowCenter;
+  font-size: 1.6rem;
   text-shadow: 0 2% 2% rgba(0, 0, 0, 0.25);
-}
+  border-radius: 25px 0px 0px 0px;
 
-.branding img:first-of-type,
-.branding p {
-  position: relative;
-  top: 0.55em;
-}
+  img {
+    @include setContainer(35px, 35px);
+  }
 
-.branding p {
-  top: 0.4em;
-}
+  img:first-of-type,
+  p {
+    position: relative;
+    top: 0.55em;
 
-.branding p:nth-of-type(1) {
-  color: #4bc0c8;
-}
+    &:nth-of-type(1) {
+      color: $SLP;
+    }
 
-.branding p:nth-of-type(2) {
-  color: #c1d7f5;
+    &:nth-of-type(2) {
+      color: $SCRIBE;
+    }
+  }
+
+  p {
+    top: 0.4em;
+  }
+
+  svg {
+    @include setContainer(25px, 25px);
+  }
+
+  .collapsed,
+  .isFlipped {
+    position: absolute;
+    @include flexRowCenter;
+    @include setContainer(40px, 40px);
+    @include stripButton;
+    top: 72px;
+    right: 0;
+    cursor: pointer;
+    border-radius: 25px 0px 0px 25px;
+    color: whitesmoke;
+    background: linear-gradient(
+      180deg,
+      #127329 0%,
+      rgba(66, 170, 90, 0.74) 100%
+    );
+  }
+
+  .isFlipped {
+    @include flip;
+    border-radius: 0px 25px 25px 0px;
+  }
 }
 
 .search {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexRowCenter;
   margin-top: 15px;
-  cursor: text;
-  appearance: none;
+
+  div:nth-of-type(1) > svg {
+    position: absolute;
+    width: 2vw;
+    top: 63%;
+    color: $searchPicColor;
+    @include stripInput;
+    z-index: 1;
+
+    &:first-child {
+      left: 20px;
+    }
+
+    &:nth-child(2) {
+      color: $searchPicColor;
+      left: 38px;
+    }
+  }
+
+  input:nth-of-type(1) {
+    position: relative;
+    @include setContainer(40px, 160px);
+    top: 17px;
+    margin: 5px;
+    padding-left: 55px;
+    border-style: none;
+    border-radius: 5px;
+    @include fontStyle;
+    color: $defaultText;
+    background-color: $searchBGColor;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button:nth-of-type(1) {
+    position: absolute;
+    width: 30px;
+    right: 30px;
+    top: 64%;
+    color: $findTranscriptBtn;
+    @include stripButton;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
-.search > div:nth-of-type(1) > svg {
-  position: absolute;
-  width: 30px;
-  top: 63%;
-  color: #474b4f;
-  border: none;
-  z-index: 10;
-  background: transparent;
+.activeLink {
+  @include activePage();
 }
 
-.search div:nth-child(1) svg:first-child {
-  left: 20px;
-}
-
-.search div:nth-child(1) svg:nth-child(2) {
-  color: #474b4f;
-  left: 38px;
-}
-
-.search input:nth-of-type(1) {
-  position: relative;
-  width: 240px;
-  height: 40px;
-  top: 17px;
-  margin: 5px;
-  padding-left: 55px;
-  border-style: none;
-  border-radius: 5px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  color: #2a2a2a;
-  background-color: #f1f4f6;
-}
-
-.search input:focus {
-  outline: none;
-  border: none;
-}
-
-/* Controls the arrow button */
-.search button:nth-of-type(1) {
-  position: absolute;
-  width: 30px;
-  right: 10px;
-  top: 64%;
-  background: transparent;
-  color: #595d63;
-  border: none;
-}
-
-.search button:nth-of-type(1):hover {
-  cursor: pointer;
-}
-
-.routingLinks {
+.navLinks {
   margin-top: 16px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   border-radius: 5px;
-}
-
-.routingLinks svg {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.routingLinks ul {
-  padding: 10px;
-}
-
-.routingLinks li:first-child {
-  color: white;
-  background-color: #007aff;
-}
-
-.routingLinks li {
-  display: flex;
-  align-items: center;
-  width: 220px;
-  height: 40px;
-  margin-bottom: 8px;
-  color: #526581;
-  list-style: none;
-  border-radius: 5px;
+  color: $linkColor;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+
+  svg {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  ul {
+    padding: 10px;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1);
+      color: whitesmoke;
+      background-color: #77b9ffc6;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    }
+  }
 }
 
-.routingLinks li:hover {
-  transform: scale(1.03);
+.miniAudioContainer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
   color: whitesmoke;
-  background-color: #77b9ff;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  margin-top: 2px;
-  width: 218px;
-  z-index: -1;
-}
-
-.toggle {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  bottom: 7%;
-  left: 2%;
-  gap: 10px;
   cursor: pointer;
-}
+  background-color: #302f2f74;
+  border-radius: 0px 0px 0px 25px;
+  @include setContainer(106px, 276px);
 
-.toggle svg {
-  margin-top: 1.5%;
-}
-
-.profile {
-  position: fixed;
-  bottom: 0%;
-  width: 240px;
-  height: 71px;
-  background: #c1d7f5 url(/src/assets/navigation-icons/user-avatar.svg)
-    no-repeat 10px center;
-}
-
-.profile div {
-  position: relative;
-  left: 3.1em;
-  top: 5px;
-  line-height: 3px;
+  svg {
+    @include setContainer(30px, 30px);
+    margin-bottom: 10px;
+  }
 }

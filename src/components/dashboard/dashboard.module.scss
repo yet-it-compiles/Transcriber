@@ -4,12 +4,14 @@
 
 /* !TESTING VALUE */
 body {
-  background-color: #bac5db;
+  background-color: #cbdbba;
 }
 
 .dashboard {
   position: relative;
-  @include setContainer(73.68vh, 45.8vw);
+  min-height: 85.5%;
+  min-width: 65vw;
+  padding: 0px;
   color: $whiteColor;
   backdrop-filter: blur(4px);
   background-color: rgba(22, 23, 24, 0.852);
@@ -24,12 +26,13 @@ body {
 .btnContainers {
   height: 8vh;
   @include flexRowCenter;
-  gap: 1vw;
+  gap: 2vw;
   margin-bottom: 50px;
 
   button {
     @include flexColCenter;
-    @include setContainer(7.5vh, 4.5vw);
+    padding: 20px;
+    min-width: 120px;
     @include stripButton;
     font-weight: 700;
     font-size: 0.7rem;
@@ -49,14 +52,14 @@ body {
     }
 
     span {
-      margin-top: 10px;
+      margin-top: 0.46vh;
     }
 
     svg {
       position: relative;
-      margin-top: 10px;
+      margin-top: 0.46vh;
       color: $whiteColor;
-      @include setContainer(35px, 35px);
+      @include setContainer(3vh, 2vw);
     }
   }
 }
