@@ -141,7 +141,7 @@ const Dashboard = () => {
       <DisplayModal isOpen={isModalOpen} onRequestClose={handleSetModal} />
 
       <div>
-        <h2>Previews</h2>
+        <h2>Transcript Previews</h2>
 
         <div className={styles.movie}>
           <p>Conversation with ...</p>
@@ -150,7 +150,7 @@ const Dashboard = () => {
       </div>
 
       <div>
-        <h2>Recent Files</h2>
+        <h2>Currently Tracked Files</h2>
       </div>
     </div>
   );

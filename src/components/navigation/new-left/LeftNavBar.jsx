@@ -11,6 +11,11 @@
 
 import React, { useState } from "react";
 import styles from "./new-left-nav.module.scss";
+
+import { CiMicrophoneOn } from "react-icons/ci";
+import { CgScreen } from "react-icons/cg";
+import { BsToggle2On } from "react-icons/bs";
+
 import { RxDividerVertical } from "react-icons/rx";
 import { GiArchiveResearch } from "react-icons/gi";
 import { FaLongArrowAltRight } from "react-icons/fa";
@@ -58,6 +63,7 @@ const LeftNavBar = () => {
       <Branding />
       <TranscriptSearch />
       <NavigationList />
+      <AudioControls />
     </div>
   );
 };
@@ -135,6 +141,16 @@ const NavigationList = () => {
         ))}
       </ul>
     </nav>
+  );
+};
+
+const AudioControls = () => {
+  return (
+    <div className={styles.miniAudioContainer}>
+      <CiMicrophoneOn />
+      <CgScreen />
+      <BsToggle2On />
+    </div>
   );
 };
 

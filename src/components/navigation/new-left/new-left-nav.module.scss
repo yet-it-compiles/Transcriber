@@ -21,6 +21,7 @@ $borders: rgba(9, 36, 75, 0.2);
 }
 
 .leftNavBar {
+  position: relative;
   @include flexCol;
   @include setContainerFull;
   @include setContainer(73.68vh, 11vw);
@@ -148,5 +149,23 @@ $borders: rgba(9, 36, 75, 0.2);
       background-color: #77b9ffc6;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     }
+  }
+}
+
+.miniAudioContainer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  color: whitesmoke;
+  cursor: pointer;
+  background-color: #302f2f74;
+  border-radius: 0px 0px 0px 25px;
+  @include setContainer(106px, 276px);
+
+  svg {
+    @include setContainer(30px, 30px);
+    margin-bottom: 10px;
   }
 }
