@@ -19,15 +19,15 @@ body {
 .btnContainers {
   height: 8vh;
   @include flexRowCenter;
-  gap: 1.8vw;
+  gap: 1vw;
+  margin-bottom: 50px;
 
   button {
     @include flexColCenter;
     @include setContainer(7.5vh, 4.5vw);
     @include stripButton;
     font-weight: 700;
-    line-height: 35px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: $whiteColor;
     border-radius: 15px;
     cursor: pointer;
@@ -42,10 +42,15 @@ body {
       transform: translateY(-10px);
     }
 
+    span {
+      margin-top: 25px;
+    }
+
     svg {
       position: relative;
+      top: 15px;
       color: $whiteColor;
-      @include setContainer(45px, 45px);
+      @include setContainer(35px, 35px);
     }
   }
 }
@@ -58,4 +63,5 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  margin-bottom: 50px;
 }

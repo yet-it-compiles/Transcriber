@@ -23,7 +23,7 @@ $borders: rgba(9, 36, 75, 0.2);
 .leftNavBar {
   @include flexCol;
   @include setContainerFull;
-  @include setContainer(73.68vh, 240px);
+  @include setContainer(73.68vh, 11vw);
   border: 1px solid rgba(209, 213, 219, 0.18);
   border-radius: 25px 0px 0px 25px;
   background: $backgroundColor;
@@ -31,9 +31,13 @@ $borders: rgba(9, 36, 75, 0.2);
 
 .branding {
   @include flexRowCenter;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   text-shadow: 0 2% 2% rgba(0, 0, 0, 0.25);
   border-radius: 25px 0px 0px 0px;
+
+  img {
+    @include setContainer(35px, 35px);
+  }
 
   img:first-of-type,
   p {
@@ -61,11 +65,11 @@ $borders: rgba(9, 36, 75, 0.2);
 
   div:nth-of-type(1) > svg {
     position: absolute;
-    width: 30px;
+    width: 2vw;
     top: 63%;
     color: $searchPicColor;
     @include stripInput;
-    z-index: 10;
+    z-index: 1;
 
     &:first-child {
       left: 20px;
@@ -79,7 +83,7 @@ $borders: rgba(9, 36, 75, 0.2);
 
   input:nth-of-type(1) {
     position: relative;
-    @include setContainer(40px, 240px);
+    @include setContainer(40px, 160px);
     top: 17px;
     margin: 5px;
     padding-left: 55px;
@@ -97,7 +101,7 @@ $borders: rgba(9, 36, 75, 0.2);
   button:nth-of-type(1) {
     position: absolute;
     width: 30px;
-    right: 10px;
+    right: 30px;
     top: 64%;
     color: $findTranscriptBtn;
     @include stripButton;
@@ -114,10 +118,9 @@ $borders: rgba(9, 36, 75, 0.2);
 
 .navLinks {
   margin-top: 16px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   border-radius: 5px;
-
   color: $linkColor;
   cursor: pointer;
 
@@ -134,7 +137,7 @@ $borders: rgba(9, 36, 75, 0.2);
     display: flex;
     align-items: center;
     height: 40px;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
@@ -142,11 +145,8 @@ $borders: rgba(9, 36, 75, 0.2);
     &:hover {
       transform: scale(1);
       color: whitesmoke;
-      background-color: #77b9ff;
+      background-color: #77b9ffc6;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     }
   }
-}
-
-.mediaControls {
 }

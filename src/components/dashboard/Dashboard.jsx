@@ -21,6 +21,8 @@ import { GiNotebook } from "react-icons/gi";
 import { IoMdMicrophone } from "react-icons/io";
 import { BsTrash, BsPersonVcard } from "react-icons/bs";
 
+import Widgets from "../widgets/metrics/MetricWidgets";
+
 /**
  * Defines an object of various templates the modal can have dependent on which
  * button invokes it.
@@ -102,8 +104,8 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
+      <Widgets />
       <h2> Quick Access {isModalOpen} </h2>
-
       <div className={styles.btnContainers}>
         <button onClick={handleSetModal}>
           <BsPersonVcard />
@@ -138,14 +140,18 @@ const Dashboard = () => {
 
       <DisplayModal isOpen={isModalOpen} onRequestClose={handleSetModal} />
 
-      <h2>Previews</h2>
+      <div>
+        <h2>Previews</h2>
 
-      <div className={styles.movie}>
-        <p>Conversation with ...</p>
-        <p>May 17th, 2023</p>
+        <div className={styles.movie}>
+          <p>Conversation with ...</p>
+          <p>May 17th, 2023</p>
+        </div>
       </div>
 
-      <h2>Recent Files</h2>
+      <div>
+        <h2>Recent Files</h2>
+      </div>
     </div>
   );
 };

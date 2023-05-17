@@ -10,7 +10,7 @@ $backgroundColor: linear-gradient(
 .rightNavBar {
   @include flexCol;
   @include setContainerFull;
-  @include setContainer(73.68vh, 240px);
+  @include setContainer(73.68vh, 11vw);
   border: $borderColor;
   border-radius: 0px 25px 25px 0px;
   background: $backgroundColor;

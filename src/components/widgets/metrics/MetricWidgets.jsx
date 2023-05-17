@@ -59,9 +59,9 @@ const DisplayWidgets = ({ title, value, unit, percentChange }) => {
   const [widgetMetrics] = useState(initialWidgetMetrics);
 
   return (
-    <div className={styles.widget}>
+    <div className={styles.container}>
       {widgetMetrics.map((eachMetric, eachIndex) => (
-        <aside key={eachIndex}>
+        <aside key={eachIndex} className={styles.widget}>
           <p>{eachMetric.title}</p>
           <p>
             {eachMetric.unit === "USD"
