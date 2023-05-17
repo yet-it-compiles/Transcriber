@@ -49,6 +49,10 @@
   background: "transparent";
 }
 
+@mixin flip {
+  transform: scaleX(-1);
+}
+
 @mixin bounceInTopAnim($transY, $anim, $opacity) {
   opacity: $opacity;
   transform: translateY(transY);

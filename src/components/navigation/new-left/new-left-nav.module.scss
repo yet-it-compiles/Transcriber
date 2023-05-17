@@ -57,6 +57,11 @@ $borders: rgba(9, 36, 75, 0.2);
   p {
     top: 0.4em;
   }
+
+  svg {
+    @include setContainer(25px, 25px);
+    @include flip;
+  }
 }
 
 .search {
@@ -168,4 +173,16 @@ $borders: rgba(9, 36, 75, 0.2);
     @include setContainer(30px, 30px);
     margin-bottom: 10px;
   }
+}
+
+.collapsed {
+  position: absolute;
+  @include flexRowCenter;
+  @include setContainer(40px, 40px);
+  top: 72px;
+  right: 0;
+  cursor: pointer;
+  border-radius: 25px 0px 0px 25px;
+  color: whitesmoke;
+  background: linear-gradient(180deg, #127329 0%, rgba(66, 170, 90, 0.74) 100%);
 }

@@ -15,7 +15,7 @@ import styles from "./new-left-nav.module.scss";
 import { CiMicrophoneOn } from "react-icons/ci";
 import { CgScreen } from "react-icons/cg";
 import { BsToggle2On } from "react-icons/bs";
-
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { RxDividerVertical } from "react-icons/rx";
 import { GiArchiveResearch } from "react-icons/gi";
 import { FaLongArrowAltRight } from "react-icons/fa";
@@ -79,6 +79,9 @@ const Branding = () => {
       <img src="/project-logo.svg" alt="Project Logo" />
       <p>SLP </p>
       <p>Scribe</p>
+      <span className={styles.collapsed}>
+        <HiOutlineArrowNarrowRight />
+      </span>
     </div>
   );
 };
