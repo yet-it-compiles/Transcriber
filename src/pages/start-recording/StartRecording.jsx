@@ -1,7 +1,8 @@
 /**
  * @file Record.jsx
  *
- * @description This file is responsible for constructing the recording page
+ * @description This file is responsible for constructing the Start Recording
+ * page from its related components.
  *
  * @requires react
  * @requires LeftNavBar
@@ -19,9 +20,9 @@ import AudioRecorder from "../../components/audio-recorder/AudioRecorder";
 import RightNavBar from "../../components/navigation/right/RightNavBar";
 
 /**
- * Responsible for rendering the recording page
- *
- * @returns {JSX.Element}
+ * Renders the Start Recording page and centers it on the screen
+
+ * @returns {JSX.Element} The component that represents the Start Recording page
  */
 const StartRecording = () => {
   return (

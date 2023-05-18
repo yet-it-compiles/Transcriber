@@ -1,0 +1,11 @@
+@import "../../styles/mixins";
+
+.recordContainer {
+  @include flexRowCenter;
+  height: 100vh;
+
+  h1 {
+    min-height: 85.5%;
+    min-width: 65vw;
+  }
+}
