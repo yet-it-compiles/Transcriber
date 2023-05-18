@@ -8,10 +8,11 @@ body {
 }
 
 .mediaPlayer {
-  position: fixed;
+  position: relative;
+  margin-top: 838px;
   display: flex;
   align-items: center;
-  height: 8vh;
+  min-height: 8vh;
   width: 65vw;
 
   bottom: 0;
