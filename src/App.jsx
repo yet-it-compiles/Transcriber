@@ -13,8 +13,8 @@ import AuthContextProvider from "./context/AuthContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-/* import ForgotPassword from "./pages/forgot-password/ForgotPassword"; */
+/* import Login from "./pages/login/Login";
+import ForgotPassword from "./pages/forgot-password/ForgotPassword"; */
 import StartRecording from "./pages/start-recording/StartRecording";
 import EditTranscript from "./pages/editor/EditTranscript";
 import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
@@ -26,28 +26,18 @@ import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
  */
 const App = () => {
   return (
-    <>
-      <Routing />
-    </>
-  );
-};
-
-const Routing = () => {
-  return (
-    <>
-      <BrowserRouter>
-        <AuthContextProvider>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
-            <Route path="/home" element={<Home />} />
-            <Route path="/start-recording" element={<StartRecording />} />
-            <Route path="/editor" element={<EditTranscript />} />
-            <Route path="/display-analytics" element={<DisplayAnalytics />} />
-          </Routes>
-        </AuthContextProvider>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <AuthContextProvider>
+        <Routes>
+          {/* <Route path="/" element={<Login />} /> */}
+          {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
+          <Route path="/" element={<Home />} />
+          <Route path="/start-recording" element={<StartRecording />} />
+          <Route path="/editor" element={<EditTranscript />} />
+          <Route path="/display-analytics" element={<DisplayAnalytics />} />
+        </Routes>
+      </AuthContextProvider>
+    </BrowserRouter>
   );
 };
 
