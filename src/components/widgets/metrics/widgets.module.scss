@@ -2,14 +2,14 @@
 
 .container {
   @include flexRowCenter;
-  gap: 30px;
+  gap: 1.6vw;
 }
 
 .widget {
-  width: 17.5%;
-  height: 9vh;
+  min-width: 16.5%;
+  min-height: 9vh;
   margin-top: 80px;
-  margin-bottom: 50px;
+  margin-bottom: 2.31vh;
   border-radius: 12px;
   font: normal 600 20px "Inter";
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -30,32 +30,32 @@
 
   p {
     position: relative;
-    line-height: 0px;
-    padding-top: 10px;
-    left: 22px;
+    line-height: 0vh;
+    padding-top: 0.8vh;
+    left: 0.67vw;
   }
 }
 
 .container aside p:nth-of-type(1) {
-  font-size: 0.875em;
+  font-size: 0.9rem;
 }
 
 .container aside p:nth-of-type(2) {
   display: inline-block;
-  font-size: 1.4em;
+  font-size: 1.4rem;
 }
 
 .container aside p:nth-of-type(3) {
   display: inline-block;
-  left: 28px;
-  font-size: 0.56em;
+  left: 1vw;
+  font-size: 0.65rem;
 }
 
 .container aside p:nth-of-type(4) {
   display: inline-block;
-  left: 30px;
-  top: -10px;
-  font-size: 0.6rem;
+  left: 0.78vw;
+  top: -1.2vh;
+  font-size: 0.65rem;
   font-weight: 700;
   color: #0ecc37;
 }

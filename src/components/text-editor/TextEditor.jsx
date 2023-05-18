@@ -43,8 +43,6 @@ const PLUGIN_OPTIONS = [
   "autosave",
   "save",
   "visualchars",
-  "toc ",
-  "textpattern ",
   "quickbars",
 ];
 

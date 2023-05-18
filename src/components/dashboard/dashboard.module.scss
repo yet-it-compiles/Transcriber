@@ -32,7 +32,7 @@ body {
   button {
     @include flexColCenter;
     padding: 20px;
-    min-width: 120px;
+    min-width: 4.5vw;
     @include stripButton;
     font-weight: 700;
     font-size: 0.7rem;
