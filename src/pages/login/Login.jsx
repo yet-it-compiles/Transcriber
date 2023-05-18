@@ -44,7 +44,7 @@ const Login = () => {
     login(username, password)
       .then((response) => {
         console.log(response);
-        navigate("/recorder");
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error.message);
@@ -57,7 +57,7 @@ const Login = () => {
     googleLogin(username, password)
     .then((response) => {
       console.log(response);
-      navigate("/recorder");
+      navigate("/home");
     })
     .catch((error) => {
       console.log(error.message);

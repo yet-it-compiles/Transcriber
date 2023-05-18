@@ -6,7 +6,7 @@
  *
  * @requires react
  * @requires useAuth
- * @requires register.scss
+ * @requires register.module.scss
  *
  * @exports Login
  */
@@ -17,9 +17,9 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 /**
- * Proviles the ability to allow the user to login to their profile
+ * Provides the ability to Register a account
  *
- * @returns a login screen with two input fields for email and password
+ * @returns a register now screen with three input fields for email, password, confirm password
  */
 const Register = () => {
   const navigate = useNavigate();
@@ -39,7 +39,8 @@ const Register = () => {
           navigate("/");
         })
         .catch((error) => {
-          console.log(error.message);
+          alert(`${error.message}`)
+         //console.log(error.message);
         });
     } else {
       alert("Passwords don't match");
