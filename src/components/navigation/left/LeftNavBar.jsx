@@ -34,7 +34,7 @@ const APPLICATION_PAGES = [
     id: 1,
     icon: <FcHome />,
     name: "Dashboard",
-    path: "/",
+    path: "/home",
   },
   {
     id: 2,

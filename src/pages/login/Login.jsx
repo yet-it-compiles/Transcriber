@@ -24,7 +24,7 @@ import { useNavigate, Link } from "react-router-dom";
 import googleImage from "../../assets/pictures/google-signin.png"
 
 /**
- * Proviles the ability to allow the user to login to their profile
+ * Provides the ability to allow the user to login to their profile
  *
  * @returns a login screen with two input fields for email and password
  */
@@ -100,7 +100,7 @@ const Login = () => {
               placeholder="Password"
             />
 
-            <Link to="/forgot" className={styles.forgot}>
+            <Link to="/forgot-password" className={styles.forgot}>
               Forgot Password?
             </Link>
           </div>
@@ -115,7 +115,7 @@ const Login = () => {
         </button>
 
         <p className={styles.registerText}>Don't Have An Account? &nbsp;
-          <Link to="/register" className={styles.register}>
+          <Link to="/register-account" className={styles.register}>
               Register Now
           </Link>
         </p>
