@@ -43,7 +43,8 @@ const ForgotPassword = () => {
             navigate("/");
         })
         .catch((error) => {
-        console.log(error.message);
+          alert(`${email} email doesn't exist`);
+          //console.log(error);
         });
   };
 

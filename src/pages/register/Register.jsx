@@ -6,7 +6,7 @@
  *
  * @requires react
  * @requires useAuth
- * @requires login.scss
+ * @requires register.scss
  *
  * @exports Login
  *
@@ -18,57 +18,46 @@
  */
 
 import React, { useEffect, useState } from "react";
-import styles from "./login.module.scss";
+import styles from "./register.module.scss";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import googleImage from "../../assets/pictures/google-signin.png"
 
 /**
  * Proviles the ability to allow the user to login to their profile
  *
  * @returns a login screen with two input fields for email and password
  */
-const Login = () => {
+const Register = () => {
 
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { login, googleLogin } = useAuth();
+  const { register } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!username || !password) {
-      console.log("Incorrect values");
-    }
-    login(username, password)
+    
+    if(confirmPassword === password ){
+        register(email, password)
       .then((response) => {
         console.log(response);
-        navigate("/recorder");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.message);
       });
-  };
-
-  const handleGoogle = (event) => {
-    event.preventDefault();
-
-    googleLogin(username, password)
-    .then((response) => {
-      console.log(response);
-      navigate("/recorder");
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+    }else{  
+        alert("Passwords don't match");
+    }
 };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.overlay}>
-        <h1 className={styles.welcome}>Welcome to</h1>
+        <h1 className={styles.welcome}>Register Now To</h1>
         <h1 className={styles.transcriber}>
           &nbsp;SLPscribe<sup className={styles.tm}>TM</sup>
         </h1>
@@ -83,13 +72,12 @@ const Login = () => {
           <div className={styles.fieldHolder}>
             <input
               className={`${styles.loginField} ${styles.username}`}
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               type="text"
               required
-              placeholder="Username"
+              placeholder="Enter Email"
             />
-
           </div>
 
           <div className={styles.fieldHolder}>
@@ -101,30 +89,26 @@ const Login = () => {
               required
               placeholder="Password"
             />
+          </div>
 
-            <Link to="/forgot" className={styles.forgot}>
-              Forgot Password?
-            </Link>
+          <div className={styles.fieldHolder}>
+            <input
+              className={`${styles.loginField} ${styles.confirmPassword}`}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              type="password"
+              required
+              placeholder="Confirm Password"
+            />
           </div>
 
           <button type="submit" className={styles.loginBtn}>
             Login
           </button>
         </form>
-
-        <button type="submit" onClick={handleGoogle} className={styles.googleButton}>
-          <img src={googleImage} alt="loginWithGoogle" />
-        </button>
-
-        <p className={styles.registerText}>Don't Have An Account? &nbsp;
-          <Link to="/register" className={styles.register}>
-              Register Now
-          </Link>
-        </p>
-        
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;
