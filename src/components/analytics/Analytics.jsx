@@ -14,9 +14,11 @@ import React from "react";
 import styles from "./analytics.module.scss";
 
 /**
+ * @TODO - Was only implemented as a valid route for routing users
+ *
  * Responsible for rendering the analytics page
  *
- * @returns {JSX.Element} that displays the analytics page
+ * @returns {JSX.Element} The component that displays the analytics page
  */
 const Analytics = () => {
   return (

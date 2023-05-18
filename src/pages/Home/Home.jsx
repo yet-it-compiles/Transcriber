@@ -1,7 +1,8 @@
 /**
  * @file Home.jsx
  *
- * @description This component is responsible for rendering the dashboard UI
+ * @description This component is responsible for constructing the Dashboard
+ * component from its related components.
  *
  * @requires react
  * @requires LeftNavBar
@@ -18,9 +19,9 @@ import Dashboard from "../../components/dashboard/Dashboard";
 import RightNavBar from "../../components/navigation/right/RightNavBar";
 
 /**
- * Responsible for assembling the dashboard, and exporting it to App.jsx
+ * Renders the Dashboard, and centers it on the screen
  *
- * @returns {JSX.Element} that resembles the dashboard
+ * @returns {JSX.Element} The component representing the Dashboard
  */
 const Home = () => {
   return (

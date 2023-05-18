@@ -1,13 +1,12 @@
-import React, { createContext, useContext, useState } from 'react';
-import { auth } from '../utils/FirebaseContext';
+import React, { createContext, useContext, useState } from "react";
+import { auth } from "../utils/FirebaseContext";
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
-  GoogleAuthProvider
-
-} from 'firebase/auth';
+  GoogleAuthProvider,
+} from "firebase/auth";
 
 const AuthContext = createContext({
   currentUser: null,
@@ -34,9 +33,9 @@ export default function AuthContextProvider({ children }) {
     return sendPasswordResetEmail(auth, email);
   }
 
-  function googleLogin(){
+  function googleLogin() {
     const googleAuthProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth,googleAuthProvider);
+    return signInWithPopup(auth, googleAuthProvider);
   }
 
   const value = {

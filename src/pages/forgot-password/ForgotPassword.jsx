@@ -5,9 +5,9 @@
  * UI which allows the user to recover their email or password.
  *
  * @requires React
- * @requires login.module.scss
  * @requires emailjs/browser
  * @requires react-router-dom
+ * @requires login.module.scss
  *
  * @exports ForgotPassword
  */
@@ -34,18 +34,18 @@ const ForgotPassword = () => {
     event.preventDefault();
 
     resetPassword(email)
-        .then((response) => {
-            console.log(response)
-            event.target.reset();
-            alert(
-              `Email sent to ${email}, If you don't see it, be sure to check your spam folder`
-            );
-            navigate("/");
-        })
-        .catch((error) => {
-          alert(`${email} email doesn't exist`);
-          //console.log(error);
-        });
+      .then((response) => {
+        console.log(response);
+        event.target.reset();
+        alert(
+          `Email sent to ${email}, If you don't see it, be sure to check your spam folder`
+        );
+        navigate("/");
+      })
+      .catch((error) => {
+        alert(`${email} email doesn't exist`);
+        //console.log(error);
+      });
   };
 
   return (

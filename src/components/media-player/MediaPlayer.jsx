@@ -14,13 +14,13 @@
 import React, { useState, useCallback, useEffect } from "react";
 import styles from "./player.module.scss";
 import { AiOutlineFastForward } from "react-icons/ai";
+import { FcVideoFile, FcDownload } from "react-icons/fc";
+import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import {
   BsVolumeDownFill,
   BsFillVolumeUpFill,
   BsFillVolumeMuteFill,
 } from "react-icons/bs";
-import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
-import { FcVideoFile, FcDownload } from "react-icons/fc";
 
 /**
  * This component is responsible for rendering the audio player UI that provides

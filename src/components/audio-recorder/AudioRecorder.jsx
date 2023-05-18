@@ -1,14 +1,17 @@
 /**
  * @file AudioRecorder.jsx
  *
- * @description This module is responsible for allowing the application to connect
- * to the users microphone, and provide them the ability to play, pause, skip,
- * and adjust the volume of the applications audio playback.
+ * @description This module is responsible for providing the audio recording, 
+ * playback, and download functionality. Additionally, this is where the audio 
+ * is captured, to be s
+ *
+ * This module allows the application to connect to the users microphone to
+ * allow the application to capture audio to playback, download, or transcribe.
  *
  * @requires react
- * @requires record.module.scss
- * @requires MediaPlayer
  * @requires react-icons
+ * @requires MediaPlayer
+ * @requires record.module.scss
  *
  * @exports MakeRecording
  */
@@ -20,8 +23,7 @@ import MediaPlayer from "../media-player/MediaPlayer";
 import { FaMicrophoneAlt } from "react-icons/fa";
 
 /**
- * Handles the functionality to allow the user to record audio from their mic,
- * and playback the recording, and download it as a .wav file.
+ * Allow the user to record audio from their mic and playback the recording, and download it as a .wav file.
  *
  * This is accomplished by initializing the dynamic values of the recording
  * features, and then request audio recording permissions from the browser. The
@@ -40,9 +42,11 @@ const MakeRecording = () => {
   const [recordingDuration, setRecordingDuration] = useState(0);
 
   /**
-   * Requests access to the browsers microphone, and sets the primary mic as
-   * the requested target. Once the data is retrieved, we efficiently chunk
-   * it and assign it an object URL
+   * Requests access to the users microphone and allows them to record audio.
+   *
+   * This is accomplished by creating an audioStream and mediaRecorder which
+   * allows the user to record audio. The audio is then captured, chunked and
+   * assigned to an object URL [blob:http:]
    */
   const startRecording = async () => {
     try {
@@ -76,8 +80,7 @@ const MakeRecording = () => {
   };
 
   /**
-   * Callback that handles the ability to let a user stop the recording by
-   * accessing the mediaRecorderRef switching its value to false.
+   * Callback that handles stopping the audio recording by toggling the state
    */
   const stopRecording = () => {
     setIsRecording(false);

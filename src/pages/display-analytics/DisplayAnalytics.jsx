@@ -1,8 +1,8 @@
 /**
- * @file Analytics.jsx
+ * @file DisplayAnalytics.jsx
  *
- * @description This component is responsible for constructing the analytics
- * page
+ * @description This component is responsible for constructing the Analytics
+ * page from its related components.
  *
  * @requires react
  * @requires Analytics
@@ -19,6 +19,11 @@ import LeftNavBar from "../../components/navigation/left/LeftNavBar";
 import Analytics from "../../components/analytics/analytics";
 import RightNavBar from "../../components/navigation/right/RightNavBar";
 
+/**
+ * Renders the analytics page and centers it on the screen
+ *
+ * @returns {JSX.Element} The component representing the analytics page
+ */
 const DisplayAnalytics = () => {
   return (
     <div className={styles.analyticsContainer}>

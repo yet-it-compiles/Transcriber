@@ -1,7 +1,8 @@
 /**
  * @file EditTranscript.jsx
  *
- * @description
+ * @description This component is responsible for constructing the Text Editor
+ * page from its related components.
  *
  * @requires react
  * @requires TextEditor
@@ -14,16 +15,14 @@
 
 import React from "react";
 import styles from "./edit-transcript.module.scss";
-import LeftNavBar from "../../components/navigation/left/LeftNavBar";
 import TextEditor from "../../components/text-editor/TextEditor";
+import LeftNavBar from "../../components/navigation/left/LeftNavBar";
 import RightNavBar from "../../components/navigation/right/RightNavBar";
 
 /**
- * Responsible for
+ * Renders the text editor page and centers it on the screen
  *
- * Accomplished by
- *
- * @returns {JSX.Element} -
+ * @returns {JSX.Element} The component that represents the text editor
  */
 const EditTranscript = () => {
   return (
