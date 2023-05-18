@@ -18,6 +18,7 @@ import ForgotPassword from "./pages/forgot-password/ForgotPassword"; */
 import StartRecording from "./pages/start-recording/StartRecording";
 import EditTranscript from "./pages/editor/EditTranscript";
 import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
+import SupportFAQ from "./pages/support-FAQ/SupportFAQ";
 
 /**
  * Entry level component that renders the application
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/start-recording" element={<StartRecording />} />
           <Route path="/editor" element={<EditTranscript />} />
           <Route path="/display-analytics" element={<DisplayAnalytics />} />
+          <Route path="/support-FAQ" element={<SupportFAQ />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>

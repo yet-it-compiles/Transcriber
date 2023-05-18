@@ -9,18 +9,12 @@
  * @requires register.scss
  *
  * @exports Login
- *
- * @TODO
- * - Refactor component to only use classes instead of IDs
- * - Refactor component to use proper CSS module import syntax to prompt better
- * interaction with other components.
- * - Refactor CSS to get rid of warning messages related fire-fox notifications
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./register.module.scss";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Proviles the ability to allow the user to login to their profile
@@ -28,7 +22,6 @@ import { useNavigate, Link } from "react-router-dom";
  * @returns a login screen with two input fields for email and password
  */
 const Register = () => {
-
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,20 +32,19 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    
-    if(confirmPassword === password ){
-        register(email, password)
-      .then((response) => {
-        console.log(response);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-    }else{  
-        alert("Passwords don't match");
+    if (confirmPassword === password) {
+      register(email, password)
+        .then((response) => {
+          console.log(response);
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    } else {
+      alert("Passwords don't match");
     }
-};
+  };
 
   return (
     <div className={styles.wrapper}>
