@@ -58,7 +58,7 @@ const APPLICATION_PAGES = [
     id: 5,
     icon: <FcVoicePresentation />,
     name: "Support / FAQ",
-    path: "/support",
+    path: "/support-FAQ",
   },
 ];
 
