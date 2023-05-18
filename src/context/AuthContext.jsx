@@ -1,5 +1,21 @@
+/**
+ * @file AuthContext.jsx
+ *
+ * @description The context is responsible for sharing authentication information to
+ * other components.
+ *
+ * @requires react
+ * 
+ *
+ * @exports AuthContextProvider
+ * @exports useAuth()
+ */
+
+
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "../utils/FirebaseContext";
+
+//Firebase pre-built methods.
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -63,5 +79,6 @@ export default function AuthContextProvider({ children }) {
     googleLogin,
     signout,
   };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
