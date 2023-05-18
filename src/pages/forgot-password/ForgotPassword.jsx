@@ -34,17 +34,18 @@ const ForgotPassword = () => {
     event.preventDefault();
 
     resetPassword(email)
-      .then((response) => {
-        console.log(response);
-        event.target.reset();
-        alert(
-          `Email sent to ${email}, If you don't see it, be sure to check your spam folder`
-        );
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+        .then((response) => {
+            console.log(response)
+            event.target.reset();
+            alert(
+              `Email sent to ${email}, If you don't see it, be sure to check your spam folder`
+            );
+            navigate("/");
+        })
+        .catch((error) => {
+          alert(`${email} email doesn't exist`);
+          //console.log(error);
+        });
   };
 
   return (

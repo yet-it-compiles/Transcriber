@@ -69,6 +69,11 @@
   display: inline-block;
 }
 
+.fieldHolder input::placeholder{
+    color: var(--placeholder-color);
+}    
+
+
 .fieldHolder {
   position: relative;
   margin-bottom: 1.25em;
@@ -76,10 +81,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-
-.fieldHolder input::placeholder{
-  color: var(--placeholder-color);
-}   
 
 .loginField {
   border: 0;
@@ -138,7 +139,7 @@
 }
 
 .password {
-  margin-bottom: 0;
+  margin-bottom: 30px;
   font-size: 1.25em;
 }
 
@@ -153,13 +154,8 @@
   margin-left: auto;
 }
 
-.registerText{
-  color: white;
-  font-size: 20px
-}
-
-.register{
-  color: var(--link-color);
+.confirmPassword{
+    font-size: 1.25em;
 }
 
 .loginBtn {
@@ -182,12 +178,3 @@
 .loginBtn:active {
   transform: scale(0.98);
 }
-
-.googleButton{
-  background-color: transparent;
-  padding: 0px 0px;
-  margin-top: 3rem;
-  border: none;
-  cursor: pointer;
-}
-
