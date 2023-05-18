@@ -110,6 +110,15 @@ const Login = () => {
           </button>
         </form>
 
+        
+        <div className={styles.horizontalLineFrame}>
+          <div className={styles.horizontalLineAttributesLeft} />
+          <div>
+            <p className={styles.horizontalAttributesMiddle}>Alternatively</p>
+          </div>
+          <div className={styles.horizontalLineAttributesRight} />
+        </div>
+
         <button type="submit" onClick={handleGoogle} className={styles.googleButton}>
           <img src={googleImage} alt="loginWithGoogle" />
         </button>
