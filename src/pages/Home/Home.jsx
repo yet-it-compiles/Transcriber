@@ -17,6 +17,7 @@ import styles from "./home.module.scss";
 import LeftNavBar from "../../components/navigation/left/LeftNavBar";
 import Dashboard from "../../components/dashboard/Dashboard";
 import RightNavBar from "../../components/navigation/right/RightNavBar";
+import WeatherCalendar from "../../components/widgets/weather-calendar/WeatherCalendar";
 
 /**
  * Renders the Dashboard, and centers it on the screen
@@ -28,6 +29,7 @@ const Home = () => {
     <div className={styles.container}>
       <LeftNavBar />
       <Dashboard />
+
       <RightNavBar />
     </div>
   );

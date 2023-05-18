@@ -11,6 +11,7 @@
 
 import React, { useState } from "react";
 import styles from "./right-nav.module.scss";
+import WeatherCalendar from "../../widgets/weather-calendar/WeatherCalendar";
 
 /**
  * Responsible for
@@ -20,7 +21,11 @@ import styles from "./right-nav.module.scss";
  * @returns {JSX.Element} -
  */
 const RightNavBar = () => {
-  return <div className={styles.rightNavBar}></div>;
+  return (
+    <div className={styles.rightNavBar}>
+      <WeatherCalendar />;
+    </div>
+  );
 };
 
 /**
@@ -31,11 +36,7 @@ const RightNavBar = () => {
  * @returns {JSX.Element} -
  */
 const ComponentName = () => {
-  return (
-    <>
-      <h1>Welcome to RightNavBar</h1>
-    </>
-  );
+  return <></>;
 };
 
 export default RightNavBar;
