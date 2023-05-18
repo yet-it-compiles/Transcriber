@@ -1,7 +1,14 @@
-.container {
-  height: 30vh;
-  width: 60vw;
-  background-color: antiquewhite;
+.editorContainer {
+  min-height: 85.5%;
+  min-width: 65vw;
+  padding: 0px;
+
+  background-color: #444;
+}
+
+.editorStyles {
+  min-height: 85.5%;
+  min-width: 65vw;
 }
 
 .title {
@@ -24,9 +31,6 @@
 
 .button:hover {
   background-color: #444;
-}
-
-.timeStamp {
 }
 
 .timeStamp > span {

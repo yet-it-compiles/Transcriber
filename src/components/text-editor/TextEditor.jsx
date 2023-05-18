@@ -13,8 +13,8 @@
  */
 
 import React, { useCallback, useState } from "react";
-import { Editor } from "@tinymce/tinymce-react";
 import styles from "./editor.module.css";
+import { Editor } from "@tinymce/tinymce-react";
 import { FcCalendar, FcClock } from "react-icons/fc";
 
 const PLUGIN_OPTIONS = [
@@ -172,20 +172,22 @@ const TextEditor = () => {
           <FcClock /> {formattedTime}
         </span>
       </div>
-      <Editor
-        apiKey={import.meta.env.VITE_EDITOR_AUTHORIZATION_1}
-        value={content}
-        onEditorChange={(newContent) => {
-          setContent(newContent);
-        }}
-        init={{
-          height: 900,
-          menubar: true,
-          plugins: PLUGIN_OPTIONS,
-          toolbar: TOOLBAR_OPTIONS,
-        }}
-        className={styles.editor}
-      />
+      <div className={styles.editorStyles}>
+        <Editor
+          apiKey={import.meta.env.VITE_EDITOR_AUTHORIZATION_1}
+          value={content}
+          onEditorChange={(newContent) => {
+            setContent(newContent);
+          }}
+          init={{
+            height: 900,
+            menubar: true,
+            plugins: PLUGIN_OPTIONS,
+            toolbar: TOOLBAR_OPTIONS,
+          }}
+          className={styles.editor}
+        />
+      </div>
       <div>
         <button onClick={handleDocumentSave} className={styles.button}>
           Save

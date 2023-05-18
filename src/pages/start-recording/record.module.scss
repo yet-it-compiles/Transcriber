@@ -1,0 +1,6 @@
+@import "../../styles/mixins";
+
+.recordContainer {
+  @include flexRowCenter;
+  height: 100vh;
+}

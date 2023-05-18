@@ -4,12 +4,14 @@
  * @description This component is responsible for rendering the dashboard UI
  *
  * @requires react
+ * @requires LeftNavBar
+ * @requires RightNavBar
  * @requires home.module.scss
  *
  * @exports Home
  */
 
-import React, { useState } from "react";
+import React from "react";
 import styles from "./home.module.scss";
 import LeftNavBar from "../../components/navigation/left/LeftNavBar";
 import Dashboard from "../../components/dashboard/Dashboard";

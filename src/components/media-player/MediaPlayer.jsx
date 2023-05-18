@@ -6,7 +6,7 @@
  *
  * @requires react
  * @requires react-icons
- * @requires media-recorder.module.scss
+ * @requires player.module.scss
  *
  * @exports MediaPlayerUI
  */
@@ -22,6 +22,13 @@ import {
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import { FcVideoFile, FcDownload } from "react-icons/fc";
 
+/**
+ * This component is responsible for rendering the audio player UI that provides
+ * the interface for the user to interact with the audio player.
+ *
+ * @param {*} param0
+ * @returns
+ */
 const MediaPlayerUI = ({ audioBlobURL, audioRef, recordingDuration }) => {
   const [volume, setVolume] = useState(25);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -47,6 +54,9 @@ const MediaPlayerUI = ({ audioBlobURL, audioRef, recordingDuration }) => {
     };
   }, [audioBlobURL, volume]);
 
+  /**
+   * Callback function that allows the audio to be played
+   */
   const playRecording = useCallback(() => {
     if (!audioBlobURL) return;
     setIsPlaying((prev) => !prev);
@@ -61,6 +71,10 @@ const MediaPlayerUI = ({ audioBlobURL, audioRef, recordingDuration }) => {
     audioRef.current = audio;
   }, [audioBlobURL, volume]);
 
+  /**
+   * Callback function that allows the audio to be downloaded to the /downloads
+   * folder on the users device
+   */
   const downloadRecording = () => {
     const link = document.createElement("a");
     link.href = audioBlobURL;
@@ -68,6 +82,14 @@ const MediaPlayerUI = ({ audioBlobURL, audioRef, recordingDuration }) => {
     link.click();
   };
 
+  /**
+   * Callback function that takes in the time, and formats it to resemble the
+   * audio on a timer
+   *
+   * @param {time} time the amount of time that has passed
+   *
+   * @returns a formatted string that represents the current time of the audio
+   */
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60)
@@ -76,6 +98,11 @@ const MediaPlayerUI = ({ audioBlobURL, audioRef, recordingDuration }) => {
     return `${minutes}:${seconds}`;
   };
 
+  /**
+   * Callback function that handles the ability to change the volume
+   *
+   * @param {event} event represents the value of the volume
+   */
   const handleVolumeChange = (event) => {
     setVolume(parseInt(event.target.value, 10));
   };

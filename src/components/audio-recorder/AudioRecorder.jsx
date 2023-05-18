@@ -6,16 +6,18 @@
  * and adjust the volume of the applications audio playback.
  *
  * @requires react
+ * @requires record.module.scss
+ * @requires MediaPlayer
  * @requires react-icons
- * @requires MediaRecorder
  *
  * @exports MakeRecording
  */
 
 import React, { useState, useRef } from "react";
-import MediaPlayer from "../components/media-player/MediaPlayer";
+import styles from "./record.module.scss";
+import MediaPlayer from "../media-player/MediaPlayer";
+
 import { FaMicrophoneAlt } from "react-icons/fa";
-import styles from "../pages/record/record.module.scss";
 
 /**
  * Handles the functionality to allow the user to record audio from their mic,
@@ -111,7 +113,9 @@ const MakeRecording = () => {
  * This component is responsible for rendering the animated listening ellipsis,
  * that jump on the screen when the user is recording.
  *
- * @param {stopRecording} param0
+ * @param {stopRecording} param0 a bool value representing the current state
+ * of the recorder
+ *
  * @returns animated ellipsis that animate when a recording is in progress
  */
 const RecordingInProgress = ({ stopRecording }) => (
@@ -135,6 +139,7 @@ const RecordingInProgress = ({ stopRecording }) => (
  * microphone icon to start a recording.
  *
  * @param {startRecording} param0 react-icon displaying a microphone
+ *
  * @returns page introduction text and an interactable react-icon to start
  * recording
  */

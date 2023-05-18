@@ -11,6 +11,7 @@
 
 import React, { useState } from "react";
 import styles from "./left-nav.module.scss";
+import { Link } from "react-router-dom";
 
 import { CgScreen } from "react-icons/cg";
 import { BsToggle2On } from "react-icons/bs";
@@ -29,12 +30,17 @@ import { FcVoicePresentation, FcElectricalSensor } from "react-icons/fc";
  * an associated icon, name, and path to navigate to.
  */
 const APPLICATION_PAGES = [
-  { id: 1, icon: <FcHome />, name: "Dashboard", path: "/dashboard" },
+  {
+    id: 1,
+    icon: <FcHome />,
+    name: "Dashboard",
+    path: "/",
+  },
   {
     id: 2,
     icon: <FcElectricalSensor />,
     name: "Start Recording",
-    path: "/recording",
+    path: "/start-recording",
   },
   {
     id: 3,
@@ -42,7 +48,12 @@ const APPLICATION_PAGES = [
     name: "Edit Transcripts",
     path: "/editor",
   },
-  { id: 4, icon: <FcStatistics />, name: "View Analytics", path: "/analytics" },
+  {
+    id: 4,
+    icon: <FcStatistics />,
+    name: "View Analytics",
+    path: "/display-analytics",
+  },
   {
     id: 5,
     icon: <FcVoicePresentation />,
@@ -152,8 +163,10 @@ const NavigationList = () => {
             }
             onClick={() => handleSetActive(eachPage.name)}
           >
-            {eachPage.icon}
-            {eachPage.name}
+            <Link to={eachPage.path}>
+              {eachPage.icon}
+              {eachPage.name}
+            </Link>
           </li>
         ))}
       </ul>

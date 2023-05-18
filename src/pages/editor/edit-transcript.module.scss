@@ -1,0 +1,6 @@
+@import "../../styles/mixins";
+
+.editorContainer {
+  @include flexRowCenter;
+  height: 100vh;
+}

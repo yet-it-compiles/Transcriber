@@ -90,6 +90,11 @@ const FolderModals = () => {
   );
 };
 
+/**
+ * This module renders the dashboard component
+ *
+ * @returns {JSX.Element} representing the contents of the dashboard
+ */
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 

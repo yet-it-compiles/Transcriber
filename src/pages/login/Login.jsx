@@ -17,7 +17,7 @@
  * - Refactor CSS to get rid of warning messages related fire-fox notifications
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./login.module.scss";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -28,7 +28,6 @@ import { useNavigate, Link } from "react-router-dom";
  * @returns a login screen with two input fields for email and password
  */
 const Login = () => {
-
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -75,7 +74,6 @@ const Login = () => {
               required
               placeholder="Username"
             />
-
           </div>
 
           <div className={styles.fieldHolder}>

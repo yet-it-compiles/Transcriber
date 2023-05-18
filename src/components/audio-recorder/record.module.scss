@@ -6,7 +6,8 @@ $background: #579bea;
 $recordingRed: #ff0000;
 
 .recordingContainer {
-  height: 50vh;
+  min-height: 85.5%;
+  min-width: 65vw;
   @include flexColCenter;
 }
 
