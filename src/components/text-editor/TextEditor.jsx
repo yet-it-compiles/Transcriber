@@ -7,13 +7,13 @@
  * @requires react
  * @requires react-icons
  * @requires tinymce/tinymce-react
- * @requires text-editor.module.css
+ * @requires text-editor.module.scss
  *
  * @exports TextEditor
  */
 
 import React, { useCallback, useState } from "react";
-import styles from "./editor.module.css";
+import styles from "./editor.module.scss";
 import { Editor } from "@tinymce/tinymce-react";
 import { FcCalendar, FcClock } from "react-icons/fc";
 
@@ -39,10 +39,17 @@ const PLUGIN_OPTIONS = [
   "lists",
   "wordcount",
   "help",
+  "fullscreen",
+  "autosave",
+  "save",
+  "visualchars",
+  "toc ",
+  "textpattern ",
+  "quickbars",
 ];
 
 const TOOLBAR_OPTIONS =
-  "fontselect fontsizeselect | formatselect | bold italic strikethrough | forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat";
+  "undo redo| fontselect fontsizeselect | formatselect | bold italic strikethrough | forecolor backcolor | link | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | removeformat";
 
 /**
  * Provides the ability to render DD|MM|YYYY and time
@@ -55,6 +62,7 @@ const setCurrentDate = () => {
     hour: "2-digit",
     minute: "2-digit",
   });
+
   const formattedDate = currentDate.toLocaleDateString([], {
     month: "2-digit",
     day: "2-digit",
@@ -129,8 +137,7 @@ const TextEditor = () => {
     });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
+    Object.assign(link, { href: url, download: filename });
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -180,8 +187,10 @@ const TextEditor = () => {
             setContent(newContent);
           }}
           init={{
-            height: 900,
+            height: 960,
             menubar: true,
+            skin: "oxide-dark",
+            content_css: "dark",
             plugins: PLUGIN_OPTIONS,
             toolbar: TOOLBAR_OPTIONS,
           }}
