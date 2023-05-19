@@ -6,9 +6,11 @@
  *
  * @requires react
  * @requires useAuth
+ * @requires react-router-dom
+ * @requires context/AuthContext
  * @requires register.module.scss
  *
- * @exports Login
+ * @exports Register
  */
 
 import React, { useState } from "react";
@@ -39,8 +41,8 @@ const Register = () => {
           navigate("/");
         })
         .catch((error) => {
-          alert(`${error.message}`)
-         //console.log(error.message);
+          alert(`${error.message}`);
+          //console.log(error.message);
         });
     } else {
       alert("Passwords don't match");
@@ -49,6 +51,9 @@ const Register = () => {
 
   return (
     <div className={styles.wrapper}>
+    
+    
+    
       <div className={styles.overlay}>
         <h1 className={styles.welcome}>Register Now To</h1>
         <h1 className={styles.transcriber}>
@@ -103,5 +108,7 @@ const Register = () => {
     </div>
   );
 };
+
+
 
 export default Register;

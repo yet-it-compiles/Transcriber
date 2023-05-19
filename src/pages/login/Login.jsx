@@ -5,23 +5,18 @@
  * the user to login to their account using a registered username and password.
  *
  * @requires react
- * @requires useAuth
- * @requires login.scss
+ * @requires react-router-dom
+ * @requires login.module.scss
+ * @requires context/AuthContext
  *
  * @exports Login
- *
- * @TODO
- * - Refactor component to only use classes instead of IDs
- * - Refactor component to use proper CSS module import syntax to prompt better
- * interaction with other components.
- * - Refactor CSS to get rid of warning messages related fire-fox notifications
  */
 
 import React, { useState } from "react";
 import styles from "./login.module.scss";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import googleImage from "../../assets/pictures/google-signin.png"
+import googleImage from "../../assets/pictures/google-signin.png";
 
 /**
  * Provides the ability to allow the user to login to their profile
@@ -54,14 +49,14 @@ const Login = () => {
     event.preventDefault();
 
     googleLogin(username, password)
-    .then((response) => {
-      console.log(response);
-      navigate("/home");
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-};
+      .then((response) => {
+        console.log(response);
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -116,15 +111,20 @@ const Login = () => {
           <div className={styles.horizontalLineAttributesRight} />
         </div>
 
-        <button type="submit" onClick={handleGoogle} className={styles.googleButton}>
+        <button
+          type="submit"
+          onClick={handleGoogle}
+          className={styles.googleButton}
+        >
           <img src={googleImage} alt="loginWithGoogle" />
         </button>
 
-        <p className={styles.registerText}>Don't Have An Account? &nbsp;
+        <p className={styles.registerText}>
+          Don't Have An Account? &nbsp;
           <Link to="/register-account" className={styles.register}>
-              Register Now
+            Register Now
           </Link>
-        </p> 
+        </p>
       </div>
     </div>
   );
