@@ -1,15 +1,33 @@
+@import "../../styles/mixins";
+
 .editorContainer {
-  min-height: 85.6vh;
-  min-width: 65vw;
-  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: whitesmoke;
-  background-color: #444;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  min-height: 85.5%;
+  min-width: 65vw;
+  backdrop-filter: blur(4px);
+  background-color: rgba(22, 23, 24, 0.852);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.header,
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
 }
 
 .editorStyles {
   min-height: 5.6vh;
-
   min-width: 65vw;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -18,26 +36,33 @@
   border: none;
   outline: none;
   font-size: 32px;
+  font-weight: 700;
   background-color: transparent;
-  padding: 0;
-  margin: 0;
   color: whitesmoke;
+  padding: 0;
+  margin-right: 10px 0px;
 }
 
 .button {
-  position: relative;
+  margin: 0 5px;
+  padding: 10px 10px;
   border-radius: 5px;
   color: whitesmoke;
-  cursor: pointer;
   background-color: #333;
-}
+  @include stripButton;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 
-.button:hover {
-  background-color: #444;
+  &:hover {
+    background-color: #555;
+  }
 }
 
 .timeStamp > span {
-  position: relative;
   margin-right: 30px;
-  bottom: 10px;
+}
+
+.editorStyles {
+  margin: 20px 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }

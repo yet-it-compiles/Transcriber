@@ -39,14 +39,15 @@
 
 @mixin stripButton {
   border: none;
+  outline: none;
   cursor: pointer;
   background-color: transparent;
 }
 
 @mixin stripInput {
-  border: "none";
-  outline: "none";
-  background: "transparent";
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 @mixin flip {

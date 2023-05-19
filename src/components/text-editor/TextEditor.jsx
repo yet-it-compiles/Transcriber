@@ -144,39 +144,41 @@ const TextEditor = () => {
 
   return (
     <div className={styles.editorContainer}>
-      <div className={styles.title}>
-        <h2>
+      <header className={styles.header}>
+        <div className={styles.titleSection}>
           {isEditing ? (
             <div>
               <input
                 type="text"
                 value={newTitle}
                 onChange={handleNewTitle}
+                placeholder="Enter new title..."
                 className={styles.titleInput}
               />
-              <br />
-              <button onClick={handleTitleSave} className={styles.button}>
-                Change Title
-              </button>
-              <button onClick={handleTitleCancel} className={styles.button}>
-                Cancel change
-              </button>
+              <div className={styles.buttonGroup}>
+                <button onClick={handleTitleSave} className={styles.button}>
+                  Save Title
+                </button>
+                <button onClick={handleTitleCancel} className={styles.button}>
+                  Cancel
+                </button>
+              </div>
             </div>
           ) : (
-            <span onClick={handleTitleClick} className={styles.title}>
+            <h2 onClick={handleTitleClick} className={styles.title}>
               {title}
-            </span>
+            </h2>
           )}
-        </h2>
-      </div>
-      <div className={styles.timeStamp}>
-        <span>
-          <FcCalendar /> {formattedDate}
-        </span>
-        <span>
-          <FcClock /> {formattedTime}
-        </span>
-      </div>
+        </div>
+        <div className={styles.timeStamp}>
+          <span>
+            <FcCalendar /> {formattedDate}
+          </span>
+          <span>
+            <FcClock /> {formattedTime}
+          </span>
+        </div>
+      </header>
       <div className={styles.editorStyles}>
         <Editor
           apiKey={import.meta.env.VITE_EDITOR_AUTHORIZATION_1}
@@ -195,14 +197,14 @@ const TextEditor = () => {
           className={styles.editor}
         />
       </div>
-      <div>
+      <footer className={styles.footer}>
         <button onClick={handleDocumentSave} className={styles.button}>
-          Save
+          Save Document
         </button>
         <button onClick={handleDownloadDocument} className={styles.button}>
-          Download
+          Download Document
         </button>
-      </div>
+      </footer>
     </div>
   );
 };
