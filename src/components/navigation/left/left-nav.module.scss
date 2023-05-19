@@ -25,7 +25,7 @@ $borders: rgba(9, 36, 75, 0.2);
   @include flexCol;
   min-height: 85.5vh;
   min-width: 11vw;
-  padding: 0px;
+  padding: 0rem;
   border: 1px solid rgba(209, 213, 219, 0.18);
   border-radius: 25px 0px 0px 25px;
   background: $backgroundColor;
@@ -39,7 +39,7 @@ $borders: rgba(9, 36, 75, 0.2);
   border-radius: 25px 0px 0px 0px;
 
   img {
-    @include setContainer(35px, 35px);
+    @include setContainer(3vh, 1.6vw);
   }
 
   img:first-of-type,
@@ -61,17 +61,17 @@ $borders: rgba(9, 36, 75, 0.2);
   }
 
   svg {
-    @include setContainer(25px, 25px);
+    @include setContainer(2vh, 1.65vw);
   }
 
   .collapsed,
   .isFlipped {
     position: absolute;
     @include flexRowCenter;
-    @include setContainer(40px, 40px);
+    @include setContainer(3vh, 1.7vw);
     @include stripButton;
-    top: 72px;
-    right: 0;
+    top: 6vh;
+    right: 0vw;
     cursor: pointer;
     border-radius: 25px 0px 0px 25px;
     color: whitesmoke;
@@ -91,7 +91,7 @@ $borders: rgba(9, 36, 75, 0.2);
 .search {
   position: relative;
   @include flexRowCenter;
-  margin-top: 15px;
+  margin-top: 1vh;
 
   div:nth-of-type(1) > svg {
     position: absolute;
@@ -102,7 +102,7 @@ $borders: rgba(9, 36, 75, 0.2);
     z-index: 1;
 
     &:first-child {
-      left: 20px;
+      left: 0.85vw;
     }
 
     &:nth-child(2) {
@@ -147,15 +147,15 @@ $borders: rgba(9, 36, 75, 0.2);
 }
 
 .navLinks {
-  margin-top: 16px;
-  font-size: 20px;
+  margin-top: 1.5vh;
+  font-size: 1rem;
   font-weight: 600;
   border-radius: 5px;
   color: $linkColor;
   cursor: pointer;
 
   svg {
-    margin-left: 10px;
+    margin-left: 0.4vw;
     margin-right: 10px;
   }
 
@@ -207,7 +207,7 @@ $borders: rgba(9, 36, 75, 0.2);
   }
 }
 
-.logoutButton{
+.logoutButton {
   width: 100px;
   height: 50px;
   background-color: transparent;

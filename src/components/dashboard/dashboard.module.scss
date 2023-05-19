@@ -11,7 +11,7 @@ body {
   position: relative;
   min-height: 85.5%;
   min-width: 65vw;
-  padding: 0px;
+  padding: 0;
   color: $whiteColor;
   backdrop-filter: blur(4px);
   background-color: rgba(22, 23, 24, 0.852);
@@ -19,7 +19,7 @@ body {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   h2 {
-    margin-left: 20px;
+    margin-left: 0.52vw;
   }
 }
 
@@ -27,11 +27,11 @@ body {
   height: 8vh;
   @include flexRowCenter;
   gap: 2vw;
-  margin-bottom: 50px;
+  margin-bottom: 2.31vh;
 
   button {
     @include flexColCenter;
-    padding: 20px;
+    padding: 1rem;
     min-width: 4.5vw;
     @include stripButton;
     font-weight: 700;
@@ -48,7 +48,7 @@ body {
 
     &:hover {
       transition: 500ms;
-      transform: translateY(-10px);
+      transform: translateY(-0.35vw);
     }
 
     span {
@@ -67,8 +67,8 @@ body {
 .movie {
   @include flexColCenter;
   @include setContainer(18vh, 10.8vw);
-  margin-left: 40px;
-  margin-bottom: 50px;
+  margin-left: 1.04vw;
+  margin-bottom: 2.31vh;
   border-radius: 15px;
   cursor: pointer;
   background-image: url("../../assets/pictures/place-holder.png");
@@ -82,6 +82,6 @@ body {
 
   &:hover {
     transition: 500ms;
-    transform: translateY(-10px);
+    transform: translateY(-0.26vw);
   }
 }
