@@ -24,6 +24,7 @@ import axios from "axios";
 const Transcriber = ({ apiToken, fileData }) => {
   const [summary, setSummary] = useState(null);
   const [transcript, setTranscript] = useState([]);
+  const [timestamps, setTimestamps] = useState([]);
   const [status, setStatus] = useState("Initializing Connection");
 
   useEffect(() => {
@@ -102,6 +103,15 @@ const Transcriber = ({ apiToken, fileData }) => {
                   )
                 );
 
+                const words = utterances.flatMap((utterance) =>
+                  utterance.words.map((word) => ({
+                    ...word,
+                    speaker: utterance.speaker,
+                  }))
+                );
+
+                setTimestamps(words);
+
                 setSummary(APIPollingResponse.data);
                 return;
 
@@ -159,8 +169,22 @@ const Transcriber = ({ apiToken, fileData }) => {
           <p>- Headline: {eachChapter.headline}</p>
           <p>- Gist: {eachChapter.gist}</p>
           <p>
-            Start time: {eachChapter.start}ms || End time: {eachChapter.end}ms
+            Start time: {eachChapter.start / 1_000}s || End time:{" "}
+            {eachChapter.end / 1_000}s
           </p>
+        </div>
+      ))}
+
+      {timestamps.map((word, index) => (
+        <div key={index}>
+          <h1>Timestamps! </h1>
+          <p>
+            Speaker {word.speaker}: {word.text}
+          </p>
+          <p>
+            Start: {word.start / 1_000}s, End: {word.end / 1000}s
+          </p>
+          <p>Confidence: {word.confidence}</p>
         </div>
       ))}
     </>
