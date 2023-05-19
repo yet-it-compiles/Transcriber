@@ -29,24 +29,24 @@ import ProtectedRoute from "./components/protected-routes/ProtectedRoute";
  */
 
 //Working protected routes commented out to allow easier access to other pages
-/*const App = () => {
-  return (
-    <BrowserRouter>
-      <AuthContextProvider>
-        <Routes>
-          <Route path="/" element={<Login />} /> 
-          <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-          <Route path="/forgot-password" element={<ForgotPassword />} /> 
-          <Route path="/register-account" element={<Register/>}/>
-          <Route path="/start-recording" element={<ProtectedRoute><StartRecording /></ProtectedRoute>} />
-          <Route path="/editor" element={<ProtectedRoute><EditTranscript /></ProtectedRoute>} />
-          <Route path="/display-analytics" element={<ProtectedRoute><DisplayAnalytics /></ProtectedRoute>} />
-          <Route path="/support-FAQ" element={<ProtectedRoute><SupportFAQ /></ProtectedRoute>} />
-        </Routes>
-      </AuthContextProvider>
-    </BrowserRouter>
-  );
-};*/
+// const App = () => {
+//   return (
+//     <BrowserRouter>
+//       <AuthContextProvider>
+//         <Routes>
+//           <Route path="/" element={<Login />} /> 
+//           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+//           <Route path="/forgot-password" element={<ForgotPassword />} /> 
+//           <Route path="/register-account" element={<Register/>}/>
+//           <Route path="/start-recording" element={<ProtectedRoute><StartRecording /></ProtectedRoute>} />
+//           <Route path="/editor" element={<ProtectedRoute><EditTranscript /></ProtectedRoute>} />
+//           <Route path="/display-analytics" element={<ProtectedRoute><DisplayAnalytics /></ProtectedRoute>} />
+//           <Route path="/support-FAQ" element={<ProtectedRoute><SupportFAQ /></ProtectedRoute>} />
+//         </Routes>
+//       </AuthContextProvider>
+//     </BrowserRouter>
+//   );
+// };
 
 const App = () => {
   return (

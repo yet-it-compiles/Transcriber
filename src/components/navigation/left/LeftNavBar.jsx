@@ -11,7 +11,8 @@
 
 import React, { useState } from "react";
 import styles from "./left-nav.module.scss";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
 import { CgScreen } from "react-icons/cg";
 import { BsToggle2On } from "react-icons/bs";
@@ -20,6 +21,7 @@ import { RxDividerVertical } from "react-icons/rx";
 import { GiArchiveResearch } from "react-icons/gi";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { FiLogOut } from "react-icons/fi"
 import { FcHome, FcStatistics, FcReadingEbook } from "react-icons/fc";
 import { FcVoicePresentation, FcElectricalSensor } from "react-icons/fc";
 
@@ -74,6 +76,7 @@ const LeftNavBar = () => {
       <Branding />
       <TranscriptSearch />
       <NavigationList />
+      <LogOut/>
       <AudioControls />
     </div>
   );
@@ -183,5 +186,28 @@ const AudioControls = () => {
     </div>
   );
 };
+
+const LogOut = () =>{
+  const { signout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+
+    signout()
+      .then((response) => {
+        //console.log(response);
+        alert('You have been logged out. Press Ok to be redirected to login page.')
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  
+  return (
+    <button className={styles.logoutButton} onClick={handleLogout}><FiLogOut size={25}/></button>
+  )
+}
 
 export default LeftNavBar;

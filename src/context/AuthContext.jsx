@@ -8,9 +8,8 @@
  * 
  *
  * @exports AuthContextProvider
- * @exports useAuth()
+ * @exports useAuth
  */
-
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "../utils/FirebaseContext";
@@ -24,6 +23,8 @@ import {
   GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
+  updatePassword,
+  updateEmail,
 } from "firebase/auth";
 
 const AuthContext = createContext({
@@ -32,7 +33,9 @@ const AuthContext = createContext({
   login: () => Promise,
   resetPassword: () => Promise,
   googleLogin: () => Promise,
-  logout: () => Promise,
+  signout: () => Promise,
+  changeEmail: () => Promise,
+  changePassword: () => Promise,
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -61,6 +64,14 @@ export default function AuthContextProvider({ children }) {
     return signOut(auth);
   }
 
+  function changeEmail(newEmail){
+    return updateEmail(newEmail);
+  }
+
+  function changePassword(newPassword){
+    return updatePassword(newPassword);
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
       console.log(currentUser);
@@ -78,6 +89,8 @@ export default function AuthContextProvider({ children }) {
     resetPassword,
     googleLogin,
     signout,
+    changeEmail,
+    changePassword
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
