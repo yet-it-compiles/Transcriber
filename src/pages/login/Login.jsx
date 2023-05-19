@@ -32,7 +32,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const { login, googleLogin } = useAuth();
 
   const handleSubmit = (event) => {
@@ -104,13 +103,11 @@ const Login = () => {
               Forgot Password?
             </Link>
           </div>
-
           <button type="submit" className={styles.loginBtn}>
             Login
           </button>
         </form>
 
-        
         <div className={styles.horizontalLineFrame}>
           <div className={styles.horizontalLineAttributesLeft} />
           <div>
@@ -127,8 +124,7 @@ const Login = () => {
           <Link to="/register-account" className={styles.register}>
               Register Now
           </Link>
-        </p>
-        
+        </p> 
       </div>
     </div>
   );

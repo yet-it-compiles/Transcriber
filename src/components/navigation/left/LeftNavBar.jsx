@@ -197,7 +197,7 @@ const LogOut = () =>{
     signout()
       .then((response) => {
         //console.log(response);
-        alert('You have been logged out. Press Ok to be redirected to login page.')
+        //alert('You have been logged out. Press Ok to be redirected to login page.')
         navigate("/");
       })
       .catch((error) => {
