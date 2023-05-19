@@ -1,8 +1,8 @@
 /**
  * @file AudioRecorder.jsx
  *
- * @description This module is responsible for providing the audio recording, 
- * playback, and download functionality. Additionally, this is where the audio 
+ * @description This module is responsible for providing the audio recording,
+ * playback, and download functionality. Additionally, this is where the audio
  * is captured, to be s
  *
  * This module allows the application to connect to the users microphone to
@@ -16,9 +16,10 @@
  * @exports MakeRecording
  */
 
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./record.module.scss";
 import MediaPlayer from "../media-player/MediaPlayer";
+import Transcriber from "../transcriber/Transcriber";
 
 import { FaMicrophoneAlt } from "react-icons/fa";
 
@@ -36,10 +37,31 @@ const MakeRecording = () => {
   const audioRef = useRef();
   const mediaRecorderRef = useRef();
 
+  const [error, setError] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlobURL, setAudioBlobURL] = useState(null);
   const [recordingDuration, setRecordingDuration] = useState(0);
+
+  const [showOptions, setShowOptions] = useState(false);
+  const [saveRecording, setSaveRecording] = useState(false);
+  const [viewTranscription, setViewTranscription] = useState(false);
+  const [fileData, setFileData] = useState(null);
+
+  const handleFileChange = (event) => {
+    setFileData(event.target.files[0]);
+  };
+
+  let apiToken = import.meta.env.VITE_AUTHORIZATION_1;
+
+  /**
+   * Handles updating the error state and presents the message to the user
+   * @param {error} error represents the error the user is experiencing
+   */
+  const handleError = (error) => {
+    setIsRecording(false);
+    setError(`Failed to start recording: ${error.message}`);
+  };
 
   /**
    * Requests access to the users microphone and allows them to record audio.
@@ -68,16 +90,24 @@ const MakeRecording = () => {
         setAudioBlobURL(URL.createObjectURL(blob));
         setAudioBlob(blob);
         setRecordingDuration(Math.floor((Date.now() - startTime) / 1000));
+        setShowOptions(true);
       };
 
       setIsRecording(true);
       mediaRecorder?.start();
       mediaRecorderRef.current = mediaRecorder;
     } catch (error) {
-      setIsRecording(false);
-      throw new Error("Failed to start recording:", error);
+      handleError(error);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (isRecording && mediaRecorderRef.current) {
+        mediaRecorderRef.current.stop();
+      }
+    };
+  }, [isRecording]);
 
   /**
    * Callback that handles stopping the audio recording by toggling the state
@@ -85,6 +115,20 @@ const MakeRecording = () => {
   const stopRecording = () => {
     setIsRecording(false);
     mediaRecorderRef.current?.stop();
+  };
+
+  const handleRecordingOption = (option) => {
+    setShowOptions(false);
+    if (option === "download") {
+      const downloadLink = document.createElement("a");
+      downloadLink.href = audioBlobURL;
+      downloadLink.download = "recorded_audio.wav";
+      downloadLink.click();
+      setViewTranscription(true);
+    } else if (option === "save") {
+      // PLACE HOLDER FOR DATABASE IMPLEMENTATION
+      setSaveRecording(true);
+    }
   };
 
   return (
@@ -101,6 +145,25 @@ const MakeRecording = () => {
           src={audioBlobURL}
           onError={(event) => console.error("Error playing audio:", event)}
         />
+      )}
+
+      {showOptions && (
+        <div className={styles.optionsContainer}>
+          <h2>What Would You Like To Do?</h2>
+          <button onClick={() => handleRecordingOption("download")}>
+            Edit The Transcription
+          </button>
+          <button onClick={() => handleRecordingOption("save")}>
+            View The Transcription
+          </button>
+        </div>
+      )}
+
+      {viewTranscription && (
+        <div>
+          <input type="file" onChange={handleFileChange} />
+          {fileData && <Transcriber apiToken={apiToken} fileData={fileData} />}
+        </div>
       )}
 
       <MediaPlayer
