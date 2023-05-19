@@ -29,25 +29,30 @@ import {
  * @param {*} param0
  * @returns
  */
-const MediaPlayerUI = ({ audioBlobURL, audioRef, recordingDuration }) => {
+const MediaPlayerUI = ({
+  audioBlobURL,
+  audioRef,
+  recordingDuration,
+  currentTime,
+  setCurrentTime,
+}) => {
   const [volume, setVolume] = useState(25);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentPlace, setCurrentPlace] = useState(0);
   const [title, setTitle] = useState("Set Audio Name");
 
   useEffect(() => {
     const audio = audioRef.current || new Audio(audioBlobURL);
 
     const handleTimeUpdate = () => {
-      setCurrentPlace(audio.currentTime);
+      setCurrentTime(audio.currentTime);
     };
+
     const handleAudioEnded = () => {
       setIsPlaying((prev) => !prev);
-      setCurrentPlace(0);
+      setCurrentTime(0);
     };
 
     audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("ended", handleAudioEnded);
 
     return () => {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
@@ -138,12 +143,12 @@ const MediaPlayerUI = ({ audioBlobURL, audioRef, recordingDuration }) => {
         </button>
 
         <div className={styles.progress}>
-          <div className={styles.current}>{formatTime(currentPlace)}</div>
+          <div className={styles.current}>{formatTime(currentTime)}</div>
           <div className={`${styles.progressBar} ${styles.progressMoved}`}>
             <div
               className={`${styles.progressAnimation} ${styles.isActive}`}
               style={{
-                width: `${(currentPlace / recordingDuration) * 100}%`,
+                width: `${(currentTime / recordingDuration) * 100}%`,
               }}
             />
           </div>

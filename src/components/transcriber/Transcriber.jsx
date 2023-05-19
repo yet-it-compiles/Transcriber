@@ -1,8 +1,9 @@
 /**
  * @file AudioTranscriber.js
  *
- * @description This file is responsible for handling the audio transcription
- * feature
+ * @description This component is responsible for providing the transcription
+ * functionality of the application along with the transcript animation to show
+ * the actively playing word.
  *
  * @requires axios
  *
@@ -13,19 +14,28 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 /**
- * Responsible for rendering the transcript to the screen
+ * Callback function responsible for rendering the transcript
  *
  * @param {apiToken} param0 represents the api toekn for the transcription service
- * @param {fileData} param1 represents the hardcoded file path to the audio
- * recording.
+ * @param {fileData} param1 represents the audio file path to be transcribed
+ * @param {currentTime} param2 represents the current time in the audio playback
  *
- * @returns {JSX.Element} That represnts the transcripion of the audio file
+ * @returns {JSX.Element} That represnts the audio file transcripion
  */
-const Transcriber = ({ apiToken, fileData }) => {
+const Transcriber = ({ apiToken, fileData, currentTime }) => {
   const [summary, setSummary] = useState(null);
   const [transcript, setTranscript] = useState([]);
   const [timestamps, setTimestamps] = useState([]);
   const [status, setStatus] = useState("Initializing Connection");
+
+  const [activeWordIndex, setActiveWordIndex] = useState(0);
+
+  useEffect(() => {
+    const index = timestamps.findIndex(
+      ({ start, end }) => start <= currentTime && end >= currentTime
+    );
+    setActiveWordIndex(index !== -1 ? index : activeWordIndex);
+  }, [timestamps, currentTime]);
 
   useEffect(() => {
     const client = axios.create({
@@ -63,7 +73,8 @@ const Transcriber = ({ apiToken, fileData }) => {
     };
 
     /**
-     * Transcribes the audio from the provided URL using the AssemblyAI service.
+     * Callback function responsible for transcribing the audio file and polling
+     * the API until the transcription is available.
      *
      * @param {string} audioUrl - The URL of the audio file to be transcribed.
      *
@@ -138,18 +149,18 @@ const Transcriber = ({ apiToken, fileData }) => {
 
         setTimeout(pollTranscription, 2000);
       } catch (error) {
-        setStatus("There was an error trying to connect to the Transcriber.");
+        setStatus("There was an error trying to transcribe the audio ");
       }
     };
 
-    const main = async () => {
+    const displayChapters = async () => {
       try {
         const uploadUrl = await uploadFile();
         await transcribeAudio(uploadUrl);
       } catch (error) {}
     };
 
-    main();
+    displayChapters();
   }, [apiToken, fileData]);
 
   return (
@@ -158,9 +169,36 @@ const Transcriber = ({ apiToken, fileData }) => {
         Status: <strong>{status}</strong>
       </p>
 
-      {transcript.map((eachLine, index) => (
-        <p key={index}>{eachLine}</p>
-      ))}
+      {transcript.map((eachLine, index) => {
+        const words = eachLine.split(" ");
+        return (
+          <p key={index}>
+            {words.map((word, wordIndex) => {
+              const currentWordInfo = timestamps.find(
+                ({ text }) => text.toLowerCase() === word.toLowerCase()
+              );
+
+              if (currentWordInfo) {
+                return (
+                  <span
+                    key={wordIndex}
+                    style={
+                      currentTime * 1000 >= currentWordInfo.start &&
+                      currentTime * 1000 < currentWordInfo.end
+                        ? { color: "red" }
+                        : { color: "white" }
+                    }
+                  >
+                    {word + " "}
+                  </span>
+                );
+              } else {
+                return word + " ";
+              }
+            })}
+          </p>
+        );
+      })}
 
       {summary?.chapters?.map((eachChapter, eachIndex) => (
         <div key={eachIndex}>
@@ -174,19 +212,6 @@ const Transcriber = ({ apiToken, fileData }) => {
           </p>
         </div>
       ))}
-
-      {/* <h1>Timestamps! </h1>
-      {timestamps.map((word, index) => (
-        <div key={index}>
-          <p>
-            Speaker {word.speaker}: {word.text}
-          </p>
-          <p>
-            Start: {word.start / 1_000}s, End: {word.end / 1000}s
-          </p>
-          <p>Confidence: {word.confidence}</p>
-        </div>
-      ))} */}
     </>
   );
 };

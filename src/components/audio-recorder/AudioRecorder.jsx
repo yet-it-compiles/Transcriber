@@ -5,9 +5,6 @@
  * playback, and download functionality. Additionally, this is where the audio
  * is captured, to be s
  *
- * This module allows the application to connect to the users microphone to
- * allow the application to capture audio to playback, download, or transcribe.
- *
  * @requires react
  * @requires react-icons
  * @requires MediaPlayer
@@ -24,7 +21,8 @@ import Transcriber from "../transcriber/Transcriber";
 import { FaMicrophoneAlt } from "react-icons/fa";
 
 /**
- * Allow the user to record audio from their mic and playback the recording, and download it as a .wav file.
+ * Allow the user to record audio from their mic and playback the recording, and
+ * download it as a .wav file.
  *
  * This is accomplished by initializing the dynamic values of the recording
  * features, and then request audio recording permissions from the browser. The
@@ -47,6 +45,8 @@ const MakeRecording = () => {
   const [saveRecording, setSaveRecording] = useState(false);
   const [viewTranscription, setViewTranscription] = useState(false);
   const [fileData, setFileData] = useState(null);
+
+  const [currentTime, setCurrentTime] = useState(0);
 
   const handleFileChange = (event) => {
     setFileData(event.target.files[0]);
@@ -117,16 +117,29 @@ const MakeRecording = () => {
     mediaRecorderRef.current?.stop();
   };
 
+  /**
+   * Callback function that handles downloading the audio file to the users
+   * default downlaods location
+   */
+  const downloadAudio = () => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = audioBlobURL;
+    downloadLink.download = "recorded_audio.wav";
+    downloadLink.click();
+  };
+
+  /**
+   * Callback function that handles providing the different options for the user
+   * to choose after recording the audio.
+   *
+   * @param {option} option Choice of what to do with the audio transcription
+   */
   const handleRecordingOption = (option) => {
     setShowOptions(false);
-    if (option === "download") {
-      const downloadLink = document.createElement("a");
-      downloadLink.href = audioBlobURL;
-      downloadLink.download = "recorded_audio.wav";
-      downloadLink.click();
+    downloadAudio();
+    if (option === "view") {
       setViewTranscription(true);
-    } else if (option === "save") {
-      // PLACE HOLDER FOR DATABASE IMPLEMENTATION
+    } else if (option === "edit") {
       setSaveRecording(true);
     }
   };
@@ -150,11 +163,11 @@ const MakeRecording = () => {
       {showOptions && (
         <div className={styles.optionsContainer}>
           <h2>What Would You Like To Do?</h2>
-          <button onClick={() => handleRecordingOption("download")}>
-            Edit The Transcription
+          <button onClick={() => handleRecordingOption("view")}>
+            View Transcript
           </button>
-          <button onClick={() => handleRecordingOption("save")}>
-            View The Transcription
+          <button onClick={() => handleRecordingOption("edit")}>
+            Edit In Text Editor
           </button>
         </div>
       )}
@@ -162,7 +175,13 @@ const MakeRecording = () => {
       {viewTranscription && (
         <div>
           <input type="file" onChange={handleFileChange} />
-          {fileData && <Transcriber apiToken={apiToken} fileData={fileData} />}
+          {fileData && (
+            <Transcriber
+              apiToken={apiToken}
+              fileData={fileData}
+              currentTime={currentTime}
+            />
+          )}
         </div>
       )}
 
@@ -170,6 +189,8 @@ const MakeRecording = () => {
         audioBlobURL={audioBlobURL}
         audioRef={audioRef}
         recordingDuration={recordingDuration}
+        currentTime={currentTime}
+        setCurrentTime={setCurrentTime}
       />
     </div>
   );
