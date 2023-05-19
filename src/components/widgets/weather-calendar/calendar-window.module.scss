@@ -1,12 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+
+$primary-color: #1a73e8;
+$secondary-color: #f7f7f7;
+$highlight-color: #ffe082;
+$error-color: #c62828;
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 60px;
   width: 100%;
-  border-radius: 10px 10px 0px 0px;
-  cursor: pointer;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
+  background: linear-gradient(
+    145deg,
+    $primary-color,
+    darken($primary-color, 10%)
+  );
+  color: $secondary-color;
+  border-radius: 10px 10px 0 0;
+  .weatherIcon {
+    height: 30px;
+    width: auto;
+  }
+  .temperature {
+    font-size: 1.4em;
+    margin-right: 10px;
+  }
+  .weatherDesc {
+    font-size: 0.9em;
+  }
 }
 
 .calendar {
@@ -25,11 +51,11 @@
   align-items: center;
   font-family: "Roboto", sans-serif;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
 
-.calendar:hover {
-  transform: translateY(-6px);
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 0px 30px rgba($primary-color, 0.3);
+  }
 }
 
 .cloud {
@@ -51,6 +77,18 @@
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+
+  &.selected {
+    color: $secondary-color;
+    background-color: darken($primary-color, 10%);
+    transform: scale(1.1);
+  }
+
+  &:hover:not(.disabled):not(.selected) {
+    background-color: darken($primary-color, 10%);
+    color: $secondary-color;
+    box-shadow: none;
+  }
 }
 
 .calendar .day:first-child {
@@ -61,26 +99,16 @@
   color: #388e3c;
 }
 
-.calendar .day.selected {
-  color: #ffffff;
-  background-color: #2c3e50;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.calendar .day:hover:not(.disabled):not(.selected) {
-  background-color: #f2f2f2;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
-}
-
 .calendar .dayOfWeek {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 38px;
-  font-size: 16px;
+  font-size: 0.7rem;
   font-weight: bold;
   color: #999;
+  color: darken($primary-color, 20%);
   cursor: pointer;
   overflow: hidden;
   text-transform: uppercase;
@@ -103,30 +131,27 @@
   display: flex;
   justify-content: space-evenly;
   margin: 10px;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: bold;
   color: #333;
   text-transform: uppercase;
+  color: darken($primary-color, 15%);
 }
 
-.calendar .month {
-  font-size: 23px;
-  font-weight: bold;
-  color: #333;
+.calendar .month,
+.calendar .year {
+  font-size: 1.2em;
+  font-weight: 500;
+  color: darken($primary-color, 20%);
 }
 
 .calendar .daysOfMonth {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-gap: 8px;
+  grid-gap: 0.3vw;
   transition: transform 0.2s ease-in-out;
-}
-
-.calendar .year {
-  font-size: 23px;
-  font-weight: bold;
-  color: #333;
+  padding: 10px;
 }
 
 .calendar .monthYear {
@@ -140,16 +165,15 @@
 .calendar .arrow {
   cursor: pointer;
   margin: 0 10px;
-  font-size: 24px;
+  font-size: 1rem;
   color: #333;
   transition: color 0.2s ease-in-out,
     transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.calendar .arrow:hover {
-  color: #2c3e50;
-}
-
-.calendar .arrow:active {
-  transform: translateY(4px);
+  &:hover {
+    color: darken($primary-color, 30%);
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(0.9);
+  }
 }
