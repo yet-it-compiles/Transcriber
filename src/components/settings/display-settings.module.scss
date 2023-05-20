@@ -1,6 +1,11 @@
 @import "../../styles/mixins";
 
 .settingsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   height: 85.5vh;
   width: 65vw;
   color: whitesmoke;
@@ -8,4 +13,67 @@
   background-color: rgba(22, 23, 24, 0.852);
   border: 1px solid rgba(255, 255, 255, 0.125);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  animation: slideInFromLeft 0.5s ease-out;
+
+  h2 {
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #007bff;
+    }
+  }
+
+  .setOption {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+      font-size: 16px;
+      color: #666;
+    }
+
+    input,
+    select {
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      transition: border 0.3s ease;
+
+      &:focus {
+        border-color: #007bff;
+      }
+    }
+  }
+
+  .saveBtn {
+    background-color: #007bff;
+    color: whitesmoke;
+
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

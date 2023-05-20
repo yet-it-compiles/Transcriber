@@ -20,6 +20,7 @@ import { animated, useSpring, useTransition, config } from "react-spring";
 
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
+import Settings from "./pages/settings/Settings";
 import Register from "./pages/register/Register";
 import SupportFAQ from "./pages/support-FAQ/SupportFAQ";
 import EditTranscript from "./pages/editor/EditTranscript";
@@ -27,8 +28,6 @@ import StartRecording from "./pages/start-recording/StartRecording";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
 import ProtectedRoute from "./components/protected-routes/ProtectedRoute";
-//import AudioPlayerWidget from "./components/media-player/MiniMediaPlayer";
-import Settings from "./pages/settings/Settings";
 
 const AnimatedRoutes = ({ children }) => {
   const location = useLocation();
