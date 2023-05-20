@@ -37,7 +37,7 @@ const AnimatedRoutes = ({ children }) => {
     from: { opacity: 0, transform: "translate3d(0,100%,0)" },
     enter: { opacity: 1, transform: "translate3d(0,0%,0)" },
     leave: { opacity: 0, transform: "translate3d(0,-50%,0)" },
-    config: { mass: 0.5, tension: 210, friction: 20 },
+    config: { mass: 1.5, tension: 40, friction: 50 },
   });
 
   return transitions((props, item) => (
