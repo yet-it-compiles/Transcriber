@@ -2,9 +2,41 @@
 @import "../../styles/_mixins";
 @import "../../styles/_variables";
 
+$primary-color: #2c539e;
+$secondary-color: #63967d;
+
 /* !TESTING VALUE */
+
 body {
-  background-color: #cbdbba;
+  background: #2c539e;
+  background: -moz-linear-gradient(-45deg, #2c539e 0%, #63967d 100%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    color-stop(0%, #2c539e),
+    color-stop(100%, #63967d)
+  );
+  background: -webkit-linear-gradient(-45deg, #2c539e 0%, #63967d 100%);
+  background: -o-linear-gradient(-45deg, #2c539e 0%, #63967d 100%);
+  background: -ms-linear-gradient(-45deg, #2c539e 0%, #63967d 100%);
+  background: linear-gradient(135deg, #2c539e 0%, #63967d 100%);
+  animation: gradientAnimation 60s infinite linear;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background: #2c539e;
+  }
+  20% {
+    background: #51876d;
+  }
+  40% {
+    background: #2c539e;
+  }
+  100% {
+    background: #639687;
+  }
 }
 
 .dashboard {
@@ -42,7 +74,7 @@ body {
     transition: 500ms;
     transform: translateY(0);
     animation: AnimationName 30s ease infinite;
-    background-size: 400% 400%;
+
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background: linear-gradient(122deg, #3190aa, #305da0, #2a5792);
 
