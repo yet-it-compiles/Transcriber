@@ -22,6 +22,7 @@ import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
 import ProtectedRoute from "./components/protected-routes/ProtectedRoute";
 import AudioPlayerWidget from "./components/media-player/MiniMediaPlayer";
+import Settings from "./pages/settings/Settings";
 
 /**
  * Entry level component that renders the application
@@ -61,6 +62,7 @@ const App = () => {
           <Route path="/editor" element={<EditTranscript />} />
           <Route path="/display-analytics" element={<DisplayAnalytics />} />
           <Route path="/support-FAQ" element={<SupportFAQ />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>

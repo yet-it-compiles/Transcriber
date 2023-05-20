@@ -21,7 +21,7 @@ import { RxDividerVertical } from "react-icons/rx";
 import { GiArchiveResearch } from "react-icons/gi";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import { FiLogOut } from "react-icons/fi"
+import { FiLogOut } from "react-icons/fi";
 import { FcHome, FcStatistics, FcReadingEbook } from "react-icons/fc";
 import { FcVoicePresentation, FcElectricalSensor } from "react-icons/fc";
 
@@ -62,6 +62,12 @@ const APPLICATION_PAGES = [
     name: "Support / FAQ",
     path: "/support-FAQ",
   },
+  {
+    id: 6,
+    icon: "",
+    name: "Settings",
+    path: "/settings",
+  },
 ];
 
 /**
@@ -76,7 +82,7 @@ const LeftNavBar = () => {
       <Branding />
       <TranscriptSearch />
       <NavigationList />
-      <LogOut/>
+      <LogOut />
       <AudioControls />
     </div>
   );
@@ -187,7 +193,7 @@ const AudioControls = () => {
   );
 };
 
-const LogOut = () =>{
+const LogOut = () => {
   const { signout } = useAuth();
   const navigate = useNavigate();
 
@@ -204,10 +210,12 @@ const LogOut = () =>{
         console.log(error.message);
       });
   };
-  
+
   return (
-    <button className={styles.logoutButton} onClick={handleLogout}><FiLogOut size={25}/></button>
-  )
-}
+    <button className={styles.logoutButton} onClick={handleLogout}>
+      <FiLogOut size={25} />
+    </button>
+  );
+};
 
 export default LeftNavBar;

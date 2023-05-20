@@ -1,11 +1,11 @@
 /**
- * @file SettingsPage.jsx
+ * @file Settings.jsx
  *
- * @description This file is responsible for constructing the settings page
- * from its related components.
+ * @description This component is responsible for constructing the setting page
+ * and rendering it
  *
  * @requires react
- * @requires settings.module.scss
+ * @requires Settings.module.css
  *
  * @exports Settings
  */
@@ -13,6 +13,7 @@
 import React from "react";
 import styles from "./settings.module.scss";
 import LeftNavBar from "../../components/navigation/left/LeftNavBar";
+import DisplaySettings from "../../components/settings/DisplaySettings";
 import RightNavBar from "../../components/navigation/right/RightNavBar";
 
 /**
@@ -22,11 +23,11 @@ import RightNavBar from "../../components/navigation/right/RightNavBar";
  */
 const Settings = () => {
   return (
-    <>
+    <div className={styles.settings}>
       <LeftNavBar />
-      <h1>Settings Page</h1>
+      <DisplaySettings />
       <RightNavBar />
-    </>
+    </div>
   );
 };
 
