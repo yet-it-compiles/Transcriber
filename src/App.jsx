@@ -21,7 +21,7 @@ import StartRecording from "./pages/start-recording/StartRecording";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
 import ProtectedRoute from "./components/protected-routes/ProtectedRoute";
-import AudioPlayerWidget from "./components/media-player/MiniMediaPlayer";
+//import AudioPlayerWidget from "./components/media-player/MiniMediaPlayer";
 import Settings from "./pages/settings/Settings";
 
 /**
