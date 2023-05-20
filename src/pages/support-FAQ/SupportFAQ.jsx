@@ -12,6 +12,7 @@
 
 import React from "react";
 import styles from "./support.module.scss";
+import DisplaySupport from "../../components/support/DisplaySupport";
 import LeftNavBar from "../../components/navigation/left/LeftNavBar";
 import RightNavBar from "../../components/navigation/right/RightNavBar";
 
@@ -24,7 +25,7 @@ const SupportFAQ = () => {
   return (
     <div className={styles.supportContainer}>
       <LeftNavBar />
-      <h1>Support and FAQ</h1>
+      <DisplaySupport />
       <RightNavBar />
     </div>
   );

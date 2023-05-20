@@ -1,14 +1,7 @@
 @import "../../styles/mixins";
 
 .supportContainer {
-  @include flexRowCenter;
-  height: 100vh;
-  backdrop-filter: blur(4px);
-
-  h1 {
-    position: relative;
-    left: 20px;
-    min-height: 85.5%;
-    min-width: 65vw;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
