@@ -11,6 +11,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+import styles from "./transcriber.module.scss";
 import axios from "axios";
 
 /**
@@ -36,6 +37,20 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
     );
     setActiveWordIndex(index !== -1 ? index : activeWordIndex);
   }, [timestamps, currentTime]);
+
+  const downloadTranscript = (transcript) => {
+    const blob = new Blob([transcript.join("\n")], {
+      type: "text/plain;charset=utf-8;",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "transcript.txt";
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   useEffect(() => {
     const client = axios.create({
@@ -107,12 +122,12 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
             switch (status) {
               case "completed":
                 setStatus("✅ Transcription Completed!");
-                setTranscript(
-                  utterances.map(
-                    (eachSpeaker) =>
-                      `Speaker ${eachSpeaker.speaker}: ${eachSpeaker.text}`
-                  )
+                const formattedTranscript = utterances.map(
+                  (eachSpeaker) =>
+                    `Speaker ${eachSpeaker.speaker}: ${eachSpeaker.text}`
                 );
+                setTranscript(formattedTranscript);
+                downloadTranscript(formattedTranscript);
 
                 const words = utterances.flatMap((utterance) =>
                   utterance.words.map((word) => ({
