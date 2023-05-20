@@ -24,6 +24,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { FiLogOut } from "react-icons/fi";
 import { FcHome, FcStatistics, FcReadingEbook } from "react-icons/fc";
 import { FcVoicePresentation, FcElectricalSensor } from "react-icons/fc";
+import { FiSettings } from "react-icons/fi";
 
 /**
  * Declares the avaliable pages to navigate to within the application.
@@ -64,7 +65,7 @@ const APPLICATION_PAGES = [
   },
   {
     id: 6,
-    icon: "",
+    icon: <FiSettings/>,
     name: "Settings",
     path: "/settings",
   },

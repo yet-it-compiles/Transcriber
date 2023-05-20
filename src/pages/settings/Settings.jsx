@@ -16,7 +16,7 @@ import LeftNavBar from "../../components/navigation/left/LeftNavBar";
 import DisplaySettings from "../../components/settings/DisplaySettings";
 import RightNavBar from "../../components/navigation/right/RightNavBar";
 
-/**
+/*
  * Renders the Settings page and centers it on the screen
  *
  * @returns {JSX.Element} The component that represents the Settings page
