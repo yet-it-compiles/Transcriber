@@ -10,7 +10,13 @@
 
 import React from "react";
 import AuthContextProvider from "./context/AuthContext";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import { useTransition, animated, config } from "react-spring";
 
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -23,6 +29,43 @@ import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
 import ProtectedRoute from "./components/protected-routes/ProtectedRoute";
 import AudioPlayerWidget from "./components/media-player/MiniMediaPlayer";
 import Settings from "./pages/settings/Settings";
+
+const AnimatedRoutes = ({ children }) => {
+  const location = useLocation();
+
+  const transitions = useTransition(location, {
+    from: { opacity: 0, transform: "translate3d(0,100%,0)" },
+    enter: { opacity: 1, transform: "translate3d(0,0%,0)" },
+    leave: { opacity: 0, transform: "translate3d(0,-50%,0)" },
+    config: { mass: 0.5, tension: 210, friction: 20 },
+  });
+
+  return transitions((props, item) => (
+    <animated.div style={props}>
+      <Routes location={item}>{children}</Routes>
+    </animated.div>
+  ));
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AuthContextProvider>
+        <AnimatedRoutes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/register-account" element={<Register />} />
+          <Route path="/start-recording" element={<StartRecording />} />
+          <Route path="/editor" element={<EditTranscript />} />
+          <Route path="/display-analytics" element={<DisplayAnalytics />} />
+          <Route path="/support-FAQ" element={<SupportFAQ />} />
+          <Route path="/settings" element={<Settings />} />
+        </AnimatedRoutes>
+      </AuthContextProvider>
+    </Router>
+  );
+};
 
 /**
  * Entry level component that renders the application
@@ -48,25 +91,5 @@ import Settings from "./pages/settings/Settings";
     </BrowserRouter>
   );
 };*/
-
-const App = () => {
-  return (
-    <BrowserRouter>
-      <AuthContextProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/register-account" element={<Register />} />
-          <Route path="/start-recording" element={<StartRecording />} />
-          <Route path="/editor" element={<EditTranscript />} />
-          <Route path="/display-analytics" element={<DisplayAnalytics />} />
-          <Route path="/support-FAQ" element={<SupportFAQ />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </AuthContextProvider>
-    </BrowserRouter>
-  );
-};
 
 export default App;
