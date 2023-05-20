@@ -1,5 +1,13 @@
 @import "../../../styles/mixins";
 
+$widget-font-family: "Inter", sans-serif;
+$widget-background-even: #355b91;
+$widget-background-odd: #246083;
+$font-color-highlight: #0ecc37;
+$widget-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+$widget-background-hover: lighten($widget-background-even, 10%);
+$widget-transition-duration: 0.3s;
+
 .container {
   @include flexRowCenter;
   gap: 1.6vw;
@@ -8,31 +16,46 @@
 .widget {
   min-width: 16.5%;
   min-height: 9vh;
-  margin-top: 3.7vh;
-  margin-bottom: 2.31vh;
+  margin: 3.7vh 0 2.31vh;
+
   border-radius: 12px;
-  font: normal 600 1rem "Inter";
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  transition: all 0.2s ease-in-out;
+  font: normal 600 1rem $widget-font-family;
+
+  background-size: 200% 200%;
+  background-image: linear-gradient(
+    45deg,
+    $widget-background-even 50%,
+    $widget-background-odd 50%
+  );
+  box-shadow: $widget-shadow;
+  transition: all $widget-transition-duration ease-in-out;
 
   &:nth-child(even) {
-    background-color: #355b91;
+    background-color: $widget-background-even;
   }
 
   &:nth-child(odd) {
-    background-color: #246083;
+    background-color: $widget-background-odd;
   }
 
   &:hover {
     cursor: pointer;
     transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-position: 100% 100%;
   }
 
   p {
     position: relative;
-    line-height: 0vh;
+    line-height: 0.5;
     padding-top: 0.8vh;
     left: 0.67vw;
+    font-size: 1rem;
+    transition: color $widget-transition-duration ease-in-out;
+
+    &:hover {
+      color: silver;
+    }
   }
 }
 

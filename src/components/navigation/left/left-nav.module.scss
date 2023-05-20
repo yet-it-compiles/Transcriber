@@ -1,6 +1,6 @@
 @import "../../../styles/_mixins";
 
-$backgroundColor: linear-gradient(
+$background: linear-gradient(
   184.59deg,
   #272626 13.46%,
   rgba(2, 2, 2, 0.865) 86.54%
@@ -10,14 +10,26 @@ $SCRIBE: #c1d7f5;
 $searchBGColor: #2f2f2f;
 $searchPicColor: #474b4f;
 $findTranscriptBtn: #595d63;
-$defaultText: whitesmoke;
+$defaultTxt: whiteSmoke;
 $activeBG: #007aff;
-$linkColor: #989a9d;
-$borders: rgba(9, 36, 75, 0.2);
+$linkCol: #989a9d;
+$border: rgba(9, 36, 75, 0.2);
+$hoverBG: #77b9ffc6;
+
+@mixin headerText {
+  font-size: 1.6rem;
+  text-shadow: 0 2% 2% rgba(0, 0, 0, 0.25);
+}
+
+@mixin regularText {
+  font-size: 1rem;
+  font-weight: 600;
+}
 
 @mixin activePage {
-  color: $defaultText;
+  color: $defaultTxt;
   background-color: $activeBG;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 .leftNavBar {
@@ -26,10 +38,32 @@ $borders: rgba(9, 36, 75, 0.2);
   min-height: 85.5vh;
   min-width: 11vw;
   padding: 0rem;
-  border: 1px solid rgba(209, 213, 219, 0.18);
+  border: 1px solid $border;
   border-radius: 25px 0px 0px 25px;
-  background: $backgroundColor;
+  background: $background;
   box-shadow: 0px 4px 4px rgba(0.25, 0.25, 0.25, 0.25);
+
+  &__branding {
+    @include flexRowCenter;
+    @include headerText;
+    border-radius: 25px 0px 0px 0px;
+
+    img {
+      @include setContainer(5vh, 5vw);
+    }
+
+    p,
+    img:first-of-type {
+      position: relative;
+      top: 0.55em;
+      color: $SLP;
+    }
+
+    p {
+      top: 0.4em;
+      color: $SCRIBE;
+    }
+  }
 }
 
 .branding {
@@ -61,7 +95,7 @@ $borders: rgba(9, 36, 75, 0.2);
   }
 
   svg {
-    @include setContainer(2vh, 1.65vw);
+    @include setContainer(3vh, 1.65vw);
   }
 
   .collapsed,
@@ -74,7 +108,7 @@ $borders: rgba(9, 36, 75, 0.2);
     right: 0vw;
     cursor: pointer;
     border-radius: 25px 0px 0px 25px;
-    color: whitesmoke;
+    color: $defaultTxt;
     background: linear-gradient(
       180deg,
       #127329 0%,
@@ -120,7 +154,7 @@ $borders: rgba(9, 36, 75, 0.2);
     border-style: none;
     border-radius: 5px;
     @include fontStyle;
-    color: $defaultText;
+    color: $defaultTxt;
     background-color: $searchBGColor;
 
     &:focus {
@@ -151,11 +185,11 @@ $borders: rgba(9, 36, 75, 0.2);
   font-size: 1rem;
   font-weight: 600;
   border-radius: 5px;
-  color: $linkColor;
+  color: $linkCol;
   cursor: pointer;
 
   svg {
-    margin-left: 0.4vw;
+    margin-left: 0.5vw;
     margin-right: 10px;
   }
 
@@ -174,7 +208,7 @@ $borders: rgba(9, 36, 75, 0.2);
 
     &:hover {
       transform: scale(1);
-      color: whitesmoke;
+      color: $defaultTxt;
       background-color: #77b9ffc6;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     }
@@ -195,14 +229,14 @@ $borders: rgba(9, 36, 75, 0.2);
   display: flex;
   justify-content: space-evenly;
   align-items: flex-end;
-  color: whitesmoke;
+  color: $defaultTxt;
   cursor: pointer;
   background-color: #302f2f74;
   border-radius: 0px 0px 0px 25px;
   @include setContainer(106px, 276px);
 
   svg {
-    @include setContainer(30px, 30px);
+    @include setContainer(40px, 40px);
     margin-bottom: 10px;
   }
 }
@@ -211,7 +245,7 @@ $borders: rgba(9, 36, 75, 0.2);
   width: 100px;
   height: 50px;
   background-color: transparent;
-  color: white;
+  color: $defaultTxt;
   text-align: center;
   justify-content: center;
 }
