@@ -1,7 +1,6 @@
 @import "../../styles/mixins";
 
 .supportContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flexRowCenter;
+  height: 100vh;
 }
