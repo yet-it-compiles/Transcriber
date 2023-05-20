@@ -14,17 +14,17 @@ import styles from "./left-nav.module.scss";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 
+import { FiLogOut } from "react-icons/fi";
 import { CgScreen } from "react-icons/cg";
+import { FiSettings } from "react-icons/fi";
 import { BsToggle2On } from "react-icons/bs";
 import { CiMicrophoneOn } from "react-icons/ci";
 import { RxDividerVertical } from "react-icons/rx";
 import { GiArchiveResearch } from "react-icons/gi";
-import { FaLongArrowAltRight } from "react-icons/fa";
+import { FcVoicePresentation } from "react-icons/fc";
+import { FaLongArrowAltRight, FaMicrophoneAlt } from "react-icons/fa";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import { FiLogOut } from "react-icons/fi";
 import { FcHome, FcStatistics, FcReadingEbook } from "react-icons/fc";
-import { FcVoicePresentation, FcElectricalSensor } from "react-icons/fc";
-import { FiSettings } from "react-icons/fi";
 
 /**
  * Declares the avaliable pages to navigate to within the application.
@@ -41,7 +41,7 @@ const APPLICATION_PAGES = [
   },
   {
     id: 2,
-    icon: <FcElectricalSensor />,
+    icon: <FaMicrophoneAlt />,
     name: "Start Recording",
     path: "/start-recording",
   },
@@ -65,7 +65,7 @@ const APPLICATION_PAGES = [
   },
   {
     id: 6,
-    icon: <FiSettings/>,
+    icon: <FiSettings />,
     name: "Settings",
     path: "/settings",
   },
@@ -107,14 +107,6 @@ const LeftNavBar = () => {
  * @returns {JSX.Element} representing the right project branding section
  */
 const Branding = ({ onCollapse, isCollapsed }) => {
-  /**
-   * Callback function that when called, negates the current state by its
-   * previous state
-   */
-  const handleCollapse = () => {
-    setIsCollapsed((prev) => !prev);
-  };
-
   return (
     <div className={styles.branding}>
       <img src="/project-logo.svg" alt="Project Logo" />

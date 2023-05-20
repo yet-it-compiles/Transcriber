@@ -44,12 +44,35 @@ const MakeRecording = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [saveRecording, setSaveRecording] = useState(false);
   const [viewTranscription, setViewTranscription] = useState(false);
-  const [fileData, setFileData] = useState(null);
-
+  const [fileData, setFileData] = useState(false);
+  const [file, setFile] = useState(false);
+  const [fileContent, setFileContent] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
 
-  const handleFileChange = (event) => {
-    setFileData(event.target.files[0]);
+  /**
+   * Callback function that handles the files.
+   *
+   * @param {document} file
+   */
+  const handleFileChange = (file) => {
+    setFileData(file.target.files[0]);
+
+    const fileReader = new FileReader();
+
+    fileReader.onloadend = (newFile) => {
+      const content = newFile.target.result;
+      setFileContent(content);
+    };
+    fileReader.onerror = (fileError) => {
+      console.error(
+        "There was an error trying to read from the file:",
+        fileError
+      );
+    };
+
+    if (file.target.files[0]) {
+      fileReader.readAsText(file.target.files[0]);
+    }
   };
 
   let apiToken = import.meta.env.VITE_AUTHORIZATION_1;
@@ -139,8 +162,8 @@ const MakeRecording = () => {
     downloadAudio();
     if (option === "view") {
       setViewTranscription(true);
-    } else if (option === "edit") {
-      setSaveRecording(true);
+    } else if (option === "upload") {
+      setFile(true);
     }
   };
 
@@ -164,16 +187,19 @@ const MakeRecording = () => {
         <div className={styles.optionsContainer}>
           <h2>What Would You Like To Do?</h2>
           <button onClick={() => handleRecordingOption("view")}>
-            View Transcript
+            View Transcription
           </button>
           <button onClick={() => handleRecordingOption("edit")}>
             Edit In Text Editor
+          </button>
+          <button onClick={() => handleRecordingOption("upload")}>
+            Upload Transcription
           </button>
         </div>
       )}
 
       {viewTranscription && (
-        <div>
+        <div className={styles.fileChange}>
           <input type="file" onChange={handleFileChange} />
           {fileData && (
             <Transcriber
@@ -182,6 +208,13 @@ const MakeRecording = () => {
               currentTime={currentTime}
             />
           )}
+        </div>
+      )}
+
+      {file && (
+        <div className={styles.fileChange}>
+          <input type="file" onChange={handleFileChange} />
+          <div>{fileContent}</div>
         </div>
       )}
 

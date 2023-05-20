@@ -52,10 +52,6 @@ $hoverBG: #77b9ffc6;
       @include setContainer(5vh, 5vw);
     }
 
-    &.collapsed {
-      min-width: 4vw;
-    }
-
     p,
     img:first-of-type {
       position: relative;
@@ -91,12 +87,6 @@ $hoverBG: #77b9ffc6;
 
     &:nth-of-type(2) {
       color: $SCRIBE;
-    }
-  }
-
-  &.collapsed {
-    img {
-      @include setContainer(2vh, 0.8vw);
     }
   }
 

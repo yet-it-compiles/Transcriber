@@ -8,7 +8,7 @@
  * @requires react
  */
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import AuthContextProvider from "./context/AuthContext";
 import {
   BrowserRouter as Router,
@@ -16,7 +16,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import { useTransition, animated, config } from "react-spring";
+import { animated, useSpring, useTransition, config } from "react-spring";
 
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -32,17 +32,35 @@ import Settings from "./pages/settings/Settings";
 
 const AnimatedRoutes = ({ children }) => {
   const location = useLocation();
-
   const transitions = useTransition(location, {
-    from: { opacity: 0, transform: "translate3d(0,100%,0)" },
-    enter: { opacity: 1, transform: "translate3d(0,0%,0)" },
-    leave: { opacity: 0, transform: "translate3d(0,-50%,0)" },
-    config: { mass: 1.5, tension: 40, friction: 50 },
+    from: { opacity: 0, transform: "translate3d(0, 50%, 0)" },
+    enter: { opacity: 1, transform: "translate3d(0, 0, 0)" },
+    leave: { opacity: 0, transform: "translate3d(0, 50%, 0)" },
+    config: { mass: 1, tension: 280, friction: 60 },
   });
 
-  return transitions((props, item) => (
-    <animated.div style={props}>
-      <Routes location={item}>{children}</Routes>
+  const scrollRef = useRef(null);
+  const spring = useSpring({ scrollTop: 0 });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo(spring.scrollTop);
+    }
+  }, [spring.scrollTop]);
+
+  return transitions((style, item) => (
+    <animated.div style={{ ...style, position: "absolute", width: "100%" }}>
+      <animated.div
+        style={{ overflowY: "auto", height: "100%" }}
+        scrollTop={spring.scrollTop}
+        ref={scrollRef}
+      >
+        <Routes location={item}>{children}</Routes>
+      </animated.div>
     </animated.div>
   ));
 };
