@@ -77,13 +77,25 @@ const APPLICATION_PAGES = [
  * @returns {JSX.Element} representing the left navigation panel
  */
 const LeftNavBar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const handleCollapse = () => {
+    setIsCollapsed((prev) => !prev);
+  };
+
   return (
-    <div className={styles.leftNavBar}>
-      <Branding />
-      <TranscriptSearch />
-      <NavigationList />
-      <LogOut />
-      <AudioControls />
+    <div
+      className={
+        isCollapsed
+          ? `${styles.leftNavBar} ${styles.collapsed}`
+          : `${styles.leftNavBar}`
+      }
+    >
+      <Branding onCollapse={handleCollapse} isCollapsed={isCollapsed} />
+      {!isCollapsed && <TranscriptSearch />}
+      {!isCollapsed && <NavigationList />}
+      {!isCollapsed && <AudioControls />}
+      {!isCollapsed && <LogOut />}
     </div>
   );
 };
@@ -93,9 +105,7 @@ const LeftNavBar = () => {
  *
  * @returns {JSX.Element} representing the right project branding section
  */
-const Branding = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
+const Branding = ({ onCollapse, isCollapsed }) => {
   /**
    * Callback function that when called, negates the current state by its
    * previous state
@@ -112,7 +122,7 @@ const Branding = () => {
 
       <button
         className={isCollapsed ? `${styles.isFlipped}` : `${styles.collapsed}`}
-        onClick={handleCollapse}
+        onClick={onCollapse}
       >
         {<HiOutlineArrowNarrowRight />}
       </button>
