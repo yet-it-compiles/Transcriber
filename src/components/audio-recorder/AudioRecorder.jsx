@@ -43,50 +43,9 @@ const MakeRecording = () => {
     saveRecording: false,
   });
 
-  const [documentState, setDocumentState] = useState({
-    file: false,
-    data: false,
-    content: false,
-  });
-
   const [error, setError] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
   const [viewTranscription, setViewTranscription] = useState(false);
-
-  /**
-   * Callback function that handles changing the file
-   *
-   * @param {document} newFile
-   */
-  const handleFileChange = (newFile) => {
-    setDocumentState((prevState) => ({
-      ...prevState,
-      data: newFile.target.files[0],
-    }));
-
-    const fileReader = new FileReader();
-
-    fileReader.onloadend = (newFile) => {
-      const updatedContent = newFile.target.result;
-
-      setDocumentState((prevState) => ({
-        ...prevState,
-        content: updatedContent,
-      }));
-    };
-    fileReader.onerror = (fileError) => {
-      console.error(
-        "There was an error trying to read from the file:",
-        fileError
-      );
-    };
-
-    if (newFile.target.files[0]) {
-      fileReader.readAsText(newFile.target.files[0]);
-    }
-  };
-
-  let apiToken = import.meta.env.VITE_AUTHORIZATION_1;
 
   /**
    * Handles updating the error state and presents the message to the user
@@ -188,11 +147,6 @@ const MakeRecording = () => {
     downloadAudio();
     if (option === "view") {
       setViewTranscription(true);
-    } else if (option === "upload") {
-      setDocumentState((prevState) => ({
-        ...prevState,
-        file: true,
-      }));
     }
   };
 
@@ -208,44 +162,10 @@ const MakeRecording = () => {
         <audio
           ref={audioRef}
           src={recordingState.audioBlobURL}
-          onError={(event) => console.error("Error playing audio:", event)}
+          onError={(playbackError) =>
+            console.error("Error playing audio:", playbackError)
+          }
         />
-      )}
-
-      {showOptions && (
-        <div className={styles.optionsContainer}>
-          <h2>What Would You Like To Do?</h2>
-          <button onClick={() => handleRecordingOption("view")}>
-            View Transcription
-          </button>
-          <button onClick={() => handleRecordingOption("edit")}>
-            Edit In Text Editor
-          </button>
-          <button onClick={() => handleRecordingOption("upload")}>
-            Upload Transcription
-          </button>
-        </div>
-      )}
-
-      {viewTranscription && (
-        <div className={styles.fileChange}>
-          <input type="file" onChange={handleFileChange} />
-
-          {documentState.data && (
-            <Transcriber
-              apiToken={apiToken}
-              fileData={documentState.data}
-              currentTime={recordingState.currentTime}
-            />
-          )}
-        </div>
-      )}
-
-      {documentState.file && (
-        <div className={styles.fileChange}>
-          <input type="file" onChange={handleFileChange} />
-          <div>{documentState.content}</div>
-        </div>
       )}
 
       <MediaPlayer
