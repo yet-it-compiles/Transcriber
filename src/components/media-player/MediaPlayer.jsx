@@ -13,8 +13,8 @@
 
 import React, { useState, useCallback, useEffect } from "react";
 import styles from "./player.module.scss";
+import { FcVideoFile } from "react-icons/fc";
 import { AiOutlineFastForward } from "react-icons/ai";
-import { FcVideoFile, FcDownload } from "react-icons/fc";
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import {
   BsVolumeDownFill,
@@ -26,7 +26,12 @@ import {
  * This component is responsible for rendering the audio player UI that provides
  * the interface for the user to interact with the audio player.
  *
- * @param {*} param0
+ * @param {audioBlobURL} param1
+ * @param {audioRef} param2
+ * @param {recordingDuration} param3
+ * @param {currentTime} param4
+ * @param {setCurrentTime} param5
+ *
  * @returns
  */
 const MediaPlayerUI = ({
@@ -43,19 +48,24 @@ const MediaPlayerUI = ({
   useEffect(() => {
     const audio = audioRef.current || new Audio(audioBlobURL);
 
+    /**
+     * Callback that handles updating the progress counter
+     */
     const handleTimeUpdate = () => {
       setCurrentTime(audio.currentTime);
     };
 
     const handleAudioEnded = () => {
-      setIsPlaying((prev) => !prev);
+      setIsPlaying(false);
       setCurrentTime(0);
     };
 
     audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("ended", handleAudioEnded);
 
     return () => {
       audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("ended", handleAudioEnded);
     };
   }, [audioBlobURL, volume]);
 
@@ -71,21 +81,11 @@ const MediaPlayerUI = ({
     if (audio.paused) {
       audio.play();
     } else {
+      setIsPlaying();
       audio.pause();
     }
     audioRef.current = audio;
   }, [audioBlobURL, volume]);
-
-  /**
-   * Callback function that allows the audio to be downloaded to the /downloads
-   * folder on the users device
-   */
-  const downloadRecording = () => {
-    const link = document.createElement("a");
-    link.href = audioBlobURL;
-    link.download = "NEW_recorded_audio.wav";
-    link.click();
-  };
 
   /**
    * Callback function that takes in the time, and formats it to resemble the
@@ -177,10 +177,6 @@ const MediaPlayerUI = ({
           />
         </div>
       </div>
-
-      <button type="submit" onClick={downloadRecording}>
-        <FcDownload />
-      </button>
     </div>
   );
 };
