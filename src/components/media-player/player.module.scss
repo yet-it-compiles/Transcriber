@@ -3,44 +3,31 @@
 $background: #272424;
 $textColor: whitesmoke;
 
-body {
-  margin: 0;
-}
-
 .mediaPlayer {
-  position: relative;
-  margin-top: 63vh;
-
   display: flex;
   align-items: center;
   min-height: 8vh;
   width: 65vw;
-
-  bottom: 0;
-  color: $textColor;
+  margin-top: 63vh;
   background-color: $background;
+  @include stripButton;
+  cursor: pointer;
 
-  button {
-    border: none;
-    background-color: transparent;
-  }
   svg {
-    height: 2.34vw;
-    width: 1.7vw;
+    @include setContainer(5vh, 1.7vw);
     color: $textColor;
-    cursor: pointer;
-  }
-}
 
-.mediaPlayer svg:hover {
-  color: #7ccf60;
+    &:hover {
+      color: #7ccf60;
+    }
+  }
 }
 
 .MetaData {
   display: flex;
+
   svg {
-    height: 5.24vh;
-    width: 3vw;
+    @include setContainer(5.24vh, 3vw);
   }
 }
 
@@ -53,7 +40,7 @@ body {
   display: flex;
   justify-content: center;
   flex-grow: 1;
-  margin-bottom: 0.55vh;
+  margin-bottom: 1.5vh;
 }
 
 .flip {
@@ -67,13 +54,12 @@ body {
 
 .progressBar {
   position: relative;
-  cursor: pointer;
   height: 0.65vh;
   width: 24.7vw;
   margin-bottom: 1.8vh;
   overflow: hidden;
   border-radius: 15px;
-  background-color: white;
+  background: white;
 }
 
 .current {
@@ -84,28 +70,24 @@ body {
 
 .total {
   position: relative;
-  left: 10vw;
   top: 3.5vh;
+  left: 10vw;
 }
 
 .progressAnimation {
   position: absolute;
-  top: 0;
-  left: 0;
   height: 100%;
-  border-radius: 15px;
+  animation: progress audio linear forwards;
+  background-color: #3b3c3a;
   background-image: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.3),
     rgba(255, 255, 255, 0.05)
   );
-  animation: progress audio linear forwards;
-  background-color: #3b3c3a;
-}
 
-.progressAnimation:hover {
-  cursor: pointer;
-  background-color: #17a323;
+  &:hover {
+    background-color: #17a323;
+  }
 }
 
 .volumeControl {
@@ -115,9 +97,8 @@ body {
 }
 
 .sliderContainer {
-  position: absolute;
-  bottom: 1.5vh;
-  left: 1.5vw;
+  position: relative;
+  right: 5vw;
 }
 
 @keyframes transitional {

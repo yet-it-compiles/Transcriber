@@ -36,12 +36,12 @@ const Header = () => {
         Import File
       </button>
 
-      <button type="button" name="notes">
+      <button name="notes">
         <GiNotebook />
         Quick Notes
       </button>
 
-      <button type="button" name="record">
+      <button name="record">
         <FaMicrophoneAlt />
         Quick Record
       </button>

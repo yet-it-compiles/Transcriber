@@ -41,7 +41,6 @@ const MediaPlayerUI = ({
   currentTime,
   setTime,
 }) => {
-  const [volume, setVolume] = useState(25);
   const [isPlaying, setIsPlaying] = useState(false);
   const [title, setTitle] = useState("Set Audio Name");
 
@@ -76,7 +75,7 @@ const MediaPlayerUI = ({
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("ended", handleAudioEnded);
     };
-  }, [audioBlobURL, volume]);
+  }, [audioBlobURL]);
 
   /**
    * Callback function that allows the audio to be played
@@ -94,7 +93,7 @@ const MediaPlayerUI = ({
       audio.pause();
     }
     audioRef.current = audio;
-  }, [audioBlobURL, volume]);
+  }, [audioBlobURL]);
 
   /**
    * Callback function that takes in the time, and formats it to resemble the
@@ -110,15 +109,6 @@ const MediaPlayerUI = ({
       .toString()
       .padStart(2, "0");
     return `${minutes}:${seconds}`;
-  };
-
-  /**
-   * Callback function that handles the ability to change the volume
-   *
-   * @param {event} event represents the value of the volume
-   */
-  const handleVolumeChange = (event) => {
-    setVolume(parseInt(event.target.value, 10));
   };
 
   return (
@@ -165,6 +155,25 @@ const MediaPlayerUI = ({
         <div className={styles.total}>{formatTime(recordingDuration)}</div>
       </div>
 
+      <VolumeControl />
+    </div>
+  );
+};
+
+const VolumeControl = () => {
+  const [volume, setVolume] = useState(25);
+
+  /**
+   * Callback function that handles the ability to change the volume
+   *
+   * @param {event} volume represents the value of the volume
+   */
+  const handleVolumeChange = (newVolume) => {
+    setVolume(parseInt(newVolume.target.value, 10));
+  };
+
+  return (
+    <>
       <div className={styles.volumeControl}>
         {volume <= 1 ? (
           <BsFillVolumeMuteFill onClick={() => setVolume(45)} />
@@ -175,18 +184,19 @@ const MediaPlayerUI = ({
         ) : (
           <BsFillVolumeMuteFill onClick={() => setVolume(25)} />
         )}
-
-        <div className={styles.sliderContainer}>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={volume}
-            onChange={handleVolumeChange}
-          />
-        </div>
       </div>
-    </div>
+
+      <div className={styles.sliderContainer}>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={volume}
+          onChange={handleVolumeChange}
+        />
+        {/* className={sliderContainer} */}
+      </div>
+    </>
   );
 };
 
