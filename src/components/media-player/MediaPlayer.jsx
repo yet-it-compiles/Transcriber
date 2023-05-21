@@ -30,16 +30,16 @@ import {
  * @param {audioRef} param2
  * @param {recordingDuration} param3
  * @param {currentTime} param4
- * @param {setCurrentTime} param5
+ * @param {setTime} param5
  *
- * @returns
+ * @returns The media player component that resembles an audio player
  */
 const MediaPlayerUI = ({
   audioBlobURL,
   audioRef,
   recordingDuration,
   currentTime,
-  setCurrentTime,
+  setTime,
 }) => {
   const [volume, setVolume] = useState(25);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -52,12 +52,21 @@ const MediaPlayerUI = ({
      * Callback that handles updating the progress counter
      */
     const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
+      setTime((prevState) => ({
+        ...prevState,
+        currentTime: audio.currentTime,
+      }));
     };
 
+    /**
+     * Callback that handles ensuring correct state of play/pause and reset time
+     */
     const handleAudioEnded = () => {
       setIsPlaying(false);
-      setCurrentTime(0);
+      setTime((prevState) => ({
+        ...prevState,
+        currentTime: 0,
+      }));
     };
 
     audio.addEventListener("timeupdate", handleTimeUpdate);
@@ -119,12 +128,12 @@ const MediaPlayerUI = ({
         <p>
           {title}
           <br />
-          05/09/2023
+          05/20/2023
         </p>
       </div>
 
       <div className={styles.audioControls}>
-        <button type="submit">
+        <button>
           <AiOutlineFastForward className={styles.flip} />
         </button>
 
@@ -138,7 +147,7 @@ const MediaPlayerUI = ({
           </button>
         )}
 
-        <button type="submit">
+        <button>
           <AiOutlineFastForward />
         </button>
 

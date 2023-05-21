@@ -17,7 +17,6 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./record.module.scss";
 import MediaPlayer from "../media-player/MediaPlayer";
 import Transcriber from "../transcriber/Transcriber";
-
 import { FaMicrophoneAlt } from "react-icons/fa";
 
 /**
@@ -35,33 +34,45 @@ const MakeRecording = () => {
   const audioRef = useRef();
   const mediaRecorderRef = useRef();
 
-  const [error, setError] = useState(null);
-  const [audioBlob, setAudioBlob] = useState(null);
-  const [isRecording, setIsRecording] = useState(false);
-  const [audioBlobURL, setAudioBlobURL] = useState(null);
-  const [recordingDuration, setRecordingDuration] = useState(0);
+  const [recordingState, setRecordingState] = useState({
+    isRecording: false,
+    audioBlob: null,
+    audioBlobURL: null,
+    currentTime: 0,
+    recordingDuration: 0,
+    saveRecording: false,
+  });
 
+  const [documentState, setDocumentState] = useState({
+    file: false,
+    data: false,
+    content: false,
+  });
+
+  const [error, setError] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
-  const [saveRecording, setSaveRecording] = useState(false);
   const [viewTranscription, setViewTranscription] = useState(false);
-  const [fileData, setFileData] = useState(false);
-  const [file, setFile] = useState(false);
-  const [fileContent, setFileContent] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
 
   /**
-   * Callback function that handles the files.
+   * Callback function that handles changing the file
    *
-   * @param {document} file
+   * @param {document} newFile
    */
-  const handleFileChange = (file) => {
-    setFileData(file.target.files[0]);
+  const handleFileChange = (newFile) => {
+    setDocumentState((prevState) => ({
+      ...prevState,
+      data: newFile.target.files[0],
+    }));
 
     const fileReader = new FileReader();
 
     fileReader.onloadend = (newFile) => {
-      const content = newFile.target.result;
-      setFileContent(content);
+      const updatedContent = newFile.target.result;
+
+      setDocumentState((prevState) => ({
+        ...prevState,
+        content: updatedContent,
+      }));
     };
     fileReader.onerror = (fileError) => {
       console.error(
@@ -70,8 +81,8 @@ const MakeRecording = () => {
       );
     };
 
-    if (file.target.files[0]) {
-      fileReader.readAsText(file.target.files[0]);
+    if (newFile.target.files[0]) {
+      fileReader.readAsText(newFile.target.files[0]);
     }
   };
 
@@ -79,10 +90,14 @@ const MakeRecording = () => {
 
   /**
    * Handles updating the error state and presents the message to the user
+   *
    * @param {error} error represents the error the user is experiencing
    */
   const handleError = (error) => {
-    setIsRecording(false);
+    setRecordingState((prevState) => ({
+      ...prevState,
+      isRecording: false,
+    }));
     setError(`Failed to start recording: ${error.message}`);
   };
 
@@ -110,13 +125,21 @@ const MakeRecording = () => {
 
       mediaRecorder.onstop = () => {
         const blob = new Blob(capturedRecordings);
-        setAudioBlobURL(URL.createObjectURL(blob));
-        setAudioBlob(blob);
-        setRecordingDuration(Math.floor((Date.now() - startTime) / 1000));
+
+        setRecordingState((prevState) => ({
+          ...prevState,
+          audioBlob: blob,
+          audioBlobURL: URL.createObjectURL(blob),
+          recordingDuration: Math.floor((Date.now() - startTime) / 1000),
+        }));
+
         setShowOptions(true);
       };
 
-      setIsRecording(true);
+      setRecordingState((prevState) => ({
+        ...prevState,
+        isRecording: true,
+      }));
       mediaRecorder?.start();
       mediaRecorderRef.current = mediaRecorder;
     } catch (error) {
@@ -126,17 +149,20 @@ const MakeRecording = () => {
 
   useEffect(() => {
     return () => {
-      if (isRecording && mediaRecorderRef.current) {
+      if (recordingState.isRecording && mediaRecorderRef.current) {
         mediaRecorderRef.current.stop();
       }
     };
-  }, [isRecording]);
+  }, [recordingState.isRecording]);
 
   /**
    * Callback that handles stopping the audio recording by toggling the state
    */
   const stopRecording = () => {
-    setIsRecording(false);
+    setRecordingState((prevState) => ({
+      ...prevState,
+      isRecording: false,
+    }));
     mediaRecorderRef.current?.stop();
   };
 
@@ -146,7 +172,7 @@ const MakeRecording = () => {
    */
   const downloadAudio = () => {
     const downloadLink = document.createElement("a");
-    downloadLink.href = audioBlobURL;
+    downloadLink.href = recordingState.audioBlobURL;
     downloadLink.download = "recorded_audio.wav";
     downloadLink.click();
   };
@@ -163,22 +189,25 @@ const MakeRecording = () => {
     if (option === "view") {
       setViewTranscription(true);
     } else if (option === "upload") {
-      setFile(true);
+      setDocumentState((prevState) => ({
+        ...prevState,
+        file: true,
+      }));
     }
   };
 
   return (
     <div className={styles.recordingContainer}>
-      {isRecording ? (
+      {recordingState.isRecording ? (
         <RecordingInProgress stopRecording={stopRecording} />
       ) : (
         <NotListening startRecording={startRecording} />
       )}
 
-      {audioBlobURL && (
+      {recordingState.audioBlobURL && (
         <audio
           ref={audioRef}
-          src={audioBlobURL}
+          src={recordingState.audioBlobURL}
           onError={(event) => console.error("Error playing audio:", event)}
         />
       )}
@@ -201,29 +230,30 @@ const MakeRecording = () => {
       {viewTranscription && (
         <div className={styles.fileChange}>
           <input type="file" onChange={handleFileChange} />
-          {fileData && (
+
+          {documentState.data && (
             <Transcriber
               apiToken={apiToken}
-              fileData={fileData}
-              currentTime={currentTime}
+              fileData={documentState.data}
+              currentTime={recordingState.currentTime}
             />
           )}
         </div>
       )}
 
-      {file && (
+      {documentState.file && (
         <div className={styles.fileChange}>
           <input type="file" onChange={handleFileChange} />
-          <div>{fileContent}</div>
+          <div>{documentState.content}</div>
         </div>
       )}
 
       <MediaPlayer
-        audioBlobURL={audioBlobURL}
+        audioBlobURL={recordingState.audioBlobURL}
         audioRef={audioRef}
-        recordingDuration={recordingDuration}
-        currentTime={currentTime}
-        setCurrentTime={setCurrentTime}
+        recordingDuration={recordingState.recordingDuration}
+        currentTime={recordingState.currentTime}
+        setTime={setRecordingState}
       />
     </div>
   );

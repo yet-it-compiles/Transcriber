@@ -101,7 +101,7 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
       const url = "/transcript";
       const modelSelection = {
         audio_url: audioUrl,
-        speakers_expected: 2,
+        /* speakers_expected: 2, */
         auto_chapters: true,
         speaker_labels: true,
         sentiment_analysis: true,
