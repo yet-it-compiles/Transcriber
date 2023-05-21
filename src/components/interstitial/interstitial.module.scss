@@ -1,0 +1,91 @@
+@import "../../styles/_mixins";
+
+.screenContainer {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  min-height: 85.5%;
+  min-width: 60vw;
+  display: flex;
+
+  color: whitesmoke;
+  backdrop-filter: blur(4px);
+  background-color: rgba(22, 23, 24, 0.852);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  p {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+
+  aside {
+    &:nth-child(3) {
+      position: relative;
+      left: 50%;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.eachOption {
+  @include setContainer(150px, 250px);
+
+  padding: 1rem;
+  cursor: pointer;
+
+  transition: 500ms;
+  transform: translateY(0);
+
+  border-radius: 15px;
+  background-color: rgba(99, 93, 93, 0.16);
+
+  span {
+    display: flex;
+
+    justify-content: center;
+  }
+
+  svg {
+    @include setContainer(90px, 90px);
+    animation: animatedColor 30s ease infinite;
+
+    &:hover {
+      transition: 500ms;
+      transform: translateY(-0.26vw);
+    }
+  }
+
+  &:hover {
+    transition: 500ms;
+    transform: translateY(-0.26vw);
+  }
+}
+
+@keyframes animatedColor {
+  0% {
+    color: #971fd4;
+  }
+  50% {
+    color: #711fba;
+  }
+  100% {
+    color: #5727db;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

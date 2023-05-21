@@ -18,6 +18,7 @@ import styles from "./record.module.scss";
 import LeftNavBar from "../../components/navigation/left/LeftNavBar";
 import AudioRecorder from "../../components/audio-recorder/AudioRecorder";
 import RightNavBar from "../../components/navigation/right/RightNavBar";
+import Interstitial from "../../components/interstitial/Interstitial";
 
 /**
  * Renders the Start Recording page and centers it on the screen
@@ -28,7 +29,8 @@ const StartRecording = () => {
   return (
     <div className={styles.recordContainer}>
       <LeftNavBar />
-      <AudioRecorder />
+      <Interstitial />
+      {/* <AudioRecorder /> */}
       <RightNavBar />
     </div>
   );
