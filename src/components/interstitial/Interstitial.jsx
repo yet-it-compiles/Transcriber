@@ -1,5 +1,5 @@
 /**
- * @file Screen.jsx
+ * @file Interstitial.jsx
  *
  * @description This component is responsible for creating the intermediate
  * screen that asks the user what they would like to do on the recording screen.
@@ -22,21 +22,21 @@ import Uploader from "../uploader/Uploader";
 /**
  * Responsible for rendering the transitional screen
  *
- * @returns {JSX.Element} Resembling an nterstitial screen
+ * @returns {JSX.Element} Resembling an interstitial screen
  */
 const Interstitial = () => {
   const [selectedOption, setSelectedOption] = useState("");
 
   return (
     <div className={styles.screenContainer}>
-      <h1>What Would You Like To Do? {selectedOption} </h1>
+      <h1>What Would You Like To Do?</h1>
 
       {selectedOption == "Record Audio" ? (
         <AudioRecorder />
       ) : selectedOption == "Upload to View" ? (
         <Uploader />
       ) : selectedOption == "Record w/ Live Transcription" ? (
-        <h1>Feature Coming Soon!</h1>
+        <h2>Feature Coming Soon!</h2>
       ) : (
         <InterstitialOptions userOption={setSelectedOption} />
       )}
@@ -64,7 +64,7 @@ const pageOptions = [
   {
     id: 1,
     icon: <BsSoundwave />,
-    name: "Record New Audio",
+    name: "Record Audio",
   },
   {
     id: 2,
@@ -82,7 +82,7 @@ const pageOptionsMinor = [
   {
     id: 1,
     icon: <BsSoundwave />,
-    name: "View Transcript",
+    name: "Listen to Transcript",
   },
   {
     id: 2,
@@ -91,6 +91,14 @@ const pageOptionsMinor = [
   },
 ];
 
+/**
+ * Responsible for rendering the avaliable features the user can access at on
+ * the navigated page. This acts as a interstitial for the application.
+ *
+ * @param {userOption} param1 the selected transcription feature the user requests
+ *
+ * @returns {JSX.Element} Resembling each transcription option
+ */
 const InterstitialOptions = ({ userOption }) => {
   return (
     <>

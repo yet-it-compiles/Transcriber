@@ -33,6 +33,7 @@
     "react-router-dom": "^6.11.2",
     "react-scroll": "^1.8.9",
     "react-spring": "^9.7.1",
+    "react-transition-group": "^4.4.5",
     "sass": "^1.62.1",
     "uglify-js": "^3.17.4",
     "underscore.string": "^3.3.6",

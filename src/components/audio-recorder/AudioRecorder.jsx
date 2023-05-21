@@ -16,7 +16,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./record.module.scss";
 import MediaPlayer from "../media-player/MediaPlayer";
-import Transcriber from "../transcriber/Transcriber";
 import { FaMicrophoneAlt } from "react-icons/fa";
 
 /**
