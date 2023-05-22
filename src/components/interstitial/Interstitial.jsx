@@ -29,7 +29,7 @@ const Interstitial = () => {
 
   return (
     <div className={styles.screenContainer}>
-      <h1>What Would You Like To Do?</h1>
+      {!selectedOption ? <h1>What Would You Like To Do?</h1> : <h1></h1>}
 
       {selectedOption == "Record Audio" ? (
         <AudioRecorder />

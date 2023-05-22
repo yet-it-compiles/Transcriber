@@ -4,112 +4,96 @@ $background: #272424;
 $textColor: whitesmoke;
 
 .mediaPlayer {
+  position: relative;
   display: flex;
-  align-items: center;
-  min-height: 8vh;
-  width: 65vw;
-  margin-top: 63vh;
+  justify-content: space-between;
+  height: 7vh;
+  min-width: 100%;
   background-color: $background;
-  @include stripButton;
-  cursor: pointer;
 
   svg {
-    @include setContainer(5vh, 1.7vw);
-    color: $textColor;
+    margin-bottom: 1.375rem;
+    color: whitesmoke;
+    @include setContainer(2rem, 2rem);
+  }
+}
+
+.metaData {
+  @include flexRowCenter;
+
+  svg {
+    @include setContainer(3.5rem, 3.5rem);
+  }
+}
+
+.initialTime {
+  position: relative;
+  top: 52%;
+  left: 2%;
+}
+
+.finalTime {
+  position: relative;
+  top: 52%;
+  right: 2%;
+}
+
+.audioControls {
+  @include flexRowCenter;
+
+  .isActive {
+    background-color: rgba(6, 6, 6, 0.492);
+  }
+
+  .progress {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .progressBar {
+    height: 0.65vh;
+    width: 24.7vw;
+    margin-bottom: 1.8vh;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color: whitesmoke;
+  }
+
+  .progressAnimation {
+    height: 100%;
+    border-radius: 15px;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.05)
+    );
+    animation: progress audio linear forwards;
+    background-color: #3b3c3a;
 
     &:hover {
-      color: #7ccf60;
+      cursor: pointer;
+      background-color: #21b830c1;
     }
   }
 }
 
-.MetaData {
-  display: flex;
-
-  svg {
-    @include setContainer(5.24vh, 3vw);
-  }
-}
-
-.transitional {
-  -webkit-animation: transitional 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: transitional 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-.audioControls {
-  display: flex;
-  justify-content: center;
-  flex-grow: 1;
-  margin-bottom: 1.5vh;
-}
-
-.flip {
-  transform: scaleX(-1);
-}
-
-.progress {
-  position: absolute;
-  bottom: 0;
-}
-
-.progressBar {
-  position: relative;
-  height: 0.65vh;
-  width: 24.7vw;
-  margin-bottom: 1.8vh;
-  overflow: hidden;
-  border-radius: 15px;
-  background: white;
-}
-
-.current {
-  position: relative;
-  right: 1.8vw;
-  top: 0.86vh;
-}
-
-.total {
-  position: relative;
-  top: 3.5vh;
-  left: 10vw;
-}
-
-.progressAnimation {
-  position: absolute;
-  height: 100%;
-  animation: progress audio linear forwards;
-  background-color: #3b3c3a;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0.05)
-  );
-
-  &:hover {
-    background-color: #17a323;
-  }
-}
-
 .volumeControl {
-  position: relative;
-  right: 8%;
-  cursor: pointer;
-}
+  @include flexRowCenter;
+  margin-right: 1.875rem;
 
-.sliderContainer {
-  position: relative;
-  right: 5vw;
+  i {
+    margin-top: 1.4375rem;
+  }
 }
 
 @keyframes transitional {
   0% {
-    -webkit-transform: rotate(-360deg);
     transform: rotate(-360deg);
     opacity: 0;
   }
 
   100% {
-    -webkit-transform: rotate(0);
     transform: rotate(0);
     opacity: 1;
   }

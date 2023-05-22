@@ -41,8 +41,8 @@ const MediaPlayerUI = ({
   currentTime,
   setTime,
 }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [title, setTitle] = useState("Set Audio Name");
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     const audio = audioRef.current || new Audio(audioBlobURL);
@@ -112,21 +112,24 @@ const MediaPlayerUI = ({
   };
 
   return (
-    <div className={styles.mediaPlayer}>
-      <div className={styles.MetaData}>
-        <FcVideoFile className={styles.icons} />
+    <aside className={styles.mediaPlayer}>
+      <section className={styles.metaData}>
+        <FcVideoFile />
         <p>
           {title}
           <br />
-          05/20/2023
+          <time datetime="2023-05-23">May 23, 2023</time>
         </p>
-      </div>
+      </section>
+
+      <span className={styles.initialTime}>{formatTime(currentTime)}</span>
 
       <div className={styles.audioControls}>
         <button>
-          <AiOutlineFastForward className={styles.flip} />
+          <AiOutlineFastForward />
         </button>
 
+        {/* Play | Pause Conditional Rendering Logic */}
         {isPlaying ? (
           <button onClick={playRecording}>
             <FaPauseCircle className={styles.transitional} />
@@ -136,13 +139,13 @@ const MediaPlayerUI = ({
             <FaPlayCircle />
           </button>
         )}
+        {/* TESTING VALUE FOR RED LINE */}
 
         <button>
           <AiOutlineFastForward />
         </button>
 
         <div className={styles.progress}>
-          <div className={styles.current}>{formatTime(currentTime)}</div>
           <div className={`${styles.progressBar} ${styles.progressMoved}`}>
             <div
               className={`${styles.progressAnimation} ${styles.isActive}`}
@@ -152,11 +155,12 @@ const MediaPlayerUI = ({
             />
           </div>
         </div>
-        <div className={styles.total}>{formatTime(recordingDuration)}</div>
       </div>
 
+      <span className={styles.finalTime}>{formatTime(recordingDuration)}</span>
+
       <VolumeControl />
-    </div>
+    </aside>
   );
 };
 
@@ -172,31 +176,34 @@ const VolumeControl = () => {
     setVolume(parseInt(newVolume.target.value, 10));
   };
 
-  return (
-    <>
-      <div className={styles.volumeControl}>
-        {volume <= 1 ? (
-          <BsFillVolumeMuteFill onClick={() => setVolume(45)} />
-        ) : volume < 50 ? (
-          <BsVolumeDownFill onClick={() => setVolume(100)} />
-        ) : volume >= 50 ? (
-          <BsFillVolumeUpFill onClick={() => setVolume(0)} />
-        ) : (
-          <BsFillVolumeMuteFill onClick={() => setVolume(25)} />
-        )}
-      </div>
+  /**
+   * Callback that handles which volume icon should be displayed based on the
+   * current level of the volume
+   *
+   * @returns the volume icon
+   */
+  const renderVolumeIcon = () => {
+    if (volume <= 1) {
+      return <BsFillVolumeMuteFill onClick={() => setVolume(45)} />;
+    } else if (volume < 50) {
+      return <BsVolumeDownFill onClick={() => setVolume(100)} />;
+    } else {
+      return <BsFillVolumeUpFill onClick={() => setVolume(0)} />;
+    }
+  };
 
-      <div className={styles.sliderContainer}>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={volume}
-          onChange={handleVolumeChange}
-        />
-        {/* className={sliderContainer} */}
-      </div>
-    </>
+  return (
+    <section className={styles.volumeControl}>
+      <i>{renderVolumeIcon()}</i>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value={volume}
+        onChange={handleVolumeChange}
+        aria-label="Volume control"
+      />
+    </section>
   );
 };
 
