@@ -12,7 +12,7 @@
  * @exports TextEditor
  */
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import styles from "./editor.module.scss";
 import { Editor } from "@tinymce/tinymce-react";
 import { FcCalendar, FcClock } from "react-icons/fc";
@@ -55,20 +55,23 @@ const TOOLBAR_OPTIONS =
  * @returns two formatted values for current date, and time
  */
 const setCurrentDate = () => {
-  const currentDate = new Date();
-  const formattedTime = currentDate.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  return useMemo(() => {
+    const currentDate = new Date();
 
-  const formattedDate = currentDate.toLocaleDateString([], {
-    month: "2-digit",
-    day: "2-digit",
-    year: "numeric",
-  });
-  return { formattedTime, formattedDate };
+    const formattedTime = currentDate.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const formattedDate = currentDate.toLocaleDateString([], {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
+    });
+
+    return { formattedDate, formattedTime };
+  }, []);
 };
-
 /**
  * The file handles the responsibility of designing a new
  *
@@ -83,34 +86,33 @@ const TextEditor = () => {
   /**
    * Callback function that handles the click-to-edit title
    */
-  const handleTitleClick = useCallback(() => {
-    setIsEditing(() => true);
-  }, []);
+  const handleTitleClick = useCallback(() => setIsEditing(true), []);
 
   /**
    * Callback function that handles setting the new document title
    *
    * @param {event} param0 - The value the user tries to assign as the title
    */
-  const handleNewTitle = useCallback((event) => {
-    setNewTitle(() => event.target.value);
-  }, []);
+  const handleNewTitle = useCallback(
+    (event) => setNewTitle(event.target.value),
+    []
+  );
 
   /**
    * Callback function that handles saving the title as the document name on
    * download
    */
   const handleTitleSave = useCallback(() => {
-    setTitle(() => newTitle);
-    setIsEditing(() => false);
+    setTitle(newTitle);
+    setIsEditing(false);
   }, [newTitle]);
 
   /**
    * Callback function that handles when the title editing is cancelled
    */
   const handleTitleCancel = useCallback(() => {
-    setIsEditing(() => false);
-    setNewTitle(() => title);
+    setIsEditing(false);
+    setNewTitle(title);
   }, [title]);
 
   /**

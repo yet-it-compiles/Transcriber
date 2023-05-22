@@ -14,14 +14,13 @@
 import React, { useState } from "react";
 import styles from "./dashboard.module.scss";
 import DisplayModal from "../modal/DisplayModal";
+import Widgets from "../widgets/metrics/MetricWidgets";
 
 import { BiEdit } from "react-icons/bi";
 import { HiDownload } from "react-icons/hi";
 import { GiNotebook } from "react-icons/gi";
 import { IoMdMicrophone } from "react-icons/io";
 import { BsTrash, BsPersonVcard } from "react-icons/bs";
-
-import Widgets from "../widgets/metrics/MetricWidgets";
 
 /**
  * Defines an object of various templates the modal can have dependent on which

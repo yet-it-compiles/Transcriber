@@ -5,16 +5,13 @@
  * other components.
  *
  * @requires react
- * 
  *
- * @exports AuthContextProvider
  * @exports useAuth
+ * @exports AuthContextProvider
  */
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import { auth } from "../utils/FirebaseContext";
-
-//Firebase pre-built methods.
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -60,27 +57,27 @@ export default function AuthContextProvider({ children }) {
     return signInWithPopup(auth, googleAuthProvider);
   }
 
-  function signout(){
+  function signout() {
     return signOut(auth);
   }
 
-  function changeEmail(newEmail){
+  function changeEmail(newEmail) {
     return updateEmail(newEmail);
   }
 
-  function changePassword(newPassword){
+  function changePassword(newPassword) {
     return updatePassword(newPassword);
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) =>{
-      console.log(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      /* console.log(currentUser); */
       setCurrentUser(currentUser);
-    })
-    return () =>{
+    });
+    return () => {
       unsubscribe();
     };
-  },[]);
+  }, []);
 
   const value = {
     currentUser,
@@ -90,7 +87,7 @@ export default function AuthContextProvider({ children }) {
     googleLogin,
     signout,
     changeEmail,
-    changePassword
+    changePassword,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

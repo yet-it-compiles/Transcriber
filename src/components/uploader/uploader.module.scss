@@ -1,0 +1,89 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  height: 55%;
+  padding: 1rem;
+  border-radius: 5px;
+  color: #333;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    color: #007bff;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileInputLabel {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  background: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.imagePreview {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 5px;
+}
+
+.fileContent {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.error {
+  color: #f00;
+  margin-top: 1rem;
+}
