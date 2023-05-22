@@ -83,6 +83,7 @@ const MakeRecording = () => {
 
       mediaRecorder.onstop = () => {
         const blob = new Blob(capturedRecordings);
+        downloadAudio();
 
         setRecordingState((prevState) => ({
           ...prevState,

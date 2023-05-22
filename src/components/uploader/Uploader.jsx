@@ -20,30 +20,46 @@ import styles from "./uploader.module.scss";
  * This is accomplished by assigning an event listener that will update the
  * state with the meta data about the file being uploaded.
  *
- * @returns {JSX.Element} Representing an upload button
+ * @returns {JSX.Element} The upload component
  */
 const Uploader = () => {
+  /**
+   * @typedef {Object} documentState
+   *
+   * @property {File|null} file - The file being uploaded
+   * @property {string|null} content - The content of the uploaded file
+   * @property {string|null} error - Error message that occured during handling
+   * @property {boolean} isLoading - The loading state of the file upload
+   * @property {boolean} isImage - Whether or not the file is an image
+   */
   const [documentState, setDocumentState] = useState({
     file: null,
     content: null,
     error: null,
+    isLoading: false,
+    isImage: false,
   });
 
   /**
-   * Responsible for reading the contents of a file and updates the state with
-   *  the content or an error message.
+   * @function useEffect
+   *
+   * @description useEffect responsible for reading the contents of a file and updates the state with
+   * the content or an error message.
    *
    * @param {Object} documentState - The state object containing the file,
    * content, and error properties.
    */
   useEffect(() => {
     if (documentState.file) {
+      setDocumentState((prevState) => ({ ...prevState, isLoading: true }));
+
       const reader = new FileReader();
 
-      reader.onloadend = (event) => {
+      reader.onloadend = () => {
         setDocumentState((prevState) => ({
           ...prevState,
-          content: event.target.result,
+          content: reader.result,
+          isLoading: false,
         }));
       };
 
@@ -51,21 +67,32 @@ const Uploader = () => {
         setDocumentState((prevState) => ({
           ...prevState,
           error: `There was an error trying to read from the file: ${reader.error}`,
+          isLoading: false,
         }));
       };
 
-      reader.readAsText(documentState.file);
+      const isImage = documentState.file.type.startsWith("image");
+      setDocumentState((prevState) => ({ ...prevState, isImage }));
+
+      /* ! Add conditional check for audio */
+      if (isImage) {
+        reader.readAsDataURL(documentState.file);
+      } else {
+        reader.readAsText(documentState.file);
+      }
     }
   }, [documentState.file]);
 
   /**
-   * Callback function that handles changes to the file input field and updates
+   * @function handleFileChange
+   *
+   * @description Callback function that handles changes to the file input field and updates
    * the state with the new file.
    *
    * @param {Event} fileChange - The change event triggered by the file input field.
    */
-  const handleFileChange = (fileChange) => {
-    const newFile = fileChange.target.files[0];
+  const handleFileChange = (event) => {
+    const newFile = event.target.files[0];
     setDocumentState((prevState) => ({
       ...prevState,
       file: newFile,
@@ -73,11 +100,46 @@ const Uploader = () => {
   };
 
   return (
-    <>
-      <input type="file" onChange={handleFileChange} />
-      <div>{documentState.content}</div>
-      {documentState.error && <div>Error: {documentState.error}</div>}
-    </>
+    <section
+      role="region"
+      aria-labelledby="fileUploadSection"
+      className={styles.container}
+    >
+      <h2 className={styles.title}>Upload your file</h2>
+
+      <div className={styles.inputContainer}>
+        <input
+          id="fileInput"
+          type="file"
+          onChange={handleFileChange}
+          aria-label="File upload input"
+          className={styles.fileInput}
+        />
+        <label htmlFor="fileInput" className={styles.fileInputLabel}>
+          Select a file
+        </label>
+      </div>
+      {documentState.isLoading ? (
+        <div className={styles.loadingContainer}>
+          <div className={styles.spinner}></div>
+          <p>Loading...</p>
+        </div>
+      ) : documentState.isImage && documentState.content ? (
+        <img
+          src={documentState.content}
+          alt="Preview"
+          className={styles.imagePreview}
+        />
+      ) : (
+        <pre className={styles.fileContent}>{documentState.content}</pre>
+      )}
+
+      {documentState.error && (
+        <div aria-label="Error message" className={styles.error}>
+          Error: {documentState.error}
+        </div>
+      )}
+    </section>
   );
 };
 

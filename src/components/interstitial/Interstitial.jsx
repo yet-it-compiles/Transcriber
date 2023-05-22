@@ -16,8 +16,8 @@ import { AiOutlineRead } from "react-icons/ai";
 import { MdOutlineLiveTv } from "react-icons/md";
 import styles from "./interstitial.module.scss";
 
-import AudioRecorder from "../audio-recorder/AudioRecorder";
 import Uploader from "../uploader/Uploader";
+import AudioRecorder from "../audio-recorder/AudioRecorder";
 
 /**
  * Responsible for rendering the transitional screen
@@ -105,20 +105,18 @@ const pageOptionsMinor = [
  */
 const InterstitialOptions = ({ setSelectedOption }) => {
   return (
-    <>
-      <aside>
-        {pageOptions.map((eachOption, eachIndex) => (
-          <aside
-            key={eachIndex}
-            className={styles.eachOption}
-            onClick={() => setSelectedOption(eachOption.name)}
-          >
-            <p>{eachOption.icon}</p>
-            <p>{eachOption.name}</p>
-          </aside>
-        ))}
-      </aside>
-    </>
+    <div className={styles.interOptionsContainer}>
+      {pageOptions.map((eachOption) => (
+        <aside
+          key={eachOption.id}
+          className={styles.eachOption}
+          onClick={() => setSelectedOption(eachOption.name)}
+        >
+          <p>{eachOption.icon}</p>
+          <p>{eachOption.name}</p>
+        </aside>
+      ))}
+    </div>
   );
 };
 
