@@ -75,3 +75,31 @@
     opacity: 1;
   }
 }
+
+.userSettingsFormsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+}
+
+.userForm {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+}
+
+.userForm input {
+    height: 35px;
+    border-radius: 5px;
+    width: 235px;
+}
+
+.userForm button {
+    width: fit-content;
+}
+
+.userForm h4 {
+    margin-bottom: 1.1rem;
+    margin-top: 5px;
+}

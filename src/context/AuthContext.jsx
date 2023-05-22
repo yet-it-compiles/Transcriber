@@ -22,6 +22,8 @@ import {
   onAuthStateChanged,
   updatePassword,
   updateEmail,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
 
 const AuthContext = createContext({
@@ -33,6 +35,7 @@ const AuthContext = createContext({
   signout: () => Promise,
   changeEmail: () => Promise,
   changePassword: () => Promise,
+  reauthenticateWithCredential: () => Promise,
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -61,12 +64,21 @@ export default function AuthContextProvider({ children }) {
     return signOut(auth);
   }
 
+  function reAuthenticate(password) {
+    let credential = EmailAuthProvider.credential(
+        currentUser.email,
+        password
+    )
+
+    return reauthenticateWithCredential(currentUser, credential);
+  }
+
   function changeEmail(newEmail) {
-    return updateEmail(newEmail);
+    return updateEmail(currentUser, newEmail);
   }
 
   function changePassword(newPassword) {
-    return updatePassword(newPassword);
+    return updatePassword(currentUser, newPassword);
   }
 
   useEffect(() => {
@@ -88,6 +100,7 @@ export default function AuthContextProvider({ children }) {
     signout,
     changeEmail,
     changePassword,
+    reAuthenticate,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

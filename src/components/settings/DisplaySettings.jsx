@@ -12,7 +12,7 @@
 
 import React, { useState } from "react";
 import styles from "./display-settings.module.scss";
-
+import { useAuth } from "../../context/AuthContext";
 /**
  * This component is responsible for rendering the settings page
  *
@@ -34,38 +34,125 @@ const Settings = () => {
  * @returns A component resenbling the user settings section
  */
 const UserSettings = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleEmailChange = (newEmail) => {
-    setEmail(newEmail.target.value);
-  };
-
-  const handlePasswordChange = (newPassword) => {
-    setPassword(newPassword.target.value);
-  };
-
-  // @TODO implement save changes
 
   return (
     <div className={styles.userSettingsContainer}>
-      <h2>User Settings</h2>
-      <div className={styles.setOption}>
-        <label>Email</label>
-        <input type="email" value={email} onChange={handleEmailChange} />
-      </div>
-      <div className={styles.setOption}>
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-      <button className="save-button">Save Changes</button>
+        <h2>User Settings</h2>
+        <div className={styles.userSettingsFormsContainer}>
+            <ChangeEmailForm/>
+            <ChangePasswordForm/>
+        </div>
     </div>
   );
 };
+
+const ChangePasswordForm = () => {
+
+    const {reAuthenticate, changePassword} = useAuth();
+
+    const [currPassword, setCurrPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        reAuthenticate(currPassword)
+        .then((response) => {
+            console.log(response)
+            if(newPassword === confirmPassword) {
+                changePassword(newPassword)
+                .then((res) => {
+                console.log(res);
+                alert('Password updated successfully')
+                })
+                .catch((error) => {
+                console.log(error.message);
+                });
+            }else {
+                alert('New password and confirm new password do not match')
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className={styles.userForm}>
+            <h3>Change Password</h3>
+            <input 
+                type="password"
+                value={currPassword}
+                onChange={(event) => setCurrPassword(event.target.value)}
+                placeholder="Current Password"
+            />
+            <input 
+                type="password"
+                value={newPassword}
+                onChange={(event) => setNewPassword(event.target.value)}
+                placeholder="New Password"
+            />
+            <input 
+                type="password"
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                placeholder="Confirm New Password"
+            />
+            <button type ="submit" className={styles.confirmFormButton}>Set New Password</button>
+        </form>
+    )
+}
+
+const ChangeEmailForm = () => {
+
+    const {reAuthenticate, changeEmail} = useAuth();
+
+    const [newEmail, setNewEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        reAuthenticate(password)
+            .then((response) => {
+                console.log(response)
+                changeEmail(newEmail)
+                .then((res) => {
+                    console.log(res);
+                    alert('email update successfully')
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            })
+            .catch((error) => {
+                console.log(error.message);
+                alert('error updating email')
+            });
+    }
+    
+
+    return (
+
+        <form onSubmit={handleSubmit} className={styles.userForm}>
+            <h3>Change Email</h3>
+            <input 
+                type="text"
+                value={newEmail}
+                onChange={(event) => setNewEmail(event.target.value)}
+                placeholder="New Email"
+            />
+            <input 
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Password"
+            />
+            <button type="submit" className={styles.confirmFormButton}>Set New Email</button>
+        </form>
+    )
+}
 
 /**
  * Responsible for rendering the transcription settings section of the settings

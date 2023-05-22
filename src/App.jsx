@@ -50,7 +50,7 @@ const App = () => {
     <Router>
       <AuthContextProvider>
         <AnimatedRoutes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/register-account" element={<Register />} />
@@ -88,6 +88,6 @@ const App = () => {
       </AuthContextProvider>
     </BrowserRouter>
   );
-};*/
+}; */
 
 export default App;
