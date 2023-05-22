@@ -113,6 +113,7 @@ const MediaPlayerUI = ({
 
   return (
     <aside className={styles.mediaPlayer}>
+      
       <section className={styles.metaData}>
         <FcVideoFile />
         <p>

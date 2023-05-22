@@ -10,59 +10,73 @@
  * @exports Uploader
  */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./uploader.module.scss";
 
 /**
  * Responsible for rendering the component that handles uploading documents
  * to the application
  *
- * @returns {JSX.Element} An upload button
+ * This is accomplished by assigning an event listener that will update the
+ * state with the meta data about the file being uploaded.
+ *
+ * @returns {JSX.Element} Representing an upload button
  */
 const Uploader = () => {
   const [documentState, setDocumentState] = useState({
-    file: false,
-    data: false,
-    content: false,
+    file: null,
+    content: null,
+    error: null,
   });
 
   /**
-   * Callback function that handles changing the file
+   * Responsible for reading the contents of a file and updates the state with
+   *  the content or an error message.
    *
-   * @param {File Object} newFile
+   * @param {Object} documentState - The state object containing the file,
+   * content, and error properties.
    */
-  const handleFileChange = (newFile) => {
+  useEffect(() => {
+    if (documentState.file) {
+      const reader = new FileReader();
+
+      reader.onloadend = (event) => {
+        setDocumentState((prevState) => ({
+          ...prevState,
+          content: event.target.result,
+        }));
+      };
+
+      reader.onerror = () => {
+        setDocumentState((prevState) => ({
+          ...prevState,
+          error: `There was an error trying to read from the file: ${reader.error}`,
+        }));
+      };
+
+      reader.readAsText(documentState.file);
+    }
+  }, [documentState.file]);
+
+  /**
+   * Callback function that handles changes to the file input field and updates
+   * the state with the new file.
+   *
+   * @param {Event} fileChange - The change event triggered by the file input field.
+   */
+  const handleFileChange = (fileChange) => {
+    const newFile = fileChange.target.files[0];
     setDocumentState((prevState) => ({
       ...prevState,
-      data: newFile.target.files[0],
+      file: newFile,
     }));
-
-    const fileReader = new FileReader();
-
-    fileReader.onloadend = (newFile) => {
-      const updatedContent = newFile.target.result;
-
-      setDocumentState((prevState) => ({
-        ...prevState,
-        content: updatedContent,
-      }));
-    };
-    fileReader.onerror = (fileError) => {
-      console.error(
-        "There was an error trying to read from the file:",
-        fileError
-      );
-    };
-
-    if (newFile.target.files[0]) {
-      fileReader.readAsText(newFile.target.files[0]);
-    }
   };
 
   return (
     <>
       <input type="file" onChange={handleFileChange} />
       <div>{documentState.content}</div>
+      {documentState.error && <div>Error: {documentState.error}</div>}
     </>
   );
 };

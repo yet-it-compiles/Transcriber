@@ -21,6 +21,7 @@
     "emailjs-com": "^3.2.0",
     "file-reader": "^1.1.1",
     "firebase": "^9.22.0",
+    "framer-motion": "^10.12.12",
     "material-icons-react": "^1.0.4",
     "modal": "^1.2.0",
     "react": "^18.2.0",

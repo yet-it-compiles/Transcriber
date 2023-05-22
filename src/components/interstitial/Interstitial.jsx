@@ -27,19 +27,23 @@ import Uploader from "../uploader/Uploader";
 const Interstitial = () => {
   const [selectedOption, setSelectedOption] = useState("");
 
-  return (
-    <div className={styles.screenContainer}>
-      {!selectedOption ? <h1>What Would You Like To Do?</h1> : <h1></h1>}
+  const handlePageRender = () => {
+    switch (selectedOption) {
+      case "Record Audio":
+        return <AudioRecorder />;
+      case "Upload to View":
+        return <Uploader />;
+      case "Record w/ Live Transcription":
+        return <h2>Feature Coming Soon!</h2>;
+      default:
+        return <InterstitialOptions setSelectedOption={setSelectedOption} />;
+    }
+  };
 
-      {selectedOption == "Record Audio" ? (
-        <AudioRecorder />
-      ) : selectedOption == "Upload to View" ? (
-        <Uploader />
-      ) : selectedOption == "Record w/ Live Transcription" ? (
-        <h2>Feature Coming Soon!</h2>
-      ) : (
-        <InterstitialOptions userOption={setSelectedOption} />
-      )}
+  return (
+    <div className={styles.interContainer}>
+      <h1>{selectedOption ? "" : "What Would You Like To Do?"}</h1>
+      {handlePageRender()}
 
       {/* {viewTranscription && (
         <div className={styles.fileChange}>
@@ -99,21 +103,21 @@ const pageOptionsMinor = [
  *
  * @returns {JSX.Element} Resembling each transcription option
  */
-const InterstitialOptions = ({ userOption }) => {
+const InterstitialOptions = ({ setSelectedOption }) => {
   return (
     <>
-      <p>
+      <aside>
         {pageOptions.map((eachOption, eachIndex) => (
           <aside
             key={eachIndex}
             className={styles.eachOption}
-            onClick={() => userOption(eachOption.name)}
+            onClick={() => setSelectedOption(eachOption.name)}
           >
-            <span>{eachOption.icon}</span>
-            <span>{eachOption.name}</span>
+            <p>{eachOption.icon}</p>
+            <p>{eachOption.name}</p>
           </aside>
         ))}
-      </p>
+      </aside>
     </>
   );
 };

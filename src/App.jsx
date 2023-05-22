@@ -8,7 +8,7 @@
  * @requires react
  */
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import AuthContextProvider from "./context/AuthContext";
 import {
   BrowserRouter as Router,
@@ -16,7 +16,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import { animated, useSpring, useTransition, config } from "react-spring";
+import { animated, useTransition } from "react-spring";
 
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -26,40 +26,21 @@ import SupportFAQ from "./pages/support-FAQ/SupportFAQ";
 import EditTranscript from "./pages/editor/EditTranscript";
 import StartRecording from "./pages/start-recording/StartRecording";
 import ForgotPassword from "./pages/forgot-password/ForgotPassword";
-import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
 import ProtectedRoute from "./components/protected-routes/ProtectedRoute";
+import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
 
 const AnimatedRoutes = ({ children }) => {
   const location = useLocation();
   const transitions = useTransition(location, {
-    from: { opacity: 0, transform: "translate3d(0, 50%, 0)" },
+    from: { opacity: 0, transform: "translate3d(0, 20%, 0)" },
     enter: { opacity: 1, transform: "translate3d(0, 0, 0)" },
-    leave: { opacity: 0, transform: "translate3d(0, 50%, 0)" },
-    config: { mass: 1, tension: 280, friction: 60 },
+    leave: { opacity: 0, transform: "translate3d(0, -20%, 0)" },
+    config: { mass: 1, tension: 540, friction: 50 },
   });
-
-  const scrollRef = useRef(null);
-  const spring = useSpring({ scrollTop: 0 });
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo(spring.scrollTop);
-    }
-  }, [spring.scrollTop]);
 
   return transitions((style, item) => (
     <animated.div style={{ ...style, position: "absolute", width: "100%" }}>
-      <animated.div
-        style={{ overflowY: "auto", height: "100%" }}
-        scrollTop={spring.scrollTop}
-        ref={scrollRef}
-      >
-        <Routes location={item}>{children}</Routes>
-      </animated.div>
+      <Routes location={item}>{children}</Routes>
     </animated.div>
   ));
 };
