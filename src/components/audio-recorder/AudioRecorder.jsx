@@ -1,13 +1,12 @@
 /**
  * @file AudioRecorder.jsx
  *
- * @description This module is responsible for providing the audio recording,
- * playback, and download functionality. Additionally, this is where the audio
- * is captured, to be s
+ * @description Provides audio recording and playback functionality for the
+ * entire application. Accomplished by captuing the audio using MediaDevices API,
+ * encodes the audio as a Blob object and finally creates an object URL.
  *
  * @requires react
  * @requires react-icons
- * @requires MediaPlayer
  * @requires record.module.scss
  *
  * @exports MakeRecording
@@ -19,8 +18,9 @@ import MediaPlayer from "../media-player/MediaPlayer";
 import { FaMicrophoneAlt } from "react-icons/fa";
 
 /**
- * Allow the user to record audio from their mic and playback the recording, and
- * download it as a .wav file.
+ * @component
+ *
+ * @description This component is responsible for rendering Audio Recorder.
  *
  * This is accomplished by initializing the dynamic values of the recording
  * features, and then request audio recording permissions from the browser. The
@@ -29,10 +29,11 @@ import { FaMicrophoneAlt } from "react-icons/fa";
  *
  * @returns {JSX.Element} representing an audio recorder
  */
-const MakeRecording = () => {
+const MakeRecording = ({ setShowOptions }) => {
   const audioRef = useRef();
   const mediaRecorderRef = useRef();
 
+  const [error, setError] = useState(null);
   const [recordingState, setRecordingState] = useState({
     isRecording: false,
     audioBlob: null,
@@ -41,10 +42,6 @@ const MakeRecording = () => {
     recordingDuration: 0,
     saveRecording: false,
   });
-
-  const [error, setError] = useState(null);
-  const [showOptions, setShowOptions] = useState(false);
-  const [viewTranscription, setViewTranscription] = useState(false);
 
   /**
    * Handles updating the error state and presents the message to the user
@@ -59,16 +56,29 @@ const MakeRecording = () => {
     setError(`Failed to start recording: ${error.message}`);
   };
 
+  /* ! DELETE */
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setRecordingState((prevState) => {
+      const newState = {
+        ...prevState,
+        audioBlob: file,
+        audioBlobURL: URL.createObjectURL(file),
+      };
+      return newState;
+    });
+  };
+
   /**
-   * Requests access to the users microphone and allows them to record audio.
+   * @function
    *
-   * This is accomplished by creating an audioStream and mediaRecorder which
-   * allows the user to record audio. The audio is then captured, chunked and
-   * assigned to an object URL [blob:http:]
+   * @description Requests access to the users microphone and allows them to
+   * record audio. This is accomplished by creating an audioStream and
+   * mediaRecorder which allows the user to record audio. The audio is then
+   * captured, chunked and assigned to an object URL [blob:http:]
    */
   const startRecording = async () => {
     try {
-      // Ensures the audio is captured directly from the microphone
       const audioStream = await navigator.mediaDevices.getUserMedia({
         audio: { capture: true },
       });
@@ -83,7 +93,6 @@ const MakeRecording = () => {
 
       mediaRecorder.onstop = () => {
         const blob = new Blob(capturedRecordings);
-        downloadAudio();
 
         setRecordingState((prevState) => ({
           ...prevState,
@@ -92,13 +101,17 @@ const MakeRecording = () => {
           recordingDuration: Math.floor((Date.now() - startTime) / 1000),
         }));
 
-        setShowOptions(true);
+        setShowOptions((prevOptions) => ({
+          ...prevOptions,
+          file: blob,
+        }));
       };
 
       setRecordingState((prevState) => ({
         ...prevState,
         isRecording: true,
       }));
+
       mediaRecorder?.start();
       mediaRecorderRef.current = mediaRecorder;
     } catch (error) {
@@ -106,6 +119,12 @@ const MakeRecording = () => {
     }
   };
 
+  /**
+   * @useEffect
+   *
+   * @description useEffect hook used to run side effects that handle stopping
+   * the recording when the component unmounts, or when isRecording changes to false.
+   */
   useEffect(() => {
     return () => {
       if (recordingState.isRecording && mediaRecorderRef.current) {
@@ -115,7 +134,10 @@ const MakeRecording = () => {
   }, [recordingState.isRecording]);
 
   /**
-   * Callback that handles stopping the audio recording by toggling the state
+   * @stateUpdaterFunction
+   *
+   * @description Tasked with updating the components recording state by using
+   * its previous state, and specifically updating isRecording to false.
    */
   const stopRecording = () => {
     setRecordingState((prevState) => ({
@@ -123,31 +145,6 @@ const MakeRecording = () => {
       isRecording: false,
     }));
     mediaRecorderRef.current?.stop();
-  };
-
-  /**
-   * Callback function that handles downloading the audio file to the users
-   * default downlaods location
-   */
-  const downloadAudio = () => {
-    const downloadLink = document.createElement("a");
-    downloadLink.href = recordingState.audioBlobURL;
-    downloadLink.download = "recorded_audio.wav";
-    downloadLink.click();
-  };
-
-  /**
-   * Callback function that handles providing the different options for the user
-   * to choose after recording the audio.
-   *
-   * @param {option} option Choice of what to do with the audio transcription
-   */
-  const handleRecordingOption = (option) => {
-    setShowOptions(false);
-    downloadAudio();
-    if (option === "view") {
-      setViewTranscription(true);
-    }
   };
 
   return (
@@ -180,24 +177,27 @@ const MakeRecording = () => {
 };
 
 /**
- * This component is responsible for rendering the animated listening ellipsis,
- * that jump on the screen when the user is recording.
+ * @component
  *
- * @param {stopRecording} param0 a bool value representing the current state
- * of the recorder
+ * @description Responsible for rendering the animated jumping ellipsis that
+ * play when the user is actively recording.
  *
- * @returns animated ellipsis that animate when a recording is in progress
+ * @param {boolean} stopRecording the current state of stopRecording
+ *
+ * @returns {JSX.Element} resembling the animated ellipsis to signal the
+ * application is currently recording
  */
 const RecordingInProgress = ({ stopRecording }) => (
   <div>
-    <h2>
+    <p>
       Listening
       <span className={styles.dotsContainer}>
         {[...Array(3)].map((_, i) => (
           <span key={i} className={styles.dots}></span>
         ))}
       </span>
-    </h2>
+    </p>
+
     <button onClick={stopRecording}>
       <FaMicrophoneAlt className={`${styles.isRec}`} />
     </button>
@@ -205,21 +205,23 @@ const RecordingInProgress = ({ stopRecording }) => (
 );
 
 /**
- * This component is responsible for prompting the user to click on the
- * microphone icon to start a recording.
+ * @component
  *
- * @param {startRecording} param0 react-icon displaying a microphone
+ * @description Responsible for rendering the prompt notifying the user to click
+ * on the microphone to begin recording.
  *
- * @returns page introduction text and an interactable react-icon to start
+ * @param {boolean} startRecording react-icon displaying a microphone
+ *
+ * @returns {JSX.Element} page introduction text and an interactable react-icon to start
  * recording
  */
 const NotListening = ({ startRecording }) => (
-  <div className={styles.isNotListening}>
+  <>
     <h2>Please click the microphone when you're ready to start a recording</h2>
     <button onClick={startRecording}>
       <FaMicrophoneAlt className={`${styles.isNotRec} `} />
     </button>
-  </div>
+  </>
 );
 
 export default MakeRecording;

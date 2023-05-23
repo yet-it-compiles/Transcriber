@@ -23,14 +23,18 @@ import {
 } from "react-icons/bs";
 
 /**
- * This component is responsible for rendering the audio player UI that provides
+ * @component MediaPlayerUI
+ *
+ * @description Responsible for rendering the audio player UI that provides
  * the interface for the user to interact with the audio player.
  *
- * @param {audioBlobURL} param1
- * @param {audioRef} param2
- * @param {recordingDuration} param3
- * @param {currentTime} param4
- * @param {setTime} param5
+ * @param {string} audioBlobURL The URL of an audio blob
+ * @param {React.RefObject<HTMLAudioElement>} audioRef Audio element reference
+ * @param {number | string} recordingDuration The total duration in milliseconds
+ * of the audio file
+ * @param {{number}} currentTime The current time of the audio file
+ * @param {(time: number) => void} setTime Function to set the current time of
+ * an audio file
  *
  * @returns The media player component that resembles an audio player
  */
@@ -44,13 +48,23 @@ const MediaPlayerUI = ({
   const [title, setTitle] = useState("Set Audio Name");
   const [isPlaying, setIsPlaying] = useState(false);
 
+  /**
+   * @useEffect
+   *
+   * @description useEffect hook that handles updating the progress counter and
+   * ensures that the correct icon is displayed
+   *
+   * @throws {Error} An error that
+   */
   useEffect(() => {
     const audio = audioRef.current || new Audio(audioBlobURL);
 
     /**
-     * Callback that handles updating the progress counter
+     * @callback handleTimestampUpdate
+     *
+     * @description handles updating the current time state to its current value
      */
-    const handleTimeUpdate = () => {
+    const handleTimestampUpdate = () => {
       setTime((prevState) => ({
         ...prevState,
         currentTime: audio.currentTime,
@@ -58,27 +72,34 @@ const MediaPlayerUI = ({
     };
 
     /**
-     * Callback that handles ensuring correct state of play/pause and reset time
+     * @callback handleAudioEnded
+     *
+     * @description state updater function that handles updating the current
+     * state of play/pause icon
      */
     const handleAudioEnded = () => {
       setIsPlaying(false);
+
       setTime((prevState) => ({
         ...prevState,
         currentTime: 0,
       }));
     };
 
-    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("timeupdate", handleTimestampUpdate);
     audio.addEventListener("ended", handleAudioEnded);
 
     return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("timeupdate", handleTimestampUpdate);
       audio.removeEventListener("ended", handleAudioEnded);
     };
   }, [audioBlobURL]);
 
   /**
-   * Callback function that allows the audio to be played
+   * @callback playRecording
+   *
+   * @description memoized callBack that handles creating an audio object ref
+   * and controls weather the audio should be playing or paused
    */
   const playRecording = useCallback(() => {
     if (!audioBlobURL) return;
@@ -113,13 +134,12 @@ const MediaPlayerUI = ({
 
   return (
     <aside className={styles.mediaPlayer}>
-      
       <section className={styles.metaData}>
         <FcVideoFile />
         <p>
           {title}
           <br />
-          <time datetime="2023-05-23">May 23, 2023</time>
+          <time dateTime="2023-05-23">May 23, 2023</time>
         </p>
       </section>
 
@@ -140,7 +160,6 @@ const MediaPlayerUI = ({
             <FaPlayCircle />
           </button>
         )}
-        {/* TESTING VALUE FOR RED LINE */}
 
         <button>
           <AiOutlineFastForward />
@@ -165,23 +184,38 @@ const MediaPlayerUI = ({
   );
 };
 
+/**
+ * @component VolumeControl
+ *
+ * @description Responsible for rendering the volume control section of the
+ * media player
+ *
+ * @returns {JSX.Element} That represents an audio volume control
+ *
+ * @throws {error} represen error that
+ */
 const VolumeControl = () => {
   const [volume, setVolume] = useState(25);
 
   /**
-   * Callback function that handles the ability to change the volume
+   * @callback handleVolumeChange
    *
-   * @param {event} volume represents the value of the volume
+   * @description Callback function that handles the ability to change the value
+   * of the volume when it changes.
+   *
+   * @param {event} newVolume representing the new change in volume
    */
   const handleVolumeChange = (newVolume) => {
     setVolume(parseInt(newVolume.target.value, 10));
   };
 
   /**
-   * Callback that handles which volume icon should be displayed based on the
-   * current level of the volume
+   * @callback renderVolumeIcon
    *
-   * @returns the volume icon
+   * @description callBack that handles controling what volume icon should be
+   * displayed dependent on the level of the volume
+   *
+   * @returns {JSX.Element} representing the volume button icon
    */
   const renderVolumeIcon = () => {
     if (volume <= 1) {

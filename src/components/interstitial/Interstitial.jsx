@@ -9,7 +9,6 @@
  *
  * @exports Interstitial
  */
-
 import React, { useState } from "react";
 import { BsSoundwave } from "react-icons/bs";
 import { AiOutlineRead } from "react-icons/ai";
@@ -17,24 +16,39 @@ import { MdOutlineLiveTv } from "react-icons/md";
 import styles from "./interstitial.module.scss";
 
 import Uploader from "../uploader/Uploader";
+import Transcriber from "../transcriber/Transcriber";
 import AudioRecorder from "../audio-recorder/AudioRecorder";
 
 /**
- * Responsible for rendering the transitional screen
+ * @component Interstitial
+ *
+ * @description responsible for rendering the transitional screen
  *
  * @returns {JSX.Element} Resembling an interstitial screen
  */
 const Interstitial = () => {
   const [selectedOption, setSelectedOption] = useState("");
+  const [showOptions, setShowOptions] = useState({
+    option: false,
+    currentTime: 0,
+    file: false,
+  });
 
+  /**
+   * @component handlePageRender
+   *
+   * @description responsible for rendering the correct page based off the users
+   * selection
+   */
   const handlePageRender = () => {
     switch (selectedOption) {
       case "Record Audio":
-        return <AudioRecorder />;
+        return <AudioRecorder setShowOptions={setShowOptions} />;
       case "Upload to View":
         return <Uploader />;
       case "Record w/ Live Transcription":
         return <h2>Feature Coming Soon!</h2>;
+
       default:
         return <InterstitialOptions setSelectedOption={setSelectedOption} />;
     }
@@ -45,25 +59,25 @@ const Interstitial = () => {
       <h1>{selectedOption ? "" : "What Would You Like To Do?"}</h1>
       {handlePageRender()}
 
-      {/* {viewTranscription && (
-        <div className={styles.fileChange}>
-          <input type="file" onChange={handleFileChange} />
-
-          {documentState.data && (
-            <Transcriber
-              apiToken={import.meta.env.VITE_AUTHORIZATION_1}
-              fileData={documentState.data}
-              currentTime={recordingState.currentTime}
-            />
-          )}
-        </div>
+      {showOptions.file ? (
+        <Transcriber
+          apiToken={import.meta.env.VITE_AUTHORIZATION_1}
+          fileData={showOptions.file}
+          currentTime={showOptions.currentTime}
+        />
+      ) : (
+        ""
       )}
-
-     */}
     </div>
   );
 };
 
+/**
+ * @object
+ *
+ * @description Responsible for containing the possible options the user has when navigating
+ * to the Start Recording page.
+ */
 const pageOptions = [
   {
     id: 1,
@@ -96,12 +110,14 @@ const pageOptionsMinor = [
 ];
 
 /**
- * Responsible for rendering the avaliable features the user can access at on
+ * @component InterstitialOptions
+ *
+ * @description responsible for rendering the avaliable features the user can access at on
  * the navigated page. This acts as a interstitial for the application.
  *
- * @param {userOption} param1 the selected transcription feature the user requests
+ * @param {boolean} setSelectedOption the selected transcription feature the user requests
  *
- * @returns {JSX.Element} Resembling each transcription option
+ * @returns {JSX.Element} resembling each transcription option
  */
 const InterstitialOptions = ({ setSelectedOption }) => {
   return (
