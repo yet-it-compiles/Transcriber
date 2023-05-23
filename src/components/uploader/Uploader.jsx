@@ -20,11 +20,9 @@ import styles from "./uploader.module.scss";
  * to the application. This is accomplished by assigning an event listener that will update the
  * state with the meta data about the file being uploaded.
  *
- * @param {object} showOptions representing the parents state updater function
- *
  * @returns {JSX.Element} resembling the upload component
  */
-const Uploader = ({ showOptions }) => {
+const Uploader = () => {
   /**
    * @typedef {Object} documentState
    *
@@ -40,6 +38,7 @@ const Uploader = ({ showOptions }) => {
     error: null,
     isLoading: false,
     isImage: false,
+    isAudio: false,
     isTranscript: false,
   });
 
@@ -77,7 +76,6 @@ const Uploader = ({ showOptions }) => {
       const isImage = documentState.file.type.startsWith("image");
       setDocumentState((prevState) => ({ ...prevState, isImage }));
 
-      /* ! Add conditional check for audio */
       if (isImage) {
         reader.readAsDataURL(documentState.file);
       } else {
@@ -96,10 +94,7 @@ const Uploader = ({ showOptions }) => {
    */
   const handleFileChange = (event) => {
     const newFile = event.target.files[0];
-
-    if (showOptions.option) {
-      showOptions.file = newFile;
-    }
+    setDocumentState((prevState) => ({ ...prevState, file: newFile }));
   };
 
   return (
@@ -137,20 +132,6 @@ const Uploader = ({ showOptions }) => {
       ) : (
         <pre className={styles.fileContent}>{documentState.content}</pre>
       )}
-
-      {/* {documentState.isTranscript && (
-        <div className={styles.fileChange}>
-          <input type="file" onChange={handleFileChange} />
-
-          {documentState.data && (
-            <Transcriber
-              apiToken={import.meta.env.VITE_AUTHORIZATION_1}
-              file={documentState.file}
-              currentTime={recordingState.currentTime}
-            />
-          )}
-        </div>
-      )} */}
 
       {documentState.error && (
         <div aria-label="Error message" className={styles.error}>
