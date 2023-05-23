@@ -5,39 +5,57 @@
  * functionality of the application along with the transcript animation to show
  * the actively playing word.
  *
+ * @requires React
  * @requires axios
  *
  * @exports Transcriber
  */
 
 import React, { useState, useEffect } from "react";
-import styles from "./transcriber.module.scss";
 import axios from "axios";
 
 /**
- * Callback function responsible for rendering the transcript
+ * @component Transcriber
  *
- * @param {apiToken} param0 represents the api toekn for the transcription service
- * @param {fileData} param1 represents the audio file path to be transcribed
- * @param {currentTime} param2 represents the current time in the audio playback
+ * @description Responsible for rendering the animated transcription file that
+ * contains the text to speech of the uploaded audio file.
  *
- * @returns {JSX.Element} That represnts the audio file transcripion
+ * @param {string} apiToken representing the api toekn for the transcription service
+ * @param {string} fileData representing the audio file path to be transcribed
+ * @param {number} currentTime representing the current time in the audio playback
+ *
+ * @returns {JSX.Element} representing the audio file transcripion component
  */
 const Transcriber = ({ apiToken, fileData, currentTime }) => {
   const [summary, setSummary] = useState(null);
   const [transcript, setTranscript] = useState([]);
   const [timestamps, setTimestamps] = useState([]);
   const [status, setStatus] = useState("Initializing Connection");
-
   const [activeWordIndex, setActiveWordIndex] = useState(0);
 
+  /**
+   * @useEffect
+   *
+   * @description useEffect that applies side effects when timestamps or
+   * currentTime changes, it enumerates through each timestamp
+   */
   useEffect(() => {
     const index = timestamps.findIndex(
       ({ start, end }) => start <= currentTime && end >= currentTime
     );
+
     setActiveWordIndex(index !== -1 ? index : activeWordIndex);
   }, [timestamps, currentTime]);
 
+  /**
+   * @function downloadTranscript
+   *
+   * @description responsible for downloading the transcript when its recieved
+   * by the application
+   *
+   * @param {string} transcript representing the transcript of the audio file
+   * that was uploaded
+   */
   const downloadTranscript = (transcript) => {
     const blob = new Blob([transcript.join("\n")], {
       type: "text/plain;charset=utf-8;",
@@ -52,6 +70,12 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
     document.body.removeChild(link);
   };
 
+  /**
+   * @useEffect
+   *
+   * @description Initializes an instance of the axios library with the API
+   * configuration that is used to make HTTP requests
+   */
   useEffect(() => {
     const client = axios.create({
       baseURL: "https://api.assemblyai.com/v2",
@@ -61,11 +85,15 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
     });
 
     /**
-     * The method is responsible for uploading the audio file to the transcription
+     * @function uploadFile
+     *
+     * @description The method is responsible for uploading the audio file to the transcription
      * service.
      *
      * @returns {Promise<string|null>} The URL of the uploaded audio file, or null
      * if there was an error.
+     *
+     * @throws {Error} representing if there was an error uploading the audio file
      */
     const uploadFile = async () => {
       const url = "/upload";
@@ -88,14 +116,16 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
     };
 
     /**
-     * Callback function responsible for transcribing the audio file and polling
-     * the API until the transcription is available.
+     * @function transcribeAudio
      *
-     * @param {string} audioUrl - The URL of the audio file to be transcribed.
+     * @description callBack function responsible for transcribing the audio
+     * file along with polling the API until the transcription is available.
+     *
+     * @param {string} audioUrl The URL of the audio file to be transcribed.
      *
      * @returns {Promise<object>} The audio files full transcription
      *
-     * @throws {Error} If the transcription process fails.
+     * @throws {Error} representing if the transcription process fails.
      */
     const transcribeAudio = async (audioUrl) => {
       const url = "/transcript";
@@ -114,6 +144,18 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
         const transcriptId = response.data.id;
         const pollingEndpoint = `/transcript/${transcriptId}`;
 
+        /**
+         * @function pollTranscription
+         *
+         * @description Responsible for inititiating the polling of the API
+         * to check weather or not the transcript is available
+         *
+         * @throws {Error} if the transcription fails
+         *
+         * @throws {Error} if there was an error connecting to the API
+         *
+         * @throws {Error} if the was a 401 response from the server
+         */
         const pollTranscription = async () => {
           try {
             const APIPollingResponse = await client.get(pollingEndpoint);
@@ -126,6 +168,7 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
                   (eachSpeaker) =>
                     `Speaker ${eachSpeaker.speaker}: ${eachSpeaker.text}`
                 );
+
                 setTranscript(formattedTranscript);
                 downloadTranscript(formattedTranscript);
 
@@ -168,6 +211,14 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
       }
     };
 
+    /**
+     * @component displayChapters
+     *
+     * @description Responsible for displaying the chapters that were derived
+     * from the transcript.
+     *
+     * @returns {JSX.Element} representing each chapter of the transcript
+     */
     const displayChapters = async () => {
       try {
         const uploadUrl = await uploadFile();
@@ -184,10 +235,10 @@ const Transcriber = ({ apiToken, fileData, currentTime }) => {
         Status: <strong>{status}</strong>
       </p>
 
-      {transcript.map((eachLine, index) => {
+      {transcript.map((eachLine, eachIndex) => {
         const words = eachLine.split(" ");
         return (
-          <p key={index}>
+          <p key={eachIndex}>
             {words.map((word, wordIndex) => {
               const currentWordInfo = timestamps.find(
                 ({ text }) => text.toLowerCase() === word.toLowerCase()

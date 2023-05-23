@@ -14,15 +14,17 @@ import React, { useState, useEffect } from "react";
 import styles from "./uploader.module.scss";
 
 /**
- * Responsible for rendering the component that handles uploading documents
- * to the application
+ * @component Uploader
  *
- * This is accomplished by assigning an event listener that will update the
+ * @description responsible for rendering the component that handles uploading documents
+ * to the application. This is accomplished by assigning an event listener that will update the
  * state with the meta data about the file being uploaded.
  *
- * @returns {JSX.Element} The upload component
+ * @param {object} showOptions representing the parents state updater function
+ *
+ * @returns {JSX.Element} resembling the upload component
  */
-const Uploader = () => {
+const Uploader = ({ showOptions }) => {
   /**
    * @typedef {Object} documentState
    *
@@ -38,15 +40,16 @@ const Uploader = () => {
     error: null,
     isLoading: false,
     isImage: false,
+    isTranscript: false,
   });
 
   /**
-   * @function useEffect
+   * @useEffect
    *
    * @description useEffect responsible for reading the contents of a file and updates the state with
    * the content or an error message.
    *
-   * @param {Object} documentState - The state object containing the file,
+   * @param {Object} documentState The state object containing the file,
    * content, and error properties.
    */
   useEffect(() => {
@@ -93,10 +96,10 @@ const Uploader = () => {
    */
   const handleFileChange = (event) => {
     const newFile = event.target.files[0];
-    setDocumentState((prevState) => ({
-      ...prevState,
-      file: newFile,
-    }));
+
+    if (showOptions.option) {
+      showOptions.file = newFile;
+    }
   };
 
   return (
@@ -115,6 +118,7 @@ const Uploader = () => {
           aria-label="File upload input"
           className={styles.fileInput}
         />
+
         <label htmlFor="fileInput" className={styles.fileInputLabel}>
           Select a file
         </label>
@@ -133,6 +137,20 @@ const Uploader = () => {
       ) : (
         <pre className={styles.fileContent}>{documentState.content}</pre>
       )}
+
+      {/* {documentState.isTranscript && (
+        <div className={styles.fileChange}>
+          <input type="file" onChange={handleFileChange} />
+
+          {documentState.data && (
+            <Transcriber
+              apiToken={import.meta.env.VITE_AUTHORIZATION_1}
+              file={documentState.file}
+              currentTime={recordingState.currentTime}
+            />
+          )}
+        </div>
+      )} */}
 
       {documentState.error && (
         <div aria-label="Error message" className={styles.error}>

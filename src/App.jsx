@@ -6,9 +6,14 @@
  * initialize the primary UI features.
  *
  * @requires react
+ * @requires react-spring
+ * @requires react-router-dom
+ *
+ * @exports App
  */
 
 import React from "react";
+import { animated, useTransition } from "react-spring";
 import AuthContextProvider from "./context/AuthContext";
 import {
   BrowserRouter as Router,
@@ -16,7 +21,6 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import { animated, useTransition } from "react-spring";
 
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -29,6 +33,17 @@ import ForgotPassword from "./pages/forgot-password/ForgotPassword";
 import ProtectedRoute from "./components/protected-routes/ProtectedRoute";
 import DisplayAnalytics from "./pages/display-analytics/DisplayAnalytics";
 
+/**
+ * @component AnimatedRoutes
+ *
+ * @description Responsible for animating the transitions between application
+ * routes using the react-spring library
+ *
+ * @param {Route} children represents navigation routes
+ *
+ * @returns {JSX.Element} an animated route that applies the animations and
+ * transitions
+ */
 const AnimatedRoutes = ({ children }) => {
   const location = useLocation();
   const transitions = useTransition(location, {
@@ -45,6 +60,15 @@ const AnimatedRoutes = ({ children }) => {
   ));
 };
 
+/**
+ * @component App
+ *
+ * @description This component is responsible for providing routes to the
+ * AnimatedRoutes component above and returns animated routes when the user
+ * navigates through the application.
+ *
+ * @returns {JSX.Element} representing an animated route
+ */
 const App = () => {
   return (
     <Router>
