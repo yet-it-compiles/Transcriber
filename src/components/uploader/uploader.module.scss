@@ -9,20 +9,27 @@
   align-items: center;
   width: 75%;
   height: 55%;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 5px;
   color: #333;
   background: #fff;
   border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.02);
+  }
 }
 
 .title {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #007bff;
   transition: color 0.3s ease-in-out;
+
   &:hover {
-    color: #007bff;
+    color: #0056b3;
   }
 }
 
@@ -37,15 +44,16 @@
 
 .fileInputLabel {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  margin-bottom: 1rem;
-  background: #007bff;
+  padding: 0.6rem 1.2rem;
+  margin-bottom: 1.5rem;
+  background: #1366aa;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+
   &:hover {
-    background-color: #0056b3;
+    background-color: #105892;
   }
 }
 
@@ -58,9 +66,9 @@
   border: 4px solid #f3f3f3;
   border-radius: 50%;
   border-top: 4px solid #3498db;
-
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -76,14 +84,17 @@
   width: 100%;
   max-width: 500px;
   border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .fileContent {
   white-space: pre-wrap;
   word-wrap: break-word;
+  font-family: "Arial", sans-serif;
+  font-size: 1.2rem;
 }
 
 .error {
   color: #f00;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
