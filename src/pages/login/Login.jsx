@@ -37,7 +37,7 @@ const Login = () => {
     }
     login(username, password)
       .then((response) => {
-        console.log(response);
+        /*console.log(response);*/
         navigate("/home");
       })
       .catch((error) => {
@@ -50,7 +50,7 @@ const Login = () => {
 
     googleLogin(username, password)
       .then((response) => {
-        console.log(response);
+        /*console.log(response);*/
         navigate("/home");
       })
       .catch((error) => {
