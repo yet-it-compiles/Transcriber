@@ -155,25 +155,25 @@ const TranscriptSearch = () => {
  * @returns {JSX.Element} navigation bar that will route users to different pages
  */
 const NavigationList = () => {
-  const [activePage, setActivePage] = useState(APPLICATION_PAGES[0]);
+  // const [activePage, setActivePage] = useState(APPLICATION_PAGES[0]);
 
-  const handleSetActive = (pageName) => {
-    const newActive = APPLICATION_PAGES.find((page) => page.name === pageName);
-    setActivePage(newActive);
-  };
+  // const handleSetActive = (pageName) => {
+  //   const newActive = APPLICATION_PAGES.find((page) => page.name === pageName);
+  //   setActivePage(newActive);
+  // };
 
   return (
     <nav className={styles.navLinks}>
       <ul>
-        {APPLICATION_PAGES.map((eachPage) => (
+        {APPLICATION_PAGES.map((eachPage) => ( 
           <li
             key={eachPage.id}
             className={
-              activePage.name === eachPage.name
+              window.location.pathname == eachPage.path
                 ? styles.activeLink
                 : styles.navLink
             }
-            onClick={() => handleSetActive(eachPage.name)}
+            //onClick={() => handleSetActive(eachPage.name)}
           >
             <Link to={eachPage.path}>
               {eachPage.icon}

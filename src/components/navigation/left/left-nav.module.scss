@@ -205,20 +205,19 @@ $hoverBG: #77b9ffc6;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-
+    
     &:hover {
       transform: scale(1);
       color: $defaultTxt;
       background-color: #77b9ffc6;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     }
-
+    
     a {
       text-decoration: none;
       color: inherit;
-      padding-right: 30px;
-      padding-top: 6px;
-      padding-bottom: 7px;
+      width: 100%;
+      height:75%;
     }
   }
 }
