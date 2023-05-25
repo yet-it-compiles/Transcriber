@@ -28,7 +28,6 @@ const Home = () => {
     <div className={styles.container}>
       <LeftNavBar />
       <Dashboard />
-
       <RightNavBar />
     </div>
   );

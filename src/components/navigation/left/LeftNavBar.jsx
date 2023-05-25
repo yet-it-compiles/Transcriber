@@ -33,38 +33,38 @@ import { FcHome, FcStatistics, FcReadingEbook } from "react-icons/fc";
  * an associated icon, name, and path to navigate to.
  */
 const APPLICATION_PAGES = [
+  // {
+  //   id: 1,
+  //   icon: <FcHome />,
+  //   name: "Dashboard",
+  //   path: "/home",
+  // },
   {
     id: 1,
-    icon: <FcHome />,
-    name: "Dashboard",
-    path: "/home",
-  },
-  {
-    id: 2,
     icon: <FaMicrophoneAlt />,
     name: "Start Recording",
     path: "/start-recording",
   },
   {
-    id: 3,
+    id: 2,
     icon: <FcReadingEbook />,
     name: "Edit Transcripts",
     path: "/editor",
   },
   {
-    id: 4,
+    id: 3,
     icon: <FcStatistics />,
     name: "View Analytics",
     path: "/display-analytics",
   },
   {
-    id: 5,
+    id: 4,
     icon: <FcVoicePresentation />,
     name: "Support / FAQ",
     path: "/support-FAQ",
   },
   {
-    id: 6,
+    id: 5,
     icon: <FiSettings />,
     name: "Settings",
     path: "/settings",
