@@ -12,6 +12,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./uploader.module.scss";
+import { useNavigate } from "react-router-dom";
 
 /**
  * @component Uploader
@@ -32,6 +33,7 @@ const Uploader = () => {
    * @property {boolean} isLoading - The loading state of the file upload
    * @property {boolean} isImage - Whether or not the file is an image
    */
+  const navigate = useNavigate();
   const [documentState, setDocumentState] = useState({
     file: null,
     content: null,
@@ -120,6 +122,10 @@ const Uploader = () => {
   };
 
   const handleEscape = () => {
+    if(documentState.file == null){
+      navigate("/start-recording");
+    }
+
     setDocumentState({
       file: null,
       content: null,

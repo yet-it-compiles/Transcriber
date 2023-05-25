@@ -6,9 +6,8 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 75%;
-  height: 55%;
+  height: 65%;
   padding: 1.5rem;
   border-radius: 5px;
   color: #333;
@@ -16,6 +15,8 @@
   border: 1px solid #e0e0e0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   &:hover {
     transform: translate(-50%, -50%) scale(1.02);
@@ -36,6 +37,7 @@
 .inputContainer {
   display: flex;
   flex-direction: column;
+  align-content:center;
 }
 
 .fileInput {
@@ -49,6 +51,8 @@
   background: #1366aa;
   color: #fff;
   border-radius: 5px;
+  width: 50%;
+  margin: auto;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 
