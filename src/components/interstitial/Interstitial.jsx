@@ -73,10 +73,13 @@ const Interstitial = () => {
 };
 
 /**
- * @object
+ * @object pageOptions
  *
- * @description Responsible for containing the possible options the user has when navigating
- * to the Start Recording page.
+ * @description Responsible for containing the possible options the user has
+ * when navigating to the Start Recording page.
+ *
+ * @return an object containing the avaliable page options the user can navigate
+ * to
  */
 const pageOptions = [
   {
@@ -96,7 +99,7 @@ const pageOptions = [
   },
 ];
 
-const pageOptionsMinor = [
+/* const pageOptionsMinor = [
   {
     id: 1,
     icon: <BsSoundwave />,
@@ -107,7 +110,7 @@ const pageOptionsMinor = [
     icon: <AiOutlineRead />,
     name: "Edit Transcript In Editor",
   },
-];
+]; */
 
 /**
  * @component InterstitialOptions

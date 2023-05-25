@@ -59,6 +59,14 @@ const modalTemplate = {
   },
 };
 
+/**
+ * @component FolderModals
+ *
+ * @description responsible for rendering a list of modal templates that allows
+ * the presentation of information to be displayed.
+ *
+ * @returns a list of templates
+ */
 const FolderModals = () => {
   const [template, setTemplate] = useState(modalTemplate[0]);
 
@@ -90,7 +98,9 @@ const FolderModals = () => {
 };
 
 /**
- * This module renders the dashboard component
+ * @component Dashboard
+ *
+ * @description responsible for rendering the dashboard component
  *
  * @returns {JSX.Element} representing the contents of the dashboard
  */
@@ -98,9 +108,9 @@ const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   /**
-   * Callback function that controls the current state of the modal
+   * @callback handleSetModal
    *
-   * Accomplished by changing its value back and fourth by interacting with it
+   * @description callBack function that controls the current state of the modal
    */
   const handleSetModal = () => {
     setIsModalOpen((prev) => !prev);
@@ -149,7 +159,7 @@ const Dashboard = () => {
 
         <div className={styles.movie}>
           <p>Conversation with ...</p>
-          <p>May 17th, 2023</p>
+          <p>May 30th, 2023</p>
         </div>
       </div>
 
