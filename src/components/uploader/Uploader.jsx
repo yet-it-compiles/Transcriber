@@ -13,6 +13,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./uploader.module.scss";
 import { useNavigate } from "react-router-dom";
+import { BiArrowBack } from "react-icons/bi";
 
 /**
  * @component Uploader
@@ -32,6 +33,7 @@ const Uploader = () => {
    * @property {string|null} error - Error message that occured during handling
    * @property {boolean} isLoading - The loading state of the file upload
    * @property {boolean} isImage - Whether or not the file is an image
+   * 
    */
   const navigate = useNavigate();
   const [documentState, setDocumentState] = useState({
@@ -182,7 +184,7 @@ const Uploader = () => {
       onDragOver={(dragEvent) => dragEvent.preventDefault()}
     >
       <button onClick={handleEscape} className={styles.backButton}>
-        🔙 Back
+        <BiArrowBack size={30}/>
       </button>
 
       <h2 className={styles.title}>

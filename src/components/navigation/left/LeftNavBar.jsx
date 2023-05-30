@@ -26,7 +26,9 @@ import { FaLongArrowAltRight, FaMicrophoneAlt } from "react-icons/fa";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { FcHome, FcStatistics, FcReadingEbook } from "react-icons/fc";
 
+
 /**
+ * @description
  * Declares the avaliable pages to navigate to within the application.
  *
  * This is accomplished by giving it a unique identifier to efficiently update,
@@ -155,12 +157,7 @@ const TranscriptSearch = () => {
  * @returns {JSX.Element} navigation bar that will route users to different pages
  */
 const NavigationList = () => {
-  // const [activePage, setActivePage] = useState(APPLICATION_PAGES[0]);
-
-  // const handleSetActive = (pageName) => {
-  //   const newActive = APPLICATION_PAGES.find((page) => page.name === pageName);
-  //   setActivePage(newActive);
-  // };
+ 
 
   return (
     <nav className={styles.navLinks}>
@@ -173,7 +170,6 @@ const NavigationList = () => {
                 ? styles.activeLink
                 : styles.navLink
             }
-            //onClick={() => handleSetActive(eachPage.name)}
           >
             <Link to={eachPage.path}>
               {eachPage.icon}

@@ -69,37 +69,37 @@ const AnimatedRoutes = ({ children }) => {
  *
  * @returns {JSX.Element} representing an animated route
  */
-const App = () => {
-  return (
-    <Router>
-      <AuthContextProvider>
-        <AnimatedRoutes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/register-account" element={<Register />} />
-          <Route path="/start-recording" element={<StartRecording />} />
-          <Route path="/editor" element={<EditTranscript />} />
-          <Route path="/display-analytics" element={<DisplayAnalytics />} />
-          <Route path="/support-FAQ" element={<SupportFAQ />} />
-          <Route path="/settings" element={<Settings />} />
-        </AnimatedRoutes>
-      </AuthContextProvider>
-    </Router>
-  );
-};
+// const App = () => {
+//   return (
+//     <Router>
+//       <AuthContextProvider>
+//         <AnimatedRoutes>
+//           <Route path="/" element={<Login />} />
+//           <Route path="/home" element={<Home />} />
+//           <Route path="/forgot-password" element={<ForgotPassword />} />
+//           <Route path="/register-account" element={<Register />} />
+//           <Route path="/start-recording" element={<StartRecording />} />
+//           <Route path="/editor" element={<EditTranscript />} />
+//           <Route path="/display-analytics" element={<DisplayAnalytics />} />
+//           <Route path="/support-FAQ" element={<SupportFAQ />} />
+//           <Route path="/settings" element={<Settings />} />
+//         </AnimatedRoutes>
+//       </AuthContextProvider>
+//     </Router>
+//   );
+// };
 
-/**
+/*
  * Entry level component that renders the application
  *
  * @returns {JSX.Element} Representing the application
  */
 //Working protected routes commented out to allow easier access to other pages
-/* const App = () => {
+ const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <AuthContextProvider>
-        <Routes>
+        <AnimatedRoutes>
           <Route path="/" element={<Login />} /> 
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/forgot-password" element={<ForgotPassword />} /> 
@@ -108,10 +108,11 @@ const App = () => {
           <Route path="/editor" element={<ProtectedRoute><EditTranscript /></ProtectedRoute>} />
           <Route path="/display-analytics" element={<ProtectedRoute><DisplayAnalytics /></ProtectedRoute>} />
           <Route path="/support-FAQ" element={<ProtectedRoute><SupportFAQ /></ProtectedRoute>} />
-        </Routes>
+          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+        </AnimatedRoutes>
       </AuthContextProvider>
-    </BrowserRouter>
+    </Router>
   );
-}; */
+}; 
 
 export default App;
