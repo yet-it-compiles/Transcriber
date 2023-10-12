@@ -69,32 +69,6 @@ const AnimatedRoutes = ({ children }) => {
  *
  * @returns {JSX.Element} representing an animated route
  */
-// const App = () => {
-//   return (
-//     <Router>
-//       <AuthContextProvider>
-//         <AnimatedRoutes>
-//           <Route path="/" element={<Login />} />
-//           <Route path="/home" element={<Home />} />
-//           <Route path="/forgot-password" element={<ForgotPassword />} />
-//           <Route path="/register-account" element={<Register />} />
-//           <Route path="/start-recording" element={<StartRecording />} />
-//           <Route path="/editor" element={<EditTranscript />} />
-//           <Route path="/display-analytics" element={<DisplayAnalytics />} />
-//           <Route path="/support-FAQ" element={<SupportFAQ />} />
-//           <Route path="/settings" element={<Settings />} />
-//         </AnimatedRoutes>
-//       </AuthContextProvider>
-//     </Router>
-//   );
-// };
-
-/*
- * Entry level component that renders the application
- *
- * @returns {JSX.Element} Representing the application
- */
-//Working protected routes commented out to allow easier access to other pages
  const App = () => {
   return (
     <Router>
