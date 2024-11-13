@@ -91,7 +91,7 @@
     <p>This software uses the following open-source packages:</p>
   <div>
    <a href="https://react.dev"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="55" width="55" alt="React logo"  /></a>
-   <a href="https://nodejs.org/en"><img src="https://cdn.discordapp.com/attachments/1159524203851169793/1161757732437758015/2560px-Node.png?ex=65397633&is=65270133&hm=f66c8591ced968b92242e1e5428c2bd01416c07727c23618434068c65192baca&" height="55" width="95" alt="Node logo"/></a>
+   <a href="https://nodejs.org/en"><img src="https://cdn.discordapp.com/attachments/1232053257036238992/1306120618705686614/nodejslogo_d837e18faa.png?ex=6735831e&is=6734319e&hm=3c03439bc1415a2c884fecc0e68c65c2fed5ddbaf3c35da572035fe89510d035&" height="55" width="95" alt="Node logo"/></a>
    <a href="https://vitejs.dev"><img src="https://github.com/yet-it-compiles/Transcriber/assets/43221618/1714f1eb-7ee5-4ac1-a08b-2fd16b472307" height="55" width="95" alt="Vite logo"/></a></li></a>
   </div>  
   </article>
